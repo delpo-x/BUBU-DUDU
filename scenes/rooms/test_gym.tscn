@@ -1,0 +1,184 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scenes/rooms/TestGym.gd" id="1_gym"]
+[ext_resource type="Script" path="res://scenes/core/WhiteboxBlock.gd" id="2_block"]
+[ext_resource type="Script" path="res://scenes/core/CoopCamera2D.gd" id="3_cam"]
+[ext_resource type="PackedScene" path="res://scenes/characters/Bubu.tscn" id="4_bubu"]
+[ext_resource type="PackedScene" path="res://scenes/characters/Dudu.tscn" id="5_dudu"]
+
+[node name="TestGym" type="Node2D"]
+script = ExtResource("1_gym")
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -10
+offset_right = 3840.0
+offset_bottom = 1440.0
+mouse_filter = 2
+color = Color(0.86, 0.87, 0.89, 1)
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1920, 1408)
+collision_mask = 0
+script = ExtResource("2_block")
+size = Vector2(3840, 128)
+color = Color(0.55, 0.58, 0.62, 1)
+
+[node name="WallLeft" type="StaticBody2D" parent="Geometry"]
+position = Vector2(32, 672)
+collision_mask = 0
+script = ExtResource("2_block")
+size = Vector2(64, 1344)
+color = Color(0.55, 0.58, 0.62, 1)
+
+[node name="WallRight" type="StaticBody2D" parent="Geometry"]
+position = Vector2(3808, 672)
+collision_mask = 0
+script = ExtResource("2_block")
+size = Vector2(64, 1344)
+color = Color(0.55, 0.58, 0.62, 1)
+
+[node name="Step64" type="StaticBody2D" parent="Geometry"]
+position = Vector2(768, 1312)
+collision_mask = 0
+script = ExtResource("2_block")
+size = Vector2(128, 64)
+color = Color(0.55, 0.58, 0.62, 1)
+
+[node name="Step128" type="StaticBody2D" parent="Geometry"]
+position = Vector2(960, 1280)
+collision_mask = 0
+script = ExtResource("2_block")
+size = Vector2(128, 128)
+color = Color(0.55, 0.58, 0.62, 1)
+
+[node name="Step192" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1152, 1248)
+collision_mask = 0
+script = ExtResource("2_block")
+size = Vector2(128, 192)
+color = Color(0.55, 0.58, 0.62, 1)
+
+[node name="Step256" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1344, 1216)
+collision_mask = 0
+script = ExtResource("2_block")
+size = Vector2(128, 256)
+color = Color(0.55, 0.58, 0.62, 1)
+
+[node name="Gap96A" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1600, 1104)
+collision_mask = 0
+script = ExtResource("2_block")
+size = Vector2(192, 32)
+color = Color(0.55, 0.58, 0.62, 1)
+
+[node name="Gap96B" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1888, 1104)
+collision_mask = 0
+script = ExtResource("2_block")
+size = Vector2(192, 32)
+color = Color(0.55, 0.58, 0.62, 1)
+
+[node name="Gap128" type="StaticBody2D" parent="Geometry"]
+position = Vector2(2208, 1104)
+collision_mask = 0
+script = ExtResource("2_block")
+size = Vector2(192, 32)
+color = Color(0.55, 0.58, 0.62, 1)
+
+[node name="Gap160" type="StaticBody2D" parent="Geometry"]
+position = Vector2(2560, 1104)
+collision_mask = 0
+script = ExtResource("2_block")
+size = Vector2(192, 32)
+color = Color(0.55, 0.58, 0.62, 1)
+
+[node name="Gap192" type="StaticBody2D" parent="Geometry"]
+position = Vector2(2944, 1104)
+collision_mask = 0
+script = ExtResource("2_block")
+size = Vector2(192, 32)
+color = Color(0.55, 0.58, 0.62, 1)
+
+[node name="OneWay1" type="StaticBody2D" parent="Geometry"]
+position = Vector2(3264, 1224)
+collision_mask = 0
+script = ExtResource("2_block")
+size = Vector2(256, 16)
+color = Color(0.68, 0.7, 0.74, 1)
+one_way = true
+
+[node name="OneWay2" type="StaticBody2D" parent="Geometry"]
+position = Vector2(3520, 1096)
+collision_mask = 0
+script = ExtResource("2_block")
+size = Vector2(256, 16)
+color = Color(0.68, 0.7, 0.74, 1)
+one_way = true
+
+[node name="OneWay3" type="StaticBody2D" parent="Geometry"]
+position = Vector2(3264, 968)
+collision_mask = 0
+script = ExtResource("2_block")
+size = Vector2(256, 16)
+color = Color(0.68, 0.7, 0.74, 1)
+one_way = true
+
+[node name="OneWay4" type="StaticBody2D" parent="Geometry"]
+position = Vector2(3520, 840)
+collision_mask = 0
+script = ExtResource("2_block")
+size = Vector2(256, 16)
+color = Color(0.68, 0.7, 0.74, 1)
+one_way = true
+
+[node name="OneWay5" type="StaticBody2D" parent="Geometry"]
+position = Vector2(3264, 712)
+collision_mask = 0
+script = ExtResource("2_block")
+size = Vector2(256, 16)
+color = Color(0.68, 0.7, 0.74, 1)
+one_way = true
+
+[node name="LowCeiling" type="StaticBody2D" parent="Geometry"]
+position = Vector2(544, 1168)
+collision_mask = 0
+script = ExtResource("2_block")
+size = Vector2(256, 32)
+color = Color(0.55, 0.58, 0.62, 1)
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="SpawnP1" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(256, 1300)
+
+[node name="SpawnP2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(352, 1300)
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="Bubu" parent="Players" instance=ExtResource("4_bubu")]
+position = Vector2(256, 1300)
+
+[node name="Dudu" parent="Players" instance=ExtResource("5_dudu")]
+position = Vector2(352, 1300)
+
+[node name="CoopCamera2D" type="Camera2D" parent="."]
+position = Vector2(304, 1100)
+script = ExtResource("3_cam")
+level_bounds = Rect2(0, 0, 3840, 1440)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Controls" type="Label" parent="HUD"]
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 900.0
+offset_bottom = 90.0
+theme_override_colors/font_color = Color(0.2, 0.22, 0.26, 1)
+theme_override_font_sizes/font_size = 16
+text = "P1 Bubu: pad 1 / WASD - Salto Spazio - Interagisci E - Assist Q
+P2 Dudu: pad 2 / frecce - Salto Invio - Interagisci . - Assist /
+Tocca Assist vicino al partner: in spalla. Salto o Assist: scendi. R / Back: reset"

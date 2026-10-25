@@ -1,0 +1,8 @@
+# Godot 4
+.godot/
+/android/
+/build/
+*.tmp
+# OS
+.DS_Store
+Thumbs.db
