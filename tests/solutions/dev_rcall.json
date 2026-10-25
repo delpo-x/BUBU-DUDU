@@ -1,0 +1,49 @@
+{
+ "room": "dev_rcall",
+ "path": "res://scenes/rooms/dev/Room_call.tscn",
+ "steps": [
+  {
+   "op": "walk2",
+   "x1": 524.8,
+   "x2": 547.52
+  },
+  {
+   "op": "piggy",
+   "p": 1
+  },
+  {
+   "op": "dismount",
+   "p": 1,
+   "x": 608.0,
+   "top": 592.0
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 768.0
+  },
+  {
+   "op": "call",
+   "p": 1
+  },
+  {
+   "op": "settle"
+  },
+  {
+   "op": "walk2",
+   "x1": 908.8,
+   "x2": 940.8
+  },
+  {
+   "op": "walk2",
+   "x1": 1168.0,
+   "x2": 1200.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [],
+ "dialogues": []
+}

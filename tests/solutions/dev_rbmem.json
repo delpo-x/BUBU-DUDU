@@ -1,0 +1,50 @@
+{
+ "room": "dev_rbmem",
+ "path": "res://scenes/rooms/dev/Room_bmem.tscn",
+ "steps": [
+  {
+   "op": "walk2",
+   "x1": 492.8,
+   "x2": 515.52
+  },
+  {
+   "op": "piggy",
+   "p": 1
+  },
+  {
+   "op": "dismount",
+   "p": 1,
+   "x": 608.0,
+   "top": 592.0
+  },
+  {
+   "op": "expect",
+   "what": "memory",
+   "id": "dev_m6",
+   "within": 1.0
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 716.8
+  },
+  {
+   "op": "walk2",
+   "x1": 742.4,
+   "x2": 774.4
+  },
+  {
+   "op": "walk2",
+   "x1": 976.0,
+   "x2": 1008.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [
+  "dev_m6"
+ ],
+ "dialogues": []
+}

@@ -1,0 +1,194 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scenes/core/Room.gd" id="1_room"]
+[ext_resource type="Script" path="res://scenes/core/WhiteboxBlock.gd" id="2_block"]
+[ext_resource type="Script" path="res://scenes/components/Decor.gd" id="3_decor"]
+[ext_resource type="Script" path="res://scenes/components/Exit.gd" id="4_exit"]
+[ext_resource type="Script" path="res://scenes/components/Gate.gd" id="5_gate"]
+[ext_resource type="Script" path="res://scenes/components/MemoryPickup.gd" id="6_memorypickup"]
+[ext_resource type="Script" path="res://scenes/components/PressurePlate.gd" id="7_pressureplate"]
+[ext_resource type="Script" path="res://scenes/components/WallButton.gd" id="8_wallbutton"]
+
+[node name="Room_10" type="Node2D"]
+script = ExtResource("1_room")
+room_id = &"c1_r10"
+bounds = Rect2(0.0, 0.0, 2496.0, 768.0)
+background_color = Color(0.851, 0.933, 0.941, 1.0)
+backdrop = "meadow"
+backdrop_seed = 109
+call_allowed = false
+camera_min_zoom = 0.55
+camera_max_zoom = 1.0
+intro_dialogue = &"c1_r10_in"
+hint_text = "Pesate insieme sulla piastra grande; la leva alta si raggiunge solo con un salto spinto."
+est_minutes = 3.4
+
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="Decor" type="Node2D" parent="."]
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="Things" type="Node2D" parent="."]
+
+[node name="P1" type="Marker2D" parent="Spawns"]
+position = Vector2(128.0, 545.0)
+
+[node name="P2" type="Marker2D" parent="Spawns"]
+position = Vector2(185.6, 543.0)
+
+[node name="Decor" type="Node2D" parent="Decor"]
+position = Vector2(125.26, 576.0)
+script = ExtResource("3_decor")
+kind = "bush"
+scale_factor = 0.872
+seed_value = 66
+color = Color(0.435, 0.659, 0.396, 1.0)
+
+[node name="Decor2" type="Node2D" parent="Decor"]
+position = Vector2(359.16, 576.0)
+script = ExtResource("3_decor")
+kind = "flower"
+scale_factor = 1.104
+seed_value = 0
+color = Color(1.0, 0.85, 0.4, 1.0)
+
+[node name="Decor3" type="Node2D" parent="Decor"]
+position = Vector2(1148.13, 448.0)
+script = ExtResource("3_decor")
+kind = "flower"
+scale_factor = 1.095
+seed_value = 0
+color = Color(1.0, 0.85, 0.4, 1.0)
+
+[node name="Decor4" type="Node2D" parent="Decor"]
+position = Vector2(1238.63, 448.0)
+script = ExtResource("3_decor")
+kind = "flower"
+scale_factor = 1.133
+seed_value = 0
+color = Color(0.75, 0.65, 1.0, 1.0)
+
+[node name="Decor5" type="Node2D" parent="Decor"]
+position = Vector2(1388.74, 448.0)
+script = ExtResource("3_decor")
+kind = "flower"
+scale_factor = 0.93
+seed_value = 0
+color = Color(1.0, 0.6, 0.7, 1.0)
+
+[node name="Rock" type="StaticBody2D" parent="Geometry"]
+position = Vector2(32.0, 352.0)
+script = ExtResource("2_block")
+size = Vector2(64.0, 832.0)
+color = Color(0.627, 0.647, 0.561, 1.0)
+
+[node name="Ground" type="StaticBody2D" parent="Geometry"]
+position = Vector2(192.0, 688.0)
+script = ExtResource("2_block")
+size = Vector2(256.0, 224.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Ground2" type="StaticBody2D" parent="Geometry"]
+position = Vector2(640.0, 688.0)
+script = ExtResource("2_block")
+size = Vector2(640.0, 224.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Rock2" type="StaticBody2D" parent="Geometry"]
+position = Vector2(736.0, 192.0)
+script = ExtResource("2_block")
+size = Vector2(64.0, 512.0)
+color = Color(0.627, 0.647, 0.561, 1.0)
+
+[node name="Ground3" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1024.0, 656.0)
+script = ExtResource("2_block")
+size = Vector2(128.0, 288.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Ground4" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1152.0, 624.0)
+script = ExtResource("2_block")
+size = Vector2(128.0, 352.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Ground5" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1536.0, 624.0)
+script = ExtResource("2_block")
+size = Vector2(640.0, 352.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Rock3" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1536.0, 296.0)
+script = ExtResource("2_block")
+size = Vector2(128.0, 48.0)
+color = Color(0.627, 0.647, 0.561, 1.0)
+
+[node name="Rock4" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1632.0, 128.0)
+script = ExtResource("2_block")
+size = Vector2(64.0, 384.0)
+color = Color(0.627, 0.647, 0.561, 1.0)
+
+[node name="Ground6" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1920.0, 656.0)
+script = ExtResource("2_block")
+size = Vector2(128.0, 288.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Ground7" type="StaticBody2D" parent="Geometry"]
+position = Vector2(2048.0, 688.0)
+script = ExtResource("2_block")
+size = Vector2(128.0, 224.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Ground8" type="StaticBody2D" parent="Geometry"]
+position = Vector2(2272.0, 688.0)
+script = ExtResource("2_block")
+size = Vector2(320.0, 224.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Rock5" type="StaticBody2D" parent="Geometry"]
+position = Vector2(2464.0, 352.0)
+script = ExtResource("2_block")
+size = Vector2(64.0, 832.0)
+color = Color(0.627, 0.647, 0.561, 1.0)
+
+[node name="PressurePlate" type="Area2D" parent="Things"]
+position = Vector2(512.0, 576.0)
+script = ExtResource("7_pressureplate")
+size = Vector2(160.0, 10.0)
+channel = &"c1"
+required_weight = 3
+
+[node name="Gate" type="StaticBody2D" parent="Things"]
+position = Vector2(736.0, 512.0)
+script = ExtResource("5_gate")
+size = Vector2(64.0, 128.0)
+channels = Array[StringName]([&"c1"])
+require_all = true
+latch = true
+
+[node name="Gate2" type="StaticBody2D" parent="Things"]
+position = Vector2(1632.0, 384.0)
+script = ExtResource("5_gate")
+size = Vector2(64.0, 128.0)
+channels = Array[StringName]([&"c2"])
+require_all = true
+latch = true
+
+[node name="Lever" type="Node2D" parent="Things"]
+position = Vector2(1555.2, 272.0)
+script = ExtResource("8_wallbutton")
+mode = 1
+channel = &"c2"
+
+[node name="Memory" type="Area2D" parent="Things"]
+position = Vector2(1510.4, 233.6)
+script = ExtResource("6_memorypickup")
+memory_id = "m1_d"
+
+[node name="Exit" type="Area2D" parent="Things"]
+position = Vector2(2272.0, 576.0)
+script = ExtResource("4_exit")

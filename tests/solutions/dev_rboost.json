@@ -1,0 +1,58 @@
+{
+ "room": "dev_rboost",
+ "path": "res://scenes/rooms/dev/Room_boost.tscn",
+ "steps": [
+  {
+   "op": "walk2",
+   "x1": 524.8,
+   "x2": 547.52
+  },
+  {
+   "op": "piggy",
+   "p": 1
+  },
+  {
+   "op": "dismount",
+   "p": 1,
+   "x": 640.0,
+   "top": 592.0
+  },
+  {
+   "op": "expect",
+   "what": "memory",
+   "id": "dev_m1",
+   "within": 1.0
+  },
+  {
+   "op": "interact",
+   "p": 1
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c1"
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 512.0
+  },
+  {
+   "op": "walk2",
+   "x1": 857.6,
+   "x2": 889.6
+  },
+  {
+   "op": "walk2",
+   "x1": 1104.0,
+   "x2": 1136.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [
+  "dev_m1"
+ ],
+ "dialogues": []
+}

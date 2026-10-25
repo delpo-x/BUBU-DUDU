@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+<title>Bear and panda with a gift</title>
+<desc>Original cute bear and panda couple illustration, editable vector SVG.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff5f7"/><stop offset="1" stop-color="#f2f7ff"/></linearGradient>
+</defs>
+<rect width="800" height="800" rx="70" fill="url(#bg)"/>
+<g fill="#e85b7e"><path d="M400 95 C370 60 330 90 400 145 C470 90 430 60 400 95Z"/></g>
+<!-- honey-brown bear -->
+<g transform="translate(290 195) rotate(-4)">
+  <ellipse cx="0" cy="205" rx="126" ry="148" fill="#c98b62" stroke="#6f4938" stroke-width="9"/>
+  <circle cx="-82" cy="-2" r="53" fill="#c98b62" stroke="#6f4938" stroke-width="9"/>
+  <circle cx="82" cy="-2" r="53" fill="#c98b62" stroke="#6f4938" stroke-width="9"/>
+  <circle cx="-82" cy="-2" r="25" fill="#f0c4a5"/><circle cx="82" cy="-2" r="25" fill="#f0c4a5"/>
+  <circle cx="0" cy="72" r="123" fill="#d99d73" stroke="#6f4938" stroke-width="9"/>
+  <ellipse cx="0" cy="116" rx="62" ry="46" fill="#f5d8c1"/>
+  <ellipse cx="0" cy="103" rx="19" ry="13" fill="#49362f"/>
+  <path d="M-25 128 Q0 151 25 128" fill="none" stroke="#49362f" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="-43" cy="73" r="10" fill="#302722"/><circle cx="43" cy="73" r="10" fill="#302722"/>
+  <ellipse cx="-57" cy="98" rx="18" ry="10" fill="#ef9da5" opacity=".7"/><ellipse cx="57" cy="98" rx="18" ry="10" fill="#ef9da5" opacity=".7"/>
+  <path d="M-90 200 Q-145 165 -157 216" fill="none" stroke="#6f4938" stroke-width="24" stroke-linecap="round"/>
+  <path d="M90 200 Q145 165 157 216" fill="none" stroke="#6f4938" stroke-width="24" stroke-linecap="round"/>
+</g>
+<!-- panda -->
+<g transform="translate(510 195) rotate(4)">
+  <ellipse cx="0" cy="205" rx="126" ry="148" fill="#fff" stroke="#34343b" stroke-width="9"/>
+  <circle cx="-82" cy="-2" r="53" fill="#34343b" stroke="#34343b" stroke-width="9"/>
+  <circle cx="82" cy="-2" r="53" fill="#34343b" stroke="#34343b" stroke-width="9"/>
+  <circle cx="-82" cy="-2" r="24" fill="#f5b6c1"/><circle cx="82" cy="-2" r="24" fill="#f5b6c1"/>
+  <circle cx="0" cy="72" r="123" fill="#fff" stroke="#34343b" stroke-width="9"/>
+  <ellipse cx="-46" cy="69" rx="29" ry="39" fill="#34343b" transform="rotate(25 -46 69)"/>
+  <ellipse cx="46" cy="69" rx="29" ry="39" fill="#34343b" transform="rotate(-25 46 69)"/>
+  <circle cx="-43" cy="72" r="10" fill="#fff"/><circle cx="43" cy="72" r="10" fill="#fff"/>
+  <circle cx="-43" cy="72" r="5" fill="#25252a"/><circle cx="43" cy="72" r="5" fill="#25252a"/>
+  <ellipse cx="0" cy="116" rx="62" ry="46" fill="#fff"/>
+  <ellipse cx="0" cy="103" rx="19" ry="13" fill="#34343b"/>
+  <path d="M-25 128 Q0 151 25 128" fill="none" stroke="#34343b" stroke-width="8" stroke-linecap="round"/>
+  <ellipse cx="-72" cy="103" rx="17" ry="10" fill="#ef9da5" opacity=".75"/><ellipse cx="72" cy="103" rx="17" ry="10" fill="#ef9da5" opacity=".75"/>
+  <path d="M-90 200 Q-145 165 -157 216" fill="none" stroke="#34343b" stroke-width="24" stroke-linecap="round"/>
+  <path d="M90 200 Q145 165 157 216" fill="none" stroke="#34343b" stroke-width="24" stroke-linecap="round"/>
+</g>
+<g transform="translate(400 555)"><rect x="-65" y="-25" width="130" height="105" rx="10" fill="#f4bf4f" stroke="#805b36" stroke-width="7"/><path d="M0 -25 V80 M-65 10 H65" stroke="#e85b7e" stroke-width="18"/><path d="M0 -25 C-75 -55 -65 -100 -30 -88 C-5 -80 0 -45 0 -25 C5 -80 45 -105 60 -75 C75 -45 30 -25 0 -25Z" fill="#e85b7e" stroke="#b74a68" stroke-width="5"/></g>
+</svg>

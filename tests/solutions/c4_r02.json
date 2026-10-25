@@ -1,0 +1,138 @@
+{
+ "room": "c4_r02",
+ "path": "res://scenes/rooms/ch4/Room_02.tscn",
+ "steps": [
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 307.2
+  },
+  {
+   "op": "pickup",
+   "p": 1
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 355.2
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x": 544.0
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x": 640.0,
+   "top": 528.0,
+   "nocheck": true
+  },
+  {
+   "op": "wait",
+   "s": 0.6
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 355.2
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x": 448.0,
+   "top": 528.0
+  },
+  {
+   "op": "fly",
+   "p": 2,
+   "x": 800.0,
+   "top": 256.0,
+   "timeout": 4
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 876.8
+  },
+  {
+   "op": "expect",
+   "what": "memory",
+   "id": "m4_a",
+   "within": 1.0
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 800.0
+  },
+  {
+   "op": "interact",
+   "p": 2
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c1"
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x": 544.0,
+   "top": 576.0
+  },
+  {
+   "op": "wait",
+   "s": 0.5
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x": 640.0,
+   "top": 528.0
+  },
+  {
+   "op": "wait",
+   "s": 0.5
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x": 716.8,
+   "top": 576.0
+  },
+  {
+   "op": "face",
+   "p": 1,
+   "dir": -1
+  },
+  {
+   "op": "drop",
+   "p": 1
+  },
+  {
+   "op": "wait",
+   "s": 0.4
+  },
+  {
+   "op": "walk2",
+   "x1": 985.6,
+   "x2": 1017.6
+  },
+  {
+   "op": "walk2",
+   "x1": 1232.0,
+   "x2": 1264.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [
+  "m4_a"
+ ],
+ "dialogues": [
+  "c4_r02_in",
+  "c4_sign_launch"
+ ]
+}

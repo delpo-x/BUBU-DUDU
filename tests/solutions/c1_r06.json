@@ -1,0 +1,55 @@
+{
+ "room": "c1_r06",
+ "path": "res://scenes/rooms/ch1/Room_06.tscn",
+ "steps": [
+  {
+   "op": "walk2",
+   "x1": 492.8,
+   "x2": 531.2
+  },
+  {
+   "op": "hug"
+  },
+  {
+   "op": "expect",
+   "what": "memory",
+   "id": "m1_b",
+   "within": 1.0
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c1"
+  },
+  {
+   "op": "wait",
+   "s": 0.4
+  },
+  {
+   "op": "walk2",
+   "x1": 870.4,
+   "x2": 902.4
+  },
+  {
+   "op": "walk2",
+   "x1": 1075.2,
+   "x2": 1107.2
+  },
+  {
+   "op": "walk2",
+   "x1": 1296.0,
+   "x2": 1328.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [
+  "m1_b"
+ ],
+ "dialogues": [
+  "c1_r06_in",
+  "c1_sign_hug",
+  "c1_cozy_a"
+ ]
+}

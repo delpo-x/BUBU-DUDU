@@ -1,0 +1,97 @@
+{
+ "c1_intro": [
+  {"s": "narr", "t": "Una mattina di vento, in una casetta in fondo al prato."},
+  {"s": "bubu", "t": "Dudu, hai lasciato la finestra aperta?"},
+  {"s": "dudu", "t": "Volevo far entrare un po' d'aria fresca."},
+  {"s": "bubu", "t": "È entrata. Ed è uscita. Con tutte le pagine del nostro album."},
+  {"s": "dudu", "t": "...Il nostro album? Quello con tutte le foto, i biglietti, i ricordi?"},
+  {"s": "bubu", "t": "Quello. Le pagine stanno volando verso il prato."},
+  {"s": "dudu", "t": "Allora le andiamo a riprendere. Tutte. Insieme."},
+  {"s": "bubu", "t": "Insieme. Ti insegno io come si fa. Tu stammi vicino."}
+ ],
+ "c1_outro": [
+  {"s": "dudu", "t": "Il prato è finito. E guarda quante pagine abbiamo già!"},
+  {"s": "bubu", "t": "Il vento le ha portate verso il borgo. Si vedono i tetti, laggiù."},
+  {"s": "dudu", "t": "Sai che all'inizio pensavo di essere un disastro?"},
+  {"s": "bubu", "t": "Sei stato bravissimo. E se cadi, ci sono io."},
+  {"s": "dudu", "t": "E se cadi tu, ci sono io. Va bene, andiamo."}
+ ],
+ "c1_r01_in": [
+  {"s": "bubu", "t": "Primo passo: camminare. Stick sinistro. Facile, no?"},
+  {"s": "dudu", "t": "Mi sono già girato dalla parte sbagliata due volte."},
+  {"s": "bubu", "t": "Allora sei già un esperto di direzioni. Seguimi."}
+ ],
+ "c1_sign_move": [
+  {"s": "narr", "t": "Stick sinistro: muoversi. A: saltare. Tieni premuto A per un salto più alto."},
+  {"s": "narr", "t": "Se cadete, niente paura: un palloncino a cuore vi riporta dal vostro compagno."}
+ ],
+ "c1_r02_talk": [
+  {"s": "dudu", "t": "Ho saltato in tempo! Più o meno."},
+  {"s": "bubu", "t": "Il gioco perdona un po' di ritardo. Come me quando ti prepari per uscire."},
+  {"s": "dudu", "t": "Io sono sempre puntuale. Rispetto al mio orario interno."}
+ ],
+ "c1_r03_in": [
+  {"s": "dudu", "t": "Quella sporgenza è troppo alta. Per tutti e due."},
+  {"s": "bubu", "t": "Da soli sì. Ma tu sei alto, e io sono leggero."},
+  {"s": "dudu", "t": "Mi stai chiedendo un passaggio?"},
+  {"s": "bubu", "t": "Ti sto chiedendo un trampolino. Con affetto."}
+ ],
+ "c1_sign_piggy": [
+  {"s": "narr", "t": "Y vicino al compagno: salire in groppa. Chi sta sopra preme A per un salto spinto, più alto."},
+  {"s": "narr", "t": "B: interagire con leve, pulsanti e oggetti."}
+ ],
+ "c1_sign_plate": [
+  {"s": "narr", "t": "Le piastre tengono aperte le porte solo finché qualcuno ci sta sopra."}
+ ],
+ "c1_r06_in": [
+  {"s": "dudu", "t": "Questo posto ha un'aria familiare."},
+  {"s": "bubu", "t": "Una panchina. Una lanterna. Manca solo il gelato."},
+  {"s": "dudu", "t": "E quei due che non volevano mai alzarsi per primi."}
+ ],
+ "c1_sign_hug": [
+  {"s": "narr", "t": "Nei posti accoglienti, entrambi dentro la luce: premete Y insieme per un abbraccio."},
+  {"s": "narr", "t": "Alcuni abbracci aprono la strada. Tutti fanno bene."}
+ ],
+ "c1_cozy_a": [
+  {"s": "dudu", "t": "Ti ricordi la prima volta che ci siamo seduti su una panchina?"},
+  {"s": "bubu", "t": "Il gelato si è sciolto. Avevo le dita tutte appiccicose."},
+  {"s": "dudu", "t": "E non me l'hai detto, per non interrompermi."},
+  {"s": "bubu", "t": "Stavi raccontando una cosa bellissima. Le dita potevano aspettare."}
+ ],
+ "c1_sign_call": [
+  {"s": "narr", "t": "Chi è più avanti tiene premuto Y per chiamare il compagno rimasto indietro."},
+  {"s": "narr", "t": "In alcuni posti la chiamata non arriva: lì bisogna arrangiarsi insieme."}
+ ],
+ "c1_r08_talk": [
+  {"s": "dudu", "t": "Stiamo diventando bravi, eh?"},
+  {"s": "bubu", "t": "Tu stai diventando bravo. Io lo ero già."},
+  {"s": "dudu", "t": "Allora chi ha sbagliato piastra prima?"},
+  {"s": "bubu", "t": "Era un test. Per vedere se stavi attento."}
+ ],
+ "c1_r10_in": [
+  {"s": "bubu", "t": "Senti, posso dirti una cosa? Grazie per essere qui."},
+  {"s": "dudu", "t": "Dove dovrei essere? È il nostro album."},
+  {"s": "bubu", "t": "Lo so. Ma non è da tutti mettersi a saltare per un prato solo perché glielo chiedi."},
+  {"s": "dudu", "t": "Non è da tutti. È da me."}
+ ],
+ "c1_cozy_b": [
+  {"s": "bubu", "t": "Pausa. Due minuti di niente."},
+  {"s": "dudu", "t": "Mi piace il niente, con te."},
+  {"s": "bubu", "t": "È il mio niente preferito."}
+ ],
+ "c1_r13_talk": [
+  {"s": "dudu", "t": "Quando mi chiami e arrivo volando, mi sento un supereroe."},
+  {"s": "bubu", "t": "Un supereroe che urla ogni volta."},
+  {"s": "dudu", "t": "È il mio grido di battaglia."}
+ ],
+ "c1_r14_in": [
+  {"s": "dudu", "t": "Sento che qui c'è una pagina importante."},
+  {"s": "bubu", "t": "Anche io. Facciamo con calma."}
+ ],
+ "c1_cozy_c": [
+  {"s": "dudu", "t": "Il primo abbraccio. Te lo ricordi?"},
+  {"s": "bubu", "t": "Doveva essere un abbraccio di saluto."},
+  {"s": "dudu", "t": "E invece è durato un po' troppo."},
+  {"s": "bubu", "t": "Non troppo. Il giusto. Me ne sono accorto dopo."}
+ ]
+}

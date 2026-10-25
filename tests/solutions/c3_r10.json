@@ -1,0 +1,135 @@
+{
+ "room": "c3_r10",
+ "path": "res://scenes/rooms/ch3/Room_10.tscn",
+ "steps": [
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 610.0
+  },
+  {
+   "op": "climb",
+   "p": 1,
+   "top": 512.0,
+   "x": 704.0,
+   "timeout": 8
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 610.0
+  },
+  {
+   "op": "climb",
+   "p": 2,
+   "top": 512.0,
+   "x": 729.6,
+   "timeout": 8
+  },
+  {
+   "op": "walk2",
+   "x1": 1094.4,
+   "x2": 1120.0
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 1456.0
+  },
+  {
+   "op": "walljump",
+   "p": 1,
+   "top": 256.0,
+   "x": 1536.0,
+   "dir": 1,
+   "timeout": 10
+  },
+  {
+   "op": "expect",
+   "what": "memory",
+   "id": "m3_d",
+   "within": 1.0
+  },
+  {
+   "op": "interact",
+   "p": 1
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c1"
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 1638.4
+  },
+  {
+   "op": "walk2",
+   "x1": 1753.6,
+   "x2": 1785.6
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 2016.0
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c2"
+  },
+  {
+   "op": "fly",
+   "p": 1,
+   "via": 2208.0,
+   "x": 2304.0,
+   "top": 384.0,
+   "timeout": 6
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 2323.2
+  },
+  {
+   "op": "interact",
+   "p": 1
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c3"
+  },
+  {
+   "op": "fly",
+   "p": 2,
+   "via": 2208.0,
+   "x": 2355.2,
+   "top": 384.0,
+   "timeout": 6
+  },
+  {
+   "op": "walk2",
+   "x1": 2400.0,
+   "x2": 2432.0
+  },
+  {
+   "op": "walk2",
+   "x1": 2838.4,
+   "x2": 2864.0
+  },
+  {
+   "op": "walk2",
+   "x1": 3040.0,
+   "x2": 3072.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [
+  "m3_d"
+ ],
+ "dialogues": [
+  "c3_r10_in"
+ ]
+}

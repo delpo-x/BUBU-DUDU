@@ -1,0 +1,164 @@
+{
+ "room": "c2_r06",
+ "path": "res://scenes/rooms/ch2/Room_06.tscn",
+ "steps": [
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 409.6
+  },
+  {
+   "op": "pickup",
+   "p": 1
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 570.0
+  },
+  {
+   "op": "face",
+   "p": 1,
+   "dir": 1
+  },
+  {
+   "op": "drop",
+   "p": 1
+  },
+  {
+   "op": "wait",
+   "s": 0.5
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x_node": "Things/Crate",
+   "x_dx": -62
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x_node": "Things/Crate",
+   "x_dx": 0,
+   "top": 520.0,
+   "land_tol": 26
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x": 716.8,
+   "top": 384.0
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x_node": "Things/Crate",
+   "x_dx": -66
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x_node": "Things/Crate",
+   "x_dx": -2,
+   "top": 520.0,
+   "land_tol": 26
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x": 742.4,
+   "top": 384.0
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 1088.0
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 1100.8
+  },
+  {
+   "op": "walk2",
+   "x1": 1420.8,
+   "x2": 1452.8
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 1664.0
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c1"
+  },
+  {
+   "op": "wait",
+   "s": 0.4
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 2080.0
+  },
+  {
+   "op": "wait",
+   "s": 0.2
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 2144.0
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 2169.6
+  },
+  {
+   "op": "walk2",
+   "x1": 2412.8,
+   "x2": 2435.52
+  },
+  {
+   "op": "piggy",
+   "p": 1
+  },
+  {
+   "op": "dismount",
+   "p": 1,
+   "x": 2528.0,
+   "top": 400.0
+  },
+  {
+   "op": "expect",
+   "what": "memory",
+   "id": "m2_b",
+   "within": 1.0
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 2636.8
+  },
+  {
+   "op": "walk2",
+   "x1": 2662.4,
+   "x2": 2694.4
+  },
+  {
+   "op": "walk2",
+   "x1": 2896.0,
+   "x2": 2928.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [
+  "m2_b"
+ ],
+ "dialogues": []
+}

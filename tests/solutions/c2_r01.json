@@ -1,0 +1,97 @@
+{
+ "room": "c2_r01",
+ "path": "res://scenes/rooms/ch2/Room_01.tscn",
+ "steps": [
+  {
+   "op": "walk2",
+   "x1": 371.2,
+   "x2": 403.2
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 537.6
+  },
+  {
+   "op": "pickup",
+   "p": 1
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 698.0
+  },
+  {
+   "op": "face",
+   "p": 1,
+   "dir": 1
+  },
+  {
+   "op": "drop",
+   "p": 1
+  },
+  {
+   "op": "wait",
+   "s": 0.5
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x_node": "Things/Crate",
+   "x_dx": -62
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x_node": "Things/Crate",
+   "x_dx": 0,
+   "top": 536.0,
+   "land_tol": 26
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x": 844.8,
+   "top": 400.0
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x_node": "Things/Crate",
+   "x_dx": -66
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x_node": "Things/Crate",
+   "x_dx": -2,
+   "top": 536.0,
+   "land_tol": 26
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x": 870.4,
+   "top": 400.0
+  },
+  {
+   "op": "walk2",
+   "x1": 1139.2,
+   "x2": 1171.2
+  },
+  {
+   "op": "walk2",
+   "x1": 1360.0,
+   "x2": 1392.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [],
+ "dialogues": [
+  "c2_r01_in",
+  "c2_sign_crate"
+ ]
+}

@@ -1,0 +1,39 @@
+{
+ "room": "dev_rtimed",
+ "path": "res://scenes/rooms/dev/Room_timed.tscn",
+ "steps": [
+  {
+   "op": "walk2",
+   "x1": 416.0,
+   "x2": 1120.0
+  },
+  {
+   "op": "interact",
+   "p": 1
+  },
+  {
+   "op": "interact",
+   "p": 2
+  },
+  {
+   "op": "wait",
+   "s": 0.6
+  },
+  {
+   "op": "walk2",
+   "x1": 1318.4,
+   "x2": 1350.4
+  },
+  {
+   "op": "walk2",
+   "x1": 1552.0,
+   "x2": 1584.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [],
+ "dialogues": []
+}

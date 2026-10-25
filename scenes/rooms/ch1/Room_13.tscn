@@ -1,0 +1,167 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scenes/core/Room.gd" id="1_room"]
+[ext_resource type="Script" path="res://scenes/core/WhiteboxBlock.gd" id="2_block"]
+[ext_resource type="Script" path="res://scenes/components/Decor.gd" id="3_decor"]
+[ext_resource type="Script" path="res://scenes/components/DialogueTrigger.gd" id="4_dialoguetrigger"]
+[ext_resource type="Script" path="res://scenes/components/Exit.gd" id="5_exit"]
+[ext_resource type="Script" path="res://scenes/components/Hazard.gd" id="6_hazard"]
+
+[node name="Room_13" type="Node2D"]
+script = ExtResource("1_room")
+room_id = &"c1_r13"
+bounds = Rect2(0.0, 0.0, 2560.0, 768.0)
+background_color = Color(0.851, 0.933, 0.941, 1.0)
+backdrop = "meadow"
+backdrop_seed = 112
+call_allowed = true
+camera_min_zoom = 0.55
+camera_max_zoom = 1.0
+intro_dialogue = &""
+hint_text = "Salto spinto oltre lo steccato, poi chiamata con Y tenuto premuto."
+est_minutes = 3.0
+
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="Decor" type="Node2D" parent="."]
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="Things" type="Node2D" parent="."]
+
+[node name="P1" type="Marker2D" parent="Spawns"]
+position = Vector2(128.0, 545.0)
+
+[node name="P2" type="Marker2D" parent="Spawns"]
+position = Vector2(185.6, 543.0)
+
+[node name="Decor" type="Node2D" parent="Decor"]
+position = Vector2(104.51, 576.0)
+script = ExtResource("3_decor")
+kind = "tree"
+scale_factor = 1.093
+seed_value = 0
+color = Color(0.435, 0.659, 0.396, 1.0)
+
+[node name="Decor2" type="Node2D" parent="Decor"]
+position = Vector2(250.65, 576.0)
+script = ExtResource("3_decor")
+kind = "flower"
+scale_factor = 0.972
+seed_value = 0
+color = Color(1.0, 0.6, 0.7, 1.0)
+
+[node name="Decor3" type="Node2D" parent="Decor"]
+position = Vector2(1532.52, 448.0)
+script = ExtResource("3_decor")
+kind = "grass"
+scale_factor = 0.862
+seed_value = 35
+color = Color(0.435, 0.659, 0.396, 1.0)
+
+[node name="Rock" type="StaticBody2D" parent="Geometry"]
+position = Vector2(32.0, 352.0)
+script = ExtResource("2_block")
+size = Vector2(64.0, 832.0)
+color = Color(0.627, 0.647, 0.561, 1.0)
+
+[node name="Ground" type="StaticBody2D" parent="Geometry"]
+position = Vector2(192.0, 688.0)
+script = ExtResource("2_block")
+size = Vector2(256.0, 224.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Ground2" type="StaticBody2D" parent="Geometry"]
+position = Vector2(352.0, 688.0)
+script = ExtResource("2_block")
+size = Vector2(64.0, 224.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Ground3" type="StaticBody2D" parent="Geometry"]
+position = Vector2(576.0, 688.0)
+script = ExtResource("2_block")
+size = Vector2(128.0, 224.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Ground4" type="StaticBody2D" parent="Geometry"]
+position = Vector2(992.0, 688.0)
+script = ExtResource("2_block")
+size = Vector2(704.0, 224.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Rock2" type="StaticBody2D" parent="Geometry"]
+position = Vector2(928.0, 488.0)
+script = ExtResource("2_block")
+size = Vector2(64.0, 176.0)
+color = Color(0.627, 0.647, 0.561, 1.0)
+
+[node name="Ground5" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1408.0, 656.0)
+script = ExtResource("2_block")
+size = Vector2(128.0, 288.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Ground6" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1536.0, 624.0)
+script = ExtResource("2_block")
+size = Vector2(128.0, 352.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Ground7" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1632.0, 624.0)
+script = ExtResource("2_block")
+size = Vector2(64.0, 352.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Ground8" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1856.0, 624.0)
+script = ExtResource("2_block")
+size = Vector2(128.0, 352.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Ground9" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1984.0, 656.0)
+script = ExtResource("2_block")
+size = Vector2(128.0, 288.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Ground10" type="StaticBody2D" parent="Geometry"]
+position = Vector2(2112.0, 688.0)
+script = ExtResource("2_block")
+size = Vector2(128.0, 224.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Ground11" type="StaticBody2D" parent="Geometry"]
+position = Vector2(2336.0, 688.0)
+script = ExtResource("2_block")
+size = Vector2(320.0, 224.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Rock3" type="StaticBody2D" parent="Geometry"]
+position = Vector2(2528.0, 352.0)
+script = ExtResource("2_block")
+size = Vector2(64.0, 832.0)
+color = Color(0.627, 0.647, 0.561, 1.0)
+
+[node name="Hazard" type="Area2D" parent="Things"]
+position = Vector2(448.0, 756.0)
+script = ExtResource("6_hazard")
+size = Vector2(128.0, 24.0)
+kind = "thorns"
+
+[node name="Hazard2" type="Area2D" parent="Things"]
+position = Vector2(1728.0, 756.0)
+script = ExtResource("6_hazard")
+size = Vector2(128.0, 24.0)
+kind = "thorns"
+
+[node name="DialogueTrigger" type="Area2D" parent="Things"]
+position = Vector2(2112.0, 448.0)
+script = ExtResource("4_dialoguetrigger")
+size = Vector2(128.0, 256.0)
+dialogue = &"c1_r13_talk"
+require_both = true
+
+[node name="Exit" type="Area2D" parent="Things"]
+position = Vector2(2336.0, 576.0)
+script = ExtResource("5_exit")

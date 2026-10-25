@@ -1,0 +1,153 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scenes/core/Room.gd" id="1_room"]
+[ext_resource type="Script" path="res://scenes/components/BalancePair.gd" id="2_balancepair"]
+[ext_resource type="Script" path="res://scenes/core/WhiteboxBlock.gd" id="3_block"]
+[ext_resource type="Script" path="res://scenes/components/CarryableItem.gd" id="4_carryableitem"]
+[ext_resource type="Script" path="res://scenes/components/Decor.gd" id="5_decor"]
+[ext_resource type="Script" path="res://scenes/components/Exit.gd" id="6_exit"]
+[ext_resource type="Script" path="res://scenes/components/Gate.gd" id="7_gate"]
+[ext_resource type="Script" path="res://scenes/components/MemoryPickup.gd" id="8_memorypickup"]
+[ext_resource type="Script" path="res://scenes/components/Sign.gd" id="9_sign"]
+[ext_resource type="Script" path="res://scenes/components/WallButton.gd" id="10_wallbutton"]
+
+[node name="Room_02" type="Node2D"]
+script = ExtResource("1_room")
+room_id = &"c4_r02"
+bounds = Rect2(0.0, 0.0, 1472.0, 768.0)
+background_color = Color(0.18, 0.173, 0.282, 1.0)
+backdrop = "night"
+backdrop_seed = 401
+call_allowed = false
+camera_min_zoom = 0.55
+camera_max_zoom = 1.0
+intro_dialogue = &"c4_r02_in"
+hint_text = "Stavolta vola Dudu: a Bubu serve qualcosa di pesante in braccio."
+est_minutes = 3.4
+
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="Decor" type="Node2D" parent="."]
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="Things" type="Node2D" parent="."]
+
+[node name="P1" type="Marker2D" parent="Spawns"]
+position = Vector2(128.0, 545.0)
+
+[node name="P2" type="Marker2D" parent="Spawns"]
+position = Vector2(185.6, 543.0)
+
+[node name="Decor" type="Node2D" parent="Decor"]
+position = Vector2(136.06, 576.0)
+script = ExtResource("5_decor")
+kind = "lamp"
+scale_factor = 1.0
+seed_value = 0
+
+[node name="Rock" type="StaticBody2D" parent="Geometry"]
+position = Vector2(32.0, 352.0)
+script = ExtResource("3_block")
+size = Vector2(64.0, 832.0)
+color = Color(0.365, 0.345, 0.471, 1.0)
+
+[node name="Ground" type="StaticBody2D" parent="Geometry"]
+position = Vector2(192.0, 688.0)
+script = ExtResource("3_block")
+size = Vector2(256.0, 224.0)
+color = Color(0.435, 0.416, 0.549, 1.0)
+
+[node name="Ground2" type="StaticBody2D" parent="Geometry"]
+position = Vector2(356.0, 688.0)
+script = ExtResource("3_block")
+size = Vector2(72.0, 224.0)
+color = Color(0.435, 0.416, 0.549, 1.0)
+
+[node name="Ground3" type="StaticBody2D" parent="Geometry"]
+position = Vector2(448.0, 728.0)
+script = ExtResource("3_block")
+size = Vector2(112.0, 144.0)
+color = Color(0.435, 0.416, 0.549, 1.0)
+
+[node name="Ground4" type="StaticBody2D" parent="Geometry"]
+position = Vector2(544.0, 688.0)
+script = ExtResource("3_block")
+size = Vector2(80.0, 224.0)
+color = Color(0.435, 0.416, 0.549, 1.0)
+
+[node name="Ground5" type="StaticBody2D" parent="Geometry"]
+position = Vector2(640.0, 728.0)
+script = ExtResource("3_block")
+size = Vector2(112.0, 144.0)
+color = Color(0.435, 0.416, 0.549, 1.0)
+
+[node name="Ground6" type="StaticBody2D" parent="Geometry"]
+position = Vector2(892.0, 688.0)
+script = ExtResource("3_block")
+size = Vector2(392.0, 224.0)
+color = Color(0.435, 0.416, 0.549, 1.0)
+
+[node name="Rock2" type="StaticBody2D" parent="Geometry"]
+position = Vector2(832.0, 304.0)
+script = ExtResource("3_block")
+size = Vector2(192.0, 96.0)
+color = Color(0.365, 0.345, 0.471, 1.0)
+
+[node name="Ground7" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1248.0, 688.0)
+script = ExtResource("3_block")
+size = Vector2(320.0, 224.0)
+color = Color(0.435, 0.416, 0.549, 1.0)
+
+[node name="Rock3" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1440.0, 352.0)
+script = ExtResource("3_block")
+size = Vector2(64.0, 832.0)
+color = Color(0.365, 0.345, 0.471, 1.0)
+
+[node name="Sign" type="Node2D" parent="Things"]
+position = Vector2(246.4, 576.0)
+script = ExtResource("9_sign")
+dialogue = &"c4_sign_launch"
+kind = "post"
+
+[node name="Gate" type="StaticBody2D" parent="Things"]
+position = Vector2(832.0, 464.0)
+script = ExtResource("7_gate")
+size = Vector2(64.0, 224.0)
+channels = Array[StringName]([&"c1"])
+require_all = true
+latch = true
+
+[node name="Lever" type="Node2D" parent="Things"]
+position = Vector2(793.6, 256.0)
+script = ExtResource("10_wallbutton")
+mode = 1
+channel = &"c1"
+
+[node name="Seesaw" type="Node2D" parent="Things"]
+position = Vector2(544.0, 586.0)
+script = ExtResource("2_balancepair")
+mode = 1
+pad_size = Vector2(112.0, 20.0)
+pad_a = Vector2(-96.0, 0.0)
+pad_b = Vector2(96.0, 0.0)
+travel = 48.0
+speed = 160.0
+
+[node name="Crate" type="RigidBody2D" parent="Things"]
+position = Vector2(345.6, 555.0)
+script = ExtResource("4_carryableitem")
+size = Vector2(40.0, 40.0)
+weight = 1
+color = Color(0.769, 0.58, 0.392, 1.0)
+
+[node name="Memory" type="Area2D" parent="Things"]
+position = Vector2(876.8, 217.6)
+script = ExtResource("8_memorypickup")
+memory_id = "m4_a"
+
+[node name="Exit" type="Area2D" parent="Things"]
+position = Vector2(1248.0, 576.0)
+script = ExtResource("6_exit")

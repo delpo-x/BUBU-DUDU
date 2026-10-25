@@ -1,0 +1,112 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scenes/core/Room.gd" id="1_room"]
+[ext_resource type="Script" path="res://scenes/core/WhiteboxBlock.gd" id="2_block"]
+[ext_resource type="Script" path="res://scenes/components/Decor.gd" id="3_decor"]
+[ext_resource type="Script" path="res://scenes/components/Exit.gd" id="4_exit"]
+[ext_resource type="Script" path="res://scenes/components/Gate.gd" id="5_gate"]
+[ext_resource type="Script" path="res://scenes/components/MemoryPickup.gd" id="6_memorypickup"]
+[ext_resource type="Script" path="res://scenes/components/WallButton.gd" id="7_wallbutton"]
+
+[node name="Room_wjump" type="Node2D"]
+script = ExtResource("1_room")
+room_id = &"dev_rwjump"
+bounds = Rect2(0.0, 0.0, 1536.0, 1024.0)
+background_color = Color(0.851, 0.933, 0.941, 1.0)
+backdrop = "meadow"
+backdrop_seed = 1
+call_allowed = false
+camera_min_zoom = 0.55
+camera_max_zoom = 1.0
+intro_dialogue = &""
+hint_text = "dev"
+est_minutes = 1.0
+
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="Decor" type="Node2D" parent="."]
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="Things" type="Node2D" parent="."]
+
+[node name="P1" type="Marker2D" parent="Spawns"]
+position = Vector2(128.0, 737.0)
+
+[node name="P2" type="Marker2D" parent="Spawns"]
+position = Vector2(185.6, 735.0)
+
+[node name="Decor" type="Node2D" parent="Decor"]
+position = Vector2(116.94, 768.0)
+script = ExtResource("3_decor")
+kind = "grass"
+scale_factor = 1.02
+seed_value = 50
+color = Color(0.435, 0.659, 0.396, 1.0)
+
+[node name="Rock" type="StaticBody2D" parent="Geometry"]
+position = Vector2(32.0, 480.0)
+script = ExtResource("2_block")
+size = Vector2(64.0, 1088.0)
+color = Color(0.627, 0.647, 0.561, 1.0)
+
+[node name="Ground" type="StaticBody2D" parent="Geometry"]
+position = Vector2(192.0, 912.0)
+script = ExtResource("2_block")
+size = Vector2(256.0, 288.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Ground2" type="StaticBody2D" parent="Geometry"]
+position = Vector2(704.0, 912.0)
+script = ExtResource("2_block")
+size = Vector2(768.0, 288.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Rock2" type="StaticBody2D" parent="Geometry"]
+position = Vector2(544.0, 464.0)
+script = ExtResource("2_block")
+size = Vector2(64.0, 416.0)
+color = Color(0.627, 0.647, 0.561, 1.0)
+wall_jump = true
+
+[node name="Rock3" type="StaticBody2D" parent="Geometry"]
+position = Vector2(704.0, 512.0)
+script = ExtResource("2_block")
+size = Vector2(64.0, 256.0)
+color = Color(0.627, 0.647, 0.561, 1.0)
+wall_jump = true
+
+[node name="Ground3" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1248.0, 912.0)
+script = ExtResource("2_block")
+size = Vector2(320.0, 288.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Rock4" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1440.0, 480.0)
+script = ExtResource("2_block")
+size = Vector2(64.0, 1088.0)
+color = Color(0.627, 0.647, 0.561, 1.0)
+
+[node name="Gate" type="StaticBody2D" parent="Things"]
+position = Vector2(704.0, 704.0)
+script = ExtResource("5_gate")
+size = Vector2(64.0, 128.0)
+channels = Array[StringName]([&"c1"])
+require_all = true
+latch = true
+
+[node name="Lever" type="Node2D" parent="Things"]
+position = Vector2(704.0, 384.0)
+script = ExtResource("7_wallbutton")
+mode = 1
+channel = &"c1"
+
+[node name="Memory" type="Area2D" parent="Things"]
+position = Vector2(704.0, 288.0)
+script = ExtResource("6_memorypickup")
+memory_id = "dev_m4"
+
+[node name="Exit" type="Area2D" parent="Things"]
+position = Vector2(1248.0, 768.0)
+script = ExtResource("4_exit")

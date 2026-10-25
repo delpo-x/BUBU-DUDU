@@ -1,0 +1,102 @@
+[
+ {
+  "id": "c1",
+  "title": "Il prato",
+  "subtitle": "",
+  "music": "ch1",
+  "dialogue": "res://data/dialogue/ch1.json",
+  "intro": "c1_intro",
+  "outro": "c1_outro",
+  "rooms": [
+   "res://scenes/rooms/ch1/Room_01.tscn",
+   "res://scenes/rooms/ch1/Room_02.tscn",
+   "res://scenes/rooms/ch1/Room_03.tscn",
+   "res://scenes/rooms/ch1/Room_04.tscn",
+   "res://scenes/rooms/ch1/Room_05.tscn",
+   "res://scenes/rooms/ch1/Room_06.tscn",
+   "res://scenes/rooms/ch1/Room_07.tscn",
+   "res://scenes/rooms/ch1/Room_08.tscn",
+   "res://scenes/rooms/ch1/Room_09.tscn",
+   "res://scenes/rooms/ch1/Room_10.tscn",
+   "res://scenes/rooms/ch1/Room_11.tscn",
+   "res://scenes/rooms/ch1/Room_12.tscn",
+   "res://scenes/rooms/ch1/Room_13.tscn",
+   "res://scenes/rooms/ch1/Room_14.tscn"
+  ]
+ },
+ {
+  "id": "c2",
+  "title": "Il borgo",
+  "subtitle": "",
+  "music": "ch2",
+  "dialogue": "res://data/dialogue/ch2.json",
+  "intro": "c2_intro",
+  "outro": "c2_outro",
+  "rooms": [
+   "res://scenes/rooms/ch2/Room_01.tscn",
+   "res://scenes/rooms/ch2/Room_02.tscn",
+   "res://scenes/rooms/ch2/Room_03.tscn",
+   "res://scenes/rooms/ch2/Room_04.tscn",
+   "res://scenes/rooms/ch2/Room_05.tscn",
+   "res://scenes/rooms/ch2/Room_06.tscn",
+   "res://scenes/rooms/ch2/Room_07.tscn",
+   "res://scenes/rooms/ch2/Room_08.tscn",
+   "res://scenes/rooms/ch2/Room_09.tscn",
+   "res://scenes/rooms/ch2/Room_10.tscn",
+   "res://scenes/rooms/ch2/Room_11.tscn",
+   "res://scenes/rooms/ch2/Room_12.tscn",
+   "res://scenes/rooms/ch2/Room_13.tscn",
+   "res://scenes/rooms/ch2/Room_14.tscn"
+  ]
+ },
+ {
+  "id": "c3",
+  "title": "Le nuvole",
+  "subtitle": "",
+  "music": "ch3",
+  "dialogue": "res://data/dialogue/ch3.json",
+  "intro": "c3_intro",
+  "outro": "c3_outro",
+  "rooms": [
+   "res://scenes/rooms/ch3/Room_01.tscn",
+   "res://scenes/rooms/ch3/Room_02.tscn",
+   "res://scenes/rooms/ch3/Room_03.tscn",
+   "res://scenes/rooms/ch3/Room_04.tscn",
+   "res://scenes/rooms/ch3/Room_05.tscn",
+   "res://scenes/rooms/ch3/Room_06.tscn",
+   "res://scenes/rooms/ch3/Room_07.tscn",
+   "res://scenes/rooms/ch3/Room_08.tscn",
+   "res://scenes/rooms/ch3/Room_09.tscn",
+   "res://scenes/rooms/ch3/Room_10.tscn",
+   "res://scenes/rooms/ch3/Room_11.tscn",
+   "res://scenes/rooms/ch3/Room_12.tscn",
+   "res://scenes/rooms/ch3/Room_13.tscn",
+   "res://scenes/rooms/ch3/Room_14.tscn"
+  ]
+ },
+ {
+  "id": "c4",
+  "title": "La notte",
+  "subtitle": "",
+  "music": "ch4",
+  "dialogue": "res://data/dialogue/ch4.json",
+  "intro": "c4_intro",
+  "outro": "c4_outro",
+  "rooms": [
+   "res://scenes/rooms/ch4/Room_01.tscn",
+   "res://scenes/rooms/ch4/Room_02.tscn",
+   "res://scenes/rooms/ch4/Room_03.tscn",
+   "res://scenes/rooms/ch4/Room_04.tscn",
+   "res://scenes/rooms/ch4/Room_05.tscn",
+   "res://scenes/rooms/ch4/Room_06.tscn",
+   "res://scenes/rooms/ch4/Room_07.tscn",
+   "res://scenes/rooms/ch4/Room_08.tscn",
+   "res://scenes/rooms/ch4/Room_09.tscn",
+   "res://scenes/rooms/ch4/Room_10.tscn",
+   "res://scenes/rooms/ch4/Room_11.tscn",
+   "res://scenes/rooms/ch4/Room_12.tscn",
+   "res://scenes/rooms/ch4/Room_13.tscn",
+   "res://scenes/rooms/ch4/Room_14.tscn"
+  ]
+ }
+]

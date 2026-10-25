@@ -1,0 +1,52 @@
+{
+ "room": "dev_rferry",
+ "path": "res://scenes/rooms/dev/Room_ferry.tscn",
+ "steps": [
+  {
+   "op": "walk2",
+   "x1": 377.6,
+   "x2": 358.4
+  },
+  {
+   "op": "wait_near",
+   "node": "Things/Ferry",
+   "x": 480.0,
+   "y": 778,
+   "tol": 3,
+   "arrive": true,
+   "timeout": 20
+  },
+  {
+   "op": "walk2",
+   "x1": 467.2,
+   "x2": 496.0,
+   "timeout": 3
+  },
+  {
+   "op": "wait_near",
+   "node": "Things/Ferry",
+   "x": 736.0,
+   "y": 778,
+   "tol": 3,
+   "arrive": true,
+   "timeout": 20
+  },
+  {
+   "op": "walk2",
+   "x1": 876.8,
+   "x2": 908.8,
+   "timeout": 4
+  },
+  {
+   "op": "walk2",
+   "x1": 1136.0,
+   "x2": 1168.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [],
+ "dialogues": []
+}

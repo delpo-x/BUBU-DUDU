@@ -1,45 +1,21 @@
-extends SceneTree
-## Headless smoke test for the bootstrap. Exits 0 on success, 1 on any failure.
-##   godot --headless --path . --import
-##   godot --headless --path . --script res://tests/smoke_test.gd
+extends "res://tests/TestBase.gd"
+## Bootstrap smoke test: scripts parse, input map, test gym, camera, piggyback.
 
-const SCRIPTS: Array[String] = [
-	"res://scenes/core/CoopCamera2D.gd",
-	"res://scenes/core/PadAssigner.gd",
-	"res://scenes/core/WhiteboxBlock.gd",
-	"res://scenes/characters/BasePlayer.gd",
-	"res://scenes/characters/Bubu.gd",
-	"res://scenes/characters/Dudu.gd",
-	"res://scenes/rooms/TestGym.gd",
-]
-const VERBS: Array[String] = ["left", "right", "up", "down", "jump", "interact", "assist"]
-
-var passed := 0
-var failed := 0
+const VERBS: Array[String] = ["left", "right", "up", "down", "jump", "interact", "assist", "pause"]
 
 
-func _initialize() -> void:
-	await _run()
-	print("Results: %d passed, %d failed" % [passed, failed])
-	quit(1 if failed > 0 else 0)
+func run() -> void:
+	await get_tree().process_frame
 
-
-func check(ok: bool, label: String) -> void:
-	if ok:
-		passed += 1
-		print("[OK] " + label)
-	else:
-		failed += 1
-		push_error("[FAIL] " + label)
-		print("[FAIL] " + label)
-
-
-func _run() -> void:
-	await process_frame
-
-	for path in SCRIPTS:
+	var scripts: Array[String] = []
+	_collect("res://scenes", scripts)
+	var bad := 0
+	for path in scripts:
 		var script := load(path) as Script
-		check(script != null and script.can_instantiate(), "script parses: " + path)
+		if script == null or not script.can_instantiate():
+			bad += 1
+			print("[FAIL] script does not compile: " + path)
+	check(scripts.size() > 30 and bad == 0, "all %d scripts compile" % scripts.size())
 
 	var missing := 0
 	for p in [1, 2]:
@@ -53,7 +29,7 @@ func _run() -> void:
 	if packed == null:
 		return
 	var gym := packed.instantiate()
-	root.add_child(gym)
+	get_tree().root.add_child(gym)
 	check(gym.is_inside_tree(), "test_gym instantiates")
 
 	var bubu := gym.get_node_or_null("Players/Bubu") as BasePlayer
@@ -68,12 +44,12 @@ func _run() -> void:
 	check((bubu.collision_mask & 1) != 0 and (dudu.collision_mask & 1) != 0, "players collide with world")
 
 	for i in 45:
-		await physics_frame
+		await get_tree().physics_frame
 	check(bubu.is_on_floor() and dudu.is_on_floor(), "both players land on the floor")
 	check(cam.is_current(), "coop camera is current")
 
 	var mid := (bubu.global_position + dudu.global_position) * 0.5
-	var view_half := root.get_visible_rect().size * 0.5 / cam.zoom.x
+	var view_half := get_tree().root.get_visible_rect().size * 0.5 / cam.zoom.x
 	var view := Rect2(cam.global_position - view_half, view_half * 2.0)
 	check(view.has_point(bubu.global_position) and view.has_point(dudu.global_position), "both players in camera view")
 	check(cam.level_bounds.grow(1.0).encloses(view), "camera view clamped to level bounds")
@@ -83,13 +59,21 @@ func _run() -> void:
 	check(bubu.can_hop_on(dudu), "piggyback available in range")
 	bubu.hop_on(dudu)
 	for i in 5:
-		await physics_frame
+		await get_tree().physics_frame
 	check(bubu.is_riding() and dudu.rider == bubu, "piggyback state set")
 	check(bubu.global_position.y < dudu.global_position.y - 20.0, "rider sits on carrier's back")
 	bubu.dismount(true)
 	for i in 5:
-		await physics_frame
+		await get_tree().physics_frame
 	check(not bubu.is_riding() and dudu.rider == null, "dismount clears piggyback")
 
 	gym.queue_free()
-	await process_frame
+	await get_tree().process_frame
+
+
+func _collect(dir: String, out: Array[String]) -> void:
+	for f in DirAccess.get_files_at(dir):
+		if f.ends_with(".gd"):
+			out.append(dir.path_join(f))
+	for d in DirAccess.get_directories_at(dir):
+		_collect(dir.path_join(d), out)

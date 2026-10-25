@@ -1,0 +1,41 @@
+{
+ "room": "dev_rvine",
+ "path": "res://scenes/rooms/dev/Room_vine.tscn",
+ "steps": [
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 610.0
+  },
+  {
+   "op": "climb",
+   "p": 1,
+   "top": 448,
+   "x": 704.0,
+   "timeout": 8
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 610.0
+  },
+  {
+   "op": "climb",
+   "p": 2,
+   "top": 448,
+   "x": 729.6,
+   "timeout": 8
+  },
+  {
+   "op": "walk2",
+   "x1": 1040.0,
+   "x2": 1072.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [],
+ "dialogues": []
+}

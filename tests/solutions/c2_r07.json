@@ -1,0 +1,64 @@
+{
+ "room": "c2_r07",
+ "path": "res://scenes/rooms/ch2/Room_07.tscn",
+ "steps": [
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 624.0
+  },
+  {
+   "op": "walljump",
+   "p": 1,
+   "top": 256.0,
+   "x": 704.0,
+   "dir": 1,
+   "timeout": 10
+  },
+  {
+   "op": "expect",
+   "what": "memory",
+   "id": "m2_c",
+   "within": 1.0
+  },
+  {
+   "op": "interact",
+   "p": 1
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c1"
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 806.4
+  },
+  {
+   "op": "walk2",
+   "x1": 921.6,
+   "x2": 953.6
+  },
+  {
+   "op": "walk2",
+   "x1": 1203.2,
+   "x2": 1235.2
+  },
+  {
+   "op": "walk2",
+   "x1": 1424.0,
+   "x2": 1456.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [
+  "m2_c"
+ ],
+ "dialogues": [
+  "c2_r07_in",
+  "c2_sign_wall"
+ ]
+}

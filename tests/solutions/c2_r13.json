@@ -1,0 +1,118 @@
+{
+ "room": "c2_r13",
+ "path": "res://scenes/rooms/ch2/Room_13.tscn",
+ "steps": [
+  {
+   "op": "walk2",
+   "x1": 377.6,
+   "x2": 358.4
+  },
+  {
+   "op": "wait_near",
+   "node": "Things/Ferry",
+   "x": 480.0,
+   "y": 714.0,
+   "tol": 3,
+   "arrive": true,
+   "timeout": 20
+  },
+  {
+   "op": "walk2",
+   "x1": 467.2,
+   "x2": 496.0,
+   "timeout": 3
+  },
+  {
+   "op": "wait_near",
+   "node": "Things/Ferry",
+   "x": 864.0,
+   "y": 714.0,
+   "tol": 3,
+   "arrive": true,
+   "timeout": 20
+  },
+  {
+   "op": "walk2",
+   "x1": 1004.8,
+   "x2": 1036.8,
+   "timeout": 4
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 1424.0
+  },
+  {
+   "op": "walljump",
+   "p": 1,
+   "top": 256.0,
+   "x": 1504.0,
+   "dir": 1,
+   "timeout": 10
+  },
+  {
+   "op": "interact",
+   "p": 1
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c1"
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 1606.4
+  },
+  {
+   "op": "walk2",
+   "x1": 1721.6,
+   "x2": 1753.6
+  },
+  {
+   "op": "walk2",
+   "x1": 2092.8,
+   "x2": 2115.52
+  },
+  {
+   "op": "piggy",
+   "p": 1
+  },
+  {
+   "op": "dismount",
+   "p": 1,
+   "x": 2208.0,
+   "top": 528.0
+  },
+  {
+   "op": "interact",
+   "p": 1
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c2"
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 2080.0
+  },
+  {
+   "op": "walk2",
+   "x1": 2425.6,
+   "x2": 2457.6
+  },
+  {
+   "op": "walk2",
+   "x1": 2672.0,
+   "x2": 2704.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [],
+ "dialogues": [
+  "c2_r13_in"
+ ]
+}

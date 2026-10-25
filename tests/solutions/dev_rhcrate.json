@@ -1,0 +1,74 @@
+{
+ "room": "dev_rhcrate",
+ "path": "res://scenes/rooms/dev/Room_hcrate.tscn",
+ "steps": [
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 400.0
+  },
+  {
+   "op": "pickup",
+   "p": 2
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 650.0
+  },
+  {
+   "op": "face",
+   "p": 2,
+   "dir": 1
+  },
+  {
+   "op": "drop",
+   "p": 2
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c1",
+   "timeout": 4.0
+  },
+  {
+   "op": "wait",
+   "s": 0.5
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 643.2
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x": 787.2
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 643.2
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x": 787.2
+  },
+  {
+   "op": "walk2",
+   "x1": 985.6,
+   "x2": 1017.6
+  },
+  {
+   "op": "walk2",
+   "x1": 1232.0,
+   "x2": 1264.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [],
+ "dialogues": []
+}

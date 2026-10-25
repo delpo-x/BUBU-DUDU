@@ -1,0 +1,243 @@
+{
+ "room": "c4_r12",
+ "path": "res://scenes/rooms/ch4/Room_12.tscn",
+ "steps": [
+  {
+   "op": "walk2",
+   "x1": 377.6,
+   "x2": 358.4
+  },
+  {
+   "op": "wait_near",
+   "node": "Things/Ferry",
+   "x": 480.0,
+   "y": 634.0,
+   "tol": 3,
+   "arrive": true,
+   "timeout": 20
+  },
+  {
+   "op": "walk2",
+   "x1": 467.2,
+   "x2": 496.0,
+   "timeout": 3
+  },
+  {
+   "op": "wait_near",
+   "node": "Things/Ferry",
+   "x": 864.0,
+   "y": 634.0,
+   "tol": 3,
+   "arrive": true,
+   "timeout": 20
+  },
+  {
+   "op": "walk2",
+   "x1": 1004.8,
+   "x2": 1036.8,
+   "timeout": 4
+  },
+  {
+   "op": "walk2",
+   "x1": 1152.0,
+   "x2": 1139.2
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x": 1360.0
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 1480.0
+  },
+  {
+   "op": "wait",
+   "s": 0.9
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x": 1240.0,
+   "top": 528.0
+  },
+  {
+   "op": "wait",
+   "s": 1.5
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x": 1606.4,
+   "top": 400.0
+  },
+  {
+   "op": "interact",
+   "p": 1
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c1"
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x": 1350.4,
+   "top": 624.0
+  },
+  {
+   "op": "wait",
+   "s": 1.0
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 1480.0
+  },
+  {
+   "op": "wait",
+   "s": 0.9
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x": 1568.0,
+   "top": 624.0
+  },
+  {
+   "op": "walk2",
+   "x1": 1785.6,
+   "x2": 1817.6
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 2192.0
+  },
+  {
+   "op": "walljump",
+   "p": 1,
+   "top": 240.0,
+   "x": 2272.0,
+   "dir": 1,
+   "timeout": 10
+  },
+  {
+   "op": "interact",
+   "p": 1
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c2"
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 2374.4
+  },
+  {
+   "op": "walk2",
+   "x1": 2489.6,
+   "x2": 2521.6
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 2745.6
+  },
+  {
+   "op": "pickup",
+   "p": 1
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 2906.0
+  },
+  {
+   "op": "face",
+   "p": 1,
+   "dir": 1
+  },
+  {
+   "op": "drop",
+   "p": 1
+  },
+  {
+   "op": "wait",
+   "s": 0.5
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x_node": "Things/Crate",
+   "x_dx": -62
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x_node": "Things/Crate",
+   "x_dx": 0,
+   "top": 584.0,
+   "land_tol": 26
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x": 3052.8,
+   "top": 448.0
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x_node": "Things/Crate",
+   "x_dx": -66
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x_node": "Things/Crate",
+   "x_dx": -2,
+   "top": 584.0,
+   "land_tol": 26
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x": 3078.4,
+   "top": 448.0
+  },
+  {
+   "op": "walk2",
+   "x1": 3558.4,
+   "x2": 3584.0
+  },
+  {
+   "op": "walk2",
+   "x1": 3788.8,
+   "x2": 3827.2
+  },
+  {
+   "op": "hug"
+  },
+  {
+   "op": "walk2",
+   "x1": 3974.4,
+   "x2": 4006.4
+  },
+  {
+   "op": "walk2",
+   "x1": 4208.0,
+   "x2": 4240.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [],
+ "dialogues": [
+  "c4_cozy_b"
+ ]
+}

@@ -1,0 +1,17 @@
+[
+ {"t": "Bubu & Dudu", "size": 54, "accent": true},
+ {"t": "L'album del vento", "size": 30},
+ {"t": "", "size": 20},
+ {"t": "Un gioco per due", "size": 26, "accent": true},
+ {"t": "da giocare vicini, sullo stesso divano", "size": 22},
+ {"t": "", "size": 20},
+ {"t": "Bubu", "size": 26, "accent": true},
+ {"t": "il panda che conosceva tutti i giochi", "size": 22},
+ {"t": "Dudu", "size": 26, "accent": true},
+ {"t": "l'orso che non ne aveva mai giocato uno", "size": 22},
+ {"t": "", "size": 20},
+ {"t": "Realizzato con Godot Engine", "size": 22},
+ {"t": "", "size": 20},
+ {"t": "Grazie per aver giocato insieme.", "size": 28, "accent": true},
+ {"t": "La prossima pagina è vostra.", "size": 24}
+]
