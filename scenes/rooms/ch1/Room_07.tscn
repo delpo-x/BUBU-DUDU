@@ -1,0 +1,142 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scenes/core/Room.gd" id="1_room"]
+[ext_resource type="Script" path="res://scenes/core/WhiteboxBlock.gd" id="2_block"]
+[ext_resource type="Script" path="res://scenes/components/Decor.gd" id="3_decor"]
+[ext_resource type="Script" path="res://scenes/components/Exit.gd" id="4_exit"]
+[ext_resource type="Script" path="res://scenes/components/Hazard.gd" id="5_hazard"]
+[ext_resource type="Script" path="res://scenes/components/Sign.gd" id="6_sign"]
+
+[node name="Room_07" type="Node2D"]
+script = ExtResource("1_room")
+room_id = &"c1_r07"
+bounds = Rect2(0.0, 0.0, 2624.0, 768.0)
+background_color = Color(0.851, 0.933, 0.941, 1.0)
+backdrop = "meadow"
+backdrop_seed = 106
+call_allowed = true
+camera_min_zoom = 0.55
+camera_max_zoom = 1.0
+intro_dialogue = &""
+hint_text = "Se uno dei due resta indietro, chi è avanti tiene premuto Y per chiamarlo."
+est_minutes = 5.9
+
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="Decor" type="Node2D" parent="."]
+
+[node name="Geometry" type="Node2D" parent="."]
+
+[node name="Things" type="Node2D" parent="."]
+
+[node name="P1" type="Marker2D" parent="Spawns"]
+position = Vector2(128.0, 545.0)
+
+[node name="P2" type="Marker2D" parent="Spawns"]
+position = Vector2(185.6, 543.0)
+
+[node name="Decor" type="Node2D" parent="Decor"]
+position = Vector2(92.04, 576.0)
+script = ExtResource("3_decor")
+kind = "grass"
+scale_factor = 1.145
+seed_value = 16
+color = Color(0.435, 0.659, 0.396, 1.0)
+
+[node name="Decor2" type="Node2D" parent="Decor"]
+position = Vector2(267.52, 576.0)
+script = ExtResource("3_decor")
+kind = "bush"
+scale_factor = 1.038
+seed_value = 46
+color = Color(0.435, 0.659, 0.396, 1.0)
+
+[node name="Decor3" type="Node2D" parent="Decor"]
+position = Vector2(1072.15, 576.0)
+script = ExtResource("3_decor")
+kind = "grass"
+scale_factor = 1.092
+seed_value = 27
+color = Color(0.435, 0.659, 0.396, 1.0)
+
+[node name="Rock" type="StaticBody2D" parent="Geometry"]
+position = Vector2(32.0, 352.0)
+script = ExtResource("2_block")
+size = Vector2(64.0, 832.0)
+color = Color(0.627, 0.647, 0.561, 1.0)
+
+[node name="Ground" type="StaticBody2D" parent="Geometry"]
+position = Vector2(192.0, 688.0)
+script = ExtResource("2_block")
+size = Vector2(256.0, 224.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Ground2" type="StaticBody2D" parent="Geometry"]
+position = Vector2(672.0, 688.0)
+script = ExtResource("2_block")
+size = Vector2(704.0, 224.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Rock2" type="StaticBody2D" parent="Geometry"]
+position = Vector2(608.0, 488.0)
+script = ExtResource("2_block")
+size = Vector2(64.0, 176.0)
+color = Color(0.627, 0.647, 0.561, 1.0)
+
+[node name="Ground3" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1120.0, 688.0)
+script = ExtResource("2_block")
+size = Vector2(192.0, 224.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Ground4" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1248.0, 688.0)
+script = ExtResource("2_block")
+size = Vector2(64.0, 224.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Ground5" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1472.0, 688.0)
+script = ExtResource("2_block")
+size = Vector2(128.0, 224.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Ground6" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1888.0, 688.0)
+script = ExtResource("2_block")
+size = Vector2(704.0, 224.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Rock3" type="StaticBody2D" parent="Geometry"]
+position = Vector2(1824.0, 488.0)
+script = ExtResource("2_block")
+size = Vector2(64.0, 176.0)
+color = Color(0.627, 0.647, 0.561, 1.0)
+
+[node name="Ground7" type="StaticBody2D" parent="Geometry"]
+position = Vector2(2400.0, 688.0)
+script = ExtResource("2_block")
+size = Vector2(320.0, 224.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
+[node name="Rock4" type="StaticBody2D" parent="Geometry"]
+position = Vector2(2592.0, 352.0)
+script = ExtResource("2_block")
+size = Vector2(64.0, 832.0)
+color = Color(0.627, 0.647, 0.561, 1.0)
+
+[node name="Sign" type="Node2D" parent="Things"]
+position = Vector2(246.4, 576.0)
+script = ExtResource("6_sign")
+dialogue = &"c1_sign_call"
+kind = "post"
+
+[node name="Hazard" type="Area2D" parent="Things"]
+position = Vector2(1344.0, 756.0)
+script = ExtResource("5_hazard")
+size = Vector2(128.0, 24.0)
+kind = "thorns"
+
+[node name="Exit" type="Area2D" parent="Things"]
+position = Vector2(2400.0, 576.0)
+script = ExtResource("4_exit")

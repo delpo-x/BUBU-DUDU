@@ -1,0 +1,35 @@
+{
+ "room": "dev_rheavy",
+ "path": "res://scenes/rooms/dev/Room_heavy.tscn",
+ "steps": [
+  {
+   "op": "walk2",
+   "x1": 499.2,
+   "x2": 524.8
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c1"
+  },
+  {
+   "op": "wait",
+   "s": 0.4
+  },
+  {
+   "op": "walk2",
+   "x1": 857.6,
+   "x2": 889.6
+  },
+  {
+   "op": "walk2",
+   "x1": 1104.0,
+   "x2": 1136.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [],
+ "dialogues": []
+}

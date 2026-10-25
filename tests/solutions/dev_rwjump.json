@@ -1,0 +1,56 @@
+{
+ "room": "dev_rwjump",
+ "path": "res://scenes/rooms/dev/Room_wjump.tscn",
+ "steps": [
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 624.0
+  },
+  {
+   "op": "walljump",
+   "p": 1,
+   "top": 384,
+   "x": 704.0,
+   "dir": 1,
+   "timeout": 10
+  },
+  {
+   "op": "expect",
+   "what": "memory",
+   "id": "dev_m4",
+   "within": 1.0
+  },
+  {
+   "op": "interact",
+   "p": 1
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c1"
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 806.4
+  },
+  {
+   "op": "walk2",
+   "x1": 921.6,
+   "x2": 953.6
+  },
+  {
+   "op": "walk2",
+   "x1": 1232.0,
+   "x2": 1264.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [
+  "dev_m4"
+ ],
+ "dialogues": []
+}

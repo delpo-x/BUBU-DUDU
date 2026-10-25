@@ -1,0 +1,116 @@
+{
+ "room": "c3_r02",
+ "path": "res://scenes/rooms/ch3/Room_02.tscn",
+ "steps": [
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 355.2
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x": 544.0
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x": 640.0,
+   "top": 528.0,
+   "nocheck": true
+  },
+  {
+   "op": "wait",
+   "s": 0.6
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 355.2
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x": 448.0,
+   "top": 528.0
+  },
+  {
+   "op": "fly",
+   "p": 1,
+   "x": 800.0,
+   "top": 256.0,
+   "timeout": 4
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 876.8
+  },
+  {
+   "op": "expect",
+   "what": "memory",
+   "id": "m3_a",
+   "within": 1.0
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 800.0
+  },
+  {
+   "op": "interact",
+   "p": 1
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c1"
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x": 544.0,
+   "top": 576.0
+  },
+  {
+   "op": "wait",
+   "s": 0.5
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x": 640.0,
+   "top": 528.0
+  },
+  {
+   "op": "wait",
+   "s": 0.5
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x": 716.8,
+   "top": 576.0
+  },
+  {
+   "op": "walk2",
+   "x1": 985.6,
+   "x2": 1017.6
+  },
+  {
+   "op": "walk2",
+   "x1": 1232.0,
+   "x2": 1264.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [
+  "m3_a"
+ ],
+ "dialogues": [
+  "c3_r02_in",
+  "c3_sign_seesaw"
+ ]
+}

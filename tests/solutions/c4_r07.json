@@ -1,0 +1,121 @@
+{
+ "room": "c4_r07",
+ "path": "res://scenes/rooms/ch4/Room_07.tscn",
+ "steps": [
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 384.0
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c1"
+  },
+  {
+   "op": "wait",
+   "s": 0.4
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 800.0
+  },
+  {
+   "op": "wait",
+   "s": 0.2
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 864.0
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 889.6
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 1264.0
+  },
+  {
+   "op": "walljump",
+   "p": 1,
+   "top": 256.0,
+   "x": 1344.0,
+   "dir": 1,
+   "timeout": 10
+  },
+  {
+   "op": "expect",
+   "what": "memory",
+   "id": "m4_c",
+   "within": 1.0
+  },
+  {
+   "op": "interact",
+   "p": 1
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c2"
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 1446.4
+  },
+  {
+   "op": "walk2",
+   "x1": 1561.6,
+   "x2": 1593.6
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 1856.0
+  },
+  {
+   "op": "bounce",
+   "p": 1,
+   "via": 1920.0,
+   "x": 2073.6,
+   "top": 448.0,
+   "timeout": 5
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 1856.0
+  },
+  {
+   "op": "bounce",
+   "p": 2,
+   "via": 1920.0,
+   "x": 2099.2,
+   "top": 448.0,
+   "timeout": 5
+  },
+  {
+   "op": "walk2",
+   "x1": 2579.2,
+   "x2": 2604.8
+  },
+  {
+   "op": "walk2",
+   "x1": 2780.8,
+   "x2": 2812.8
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [
+  "m4_c"
+ ],
+ "dialogues": [
+  "c4_r07_in"
+ ]
+}

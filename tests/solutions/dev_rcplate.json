@@ -1,0 +1,74 @@
+{
+ "room": "dev_rcplate",
+ "path": "res://scenes/rooms/dev/Room_cplate.tscn",
+ "steps": [
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 377.6
+  },
+  {
+   "op": "pickup",
+   "p": 1
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 656.0
+  },
+  {
+   "op": "face",
+   "p": 1,
+   "dir": 1
+  },
+  {
+   "op": "drop",
+   "p": 1
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c1",
+   "timeout": 4.0
+  },
+  {
+   "op": "wait",
+   "s": 0.5
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 646.4
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x": 787.2
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 646.4
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x": 787.2
+  },
+  {
+   "op": "walk2",
+   "x1": 985.6,
+   "x2": 1017.6
+  },
+  {
+   "op": "walk2",
+   "x1": 1232.0,
+   "x2": 1264.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [],
+ "dialogues": []
+}

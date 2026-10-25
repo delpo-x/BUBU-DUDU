@@ -1,0 +1,160 @@
+{
+ "room": "c4_r01",
+ "path": "res://scenes/rooms/ch4/Room_01.tscn",
+ "steps": [
+  {
+   "op": "walk2",
+   "x1": 371.2,
+   "x2": 403.2
+  },
+  {
+   "op": "walk2",
+   "x1": 652.8,
+   "x2": 675.52
+  },
+  {
+   "op": "piggy",
+   "p": 1
+  },
+  {
+   "op": "dismount",
+   "p": 1,
+   "x": 768.0,
+   "top": 400.0
+  },
+  {
+   "op": "interact",
+   "p": 1
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c1"
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 640.0
+  },
+  {
+   "op": "walk2",
+   "x1": 985.6,
+   "x2": 1017.6
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 1177.6
+  },
+  {
+   "op": "pickup",
+   "p": 1
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 1338.0
+  },
+  {
+   "op": "face",
+   "p": 1,
+   "dir": 1
+  },
+  {
+   "op": "drop",
+   "p": 1
+  },
+  {
+   "op": "wait",
+   "s": 0.5
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x_node": "Things/Crate",
+   "x_dx": -62
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x_node": "Things/Crate",
+   "x_dx": 0,
+   "top": 536.0,
+   "land_tol": 26
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x": 1484.8,
+   "top": 400.0
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x_node": "Things/Crate",
+   "x_dx": -66
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x_node": "Things/Crate",
+   "x_dx": -2,
+   "top": 536.0,
+   "land_tol": 26
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x": 1510.4,
+   "top": 400.0
+  },
+  {
+   "op": "walk2",
+   "x1": 1862.4,
+   "x2": 1888.0
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 2048.0
+  },
+  {
+   "op": "bounce",
+   "p": 1,
+   "via": 2112.0,
+   "x": 2265.6,
+   "top": 336.0,
+   "timeout": 5
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 2048.0
+  },
+  {
+   "op": "bounce",
+   "p": 2,
+   "via": 2112.0,
+   "x": 2291.2,
+   "top": 336.0,
+   "timeout": 5
+  },
+  {
+   "op": "walk2",
+   "x1": 2643.2,
+   "x2": 2668.8
+  },
+  {
+   "op": "walk2",
+   "x1": 2844.8,
+   "x2": 2876.8
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [],
+ "dialogues": [
+  "c4_r01_in"
+ ]
+}

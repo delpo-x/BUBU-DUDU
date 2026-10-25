@@ -19,6 +19,12 @@ extends StaticBody2D
 		one_way = value
 		_rebuild()
 
+## Grooved surface: Bubu can wall-jump off its sides.
+@export var wall_jump: bool = false:
+	set(value):
+		wall_jump = value
+		_rebuild()
+
 var _shape_node: CollisionShape2D
 
 
@@ -36,6 +42,10 @@ func _rebuild() -> void:
 	rect.size = size
 	_shape_node.shape = rect
 	_shape_node.one_way_collision = one_way
+	if wall_jump:
+		add_to_group(&"walljump")
+	elif is_in_group(&"walljump"):
+		remove_from_group(&"walljump")
 	queue_redraw()
 
 
@@ -51,3 +61,11 @@ func _draw() -> void:
 			x += 32.0
 	else:
 		draw_rect(Rect2(r.position, Vector2(size.x, 4.0)), top_color)
+	if wall_jump:
+		# Vertical grooves on both sides read as "climbable by wall jumps".
+		var groove := color.lightened(0.35)
+		var y := r.position.y + 10.0
+		while y < r.end.y - 10.0:
+			draw_rect(Rect2(Vector2(r.position.x, y), Vector2(6.0, 12.0)), groove)
+			draw_rect(Rect2(Vector2(r.end.x - 6.0, y), Vector2(6.0, 12.0)), groove)
+			y += 22.0

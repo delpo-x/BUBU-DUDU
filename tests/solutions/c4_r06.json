@@ -1,0 +1,188 @@
+{
+ "room": "c4_r06",
+ "path": "res://scenes/rooms/ch4/Room_06.tscn",
+ "steps": [
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 416.0
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c1"
+  },
+  {
+   "op": "fly",
+   "p": 1,
+   "via": 608.0,
+   "x": 704.0,
+   "top": 320.0,
+   "timeout": 6
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 723.2
+  },
+  {
+   "op": "interact",
+   "p": 1
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c2"
+  },
+  {
+   "op": "fly",
+   "p": 2,
+   "via": 608.0,
+   "x": 755.2,
+   "top": 320.0,
+   "timeout": 6
+  },
+  {
+   "op": "walk2",
+   "x1": 800.0,
+   "x2": 832.0
+  },
+  {
+   "op": "walk2",
+   "x1": 1110.4,
+   "x2": 1136.0
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 1225.6
+  },
+  {
+   "op": "pickup",
+   "p": 1
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 1504.0
+  },
+  {
+   "op": "face",
+   "p": 1,
+   "dir": 1
+  },
+  {
+   "op": "drop",
+   "p": 1
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c3",
+   "timeout": 4.0
+  },
+  {
+   "op": "wait",
+   "s": 0.5
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 1494.4
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x": 1635.2
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 1494.4
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x": 1635.2
+  },
+  {
+   "op": "walk2",
+   "x1": 1833.6,
+   "x2": 1865.6
+  },
+  {
+   "op": "walk2",
+   "x1": 1993.6,
+   "x2": 1974.4
+  },
+  {
+   "op": "wait_near",
+   "node": "Things/Ferry",
+   "x": 2096.0,
+   "y": 458.0,
+   "tol": 3,
+   "arrive": true,
+   "timeout": 20
+  },
+  {
+   "op": "walk2",
+   "x1": 2083.2,
+   "x2": 2112.0,
+   "timeout": 3
+  },
+  {
+   "op": "wait_near",
+   "node": "Things/Ferry",
+   "x": 2416.0,
+   "y": 458.0,
+   "tol": 3,
+   "arrive": true,
+   "timeout": 20
+  },
+  {
+   "op": "walk2",
+   "x1": 2556.8,
+   "x2": 2588.8,
+   "timeout": 4
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 2800.0
+  },
+  {
+   "op": "bounce",
+   "p": 1,
+   "via": 2864.0,
+   "x": 3017.6,
+   "top": 256.0,
+   "timeout": 5
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 2800.0
+  },
+  {
+   "op": "bounce",
+   "p": 2,
+   "via": 2864.0,
+   "x": 3043.2,
+   "top": 256.0,
+   "timeout": 5
+  },
+  {
+   "op": "walk2",
+   "x1": 3523.2,
+   "x2": 3548.8
+  },
+  {
+   "op": "walk2",
+   "x1": 3724.8,
+   "x2": 3756.8
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [],
+ "dialogues": []
+}

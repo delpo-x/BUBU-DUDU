@@ -1,0 +1,81 @@
+{
+ "room": "dev_rplates",
+ "path": "res://scenes/rooms/dev/Room_plates.tscn",
+ "steps": [
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 448.0
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c1"
+  },
+  {
+   "op": "wait",
+   "s": 0.4
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 864.0
+  },
+  {
+   "op": "wait",
+   "s": 0.2
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 928.0
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 953.6
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 1088.0
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c2"
+  },
+  {
+   "op": "wait",
+   "s": 0.4
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 1504.0
+  },
+  {
+   "op": "wait",
+   "s": 0.2
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 1568.0
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 1593.6
+  },
+  {
+   "op": "walk2",
+   "x1": 1808.0,
+   "x2": 1840.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [],
+ "dialogues": []
+}

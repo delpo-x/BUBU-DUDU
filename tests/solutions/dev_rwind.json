@@ -1,0 +1,60 @@
+{
+ "room": "dev_rwind",
+ "path": "res://scenes/rooms/dev/Room_wind.tscn",
+ "steps": [
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 416.0
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c1"
+  },
+  {
+   "op": "fly",
+   "p": 1,
+   "via": 608.0,
+   "x": 704.0,
+   "top": 448,
+   "timeout": 6
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 723.2
+  },
+  {
+   "op": "interact",
+   "p": 1
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c2"
+  },
+  {
+   "op": "fly",
+   "p": 2,
+   "via": 608.0,
+   "x": 755.2,
+   "top": 448,
+   "timeout": 6
+  },
+  {
+   "op": "walk2",
+   "x1": 800.0,
+   "x2": 832.0
+  },
+  {
+   "op": "walk2",
+   "x1": 1056.0,
+   "x2": 1088.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [],
+ "dialogues": []
+}

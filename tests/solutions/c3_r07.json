@@ -1,0 +1,101 @@
+{
+ "room": "c3_r07",
+ "path": "res://scenes/rooms/ch3/Room_07.tscn",
+ "steps": [
+  {
+   "op": "walk2",
+   "x1": 416.0,
+   "x2": 1120.0
+  },
+  {
+   "op": "interact",
+   "p": 1
+  },
+  {
+   "op": "interact",
+   "p": 2
+  },
+  {
+   "op": "wait",
+   "s": 0.6
+  },
+  {
+   "op": "walk2",
+   "x1": 1318.4,
+   "x2": 1350.4
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 1698.0
+  },
+  {
+   "op": "climb",
+   "p": 1,
+   "top": 256.0,
+   "x": 1792.0,
+   "timeout": 8
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 1698.0
+  },
+  {
+   "op": "climb",
+   "p": 2,
+   "top": 256.0,
+   "x": 1817.6,
+   "timeout": 8
+  },
+  {
+   "op": "walk2",
+   "x1": 2310.4,
+   "x2": 2336.0
+  },
+  {
+   "op": "walk2",
+   "x1": 2540.8,
+   "x2": 2563.52
+  },
+  {
+   "op": "piggy",
+   "p": 1
+  },
+  {
+   "op": "dismount",
+   "p": 1,
+   "x": 2656.0,
+   "top": 272.0
+  },
+  {
+   "op": "expect",
+   "what": "memory",
+   "id": "m3_c",
+   "within": 1.0
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 2764.8
+  },
+  {
+   "op": "walk2",
+   "x1": 2790.4,
+   "x2": 2822.4
+  },
+  {
+   "op": "walk2",
+   "x1": 3024.0,
+   "x2": 3056.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [
+  "m3_c"
+ ],
+ "dialogues": []
+}

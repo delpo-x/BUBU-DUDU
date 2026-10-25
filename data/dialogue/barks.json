@@ -1,0 +1,124 @@
+{
+ "fall_bubu": [
+  [{"s": "dudu", "t": "Il grande esperto di videogiochi è appena caduto."}, {"s": "bubu", "t": "Stavo testando il palloncino. Funziona benissimo."}],
+  [{"s": "bubu", "t": "Non era previsto. Ma l'atterraggio era elegante."}],
+  [{"s": "dudu", "t": "Tutto bene? Ti ho visto volare via."}, {"s": "bubu", "t": "Solo l'orgoglio, un po' ammaccato."}],
+  [{"s": "dudu", "t": "Tranquillo, non lo dico a nessuno."}, {"s": "bubu", "t": "Lo stai dicendo adesso."}],
+  [{"s": "bubu", "t": "Ok. Quello non conta."}, {"s": "dudu", "t": "Conta un pochino."}],
+  [{"s": "dudu", "t": "Bentornato! Ti ho tenuto il posto."}],
+  [{"s": "bubu", "t": "Il pavimento ha cambiato posto. Giuro."}],
+  [{"s": "dudu", "t": "Anche i campioni cadono, no?"}, {"s": "bubu", "t": "Soprattutto i campioni. Per far sentire meglio gli altri."}]
+ ],
+ "fall_dudu": [
+  [{"s": "dudu", "t": "Ops."}, {"s": "bubu", "t": "Il palloncino ti dona."}],
+  [{"s": "bubu", "t": "Bentornato! Com'è il panorama da lassù?"}, {"s": "dudu", "t": "Bello, ma preferisco qui vicino a te."}],
+  [{"s": "dudu", "t": "Il bordo era più vicino di quanto sembrava."}, {"s": "bubu", "t": "Succede a tutti. Riprova con calma."}],
+  [{"s": "bubu", "t": "Tranquillo: qui non si perde mai."}, {"s": "dudu", "t": "Allora posso cadere quanto voglio?"}, {"s": "bubu", "t": "...Non esageriamo."}],
+  [{"s": "dudu", "t": "Volevo vedere cosa c'era sotto."}, {"s": "bubu", "t": "E cosa c'era?"}, {"s": "dudu", "t": "Un palloncino a forma di cuore."}],
+  [{"s": "bubu", "t": "Stai migliorando. Prima cadevi più in fretta."}],
+  [{"s": "dudu", "t": "Scusa, scusa! Ci riprovo."}, {"s": "bubu", "t": "Non chiedere scusa. Siamo qui per questo."}],
+  [{"s": "bubu", "t": "Respira. Rincorsa, e salta un attimo prima del bordo."}]
+ ],
+ "falls_many": [
+  [{"s": "dudu", "t": "Questa stanza ce l'ha con me."}, {"s": "bubu", "t": "Facciamo una pausa di un secondo. Guardiamola bene, prima."}],
+  [{"s": "bubu", "t": "Il palloncino ormai ci conosce per nome."}, {"s": "dudu", "t": "Potremmo dargli un nome anche noi."}],
+  [{"s": "bubu", "t": "Ok, cambio di strategia: andiamo piano, un pezzo alla volta."}],
+  [{"s": "dudu", "t": "Quante volte siamo caduti?"}, {"s": "bubu", "t": "Abbastanza da diventare esperti di palloncini."}]
+ ],
+ "call_bubu": [
+  [{"s": "dudu", "t": "Arrivo! Arrivo! Wheee!"}],
+  [{"s": "bubu", "t": "Vieni qui, ti aspetto."}, {"s": "dudu", "t": "Il viaggio più veloce della mia vita."}],
+  [{"s": "dudu", "t": "Mi piace quando mi chiami."}, {"s": "bubu", "t": "Lo so. Per questo lo faccio."}],
+  [{"s": "bubu", "t": "Servizio navetta Bubu, buongiorno."}],
+  [{"s": "dudu", "t": "Potevo arrivarci a piedi, eh."}, {"s": "bubu", "t": "Sì, ma così è più romantico."}],
+  [{"s": "dudu", "t": "La prossima volta portami anche un caffè."}]
+ ],
+ "call_dudu": [
+  [{"s": "bubu", "t": "Mi hai chiamato? Che onore."}],
+  [{"s": "dudu", "t": "Vieni, ho trovato la strada!"}, {"s": "bubu", "t": "Guarda chi fa da guida, adesso."}],
+  [{"s": "bubu", "t": "Mi stai trascinando con un palloncino. Lo trovo giusto."}],
+  [{"s": "dudu", "t": "Ti volevo vicino. Tutto qui."}],
+  [{"s": "bubu", "t": "Ok capo, eccomi."}, {"s": "dudu", "t": "Mi piace come suona, capo."}]
+ ],
+ "piggy": [
+  [{"s": "dudu", "t": "Sei più leggero di quanto pensassi."}, {"s": "bubu", "t": "Sono fatto di bambù e buone intenzioni."}],
+  [{"s": "bubu", "t": "Si vede tutto da quassù."}, {"s": "dudu", "t": "Ti presto la vista. Tu mi presti la strada."}],
+  [{"s": "dudu", "t": "Tieniti forte."}, {"s": "bubu", "t": "Sempre."}],
+  [{"s": "bubu", "t": "Il taxi più morbido del mondo."}],
+  [{"s": "dudu", "t": "Mi sento un trampolino importante."}],
+  [{"s": "bubu", "t": "Pronti? Al tre. Anzi, al due. Anzi, ora."}]
+ ],
+ "memory": [
+  [{"s": "dudu", "t": "Un'altra pagina! Questa me la ricordo benissimo."}],
+  [{"s": "bubu", "t": "Guarda qui. Eravamo così piccoli."}, {"s": "dudu", "t": "Era l'anno scorso."}, {"s": "bubu", "t": "Appunto."}],
+  [{"s": "dudu", "t": "Questa la metto in cima all'album."}],
+  [{"s": "bubu", "t": "Ogni pagina che troviamo, l'album pesa un po' di più. Nel senso buono."}],
+  [{"s": "dudu", "t": "Sto sorridendo, vero? Lo sento."}],
+  [{"s": "bubu", "t": "Questa l'avevo dimenticata. Grazie per averla trovata con me."}]
+ ],
+ "progress": [
+  [{"s": "dudu", "t": "Ha funzionato! Abbiamo fatto qualcosa!"}],
+  [{"s": "bubu", "t": "Hai sentito quel clic? È il suono del lavoro di squadra."}],
+  [{"s": "dudu", "t": "Io non so come, ma si è aperto."}, {"s": "bubu", "t": "È il metodo migliore."}],
+  [{"s": "bubu", "t": "Bel colpo."}, {"s": "dudu", "t": "Nostro, il colpo."}],
+  [{"s": "dudu", "t": "Mi sento un genio."}, {"s": "bubu", "t": "Lo sei. Un genio morbido."}],
+  [{"s": "bubu", "t": "Uno a zero per noi."}]
+ ],
+ "slow": [
+  [{"s": "bubu", "t": "Questa stanza è un po' testarda."}, {"s": "dudu", "t": "Anche noi lo siamo."}],
+  [{"s": "dudu", "t": "Se ci fermiamo a guardarla tutta, magari ci viene un'idea."}],
+  [{"s": "bubu", "t": "Proviamo a chiederci: cosa può fare uno solo di noi due, qui?"}],
+  [{"s": "dudu", "t": "Forse dobbiamo fare le cose in un altro ordine."}, {"s": "bubu", "t": "Oppure in un altro posto."}]
+ ],
+ "stuck": [
+  [{"s": "bubu", "t": "Se ci serve, nella pausa c'è «Un piccolo aiuto». Non è barare."}, {"s": "dudu", "t": "È come chiedere la strada. Si può."}],
+  [{"s": "dudu", "t": "Ci siamo incastrati, eh?"}, {"s": "bubu", "t": "Con Start c'è un aiuto. E se proprio serve, si può anche ricominciare la stanza."}],
+  [{"s": "bubu", "t": "Respiriamo. Mettiamo in pausa e leggiamo l'aiuto, poi ci riproviamo insieme."}]
+ ],
+ "idle": [
+  [{"s": "dudu", "t": "Siamo fermi da un po'. Stiamo pensando o stiamo ammirando il paesaggio?"}, {"s": "bubu", "t": "Entrambe le cose."}],
+  [{"s": "bubu", "t": "Pausa merenda?"}, {"s": "dudu", "t": "Sempre sì."}],
+  [{"s": "dudu", "t": "Mi piace anche stare fermi, se ci sei tu."}],
+  [{"s": "bubu", "t": "Se volete fare una pausa vera, c'è Start. Il gioco aspetta."}]
+ ],
+ "resume": [
+  [{"s": "dudu", "t": "Eccoci di nuovo!"}, {"s": "bubu", "t": "Dove eravamo rimasti?"}, {"s": "dudu", "t": "Qui. Insieme."}],
+  [{"s": "bubu", "t": "Bentornati. Le pagine ci hanno aspettato."}],
+  [{"s": "dudu", "t": "Mi eri mancato, gioco."}, {"s": "bubu", "t": "E io?"}, {"s": "dudu", "t": "Tu non sei mai andato via."}],
+  [{"s": "bubu", "t": "Riprendiamo? Ho le zampe che scalpitano."}]
+ ],
+ "fast": [
+  [{"s": "dudu", "t": "Quella l'abbiamo fatta in un attimo!"}, {"s": "bubu", "t": "Siamo una squadra pericolosa."}],
+  [{"s": "bubu", "t": "Record personale. Non lo diciamo alla prossima stanza."}],
+  [{"s": "dudu", "t": "Sto diventando bravo, vero?"}, {"s": "bubu", "t": "Stai diventando bravissimo."}],
+  [{"s": "bubu", "t": "Così veloci che il vento non se n'è accorto."}]
+ ],
+ "ambient_c1": [
+  [{"s": "dudu", "t": "Senti che profumo d'erba."}, {"s": "bubu", "t": "Profuma di domenica mattina."}],
+  [{"s": "bubu", "t": "Questi fiori ci stanno guardando?"}, {"s": "dudu", "t": "Forse anche loro cercano le pagine."}],
+  [{"s": "dudu", "t": "Il prato è più grande di quanto ricordassi."}],
+  [{"s": "bubu", "t": "Un giorno facciamo un picnic qui. Senza vento."}],
+  [{"s": "dudu", "t": "Che bello camminare senza fretta."}, {"s": "bubu", "t": "Abbiamo un po' di fretta, in realtà."}, {"s": "dudu", "t": "Senza fretta, ma veloci."}]
+ ],
+ "ambient_c2": [
+  [{"s": "dudu", "t": "Senti? Qualcuno sta cucinando."}, {"s": "bubu", "t": "Non bruciare niente, tu. Siamo ospiti."}],
+  [{"s": "bubu", "t": "Le lanterne si stanno accendendo."}],
+  [{"s": "dudu", "t": "Quella finestra assomiglia alla nostra cucina."}],
+  [{"s": "bubu", "t": "Ogni casa qui sembra avere una storia."}, {"s": "dudu", "t": "Come la nostra."}],
+  [{"s": "dudu", "t": "Quante casse. Qualcuno sta traslocando?"}, {"s": "bubu", "t": "Spero non con diciotto tazze."}]
+ ],
+ "ambient_c3": [
+  [{"s": "dudu", "t": "Le nuvole sono morbide come sembrano?"}, {"s": "bubu", "t": "Più morbide. Come te."}],
+  [{"s": "bubu", "t": "Da quassù il borgo sembra un giocattolo."}],
+  [{"s": "dudu", "t": "Ho un po' di vertigini. Ma è una vertigine bella."}],
+  [{"s": "bubu", "t": "Il cielo cambia colore a ogni passo."}],
+  [{"s": "dudu", "t": "Se allungo la zampa tocco una nuvola."}, {"s": "bubu", "t": "Non allungarla troppo, per favore."}]
+ ],
+ "ambient_c4": [
+  [{"s": "dudu", "t": "Quante stelle. Non le ho mai viste così."}],
+  [{"s": "bubu", "t": "Di notte tutto è più silenzioso. Sento solo te che canticchi."}, {"s": "dudu", "t": "Non stavo canticchiando."}, {"s": "bubu", "t": "Sì, invece."}],
+  [{"s": "dudu", "t": "Stammi vicino, è buio."}, {"s": "bubu", "t": "Ci sono. Sono bianco, mi vedi."}],
+  [{"s": "bubu", "t": "Le stelle ci fanno da lanterna."}],
+  [{"s": "dudu", "t": "Mi piace la notte con te. Sembra tutto possibile."}]
+ ]
+}

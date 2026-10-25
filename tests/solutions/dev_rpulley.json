@@ -1,0 +1,108 @@
+{
+ "room": "dev_rpulley",
+ "path": "res://scenes/rooms/dev/Room_pulley.tscn",
+ "steps": [
+  {
+   "op": "walk2",
+   "x1": 352.0,
+   "x2": 339.2
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x": 560.0
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 680.0
+  },
+  {
+   "op": "wait",
+   "s": 0.9
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x": 440.0,
+   "top": 672.0
+  },
+  {
+   "op": "wait",
+   "s": 1.5
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x": 806.4,
+   "top": 544.0
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 883.2
+  },
+  {
+   "op": "expect",
+   "what": "memory",
+   "id": "dev_m3",
+   "within": 1.0
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 800.0
+  },
+  {
+   "op": "interact",
+   "p": 1
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c1"
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x": 550.4,
+   "top": 768
+  },
+  {
+   "op": "wait",
+   "s": 1.0
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 680.0
+  },
+  {
+   "op": "wait",
+   "s": 0.9
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x": 768.0,
+   "top": 768
+  },
+  {
+   "op": "walk2",
+   "x1": 985.6,
+   "x2": 1017.6
+  },
+  {
+   "op": "walk2",
+   "x1": 1232.0,
+   "x2": 1264.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [
+  "dev_m3"
+ ],
+ "dialogues": []
+}

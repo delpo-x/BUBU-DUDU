@@ -1,0 +1,32 @@
+{
+ "room": "dev_rfragile",
+ "path": "res://scenes/rooms/dev/Room_fragile.tscn",
+ "steps": [
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 512.0
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 524.8
+  },
+  {
+   "op": "walk2",
+   "x1": 844.8,
+   "x2": 876.8
+  },
+  {
+   "op": "walk2",
+   "x1": 1104.0,
+   "x2": 1136.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [],
+ "dialogues": []
+}

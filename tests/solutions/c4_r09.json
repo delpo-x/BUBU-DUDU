@@ -1,0 +1,159 @@
+{
+ "room": "c4_r09",
+ "path": "res://scenes/rooms/ch4/Room_09.tscn",
+ "steps": [
+  {
+   "op": "walk2",
+   "x1": 416.0,
+   "x2": 1120.0
+  },
+  {
+   "op": "interact",
+   "p": 1
+  },
+  {
+   "op": "interact",
+   "p": 2
+  },
+  {
+   "op": "wait",
+   "s": 0.6
+  },
+  {
+   "op": "walk2",
+   "x1": 1318.4,
+   "x2": 1350.4
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 1497.6
+  },
+  {
+   "op": "pickup",
+   "p": 1
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 1658.0
+  },
+  {
+   "op": "face",
+   "p": 1,
+   "dir": 1
+  },
+  {
+   "op": "drop",
+   "p": 1
+  },
+  {
+   "op": "wait",
+   "s": 0.5
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x_node": "Things/Crate",
+   "x_dx": -62
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x_node": "Things/Crate",
+   "x_dx": 0,
+   "top": 536.0,
+   "land_tol": 26
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x": 1804.8,
+   "top": 400.0
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x_node": "Things/Crate",
+   "x_dx": -66
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x_node": "Things/Crate",
+   "x_dx": -2,
+   "top": 536.0,
+   "land_tol": 26
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x": 1830.4,
+   "top": 400.0
+  },
+  {
+   "op": "walk2",
+   "x1": 2182.4,
+   "x2": 2208.0
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 2336.0
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c3"
+  },
+  {
+   "op": "fly",
+   "p": 1,
+   "via": 2528.0,
+   "x": 2624.0,
+   "top": 272.0,
+   "timeout": 6
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 2643.2
+  },
+  {
+   "op": "interact",
+   "p": 1
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c4"
+  },
+  {
+   "op": "fly",
+   "p": 2,
+   "via": 2528.0,
+   "x": 2675.2,
+   "top": 272.0,
+   "timeout": 6
+  },
+  {
+   "op": "walk2",
+   "x1": 2720.0,
+   "x2": 2752.0
+  },
+  {
+   "op": "walk2",
+   "x1": 3158.4,
+   "x2": 3184.0
+  },
+  {
+   "op": "walk2",
+   "x1": 3360.0,
+   "x2": 3392.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [],
+ "dialogues": []
+}

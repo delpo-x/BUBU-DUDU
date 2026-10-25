@@ -1,0 +1,144 @@
+{
+ "room": "c2_r03",
+ "path": "res://scenes/rooms/ch2/Room_03.tscn",
+ "steps": [
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 377.6
+  },
+  {
+   "op": "pickup",
+   "p": 1
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 656.0
+  },
+  {
+   "op": "face",
+   "p": 1,
+   "dir": 1
+  },
+  {
+   "op": "drop",
+   "p": 1
+  },
+  {
+   "op": "wait_ch",
+   "ch": "c1",
+   "timeout": 4.0
+  },
+  {
+   "op": "wait",
+   "s": 0.5
+  },
+  {
+   "op": "walk",
+   "p": 1,
+   "x": 646.4
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x": 787.2
+  },
+  {
+   "op": "walk",
+   "p": 2,
+   "x": 646.4
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x": 787.2
+  },
+  {
+   "op": "walk2",
+   "x1": 985.6,
+   "x2": 1017.6
+  },
+  {
+   "op": "walk2",
+   "x1": 1052.8,
+   "x2": 1056.0
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x": 1139.2
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x": 1164.8
+  },
+  {
+   "op": "walk2",
+   "x1": 1180.8,
+   "x2": 1184.0
+  },
+  {
+   "op": "jump",
+   "p": 1,
+   "x": 1267.2
+  },
+  {
+   "op": "jump",
+   "p": 2,
+   "x": 1292.8
+  },
+  {
+   "op": "walk2",
+   "x1": 1401.6,
+   "x2": 1382.4
+  },
+  {
+   "op": "wait_near",
+   "node": "Things/Ferry",
+   "x": 1504.0,
+   "y": 458.0,
+   "tol": 3,
+   "arrive": true,
+   "timeout": 20
+  },
+  {
+   "op": "walk2",
+   "x1": 1491.2,
+   "x2": 1520.0,
+   "timeout": 3
+  },
+  {
+   "op": "wait_near",
+   "node": "Things/Ferry",
+   "x": 1760.0,
+   "y": 458.0,
+   "tol": 3,
+   "arrive": true,
+   "timeout": 20
+  },
+  {
+   "op": "walk2",
+   "x1": 1900.8,
+   "x2": 1932.8,
+   "timeout": 4
+  },
+  {
+   "op": "walk2",
+   "x1": 2214.4,
+   "x2": 2240.0
+  },
+  {
+   "op": "walk2",
+   "x1": 2416.0,
+   "x2": 2448.0
+  },
+  {
+   "op": "wait_complete",
+   "timeout": 3.0
+  }
+ ],
+ "memories": [],
+ "dialogues": []
+}
