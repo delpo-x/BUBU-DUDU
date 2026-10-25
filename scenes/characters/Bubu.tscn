@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scenes/characters/Bubu.gd" id="1_bubu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bubu"]
+size = Vector2(44, 58)
+
+[node name="Bubu" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
+floor_snap_length = 6.0
+script = ExtResource("1_bubu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bubu")

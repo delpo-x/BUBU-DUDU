@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scenes/characters/Dudu.gd" id="1_dudu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dudu"]
+size = Vector2(48, 62)
+
+[node name="Dudu" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
+floor_snap_length = 6.0
+script = ExtResource("1_dudu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dudu")
