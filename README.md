@@ -70,7 +70,8 @@ Turns animated sticker WebPs into transparent lossy WebP sprite sheets (kept los
 the white background, floating captions and stray text go, the floor shadow becomes see-through.
 Files named `dudu_*` drop all near-white (the bear has none); `bubu_*` keep white inside the outline.
 `scenes/ui/Stickers.gd` draws them: laughs in shared dialogue portraits, the skipping rope on the menu,
-Bubu's postcard in the album and the two hugging in cozy spots. "Riduci movimento" holds the first frame.
+Bubu's postcard in the album and the two hugging in cozy spots.
+A `<who>_balloon` sticker replaces that character's heart balloon when they fall. "Riduci movimento" holds the first frame.
 Frames cut by the image border (a close-up) keep their white: the stretch between two outline crossings
 on the border counts as body. Outline gaps up to `GAP` pixels are closed, transparent padding is
 flattened on white and straight frame lines along the border are dropped.

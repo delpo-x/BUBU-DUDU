@@ -727,7 +727,7 @@ func _enter_balloon(fell: bool) -> void:
 	if _balloon != null and is_instance_valid(_balloon):
 		_balloon.queue_free()
 	_balloon = HeartBalloon.new()
-	_balloon.setup(body_color, lower_color, marker_color)
+	_balloon.setup(body_color, lower_color, marker_color, ("bubu" if player_index == 1 else "dudu") + "_balloon")
 	get_parent().add_child(_balloon)
 	_balloon.global_position = global_position
 	_balloon.reset_physics_interpolation()
