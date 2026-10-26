@@ -59,6 +59,18 @@ bottom of the screen, whichever hides fewer of the two characters.
 Fonts are Nunito (reading) and Fredoka (headings) from Google Fonts, both under the SIL Open
 Font License (`art/fonts/OFL_*.txt`).
 
+## Stickers
+
+```bash
+python -I tools/gen_stickers.py path/to/webp_folder [fps]
+```
+
+Turns animated sticker WebPs into transparent sprite sheets plus `SpriteFrames` in `art/stickers/`:
+the white background, floating captions and stray text go, the floor shadow becomes see-through.
+Files named `dudu_*` drop all near-white (the bear has none); `bubu_*` keep white inside the outline.
+`scenes/ui/Stickers.gd` draws them: laughs in shared dialogue portraits, the skipping rope on the menu,
+Bubu's postcard in the album and Dudu's snack after a hug. "Riduci movimento" holds the first frame.
+
 ## Animated GIFs
 
 ```bash

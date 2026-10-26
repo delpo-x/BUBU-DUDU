@@ -181,7 +181,7 @@ func _process(delta: float) -> void:
 	_blink -= delta
 	if _blink < -0.13:
 		_blink = randf_range(2.2, 4.5)
-	if _face() != _drawn_face:
+	if _face() != _drawn_face or _face() == "happy":
 		_portrait.queue_redraw()
 	if _advance_requested:
 		_advance_requested = false
@@ -277,6 +277,11 @@ func _face() -> String:
 
 
 func _draw_head(who: String, pos: Vector2, sz: Vector2, face: String) -> void:
-	var tex: Texture2D = PORTRAITS[who][face]
 	_portrait.draw_circle(pos + sz * 0.5 + Vector2(0, 4), sz.x * 0.5, Color(0.3, 0.15, 0.2, 0.18))
+	# Shared happy lines: the animated laugh sticker instead of the still smile.
+	var laugh := Stickers.frame(who + "_laugh", _t) if face == "happy" else null
+	if laugh != null:
+		_portrait.draw_texture_rect(laugh, Stickers.fit(laugh, pos + sz * 0.5, sz * 1.15), false)
+		return
+	var tex: Texture2D = PORTRAITS[who][face]
 	_portrait.draw_texture_rect(tex, Rect2(pos, sz), false)

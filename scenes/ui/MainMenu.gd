@@ -219,7 +219,8 @@ func _draw_art() -> void:
 	var ground := size.y - 70.0
 	_art.draw_rect(Rect2(Vector2(0, ground), Vector2(size.x, 70)), Color(0.55, 0.72, 0.5))
 	# Two illustrations from the vector pack as tilted cards on either side of the menu.
-	_draw_card(LEFT_CARD, Vector2(size.x * 0.17, size.y * 0.62), CARD_SIZE, -0.07, 0.0)
+	var rope := Stickers.frame("dudu_rope", _t)
+	_draw_card(rope if rope != null else LEFT_CARD, Vector2(size.x * 0.17, size.y * 0.62), CARD_SIZE, -0.07, 0.0)
 	_draw_card(RIGHT_CARD, Vector2(size.x * 0.83, size.y * 0.6), CARD_SIZE, 0.06, 1.3)
 
 
@@ -232,5 +233,5 @@ func _draw_card(tex: Texture2D, center: Vector2, side: float, angle: float, phas
 	var r := Rect2(Vector2(-side, -side) * 0.5, Vector2(side, side))
 	_art.draw_rect(Rect2(r.position + Vector2(6, 8), r.size), Color(0.45, 0.25, 0.25, 0.18))
 	_art.draw_rect(r.grow(8.0), Color(1, 1, 1))
-	_art.draw_texture_rect(tex, r, false)
+	_art.draw_texture_rect(tex, Stickers.fit(tex, Vector2.ZERO, r.size), false)
 	_art.draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
