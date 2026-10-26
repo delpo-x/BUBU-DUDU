@@ -73,7 +73,7 @@
   [{"s": "dudu", "t": "Un'altra pagina! Questa me la ricordo benissimo."}],
   [{"s": "bubu", "t": "Guarda qui. Eravamo così piccoli."}, {"s": "dudu", "t": "Era l'anno scorso."}, {"s": "bubu", "t": "Appunto."}],
   [{"s": "dudu", "t": "Questa la metto in cima all'album."}],
-  [{"s": "bubu", "t": "Ogni pagina che troviamo, l'album pesa un po' di più. Nel senso buono."}],
+  [{"s": "bubu", "t": "Ogni pagina che troviamo, l'album pesa un po' di più. Ed è bello così."}],
   [{"s": "dudu", "t": "Sto sorridendo, vero? Lo sento."}],
   [{"s": "bubu", "t": "Questa l'avevo dimenticata. Grazie per averla trovata con me."}],
   [{"s": "bubu", "t": "Questa pagina sa di casa."}, {"s": "dudu", "t": "Sa di tè e di coperte."}],
@@ -172,7 +172,7 @@
   [{"s": "bubu", "t": "Le stelle ci fanno da lanterna."}],
   [{"s": "dudu", "t": "Mi piace la notte con te. Sembra tutto possibile."}],
   [{"s": "dudu", "t": "Quella stella si muove."}, {"s": "bubu", "t": "È una lucciola."}, {"s": "dudu", "t": "...Allora è una stella piccola."}],
-  [{"s": "bubu", "t": "Il buio è meno buio quando si è in due."}, {"s": "dudu", "t": "Lo dici sempre."}],
+  [{"s": "bubu", "t": "Al buio, in due, fa meno paura."}, {"s": "dudu", "t": "Lo dici sempre."}],
   [{"s": "dudu", "t": "Dove andremo, dopo?"}, {"s": "bubu", "t": "Dove porta il vento. E se il vento non c'è, ci inventiamo un posto."}],
   [{"s": "bubu", "t": "{Una stella cadente!|Guarda, la luna.|Senti i grilli?}"}, {"s": "dudu", "t": "{Esprimi un desiderio.|È bellissima.|Cantano per noi.}"}]
  ]

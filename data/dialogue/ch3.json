@@ -58,12 +58,12 @@
   {"s": "bubu", "m": "worried", "t": "Certe sere ho paura di non essere abbastanza. Per te, per noi."},
   {"s": "dudu", "t": "Non devo rispondere subito, vero?"},
   {"s": "bubu", "m": "teary", "t": "No."},
-  {"s": "dudu", "t": "Allora resto qui. E ascolto. Tutto quello che vuoi dire."}
+  {"s": "dudu", "t": "Allora resto qui ad ascoltarti. Dimmi tutto quello che vuoi."}
  ],
  "c3_r08_talk": [
   {"s": "dudu", "t": "Grazie per prima. Per avermelo detto."},
-  {"s": "bubu", "m": "cute", "t": "Grazie a te per non avere cercato di aggiustarlo."},
-  {"s": "dudu", "t": "Non c'era niente da aggiustare. C'era solo da starti vicino."}
+  {"s": "bubu", "m": "cute", "t": "Grazie a te per non aver cercato di aggiustarlo."},
+  {"s": "dudu", "t": "Non c'era niente da aggiustare. Volevo solo starti vicino."}
  ],
  "c3_r10_in": [
   {"s": "dudu", "t": "Facciamo una lista dei sogni? Come quella sul tovagliolo."},
@@ -87,6 +87,6 @@
   {"s": "dudu", "t": "Restiamo un attimo a guardare il tramonto?"},
   {"s": "bubu", "t": "Da quassù è tutto più grande."},
   {"s": "dudu", "t": "Tranne i problemi. Quelli da quassù sembrano piccolissimi."},
-  {"s": "bubu", "m": "cute", "t": "Allora ogni tanto torniamo qui. Per rimetterli in proporzione."}
+  {"s": "bubu", "m": "cute", "t": "Allora ogni tanto torniamo quassù a rimpicciolirli un po'."}
  ]
 }

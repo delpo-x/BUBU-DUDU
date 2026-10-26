@@ -73,7 +73,7 @@
   {"s": "bubu", "m": "think", "t": "Senti, posso dirti una cosa? Grazie per essere qui."},
   {"s": "dudu", "t": "Dove dovrei essere? È il nostro album."},
   {"s": "bubu", "m": "cute", "t": "Lo so. Ma non è da tutti mettersi a saltare per un prato solo perché glielo chiedi."},
-  {"s": "dudu", "t": "Non è da tutti. È da me."}
+  {"s": "dudu", "t": "Forse non è da tutti. Però è da me."}
  ],
  "c1_cozy_b": [
   {"s": "bubu", "t": "Pausa. Due minuti di niente."},
@@ -87,12 +87,12 @@
  ],
  "c1_r14_in": [
   {"s": "dudu", "t": "Sento che qui c'è una pagina importante."},
-  {"s": "bubu", "t": "Anche io. Facciamo con calma."}
+  {"s": "bubu", "t": "Anch'io. Facciamo con calma."}
  ],
  "c1_cozy_c": [
   {"s": "dudu", "t": "Il primo abbraccio. Te lo ricordi?"},
   {"s": "bubu", "m": "teary", "t": "Doveva essere un abbraccio di saluto."},
   {"s": "dudu", "m": "giggle", "t": "E invece è durato un po' troppo."},
-  {"s": "bubu", "m": "cute", "t": "Non troppo. Il giusto. Me ne sono accorto dopo."}
+  {"s": "bubu", "m": "cute", "t": "Non troppo. Giusto così. L'ho capito solo dopo."}
  ]
 }

@@ -56,7 +56,7 @@
   {"s": "dudu", "t": "La prima volta che abbiamo litigato, non sapevo come si faceva a fare pace."},
   {"s": "bubu", "t": "Mi hai lasciato una tazza di tè sul tavolo. Senza dire niente."},
   {"s": "dudu", "t": "Non trovavo le parole."},
-  {"s": "bubu", "m": "cute", "t": "Il tè era le parole. Ed era pure zuccherato giusto."}
+  {"s": "bubu", "m": "cute", "t": "Bastava il tè. Ed era pure zuccherato come piace a me."}
  ],
  "c2_r10_talk": [
   {"s": "dudu", "t": "Ti ho visto saltare tra quelle pareti. Sembravi un ninja."},
@@ -72,7 +72,7 @@
  ],
  "c2_cozy_b": [
   {"s": "dudu", "t": "Siamo stanchi, eh?"},
-  {"s": "bubu", "t": "Il giusto. Quella stanchezza buona, di quando si è fatta una cosa insieme."},
+  {"s": "bubu", "t": "Un po'. Ma è la stanchezza buona, quella di quando abbiamo fatto qualcosa in due."},
   {"s": "dudu", "t": "Come quando abbiamo finito di montare il mobile."},
   {"s": "bubu", "t": "Con sei viti avanzate."},
   {"s": "dudu", "t": "Sta ancora in piedi. Come noi."}

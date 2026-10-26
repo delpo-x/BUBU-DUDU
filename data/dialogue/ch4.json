@@ -42,13 +42,13 @@
   {"s": "dudu", "t": "Quando ho volato con l'altalena, mi hai preso tu?"},
   {"s": "bubu", "m": "teary", "t": "Ti ho guardato. Ero troppo occupato a essere fiero."},
   {"s": "dudu", "t": "Fiero di me?"},
-  {"s": "bubu", "m": "cute", "t": "Di te. Di come sei cambiato oggi. E di come sei rimasto uguale."}
+  {"s": "bubu", "m": "cute", "t": "Di te. Di quanto sei cambiato oggi, e di quanto sei rimasto uguale."}
  ],
  "c4_r07_in": [
   {"s": "dudu", "t": "C'è una canzone che mi gira in testa."},
   {"s": "bubu", "t": "Quella della macchina? Con i finestrini abbassati?"},
   {"s": "dudu", "m": "laugh", "t": "Quella. Siamo stonati da far paura."},
-  {"s": "bubu", "t": "Siamo stonati insieme. È un'armonia tutta nostra."}
+  {"s": "bubu", "t": "Sì, ma stonati in coppia. Quasi quasi è un'armonia."}
  ],
  "c4_r08_talk": [
   {"s": "bubu", "t": "Dudu, all'inizio guidavo io. Ora mi sembra di seguirti."},
@@ -71,13 +71,13 @@
   {"s": "dudu", "t": "Siamo quasi alla fine."},
   {"s": "bubu", "t": "Della notte?"},
   {"s": "dudu", "t": "Dell'album. Mi dispiace un po'."},
-  {"s": "bubu", "m": "cute", "t": "Gli album finiscono. Noi no."}
+  {"s": "bubu", "m": "cute", "t": "Gli album finiscono. Poi se ne comincia un altro."}
  ],
  "c4_r14_in": [
   {"s": "bubu", "t": "L'ultima stanza. Sento che l'ultima pagina è qui."},
   {"s": "dudu", "t": "Allora facciamola bene. Come sappiamo fare."},
-  {"s": "bubu", "t": "Insieme."},
-  {"s": "dudu", "t": "Sempre."}
+  {"s": "bubu", "t": "Dai, che ce la facciamo."},
+  {"s": "dudu", "t": "Ovvio."}
  ],
  "c4_cozy_c": [
   {"s": "dudu", "t": "Grazie, Bubu. Per avermi insegnato a giocare."},
