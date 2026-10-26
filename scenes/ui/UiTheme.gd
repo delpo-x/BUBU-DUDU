@@ -142,9 +142,10 @@ static func button(text: String, on_pressed: Callable) -> Button:
 static func _pop(c: Control, target: float) -> void:
 	if not c.is_inside_tree():
 		return
-	var prev: Variant = c.get_meta(&"pop_tween", null)
-	if prev is Tween:
-		(prev as Tween).kill()
+	if c.has_meta(&"pop_tween"):
+		var prev: Variant = c.get_meta(&"pop_tween")
+		if prev is Tween:
+			(prev as Tween).kill()
 	c.pivot_offset = c.size * 0.5
 	var to := Vector2.ONE * (target if motion() > 0.0 else 1.0)
 	var tw := c.create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
