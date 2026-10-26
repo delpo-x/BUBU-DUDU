@@ -33,14 +33,14 @@
  "c4_r04_talk": [
   {"s": "bubu", "t": "Ti ricordi le stelle cadenti? Ne passò una sola."},
   {"s": "dudu", "t": "E ci siamo detti il desiderio."},
-  {"s": "bubu", "t": "Non si dovrebbe."},
+  {"s": "bubu", "m": "sulk", "t": "Non si dovrebbe."},
   {"s": "dudu", "t": "Si è avverato lo stesso. Stiamo qui, no?"}
  ],
  "c4_cozy_a": [
   {"s": "dudu", "t": "Quando ho volato con l'altalena, mi hai preso tu?"},
   {"s": "bubu", "t": "Ti ho guardato. Ero troppo occupato a essere fiero."},
   {"s": "dudu", "t": "Fiero di me?"},
-  {"s": "bubu", "t": "Di te. Di come sei cambiato oggi. E di come sei rimasto uguale."}
+  {"s": "bubu", "m": "cute", "t": "Di te. Di come sei cambiato oggi. E di come sei rimasto uguale."}
  ],
  "c4_r07_in": [
   {"s": "dudu", "t": "C'è una canzone che mi gira in testa."},
@@ -51,25 +51,25 @@
  "c4_r08_talk": [
   {"s": "bubu", "t": "Dudu, all'inizio guidavo io. Ora mi sembra di seguirti."},
   {"s": "dudu", "m": "sus", "t": "Ti dà fastidio?"},
-  {"s": "bubu", "t": "No. È bello stare dietro, ogni tanto. Si vede chi hai davanti."}
+  {"s": "bubu", "m": "cute", "t": "No. È bello stare dietro, ogni tanto. Si vede chi hai davanti."}
  ],
  "c4_r11_in": [
   {"s": "dudu", "t": "Ogni mattina mi fai il caffè senza chiedermelo."},
   {"s": "bubu", "t": "Perché so come lo vuoi."},
   {"s": "dudu", "t": "Io non te l'ho mai detto, che mi piace così tanto."},
-  {"s": "bubu", "t": "Me lo dici adesso. Vale lo stesso."}
+  {"s": "bubu", "m": "cute", "t": "Me lo dici adesso. Vale lo stesso."}
  ],
  "c4_cozy_b": [
   {"s": "bubu", "t": "Siediti un attimo. Guarda quante stelle."},
   {"s": "dudu", "t": "Ne vedo una che cade."},
-  {"s": "bubu", "t": "Desiderio?"},
+  {"s": "bubu", "m": "cute", "t": "Desiderio?"},
   {"s": "dudu", "t": "Già espresso. Ce l'ho accanto."}
  ],
  "c4_r13_talk": [
   {"s": "dudu", "t": "Siamo quasi alla fine."},
   {"s": "bubu", "t": "Della notte?"},
   {"s": "dudu", "t": "Dell'album. Mi dispiace un po'."},
-  {"s": "bubu", "t": "Gli album finiscono. Noi no."}
+  {"s": "bubu", "m": "cute", "t": "Gli album finiscono. Noi no."}
  ],
  "c4_r14_in": [
   {"s": "bubu", "t": "L'ultima stanza. Sento che l'ultima pagina è qui."},

@@ -93,6 +93,14 @@ func _ready() -> void:
 	_fade.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_fade.modulate.a = 1.0
 	add_child(_fade)
+	# Between rooms the two run off together in the corner of the dark screen.
+	var run := StickerView.new("both_run", Vector2(170, 125))
+	run.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+	run.offset_left = -200.0
+	run.offset_top = -150.0
+	run.offset_right = -30.0
+	run.offset_bottom = -25.0
+	_fade.add_child(run)
 	add_child(_title_root)
 
 

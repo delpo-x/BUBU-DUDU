@@ -35,7 +35,10 @@ const CHANCES := {
 ## Pool -> speaker -> sticker mood for their lines in it (see DialogueBox "m"), unless a
 ## line has its own.
 const MOODS := {
+	"fall_bubu": {"bubu": "sulk"},
 	"falls_many": {"bubu": "cry", "dudu": "sus"},
+	"memory": {"bubu": "cute"},
+	"piggy": {"bubu": "cute"},
 	"call_bubu": {"bubu": "phone"},
 	"call_dudu": {"bubu": "hey"},
 	"resume": {"bubu": "bed"},

@@ -56,7 +56,7 @@
   {"s": "dudu", "t": "Ti ricordi la prima volta che ci siamo seduti su una panchina?"},
   {"s": "bubu", "t": "Il gelato si è sciolto. Avevo le dita tutte appiccicose."},
   {"s": "dudu", "t": "E non me l'hai detto, per non interrompermi."},
-  {"s": "bubu", "t": "Stavi raccontando una cosa bellissima. Le dita potevano aspettare."}
+  {"s": "bubu", "m": "cute", "t": "Stavi raccontando una cosa bellissima. Le dita potevano aspettare."}
  ],
  "c1_sign_call": [
   {"s": "narr", "t": "Chi è più avanti tiene premuto Y per chiamare il compagno rimasto indietro."},
@@ -71,13 +71,13 @@
  "c1_r10_in": [
   {"s": "bubu", "m": "think", "t": "Senti, posso dirti una cosa? Grazie per essere qui."},
   {"s": "dudu", "t": "Dove dovrei essere? È il nostro album."},
-  {"s": "bubu", "t": "Lo so. Ma non è da tutti mettersi a saltare per un prato solo perché glielo chiedi."},
+  {"s": "bubu", "m": "cute", "t": "Lo so. Ma non è da tutti mettersi a saltare per un prato solo perché glielo chiedi."},
   {"s": "dudu", "t": "Non è da tutti. È da me."}
  ],
  "c1_cozy_b": [
   {"s": "bubu", "t": "Pausa. Due minuti di niente."},
   {"s": "dudu", "t": "Mi piace il niente, con te."},
-  {"s": "bubu", "t": "È il mio niente preferito."}
+  {"s": "bubu", "m": "cute", "t": "È il mio niente preferito."}
  ],
  "c1_r13_talk": [
   {"s": "dudu", "m": "handsome", "t": "Quando mi chiami e arrivo volando, mi sento un supereroe."},
@@ -92,6 +92,6 @@
   {"s": "dudu", "t": "Il primo abbraccio. Te lo ricordi?"},
   {"s": "bubu", "t": "Doveva essere un abbraccio di saluto."},
   {"s": "dudu", "t": "E invece è durato un po' troppo."},
-  {"s": "bubu", "t": "Non troppo. Il giusto. Me ne sono accorto dopo."}
+  {"s": "bubu", "m": "cute", "t": "Non troppo. Il giusto. Me ne sono accorto dopo."}
  ]
 }

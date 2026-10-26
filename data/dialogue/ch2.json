@@ -2,7 +2,7 @@
  "c2_intro": [
   {"s": "narr", "t": "Il borgo: tetti rossi, lanterne, e pagine incastrate dappertutto."},
   {"s": "dudu", "t": "Sembra il quartiere della nostra prima casa."},
-  {"s": "bubu", "t": "Con meno scatoloni. E meno discussioni su dove mettere il divano."},
+  {"s": "bubu", "m": "sulk", "t": "Con meno scatoloni. E meno discussioni su dove mettere il divano."},
   {"s": "dudu", "m": "handsome", "t": "Il divano stava benissimo dove dicevo io."},
   {"s": "bubu", "m": "grudge", "t": "Il divano non entrava dalla porta, dove dicevi tu."}
  ],
@@ -54,7 +54,7 @@
   {"s": "dudu", "t": "La prima volta che abbiamo litigato, non sapevo come si faceva a fare pace."},
   {"s": "bubu", "t": "Mi hai lasciato una tazza di tè sul tavolo. Senza dire niente."},
   {"s": "dudu", "t": "Non trovavo le parole."},
-  {"s": "bubu", "t": "Il tè era le parole. Ed era pure zuccherato giusto."}
+  {"s": "bubu", "m": "cute", "t": "Il tè era le parole. Ed era pure zuccherato giusto."}
  ],
  "c2_r10_talk": [
   {"s": "dudu", "t": "Ti ho visto saltare tra quelle pareti. Sembravi un ninja."},
@@ -65,7 +65,7 @@
  "c2_r13_in": [
   {"s": "bubu", "m": "think", "t": "Sai qual è la cosa che preferisco della nostra casa?"},
   {"s": "dudu", "t": "Il divano nel posto sbagliato?"},
-  {"s": "bubu", "t": "Che quando torno, la luce è accesa. Perché ci sei tu."},
+  {"s": "bubu", "m": "cute", "t": "Che quando torno, la luce è accesa. Perché ci sei tu."},
   {"s": "dudu", "m": "laugh", "t": "...Questa me la segno."}
  ],
  "c2_cozy_b": [
