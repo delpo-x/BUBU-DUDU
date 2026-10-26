@@ -1,12 +1,12 @@
 {
  "fall_bubu": [
-  [{"s": "dudu", "t": "Il grande esperto di videogiochi è appena caduto."}, {"s": "bubu", "t": "Stavo testando il palloncino. Funziona benissimo."}],
-  [{"s": "bubu", "t": "Non era previsto. Ma l'atterraggio era elegante."}],
+  [{"s": "dudu", "t": "Il grande esperto di videogiochi è appena caduto."}, {"s": "bubu", "m": "dizzy", "t": "Stavo testando il palloncino. Funziona benissimo."}],
+  [{"s": "bubu", "m": "dizzy", "t": "Non era previsto. Ma l'atterraggio era elegante."}],
   [{"s": "dudu", "t": "Tutto bene? Ti ho visto volare via."}, {"s": "bubu", "t": "Solo l'orgoglio, un po' ammaccato."}],
   [{"s": "dudu", "t": "Tranquillo, non lo dico a nessuno."}, {"s": "bubu", "t": "Lo stai dicendo adesso."}],
   [{"s": "bubu", "t": "Ok. Quello non conta."}, {"s": "dudu", "t": "Conta un pochino."}],
   [{"s": "dudu", "t": "Bentornato! Ti ho tenuto il posto."}],
-  [{"s": "bubu", "t": "Il pavimento ha cambiato posto. Giuro."}],
+  [{"s": "bubu", "m": "dizzy", "t": "Il pavimento ha cambiato posto. Giuro."}],
   [{"s": "dudu", "t": "Anche i campioni cadono, no?"}, {"s": "bubu", "t": "Soprattutto i campioni. Per far sentire meglio gli altri."}],
   [{"s": "dudu", "t": "Hai fatto una piroetta, prima di cadere?"}, {"s": "bubu", "t": "Era uno stile. Si chiama «caduta artistica»."}],
   [{"s": "bubu", "t": "Il palloncino è puntuale, almeno lui."}],
