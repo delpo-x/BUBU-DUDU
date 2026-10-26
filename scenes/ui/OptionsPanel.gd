@@ -11,7 +11,7 @@ var _first: Control
 func _ready() -> void:
 	theme = UiTheme.get_theme()
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	custom_minimum_size = Vector2(640, 0)
+	custom_minimum_size = Vector2(820, 0)
 	var v := VBoxContainer.new()
 	v.add_theme_constant_override(&"separation", 10)
 	add_child(v)
@@ -26,14 +26,24 @@ func _ready() -> void:
 	focusables.append(_slider_row(v, "Velocità del testo", speed_value, func(x: float) -> void:
 		GameState.text_speed = 0.0 if x >= 0.99 else 15.0 + x * 90.0))
 
-	focusables.append(_toggle(v, "Personaggi animati", GameState.sticker_characters, func(on: bool) -> void: GameState.sticker_characters = on))
-	focusables.append(_toggle(v, "Voci dei personaggi", GameState.voices_enabled, func(on: bool) -> void: GameState.voices_enabled = on))
-	focusables.append(_toggle(v, "Battute dei personaggi", GameState.barks_enabled, func(on: bool) -> void: GameState.barks_enabled = on))
-	focusables.append(_toggle(v, "Testo grande", GameState.large_text, func(on: bool) -> void: GameState.large_text = on))
-	focusables.append(_toggle(v, "Riduci movimento", GameState.reduce_motion, func(on: bool) -> void: GameState.reduce_motion = on))
+	# Switches in two columns so the panel fits a 720 px screen.
+	var switches := GridContainer.new()
+	switches.columns = 2
+	switches.add_theme_constant_override(&"h_separation", 12)
+	switches.add_theme_constant_override(&"v_separation", 8)
+	v.add_child(switches)
+	focusables.append(_toggle(switches, "Personaggi animati", GameState.sticker_characters, func(on: bool) -> void: GameState.sticker_characters = on))
+	focusables.append(_toggle(switches, "Voci dei personaggi", GameState.voices_enabled, func(on: bool) -> void: GameState.voices_enabled = on))
+	focusables.append(_toggle(switches, "Battute dei personaggi", GameState.barks_enabled, func(on: bool) -> void: GameState.barks_enabled = on))
+	focusables.append(_toggle(switches, "Testo grande", GameState.large_text, func(on: bool) -> void: GameState.large_text = on))
+	focusables.append(_toggle(switches, "Riduci movimento", GameState.reduce_motion, func(on: bool) -> void: GameState.reduce_motion = on))
 
 	if not OS.has_feature("web"):
-		focusables.append(_toggle(v, "Schermo intero", GameState.fullscreen, func(on: bool) -> void: GameState.fullscreen = on))
+		focusables.append(_toggle(switches, "Schermo intero", GameState.fullscreen, func(on: bool) -> void: GameState.fullscreen = on))
+
+	var keys := UiTheme.button("Assegna i tasti…", _open_controls)
+	v.add_child(keys)
+	focusables.append(keys)
 
 	var back := UiTheme.button("Indietro", _close)
 	v.add_child(back)
@@ -50,6 +60,7 @@ func open() -> void:
 func _toggle(parent: Control, text: String, on: bool, setter: Callable) -> CheckButton:
 	var b := CheckButton.new()
 	b.text = text
+	b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	b.button_pressed = on
 	b.toggled.connect(func(value: bool) -> void:
 		setter.call(value)
@@ -79,6 +90,22 @@ func _slider_row(parent: Control, text: String, value: float, setter: Callable) 
 		Sfx.play("ui_move", 0.0, -6.0))
 	row.add_child(s)
 	return s
+
+
+var _controls: ControlsPanel
+
+
+## The remapping screen opens in place of this panel and comes back to it.
+func _open_controls() -> void:
+	if _controls == null:
+		_controls = ControlsPanel.new()
+		_controls.visible = false
+		get_parent().add_child(_controls)
+		_controls.closed.connect(func() -> void:
+			visible = true
+			_first.grab_focus())
+	visible = false
+	_controls.open()
 
 
 func _close() -> void:

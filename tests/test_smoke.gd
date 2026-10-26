@@ -23,6 +23,7 @@ func run() -> void:
 			if not InputMap.has_action(StringName("p%d_%s" % [p, verb])):
 				missing += 1
 	check(missing == 0, "input actions registered (p1_*, p2_*)")
+	_test_bindings()
 
 	var packed := load("res://scenes/rooms/test_gym.tscn") as PackedScene
 	check(packed != null, "test_gym loads")
@@ -77,3 +78,28 @@ func _collect(dir: String, out: Array[String]) -> void:
 			out.append(dir.path_join(f))
 	for d in DirAccess.get_directories_at(dir):
 		_collect(dir.path_join(d), out)
+
+
+## Remapping: a taken key swaps, pad buttons swap within one player, saved and restored.
+func _test_bindings() -> void:
+	var old_path := Bindings.path
+	Bindings.path = "user://test_controls.cfg"
+	Bindings.reset_defaults()
+	var p1_jump_key := Bindings.key_of(&"p1_jump").physical_keycode
+	var p1_left_key := Bindings.key_of(&"p1_left").physical_keycode
+	Bindings.set_key(&"p1_jump", p1_left_key)
+	check(Bindings.key_of(&"p1_jump").physical_keycode == p1_left_key
+		and Bindings.key_of(&"p1_left").physical_keycode == p1_jump_key, "a taken key swaps with the action that had it")
+	Bindings.set_pad(&"p2_jump", JOY_BUTTON_Y)
+	check(Bindings.pad_of(&"p2_jump").button_index == JOY_BUTTON_Y and Bindings.pad_of(&"p2_assist").button_index == JOY_BUTTON_A
+		and Bindings.pad_of(&"p1_jump").button_index == JOY_BUTTON_A, "pad buttons swap within the same player only")
+	Bindings.reset_defaults()
+	Bindings.set_key(&"p2_interact", KEY_K)
+	# Forget it in memory only (reset would save), then read the file back.
+	Bindings.call(&"_replace_key", &"p2_interact", KEY_PERIOD)
+	Bindings.load_bindings()
+	check(Bindings.key_of(&"p2_interact").physical_keycode == KEY_K, "remapped keys are saved and loaded")
+	Bindings.reset_defaults()
+	check(Bindings.key_of(&"p1_jump").physical_keycode == p1_jump_key and Bindings.key_label(&"p1_jump") == "Spazio", "reset restores the default keys")
+	DirAccess.remove_absolute(Bindings.path)
+	Bindings.path = old_path

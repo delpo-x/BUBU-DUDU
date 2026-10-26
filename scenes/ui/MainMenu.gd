@@ -163,6 +163,13 @@ func _open_options() -> void:
 
 
 func _open_controls() -> void:
+	# Rebuilt each time: the keys may have been changed in Options meanwhile.
+	var holder := _controls.get_parent()
+	var at := _controls.get_index()
+	_controls.queue_free()
+	_controls = _build_controls()
+	holder.add_child(_controls)
+	holder.move_child(_controls, at)
 	_main.visible = false
 	_controls.visible = true
 	(_controls.get_meta(&"back") as Button).grab_focus()
@@ -175,14 +182,17 @@ func _build_controls() -> PanelContainer:
 	p.add_child(v)
 	v.add_child(UiTheme.label("Comandi", 36, UiTheme.ACCENT_INK, HORIZONTAL_ALIGNMENT_CENTER))
 	v.add_child(UiTheme.label("Primo controller: Bubu  ·  Secondo controller: Dudu", 20, UiTheme.MUTED, HORIZONTAL_ALIGNMENT_CENTER))
+	# Pad names from Bubu's current buttons (both start the same; Options can change them).
+	var jump := Bindings.pad_label(&"p1_jump")
+	var assist := Bindings.pad_label(&"p1_assist")
 	var rows := [
 		["Levetta sinistra", "Muoversi (su/giù per arrampicarsi)"],
-		["A", "Saltare (tienilo premuto per saltare più in alto)"],
-		["B", "Interagire: leve, pulsanti, cartelli, prendere e posare casse"],
-		["Y (tocco)", "In spalla al partner / scendere / abbracciarsi"],
-		["Y (tieni premuto)", "Chiamare il partner vicino a te"],
-		["A mentre sei in spalla", "Saltare giù con lo slancio"],
-		["Start", "Pausa (aiuto, ricomincia stanza, opzioni)"],
+		[jump, "Saltare (tienilo premuto per saltare più in alto)"],
+		[Bindings.pad_label(&"p1_interact"), "Interagire: leve, pulsanti, cartelli, prendere e posare casse"],
+		[assist + " (tocco)", "In spalla al partner / scendere / abbracciarsi"],
+		[assist + " (tieni premuto)", "Chiamare il partner vicino a te"],
+		[jump + " mentre sei in spalla", "Saltare giù con lo slancio"],
+		[Bindings.pad_label(&"p1_pause"), "Pausa (aiuto, ricomincia stanza, opzioni)"],
 	]
 	var grid := GridContainer.new()
 	grid.columns = 2
@@ -192,7 +202,13 @@ func _build_controls() -> PanelContainer:
 		grid.add_child(UiTheme.label(String(r[0]), 21, UiTheme.ACCENT_INK))
 		grid.add_child(UiTheme.label(String(r[1]), 21))
 	v.add_child(grid)
-	v.add_child(UiTheme.label("Tastiera — Bubu: A/D W/S, Spazio, E, Q, Esc  ·  Dudu: frecce, Invio, punto, /, Backspace", 16, UiTheme.MUTED, HORIZONTAL_ALIGNMENT_CENTER))
+	var kb := func(p: int) -> String:
+		var names: Array[String] = []
+		for s in ["left", "right", "up", "down", "jump", "interact", "assist", "pause"]:
+			names.append(Bindings.key_label(StringName("p%d_%s" % [p, s])))
+		return "%s/%s %s/%s, %s, %s, %s, %s" % names
+	v.add_child(UiTheme.label("Tastiera — Bubu: %s  ·  Dudu: %s" % [kb.call(1), kb.call(2)], 16, UiTheme.MUTED, HORIZONTAL_ALIGNMENT_CENTER))
+	v.add_child(UiTheme.label("Puoi cambiarli in Opzioni → Assegna i tasti.", 16, UiTheme.MUTED, HORIZONTAL_ALIGNMENT_CENTER))
 	v.add_child(UiTheme.label("Non si perde mai: chi cade torna dal partner su un palloncino.", 18, UiTheme.INK, HORIZONTAL_ALIGNMENT_CENTER))
 	var back := UiTheme.button("Indietro", _show_main)
 	v.add_child(back)

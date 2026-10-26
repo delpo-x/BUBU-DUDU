@@ -16,6 +16,7 @@ Sfx="*res://scenes/core/Sfx.gd"
 GameState="*res://scenes/core/GameState.gd"
 Voices="*res://scenes/core/Voices.gd"
 PadAssigner="*res://scenes/core/PadAssigner.gd"
+Bindings="*res://scenes/core/Bindings.gd"
 
 [audio]
 

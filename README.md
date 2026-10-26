@@ -17,6 +17,8 @@ Four chapters, 56 rooms, about 6 hours for a first-time pair. Targets: Windows a
 | Y hold | Call the partner over (where allowed) |
 | Start | Pause |
 
+Every key and button (but the stick and D-pad moves) can be changed in Options → "Assegna i tasti"
+(`scenes/core/Bindings.gd`, saved in `user://controls.cfg`; a taken key swaps).
 Pad 0 is Bubu (P1) and pad 1 is Dudu (P2). Keyboard fallback: P1 uses `A D W S`, `Space`, `E`, `Q`, `Esc`.
 P2 uses the arrow keys, `Enter`, `.`, `/` and `Backspace`.
 
