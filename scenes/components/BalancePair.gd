@@ -39,6 +39,7 @@ var _b_down: bool = false
 
 func _ready() -> void:
 	_room = Room.find_for(self)
+	add_to_group(Room.STATE_GROUP)
 	if mode == Mode.SEESAW:
 		_offset = travel * clampi(start_tilt, -1, 1)
 	for i in 2:
@@ -166,3 +167,15 @@ func _draw() -> void:
 	for p: Vector2 in [pa, pb]:
 		draw_rect(Rect2(p - pad_size * 0.5, pad_size), color)
 		draw_rect(Rect2(p - pad_size * 0.5, Vector2(pad_size.x, 4.0)), color.lightened(0.3))
+
+
+# --- Checkpoint save (see Room.capture_state) ---------------------------------------
+
+func snapshot() -> Variant:
+	return {"offset": _offset}
+
+
+func restore(d: Dictionary) -> void:
+	_offset = float(d.get("offset", _offset))
+	for i in _pads.size():
+		_pads[i].position = _pad_pos(i)

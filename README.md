@@ -114,6 +114,15 @@ Records looping clips of the two characters (wave, hug, jump, walk, piggyback) f
 and encodes them into `media/gifs/` (480x360, 20 fps, pure-Python encoder, no Pillow needed). The
 recording needs a window, so run it without `--headless`. `media/` is not imported or exported.
 
+## Saves
+
+Progress saves on every room entry. Inside a room it also saves the players' spot and the puzzle state
+(latched plates and gates, levers, crates, broken floors, seesaws, lit lanterns) at lantern-checkpoints
+and cozy spots ("Partita salvata"), on pause, on quitting to the menu and on closing the window, so
+"Continua" picks up where the players were. Restarting the room drops that save. Components keep their
+state through `snapshot()` / `restore()` (group `Room.STATE_GROUP`). Rooms estimated at
+`LANTERN_MIN_EST` minutes or more get a lantern once half their puzzle effort is done (`tools/chapters.py`).
+
 ## Regenerate rooms
 
 ```bash

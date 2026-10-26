@@ -1,14 +1,15 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scenes/core/Room.gd" id="1_room"]
 [ext_resource type="Script" path="res://scenes/core/WhiteboxBlock.gd" id="2_block"]
 [ext_resource type="Script" path="res://scenes/components/CarryableItem.gd" id="3_carryableitem"]
-[ext_resource type="Script" path="res://scenes/components/Decor.gd" id="4_decor"]
-[ext_resource type="Script" path="res://scenes/components/DialogueTrigger.gd" id="5_dialoguetrigger"]
-[ext_resource type="Script" path="res://scenes/components/Exit.gd" id="6_exit"]
-[ext_resource type="Script" path="res://scenes/components/Hazard.gd" id="7_hazard"]
-[ext_resource type="Script" path="res://scenes/components/MovingPlatform.gd" id="8_movingplatform"]
-[ext_resource type="Script" path="res://scenes/components/PressurePlate.gd" id="9_pressureplate"]
+[ext_resource type="Script" path="res://scenes/components/Checkpoint.gd" id="4_checkpoint"]
+[ext_resource type="Script" path="res://scenes/components/Decor.gd" id="5_decor"]
+[ext_resource type="Script" path="res://scenes/components/DialogueTrigger.gd" id="6_dialoguetrigger"]
+[ext_resource type="Script" path="res://scenes/components/Exit.gd" id="7_exit"]
+[ext_resource type="Script" path="res://scenes/components/Hazard.gd" id="8_hazard"]
+[ext_resource type="Script" path="res://scenes/components/MovingPlatform.gd" id="9_movingplatform"]
+[ext_resource type="Script" path="res://scenes/components/PressurePlate.gd" id="10_pressureplate"]
 
 [node name="Room_05" type="Node2D"]
 script = ExtResource("1_room")
@@ -40,21 +41,21 @@ position = Vector2(185.6, 543.0)
 
 [node name="Decor" type="Node2D" parent="Decor"]
 position = Vector2(95.82, 576.0)
-script = ExtResource("4_decor")
+script = ExtResource("5_decor")
 kind = "lamp"
 scale_factor = 1.0
 seed_value = 0
 
 [node name="Decor2" type="Node2D" parent="Decor"]
 position = Vector2(287.41, 576.0)
-script = ExtResource("4_decor")
+script = ExtResource("5_decor")
 kind = "lamp"
 scale_factor = 1.0
 seed_value = 0
 
 [node name="Decor3" type="Node2D" parent="Decor"]
 position = Vector2(863.5, 320.0)
-script = ExtResource("4_decor")
+script = ExtResource("5_decor")
 kind = "house"
 scale_factor = 0.818
 seed_value = 0
@@ -62,7 +63,7 @@ color = Color(0.906, 0.788, 0.663, 1.0)
 
 [node name="Decor4" type="Node2D" parent="Decor"]
 position = Vector2(1967.06, 272.0)
-script = ExtResource("4_decor")
+script = ExtResource("5_decor")
 kind = "fence"
 scale_factor = 0.8
 seed_value = 0
@@ -154,14 +155,14 @@ color = Color(0.604, 0.561, 0.6, 1.0)
 
 [node name="PressurePlate" type="Area2D" parent="Things"]
 position = Vector2(416.0, 576.0)
-script = ExtResource("9_pressureplate")
+script = ExtResource("10_pressureplate")
 size = Vector2(96.0, 10.0)
 channel = &"c1"
 required_weight = 1
 
 [node name="Lift" type="AnimatableBody2D" parent="Things"]
 position = Vector2(640.0, 586.0)
-script = ExtResource("8_movingplatform")
+script = ExtResource("9_movingplatform")
 size = Vector2(128.0, 20.0)
 travel = Vector2(0.0, -256.0)
 speed = 120.0
@@ -170,20 +171,24 @@ channels = Array[StringName]([&"c1"])
 
 [node name="PressurePlate2" type="Area2D" parent="Things"]
 position = Vector2(800.0, 320.0)
-script = ExtResource("9_pressureplate")
+script = ExtResource("10_pressureplate")
 size = Vector2(96.0, 10.0)
 channel = &"c1"
 required_weight = 1
 
+[node name="Checkpoint" type="Area2D" parent="Things"]
+position = Vector2(960.0, 320.0)
+script = ExtResource("4_checkpoint")
+
 [node name="Hazard" type="Area2D" parent="Things"]
 position = Vector2(1408.0, 756.0)
-script = ExtResource("7_hazard")
+script = ExtResource("8_hazard")
 size = Vector2(128.0, 24.0)
 kind = "thorns"
 
 [node name="DialogueTrigger" type="Area2D" parent="Things"]
 position = Vector2(1536.0, 320.0)
-script = ExtResource("5_dialoguetrigger")
+script = ExtResource("6_dialoguetrigger")
 size = Vector2(128.0, 256.0)
 dialogue = &"c2_r05_talk"
 require_both = true
@@ -197,4 +202,4 @@ color = Color(0.769, 0.58, 0.392, 1.0)
 
 [node name="Exit" type="Area2D" parent="Things"]
 position = Vector2(2592.0, 400.0)
-script = ExtResource("6_exit")
+script = ExtResource("7_exit")

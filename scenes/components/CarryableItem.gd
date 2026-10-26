@@ -40,6 +40,7 @@ func _ready() -> void:
 	freeze_mode = RigidBody2D.FREEZE_MODE_KINEMATIC
 	_shape = CompUtil.add_rect_shape(self, size)
 	_home = global_position
+	add_to_group(Room.STATE_GROUP)
 	_room = Room.find_for(self)
 
 
@@ -159,3 +160,17 @@ func _draw() -> void:
 		draw_circle(Vector2((i - (weight - 1) * 0.5) * 10.0, 0), 4.0, c.lightened(0.45))
 	if _poof > 0.0:
 		draw_arc(Vector2.ZERO, half.x + 20.0 * (1.0 - _poof / 0.3), 0.0, TAU, 24, Color(1, 1, 1, _poof / 0.3), 3.0)
+
+
+# --- Checkpoint save (see Room.capture_state) ---------------------------------------
+
+## Where the crate is (a carried one is put down under its carrier's feet).
+func snapshot() -> Variant:
+	var pos := global_position
+	if carrier != null and is_instance_valid(carrier):
+		pos = carrier.global_position + Vector2(carrier.facing * 40.0, 0.0)
+	return {"x": pos.x, "y": pos.y}
+
+
+func restore(d: Dictionary) -> void:
+	_release(Vector2(float(d.get("x", _home.x)), float(d.get("y", _home.y))), Vector2.ZERO)

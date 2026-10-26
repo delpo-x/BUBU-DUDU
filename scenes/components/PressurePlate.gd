@@ -23,6 +23,7 @@ func _ready() -> void:
 	CompUtil.setup_trigger(self)
 	CompUtil.add_rect_shape(self, Vector2(size.x - 6.0, 26.0), Vector2(0, -15.0))
 	_room = Room.find_for(self)
+	add_to_group(Room.STATE_GROUP)
 
 
 func is_active() -> bool:
@@ -72,3 +73,16 @@ func _draw() -> void:
 			draw_arc(p, 4.0, 0.0, TAU, 12, c.darkened(0.35), 1.5)
 	if hold_time > 0.0 and _timer > 0.0 and not pressed:
 		draw_arc(Vector2(0, -top_h - 34.0), 9.0, -PI / 2.0, -PI / 2.0 + TAU * (_timer / hold_time), 24, c.darkened(0.3), 3.0)
+
+
+# --- Checkpoint save (see Room.capture_state) ---------------------------------------
+
+func snapshot() -> Variant:
+	return {"on": true} if latch and _active else null
+
+
+func restore(d: Dictionary) -> void:
+	if bool(d.get("on", false)) and not _active:
+		_active = true
+		if _room != null:
+			_room.set_source(channel, CompUtil.source_id(self), true)

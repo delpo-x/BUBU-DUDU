@@ -1,16 +1,17 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://scenes/core/Room.gd" id="1_room"]
 [ext_resource type="Script" path="res://scenes/components/BalancePair.gd" id="2_balancepair"]
 [ext_resource type="Script" path="res://scenes/core/WhiteboxBlock.gd" id="3_block"]
 [ext_resource type="Script" path="res://scenes/components/CarryableItem.gd" id="4_carryableitem"]
-[ext_resource type="Script" path="res://scenes/components/CozySpot.gd" id="5_cozyspot"]
-[ext_resource type="Script" path="res://scenes/components/Decor.gd" id="6_decor"]
-[ext_resource type="Script" path="res://scenes/components/Exit.gd" id="7_exit"]
-[ext_resource type="Script" path="res://scenes/components/Gate.gd" id="8_gate"]
-[ext_resource type="Script" path="res://scenes/components/Hazard.gd" id="9_hazard"]
-[ext_resource type="Script" path="res://scenes/components/MovingPlatform.gd" id="10_movingplatform"]
-[ext_resource type="Script" path="res://scenes/components/WallButton.gd" id="11_wallbutton"]
+[ext_resource type="Script" path="res://scenes/components/Checkpoint.gd" id="5_checkpoint"]
+[ext_resource type="Script" path="res://scenes/components/CozySpot.gd" id="6_cozyspot"]
+[ext_resource type="Script" path="res://scenes/components/Decor.gd" id="7_decor"]
+[ext_resource type="Script" path="res://scenes/components/Exit.gd" id="8_exit"]
+[ext_resource type="Script" path="res://scenes/components/Gate.gd" id="9_gate"]
+[ext_resource type="Script" path="res://scenes/components/Hazard.gd" id="10_hazard"]
+[ext_resource type="Script" path="res://scenes/components/MovingPlatform.gd" id="11_movingplatform"]
+[ext_resource type="Script" path="res://scenes/components/WallButton.gd" id="12_wallbutton"]
 
 [node name="Room_12" type="Node2D"]
 script = ExtResource("1_room")
@@ -42,14 +43,14 @@ position = Vector2(185.6, 591.0)
 
 [node name="Decor" type="Node2D" parent="Decor"]
 position = Vector2(109.76, 624.0)
-script = ExtResource("6_decor")
+script = ExtResource("7_decor")
 kind = "lamp"
 scale_factor = 1.0
 seed_value = 0
 
 [node name="Decor2" type="Node2D" parent="Decor"]
 position = Vector2(3015.17, 152.48)
-script = ExtResource("6_decor")
+script = ExtResource("7_decor")
 kind = "star"
 scale_factor = 1.084
 seed_value = 0
@@ -57,14 +58,14 @@ color = Color(1.0, 1.0, 0.85, 1.0)
 
 [node name="Decor3" type="Node2D" parent="Decor"]
 position = Vector2(3196.15, 448.0)
-script = ExtResource("6_decor")
+script = ExtResource("7_decor")
 kind = "lamp"
 scale_factor = 1.0
 seed_value = 0
 
 [node name="Decor4" type="Node2D" parent="Decor"]
 position = Vector2(3667.2, 640.0)
-script = ExtResource("6_decor")
+script = ExtResource("7_decor")
 kind = "lamp"
 scale_factor = 1.0
 seed_value = 0
@@ -199,13 +200,13 @@ color = Color(0.365, 0.345, 0.471, 1.0)
 
 [node name="Hazard" type="Area2D" parent="Things"]
 position = Vector2(672.0, 820.0)
-script = ExtResource("9_hazard")
+script = ExtResource("10_hazard")
 size = Vector2(512.0, 24.0)
 kind = "thorns"
 
 [node name="Ferry" type="AnimatableBody2D" parent="Things"]
 position = Vector2(480.0, 634.0)
-script = ExtResource("10_movingplatform")
+script = ExtResource("11_movingplatform")
 size = Vector2(128.0, 20.0)
 travel = Vector2(384.0, 0.0)
 speed = 95.0
@@ -213,7 +214,7 @@ pause_time = 1.4
 
 [node name="Gate" type="StaticBody2D" parent="Things"]
 position = Vector2(1632.0, 560.0)
-script = ExtResource("8_gate")
+script = ExtResource("9_gate")
 size = Vector2(64.0, 128.0)
 channels = Array[StringName]([&"c1"])
 require_all = true
@@ -221,7 +222,7 @@ latch = true
 
 [node name="Lever" type="Node2D" parent="Things"]
 position = Vector2(1587.2, 400.0)
-script = ExtResource("11_wallbutton")
+script = ExtResource("12_wallbutton")
 mode = 1
 channel = &"c1"
 
@@ -238,7 +239,7 @@ speed = 150.0
 
 [node name="Gate2" type="StaticBody2D" parent="Things"]
 position = Vector2(2272.0, 560.0)
-script = ExtResource("8_gate")
+script = ExtResource("9_gate")
 size = Vector2(64.0, 128.0)
 channels = Array[StringName]([&"c2"])
 require_all = true
@@ -246,9 +247,13 @@ latch = true
 
 [node name="Lever2" type="Node2D" parent="Things"]
 position = Vector2(2272.0, 240.0)
-script = ExtResource("11_wallbutton")
+script = ExtResource("12_wallbutton")
 mode = 1
 channel = &"c2"
+
+[node name="Checkpoint" type="Area2D" parent="Things"]
+position = Vector2(2592.0, 624.0)
+script = ExtResource("5_checkpoint")
 
 [node name="Crate" type="RigidBody2D" parent="Things"]
 position = Vector2(2784.0, 603.0)
@@ -259,11 +264,11 @@ color = Color(0.769, 0.58, 0.392, 1.0)
 
 [node name="CozySpot" type="Area2D" parent="Things"]
 position = Vector2(3808.0, 640.0)
-script = ExtResource("5_cozyspot")
+script = ExtResource("6_cozyspot")
 kind = "bench"
 size = Vector2(217.6, 128.0)
 dialogue = &"c4_cozy_b"
 
 [node name="Exit" type="Area2D" parent="Things"]
 position = Vector2(4224.0, 640.0)
-script = ExtResource("7_exit")
+script = ExtResource("8_exit")

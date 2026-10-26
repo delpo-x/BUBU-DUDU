@@ -19,6 +19,7 @@ var _timer: float = 0.0
 
 func _ready() -> void:
 	add_to_group(&"interactables")
+	add_to_group(Room.STATE_GROUP)
 	_room = Room.find_for(self)
 	if mode == Mode.LEVER and start_on:
 		_set_active(true, false)
@@ -80,3 +81,14 @@ func _draw() -> void:
 			draw_arc(Vector2(0, -42), 17.0, -PI / 2.0, -PI / 2.0 + TAU * clampf(_timer / active_time, 0.0, 1.0), 28, c.lightened(0.2), 3.0)
 	# Small "B" prompt so the beginner knows this is usable.
 	draw_string(ThemeDB.fallback_font, Vector2(-5, -76 if mode == Mode.BUTTON else -52), "B", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, c.darkened(0.4))
+
+
+# --- Checkpoint save (see Room.capture_state) ---------------------------------------
+
+## Levers stay where they were left; timed buttons always run out.
+func snapshot() -> Variant:
+	return {"on": _active} if mode == Mode.LEVER else null
+
+
+func restore(d: Dictionary) -> void:
+	_set_active(bool(d.get("on", _active)), false)

@@ -1,14 +1,15 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scenes/core/Room.gd" id="1_room"]
 [ext_resource type="Script" path="res://scenes/core/WhiteboxBlock.gd" id="2_block"]
 [ext_resource type="Script" path="res://scenes/components/CarryableItem.gd" id="3_carryableitem"]
-[ext_resource type="Script" path="res://scenes/components/CozySpot.gd" id="4_cozyspot"]
-[ext_resource type="Script" path="res://scenes/components/Decor.gd" id="5_decor"]
-[ext_resource type="Script" path="res://scenes/components/Exit.gd" id="6_exit"]
-[ext_resource type="Script" path="res://scenes/components/Gate.gd" id="7_gate"]
-[ext_resource type="Script" path="res://scenes/components/MovingPlatform.gd" id="8_movingplatform"]
-[ext_resource type="Script" path="res://scenes/components/PressurePlate.gd" id="9_pressureplate"]
+[ext_resource type="Script" path="res://scenes/components/Checkpoint.gd" id="4_checkpoint"]
+[ext_resource type="Script" path="res://scenes/components/CozySpot.gd" id="5_cozyspot"]
+[ext_resource type="Script" path="res://scenes/components/Decor.gd" id="6_decor"]
+[ext_resource type="Script" path="res://scenes/components/Exit.gd" id="7_exit"]
+[ext_resource type="Script" path="res://scenes/components/Gate.gd" id="8_gate"]
+[ext_resource type="Script" path="res://scenes/components/MovingPlatform.gd" id="9_movingplatform"]
+[ext_resource type="Script" path="res://scenes/components/PressurePlate.gd" id="10_pressureplate"]
 
 [node name="Room_14" type="Node2D"]
 script = ExtResource("1_room")
@@ -40,7 +41,7 @@ position = Vector2(185.6, 543.0)
 
 [node name="Decor" type="Node2D" parent="Decor"]
 position = Vector2(88.93, 576.0)
-script = ExtResource("5_decor")
+script = ExtResource("6_decor")
 kind = "bush"
 scale_factor = 1.0
 seed_value = 45
@@ -48,7 +49,7 @@ color = Color(0.498, 0.627, 0.439, 1.0)
 
 [node name="Decor2" type="Node2D" parent="Decor"]
 position = Vector2(283.87, 576.0)
-script = ExtResource("5_decor")
+script = ExtResource("6_decor")
 kind = "fence"
 scale_factor = 0.8
 seed_value = 0
@@ -56,14 +57,14 @@ color = Color(0.788, 0.655, 0.486, 1.0)
 
 [node name="Decor3" type="Node2D" parent="Decor"]
 position = Vector2(716.74, 400.0)
-script = ExtResource("5_decor")
+script = ExtResource("6_decor")
 kind = "lamp"
 scale_factor = 1.0
 seed_value = 0
 
 [node name="Decor4" type="Node2D" parent="Decor"]
 position = Vector2(1689.84, 272.0)
-script = ExtResource("5_decor")
+script = ExtResource("6_decor")
 kind = "house"
 scale_factor = 0.776
 seed_value = 0
@@ -71,7 +72,7 @@ color = Color(0.769, 0.824, 0.69, 1.0)
 
 [node name="Decor5" type="Node2D" parent="Decor"]
 position = Vector2(3059.2, 464.0)
-script = ExtResource("5_decor")
+script = ExtResource("6_decor")
 kind = "lamp"
 scale_factor = 1.0
 seed_value = 0
@@ -187,14 +188,14 @@ color = Color(0.769, 0.58, 0.392, 1.0)
 
 [node name="PressurePlate" type="Area2D" parent="Things"]
 position = Vector2(1248.0, 528.0)
-script = ExtResource("9_pressureplate")
+script = ExtResource("10_pressureplate")
 size = Vector2(96.0, 10.0)
 channel = &"c1"
 required_weight = 1
 
 [node name="Lift" type="AnimatableBody2D" parent="Things"]
 position = Vector2(1472.0, 538.0)
-script = ExtResource("8_movingplatform")
+script = ExtResource("9_movingplatform")
 size = Vector2(128.0, 20.0)
 travel = Vector2(0.0, -256.0)
 speed = 120.0
@@ -203,10 +204,14 @@ channels = Array[StringName]([&"c1"])
 
 [node name="PressurePlate2" type="Area2D" parent="Things"]
 position = Vector2(1632.0, 272.0)
-script = ExtResource("9_pressureplate")
+script = ExtResource("10_pressureplate")
 size = Vector2(96.0, 10.0)
 channel = &"c1"
 required_weight = 1
+
+[node name="Checkpoint" type="Area2D" parent="Things"]
+position = Vector2(1792.0, 272.0)
+script = ExtResource("4_checkpoint")
 
 [node name="Crate2" type="RigidBody2D" parent="Things"]
 position = Vector2(2336.0, 443.0)
@@ -217,14 +222,14 @@ color = Color(0.769, 0.58, 0.392, 1.0)
 
 [node name="PressurePlate3" type="Area2D" parent="Things"]
 position = Vector2(2624.0, 464.0)
-script = ExtResource("9_pressureplate")
+script = ExtResource("10_pressureplate")
 size = Vector2(96.0, 10.0)
 channel = &"c2"
 required_weight = 1
 
 [node name="Gate" type="StaticBody2D" parent="Things"]
 position = Vector2(2816.0, 400.0)
-script = ExtResource("7_gate")
+script = ExtResource("8_gate")
 size = Vector2(64.0, 128.0)
 channels = Array[StringName]([&"c2"])
 require_all = true
@@ -232,7 +237,7 @@ latch = false
 
 [node name="CozySpot" type="Area2D" parent="Things"]
 position = Vector2(3200.0, 464.0)
-script = ExtResource("4_cozyspot")
+script = ExtResource("5_cozyspot")
 kind = "bench"
 size = Vector2(217.6, 128.0)
 dialogue = &"c2_cozy_b"
@@ -240,7 +245,7 @@ channel = &"c3"
 
 [node name="Gate2" type="StaticBody2D" parent="Things"]
 position = Vector2(3456.0, 400.0)
-script = ExtResource("7_gate")
+script = ExtResource("8_gate")
 size = Vector2(64.0, 128.0)
 channels = Array[StringName]([&"c3"])
 require_all = true
@@ -248,4 +253,4 @@ latch = true
 
 [node name="Exit" type="Area2D" parent="Things"]
 position = Vector2(3808.0, 464.0)
-script = ExtResource("6_exit")
+script = ExtResource("7_exit")

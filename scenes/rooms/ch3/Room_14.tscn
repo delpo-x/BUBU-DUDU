@@ -1,15 +1,16 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://scenes/core/Room.gd" id="1_room"]
 [ext_resource type="Script" path="res://scenes/components/BalancePair.gd" id="2_balancepair"]
 [ext_resource type="Script" path="res://scenes/core/WhiteboxBlock.gd" id="3_block"]
-[ext_resource type="Script" path="res://scenes/components/CozySpot.gd" id="4_cozyspot"]
-[ext_resource type="Script" path="res://scenes/components/Decor.gd" id="5_decor"]
-[ext_resource type="Script" path="res://scenes/components/Exit.gd" id="6_exit"]
-[ext_resource type="Script" path="res://scenes/components/Gate.gd" id="7_gate"]
-[ext_resource type="Script" path="res://scenes/components/PressurePlate.gd" id="8_pressureplate"]
-[ext_resource type="Script" path="res://scenes/components/WallButton.gd" id="9_wallbutton"]
-[ext_resource type="Script" path="res://scenes/components/WindZone.gd" id="10_windzone"]
+[ext_resource type="Script" path="res://scenes/components/Checkpoint.gd" id="4_checkpoint"]
+[ext_resource type="Script" path="res://scenes/components/CozySpot.gd" id="5_cozyspot"]
+[ext_resource type="Script" path="res://scenes/components/Decor.gd" id="6_decor"]
+[ext_resource type="Script" path="res://scenes/components/Exit.gd" id="7_exit"]
+[ext_resource type="Script" path="res://scenes/components/Gate.gd" id="8_gate"]
+[ext_resource type="Script" path="res://scenes/components/PressurePlate.gd" id="9_pressureplate"]
+[ext_resource type="Script" path="res://scenes/components/WallButton.gd" id="10_wallbutton"]
+[ext_resource type="Script" path="res://scenes/components/WindZone.gd" id="11_windzone"]
 
 [node name="Room_14" type="Node2D"]
 script = ExtResource("1_room")
@@ -41,7 +42,7 @@ position = Vector2(185.6, 671.0)
 
 [node name="Decor" type="Node2D" parent="Decor"]
 position = Vector2(95.33, 704.0)
-script = ExtResource("5_decor")
+script = ExtResource("6_decor")
 kind = "mushroom"
 scale_factor = 0.827
 seed_value = 0
@@ -49,7 +50,7 @@ color = Color(0.91, 0.565, 0.478, 1.0)
 
 [node name="Decor2" type="Node2D" parent="Decor"]
 position = Vector2(1390.2, 576.0)
-script = ExtResource("5_decor")
+script = ExtResource("6_decor")
 kind = "rock"
 scale_factor = 0.754
 seed_value = 0
@@ -57,7 +58,7 @@ color = Color(0.486, 0.498, 0.627, 1.0)
 
 [node name="Decor3" type="Node2D" parent="Decor"]
 position = Vector2(1539.04, 576.0)
-script = ExtResource("5_decor")
+script = ExtResource("6_decor")
 kind = "pine"
 scale_factor = 0.991
 seed_value = 0
@@ -65,7 +66,7 @@ color = Color(0.423, 0.597, 0.533, 1.0)
 
 [node name="Decor4" type="Node2D" parent="Decor"]
 position = Vector2(1682.57, 576.0)
-script = ExtResource("5_decor")
+script = ExtResource("6_decor")
 kind = "crystal"
 scale_factor = 1.198
 seed_value = 56
@@ -73,7 +74,7 @@ color = Color(0.718, 0.651, 0.941, 1.0)
 
 [node name="Decor5" type="Node2D" parent="Decor"]
 position = Vector2(3075.2, 576.0)
-script = ExtResource("5_decor")
+script = ExtResource("6_decor")
 kind = "lamp"
 scale_factor = 1.0
 seed_value = 0
@@ -188,49 +189,53 @@ color = Color(0.486, 0.498, 0.627, 1.0)
 
 [node name="PressurePlate" type="Area2D" parent="Things"]
 position = Vector2(416.0, 704.0)
-script = ExtResource("8_pressureplate")
+script = ExtResource("9_pressureplate")
 size = Vector2(96.0, 10.0)
 channel = &"c1"
 required_weight = 1
 
 [node name="WindZone" type="Area2D" parent="Things"]
 position = Vector2(608.0, 568.0)
-script = ExtResource("10_windzone")
+script = ExtResource("11_windzone")
 size = Vector2(96.0, 272.0)
 channels = Array[StringName]([&"c1", &"c2"])
 require_all = false
 
 [node name="Lever" type="Node2D" parent="Things"]
 position = Vector2(723.2, 448.0)
-script = ExtResource("9_wallbutton")
+script = ExtResource("10_wallbutton")
 mode = 1
 channel = &"c2"
 
 [node name="Button" type="Node2D" parent="Things"]
 position = Vector2(1264.0, 576.0)
-script = ExtResource("9_wallbutton")
+script = ExtResource("10_wallbutton")
 mode = 0
 channel = &"c3"
 active_time = 2.5
 
 [node name="Button2" type="Node2D" parent="Things"]
 position = Vector2(1968.0, 576.0)
-script = ExtResource("9_wallbutton")
+script = ExtResource("10_wallbutton")
 mode = 0
 channel = &"c4"
 active_time = 2.5
 
 [node name="Gate" type="StaticBody2D" parent="Things"]
 position = Vector2(2096.0, 512.0)
-script = ExtResource("7_gate")
+script = ExtResource("8_gate")
 size = Vector2(64.0, 128.0)
 channels = Array[StringName]([&"c3", &"c4"])
 require_all = true
 latch = true
 
+[node name="Checkpoint" type="Area2D" parent="Things"]
+position = Vector2(2192.0, 576.0)
+script = ExtResource("4_checkpoint")
+
 [node name="Gate2" type="StaticBody2D" parent="Things"]
 position = Vector2(2768.0, 464.0)
-script = ExtResource("7_gate")
+script = ExtResource("8_gate")
 size = Vector2(64.0, 224.0)
 channels = Array[StringName]([&"c5"])
 require_all = true
@@ -238,7 +243,7 @@ latch = true
 
 [node name="Lever2" type="Node2D" parent="Things"]
 position = Vector2(2729.6, 256.0)
-script = ExtResource("9_wallbutton")
+script = ExtResource("10_wallbutton")
 mode = 1
 channel = &"c5"
 
@@ -254,7 +259,7 @@ speed = 160.0
 
 [node name="CozySpot" type="Area2D" parent="Things"]
 position = Vector2(3216.0, 576.0)
-script = ExtResource("4_cozyspot")
+script = ExtResource("5_cozyspot")
 kind = "bench"
 size = Vector2(217.6, 128.0)
 dialogue = &"c3_cozy_b"
@@ -262,7 +267,7 @@ channel = &"c6"
 
 [node name="Gate3" type="StaticBody2D" parent="Things"]
 position = Vector2(3472.0, 512.0)
-script = ExtResource("7_gate")
+script = ExtResource("8_gate")
 size = Vector2(64.0, 128.0)
 channels = Array[StringName]([&"c6"])
 require_all = true
@@ -270,4 +275,4 @@ latch = true
 
 [node name="Exit" type="Area2D" parent="Things"]
 position = Vector2(3824.0, 576.0)
-script = ExtResource("6_exit")
+script = ExtResource("7_exit")

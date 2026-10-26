@@ -1,14 +1,15 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scenes/core/Room.gd" id="1_room"]
 [ext_resource type="Script" path="res://scenes/core/WhiteboxBlock.gd" id="2_block"]
 [ext_resource type="Script" path="res://scenes/components/CarryableItem.gd" id="3_carryableitem"]
-[ext_resource type="Script" path="res://scenes/components/Decor.gd" id="4_decor"]
-[ext_resource type="Script" path="res://scenes/components/Exit.gd" id="5_exit"]
-[ext_resource type="Script" path="res://scenes/components/FragileFloor.gd" id="6_fragilefloor"]
-[ext_resource type="Script" path="res://scenes/components/Gate.gd" id="7_gate"]
-[ext_resource type="Script" path="res://scenes/components/MemoryPickup.gd" id="8_memorypickup"]
-[ext_resource type="Script" path="res://scenes/components/PressurePlate.gd" id="9_pressureplate"]
+[ext_resource type="Script" path="res://scenes/components/Checkpoint.gd" id="4_checkpoint"]
+[ext_resource type="Script" path="res://scenes/components/Decor.gd" id="5_decor"]
+[ext_resource type="Script" path="res://scenes/components/Exit.gd" id="6_exit"]
+[ext_resource type="Script" path="res://scenes/components/FragileFloor.gd" id="7_fragilefloor"]
+[ext_resource type="Script" path="res://scenes/components/Gate.gd" id="8_gate"]
+[ext_resource type="Script" path="res://scenes/components/MemoryPickup.gd" id="9_memorypickup"]
+[ext_resource type="Script" path="res://scenes/components/PressurePlate.gd" id="10_pressureplate"]
 
 [node name="Room_06" type="Node2D"]
 script = ExtResource("1_room")
@@ -40,14 +41,14 @@ position = Vector2(185.6, 527.0)
 
 [node name="Decor" type="Node2D" parent="Decor"]
 position = Vector2(98.63, 560.0)
-script = ExtResource("4_decor")
+script = ExtResource("5_decor")
 kind = "lamp"
 scale_factor = 1.0
 seed_value = 0
 
 [node name="Decor2" type="Node2D" parent="Decor"]
 position = Vector2(293.0, 560.0)
-script = ExtResource("4_decor")
+script = ExtResource("5_decor")
 kind = "bush"
 scale_factor = 1.016
 seed_value = 25
@@ -55,7 +56,7 @@ color = Color(0.498, 0.627, 0.439, 1.0)
 
 [node name="Decor3" type="Node2D" parent="Decor"]
 position = Vector2(686.23, 384.0)
-script = ExtResource("4_decor")
+script = ExtResource("5_decor")
 kind = "bush"
 scale_factor = 1.058
 seed_value = 19
@@ -63,14 +64,14 @@ color = Color(0.498, 0.627, 0.439, 1.0)
 
 [node name="Decor4" type="Node2D" parent="Decor"]
 position = Vector2(847.79, 384.0)
-script = ExtResource("4_decor")
+script = ExtResource("5_decor")
 kind = "lamp"
 scale_factor = 1.0
 seed_value = 0
 
 [node name="Decor5" type="Node2D" parent="Decor"]
 position = Vector2(1347.39, 576.0)
-script = ExtResource("4_decor")
+script = ExtResource("5_decor")
 kind = "fence"
 scale_factor = 0.8
 seed_value = 0
@@ -78,7 +79,7 @@ color = Color(0.788, 0.655, 0.486, 1.0)
 
 [node name="Decor6" type="Node2D" parent="Decor"]
 position = Vector2(2628.22, 576.0)
-script = ExtResource("4_decor")
+script = ExtResource("5_decor")
 kind = "lamp"
 scale_factor = 1.0
 seed_value = 0
@@ -176,13 +177,17 @@ color = Color(0.769, 0.58, 0.392, 1.0)
 
 [node name="FragileFloor" type="StaticBody2D" parent="Things"]
 position = Vector2(1088.0, 394.0)
-script = ExtResource("6_fragilefloor")
+script = ExtResource("7_fragilefloor")
 size = Vector2(128.0, 20.0)
 break_weight = 2
 
+[node name="Checkpoint" type="Area2D" parent="Things"]
+position = Vector2(1472.0, 576.0)
+script = ExtResource("4_checkpoint")
+
 [node name="Gate" type="StaticBody2D" parent="Things"]
 position = Vector2(1888.0, 512.0)
-script = ExtResource("7_gate")
+script = ExtResource("8_gate")
 size = Vector2(64.0, 128.0)
 channels = Array[StringName]([&"c1"])
 require_all = true
@@ -190,23 +195,23 @@ latch = false
 
 [node name="PressurePlate" type="Area2D" parent="Things"]
 position = Vector2(1664.0, 576.0)
-script = ExtResource("9_pressureplate")
+script = ExtResource("10_pressureplate")
 size = Vector2(96.0, 10.0)
 channel = &"c1"
 required_weight = 1
 
 [node name="PressurePlate2" type="Area2D" parent="Things"]
 position = Vector2(2080.0, 576.0)
-script = ExtResource("9_pressureplate")
+script = ExtResource("10_pressureplate")
 size = Vector2(96.0, 10.0)
 channel = &"c1"
 required_weight = 1
 
 [node name="Memory" type="Area2D" parent="Things"]
 position = Vector2(2528.0, 361.6)
-script = ExtResource("8_memorypickup")
+script = ExtResource("9_memorypickup")
 memory_id = "m2_b"
 
 [node name="Exit" type="Area2D" parent="Things"]
 position = Vector2(2912.0, 576.0)
-script = ExtResource("5_exit")
+script = ExtResource("6_exit")

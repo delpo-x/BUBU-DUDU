@@ -36,6 +36,9 @@ var memories: Dictionary = {}      # memory id -> true
 var flags: Dictionary = {}         # string -> Variant (dialogue seen, cozy spots, ...)
 var play_time: float = 0.0
 var game_completed: bool = false
+## Mid-room save (lantern, cozy spot, pause, quit): {chapter, room, room_time, players,
+## state}. Empty when the last save is a plain room entry. See Game.save_checkpoint().
+var room_snapshot: Dictionary = {}
 
 # --- Settings (saved separately) ---
 var master_volume: float = 0.9
@@ -158,17 +161,21 @@ func new_game() -> void:
 	room_index = 0
 	flags = {}
 	play_time = 0.0
+	room_snapshot = {}
 	save_progress()
 
 
 func start_chapter(index: int) -> void:
 	chapter_index = clampi(index, 0, maxi(unlocked_chapter, 0))
 	room_index = 0
+	room_snapshot = {}
 	save_progress()
 
 
 ## Called by the game on every room entry (auto-save).
 func set_position(ch: int, room: int) -> void:
+	if ch != chapter_index or room != room_index:
+		room_snapshot = {}
 	chapter_index = ch
 	room_index = room
 	unlocked_chapter = maxi(unlocked_chapter, ch)
@@ -216,6 +223,7 @@ func capture() -> Dictionary:
 		"flags": flags,
 		"play_time": play_time,
 		"game_completed": game_completed,
+		"room_snapshot": room_snapshot,
 	}
 
 
@@ -231,6 +239,8 @@ func apply(data: Dictionary) -> void:
 	flags = fl if fl is Dictionary else {}
 	play_time = float(data.get("play_time", 0.0))
 	game_completed = bool(data.get("game_completed", false))
+	var snap: Variant = data.get("room_snapshot", {})
+	room_snapshot = snap if snap is Dictionary else {}
 
 
 func save_progress() -> void:
@@ -261,6 +271,7 @@ func delete_progress() -> void:
 	flags = {}
 	play_time = 0.0
 	game_completed = false
+	room_snapshot = {}
 	progress_changed.emit()
 
 

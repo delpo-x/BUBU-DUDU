@@ -102,6 +102,7 @@ func _hug(a: BasePlayer, b: BasePlayer) -> void:
 	if _room != null:
 		_room.set_checkpoint(a.global_position if a.player_index == 1 else b.global_position,
 			b.global_position if b.player_index == 2 else a.global_position)
+		_room.checkpoint_reached.emit()
 	_done = true
 	_busy = false
 	if remember and _flag_key() != "":

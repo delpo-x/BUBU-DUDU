@@ -61,7 +61,7 @@ func _ready() -> void:
 	_hint_label.custom_minimum_size = Vector2(520, 0)
 	_hint_label.visible = false
 	v.add_child(_hint_label)
-	v.add_child(UiTheme.label("Si salva da solo a ogni nuova stanza.", 16, UiTheme.MUTED, HORIZONTAL_ALIGNMENT_CENTER))
+	v.add_child(UiTheme.label("Si salva da solo a ogni stanza, alle lanterne e in pausa.", 16, UiTheme.MUTED, HORIZONTAL_ALIGNMENT_CENTER))
 	_nap = StickerView.new("bubu_bed", Vector2(0, 110))
 	v.add_child(_nap)
 

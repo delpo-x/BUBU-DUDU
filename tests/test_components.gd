@@ -27,6 +27,8 @@ func run() -> void:
 		await _test_call(game, false)
 		game.queue_free()
 		await frames(2)
+	await _test_room_state("res://scenes/rooms/ch1/Room_03.tscn")
+	await _test_room_state("res://scenes/rooms/dev/Room_fragile.tscn")
 	game = await _game("res://scenes/rooms/dev/Room_call.tscn")
 	if game != null:
 		await _test_call(game, true)
@@ -62,6 +64,48 @@ func _test_save() -> void:
 	check(snap.has("version"), "save carries a format version")
 	GameState.delete_progress()
 	check(not GameState.has_save(), "delete removes every save file")
+
+
+## Mid-room save round trip: change what a room remembers (crates moved, levers flipped,
+## floors broken), capture it, load the room fresh and restore: same state again.
+func _test_room_state(path: String) -> void:
+	var game := await _game(path)
+	if game == null:
+		return
+	var changed := 0
+	for n in get_tree().get_nodes_in_group(Room.STATE_GROUP):
+		if not game.room.is_ancestor_of(n):
+			continue
+		if n is CarryableItem:
+			n.call(&"restore", {"x": (n as Node2D).global_position.x + 48.0, "y": (n as Node2D).global_position.y - 4.0})
+			changed += 1
+		elif n is WallButton and (n as WallButton).mode == WallButton.Mode.LEVER:
+			(n as WallButton).interact(game.bubu)
+			changed += 1
+		elif n is FragileFloor:
+			n.call(&"restore", {"broken": true})
+			changed += 1
+	await frames(40)
+	var saved := game.room.capture_state()
+	game.queue_free()
+	await frames(2)
+	game = await _game(path)
+	if game == null:
+		return
+	game.room.restore_state(saved)
+	await frames(2)
+	var again := game.room.capture_state()
+	var same := true
+	for k: String in (saved["nodes"] as Dictionary).keys():
+		var a: Variant = saved["nodes"][k]
+		var b: Variant = (again["nodes"] as Dictionary).get(k)
+		if a is Dictionary and a.has("x"):
+			same = same and b is Dictionary and Vector2(a["x"], a["y"]).distance_to(Vector2(b["x"], b["y"])) < 6.0
+		else:
+			same = same and JSON.stringify(a) == JSON.stringify(b)
+	check(changed > 0 and same, "mid-room save restores the puzzle (%s)" % path.get_file())
+	game.queue_free()
+	await frames(2)
 
 
 func _game(path: String) -> Game:
