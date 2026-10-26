@@ -368,6 +368,8 @@ func _do_jump(vy: float) -> void:
 	_fx_scale = Vector2(0.82, 1.2)
 	jumped.emit(self)
 	Sfx.play("jump_heavy" if weight >= 2 else "jump")
+	if randf() < 0.35:
+		Voices.action(_voice_name(), "jump")
 
 
 func _update_horizontal(delta: float) -> void:
@@ -567,9 +569,15 @@ func get_weight() -> int:
 	return w
 
 
+## "bubu" or "dudu", for voices and stickers.
+func _voice_name() -> String:
+	return "bubu" if player_index == 1 else "dudu"
+
+
 func nope() -> void:
 	_shake_time = 0.3
 	Sfx.play("nope", 0.0, -2.0)
+	Voices.action(_voice_name(), "nope")
 
 
 # --- Piggyback ------------------------------------------------------------------------
@@ -605,6 +613,7 @@ func hop_on(other: BasePlayer) -> void:
 	_collision.set_deferred(&"disabled", true)
 	_snap_to_carrier(other)
 	Sfx.play("piggy_on")
+	Voices.action(_voice_name(), "piggy")
 	piggyback_started.emit(self, other)
 
 
@@ -677,7 +686,8 @@ func _try_call() -> void:
 		return
 	partner.travel_to_partner()
 	Sfx.play("call")
-	Stickers.pop(get_parent(), ("bubu" if player_index == 1 else "dudu") + "_phone", global_position - Vector2(0, _body_size.y + 30.0), 96.0, 2.0)
+	Voices.action(_voice_name(), "call")
+	Stickers.pop(get_parent(), _voice_name() + "_phone", global_position - Vector2(0, _body_size.y + 30.0), 96.0, 2.0)
 	called_partner.emit(self)
 
 
@@ -727,11 +737,13 @@ func _enter_balloon(fell: bool) -> void:
 	if _balloon != null and is_instance_valid(_balloon):
 		_balloon.queue_free()
 	_balloon = HeartBalloon.new()
-	_balloon.setup(body_color, lower_color, marker_color, ("bubu" if player_index == 1 else "dudu") + "_balloon")
+	_balloon.setup(body_color, lower_color, marker_color, _voice_name() + "_balloon")
 	get_parent().add_child(_balloon)
 	_balloon.global_position = global_position
 	_balloon.reset_physics_interpolation()
 	Sfx.play("balloon")
+	if fell:
+		Voices.action(_voice_name(), "fall")
 	if fell:
 		balance_lost.emit(self)
 

@@ -26,6 +26,7 @@ func _ready() -> void:
 	focusables.append(_slider_row(v, "Velocità del testo", speed_value, func(x: float) -> void:
 		GameState.text_speed = 0.0 if x >= 0.99 else 15.0 + x * 90.0))
 
+	focusables.append(_toggle(v, "Voci dei personaggi", GameState.voices_enabled, func(on: bool) -> void: GameState.voices_enabled = on))
 	focusables.append(_toggle(v, "Battute dei personaggi", GameState.barks_enabled, func(on: bool) -> void: GameState.barks_enabled = on))
 	focusables.append(_toggle(v, "Testo grande", GameState.large_text, func(on: bool) -> void: GameState.large_text = on))
 	focusables.append(_toggle(v, "Riduci movimento", GameState.reduce_motion, func(on: bool) -> void: GameState.reduce_motion = on))

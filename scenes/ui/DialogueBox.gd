@@ -57,6 +57,9 @@ var _blink: float = 2.5
 var _drawn_face: String = ""
 ## Optional sticker mood of the current line ("m": "grudge" -> art/stickers/<speaker>_grudge).
 var _mood: String = ""
+var _speaker: String = "narr"
+var _plain: String = ""
+var _both_turn: int = 0
 
 
 func _ready() -> void:
@@ -160,6 +163,11 @@ func _show_line() -> void:
 	_line_time = 0.0
 	_arrow.modulate.a = 0.0
 	Sfx.play("text", 0.0, -10.0)
+	_speaker = who
+	_plain = _text.get_parsed_text()
+	if _mood != "" and who != "narr":
+		for w: String in (["bubu", "dudu"] if who == "both" else [who]):
+			Voices.emote(w, _mood)
 	_portrait.queue_redraw()
 	line_shown.emit(_index)
 
@@ -176,8 +184,8 @@ func _process(delta: float) -> void:
 	else:
 		var before := int(_visible_chars)
 		_visible_chars = minf(_visible_chars + speed * delta, total)
-		if int(_visible_chars) / 6 != before / 6:
-			Sfx.play("text", 0.08, -16.0)
+		if int(_visible_chars) != before:
+			_voice_tick(before, int(_visible_chars))
 	_text.visible_characters = int(_visible_chars)
 	_arrow.modulate.a = (0.0 if _visible_chars < total else 1.0) * (1.0 - 0.45 * UiTheme.motion() * (0.5 + 0.5 * sin(_t * 6.0)))
 	# Portrait blink: a short closed-eyes frame every few seconds.
@@ -274,6 +282,21 @@ func _draw_portrait() -> void:
 			elif _name_label.text != "":
 				_draw_head("bubu", left, sz, face)
 				_draw_head("dudu", right, sz, face)
+
+
+## Babble for the letters just revealed: the speaker's voice (both take turns on shared
+## lines), the old blip for the narrator or with voices off.
+func _voice_tick(before: int, now: int) -> void:
+	if _speaker == "narr" or not Voices.enabled():
+		if now / 6 != before / 6:
+			Sfx.play("text", 0.08, -16.0)
+		return
+	for i in range(before + 1, now + 1):
+		var who := _speaker
+		if who == "both":
+			_both_turn += 1
+			who = "bubu" if (_both_turn / 4) % 2 == 0 else "dudu"
+		Voices.speak(who, _plain.substr(0, i), _plain, _mood)
 
 
 ## Face for the current portrait: shared lines smile, single speakers blink now and then.

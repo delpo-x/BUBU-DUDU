@@ -87,6 +87,8 @@ func _hug(a: BasePlayer, b: BasePlayer) -> void:
 	a.show_hearts(2.2)
 	b.show_hearts(2.2)
 	Sfx.play("hug", 0.0)
+	Voices.action("bubu", "hug")
+	Voices.action("dudu", "hug")
 	Stickers.pop(get_parent(), "both_hug", global_position - Vector2(0, size.y + 20.0), 150.0)
 	_glow = 1.0
 	await get_tree().create_timer(1.0).timeout

@@ -14,6 +14,7 @@ config/features=PackedStringArray("4.7", "GL Compatibility")
 
 Sfx="*res://scenes/core/Sfx.gd"
 GameState="*res://scenes/core/GameState.gd"
+Voices="*res://scenes/core/Voices.gd"
 PadAssigner="*res://scenes/core/PadAssigner.gd"
 
 [audio]

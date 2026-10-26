@@ -82,6 +82,15 @@ e.g. many falls -> Bubu grudge / Dudu sus, resuming -> Bubu bed, fast room -> Du
 pause menu shows him in bed and the credits end with the helmet and the bow. `check_content.py` checks
 that every mood has its sticker.
 
+## Voices
+
+`scenes/core/Voices.gd` (autoload) babbles for Bubu and Dudu, Animal Crossing style, all synthesized:
+a syllable every two letters while a line types (vowel from the text, pitch from the character and the
+line's mood, rising on questions, trembling when sad), a short reaction when a line with a mood starts
+(laugh, sob, "eh?") and grunts for jump, fall, call, piggyback, hug and "nope". "Voci dei personaggi"
+in the options turns them off. A recording overrides any piece: `art/voices/<who>_<name>.wav` or
+`.ogg`, where `<name>` is a vowel (`a`), a mood (`laugh`) or an action (`jump`).
+
 ## Animated GIFs
 
 ```bash
