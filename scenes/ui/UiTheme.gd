@@ -70,7 +70,10 @@ static func _build() -> Theme:
 	t.set_stylebox(&"normal", &"Button", box(Color(1, 1, 1, 0.0), 12, 2, Color(INK, 0.15)))
 	t.set_stylebox(&"hover", &"Button", box(Color(ACCENT_SOFT, 0.3), 12, 2, ACCENT))
 	t.set_stylebox(&"pressed", &"Button", box(ACCENT_INK, 12, 2, ACCENT_INK))
-	t.set_stylebox(&"focus", &"Button", box(ACCENT_SOFT, 12, 3, ACCENT_INK))
+	# Focus ring grows 3 px outward: a "pop" without scaling (scaled text looks blurry).
+	var btn_focus := box(ACCENT_SOFT, 12, 3, ACCENT_INK)
+	btn_focus.set_expand_margin_all(3.0)
+	t.set_stylebox(&"focus", &"Button", btn_focus)
 	t.set_stylebox(&"disabled", &"Button", box(Color(0, 0, 0, 0.04), 12))
 	t.set_color(&"font_color", &"Button", INK)
 	t.set_color(&"font_hover_color", &"Button", INK)
@@ -131,26 +134,8 @@ static func button(text: String, on_pressed: Callable) -> Button:
 	b.pressed.connect(func() -> void:
 		Sfx.play("ui_accept", 0.0, -4.0)
 		on_pressed.call())
-	b.focus_entered.connect(func() -> void:
-		Sfx.play("ui_move", 0.0, -10.0)
-		_pop(b, 1.04))
-	b.focus_exited.connect(func() -> void: _pop(b, 1.0))
+	b.focus_entered.connect(func() -> void: Sfx.play("ui_move", 0.0, -10.0))
 	return b
-
-
-## Small springy scale on the focused button; skipped with "reduce motion".
-static func _pop(c: Control, target: float) -> void:
-	if not c.is_inside_tree():
-		return
-	if c.has_meta(&"pop_tween"):
-		var prev: Variant = c.get_meta(&"pop_tween")
-		if prev is Tween:
-			(prev as Tween).kill()
-	c.pivot_offset = c.size * 0.5
-	var to := Vector2.ONE * (target if motion() > 0.0 else 1.0)
-	var tw := c.create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-	tw.tween_property(c, "scale", to, 0.12).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	c.set_meta(&"pop_tween", tw)
 
 
 ## Fade + slight grow when a panel appears. Call right after making it visible.
