@@ -11,6 +11,7 @@ signal quit_requested
 
 @export var skip_after_minutes: float = 12.0
 
+var _nap: StickerView
 var _main: PanelContainer
 var _buttons: Array[Control] = []
 var _hint_label: Label
@@ -60,7 +61,9 @@ func _ready() -> void:
 	_hint_label.custom_minimum_size = Vector2(520, 0)
 	_hint_label.visible = false
 	v.add_child(_hint_label)
-	v.add_child(UiTheme.label("Si salva da solo a ogni nuova stanza.", 16, UiTheme.MUTED, HORIZONTAL_ALIGNMENT_CENTER))
+	v.add_child(UiTheme.label("Si salva da solo a ogni stanza, alle lanterne e in pausa.", 16, UiTheme.MUTED, HORIZONTAL_ALIGNMENT_CENTER))
+	_nap = StickerView.new("bubu_bed", Vector2(0, 110))
+	v.add_child(_nap)
 
 	_options = OptionsPanel.new()
 	_options.visible = false
@@ -78,6 +81,7 @@ func open() -> void:
 	_confirm_quit = false
 	_quit_button.text = "Torna al titolo"
 	_hint_label.visible = false
+	_nap.visible = true
 	_hint_button.disabled = hint_text == ""
 	_skip_button.visible = room_time >= skip_after_minutes * 60.0
 	var shown: Array[Control] = []
@@ -89,6 +93,7 @@ func open() -> void:
 	_options.visible = false
 	_album.visible = false
 	shown[0].grab_focus()
+	UiTheme.pop_in(_main)
 
 
 func close() -> void:
@@ -98,21 +103,25 @@ func close() -> void:
 func _show_hint() -> void:
 	_hint_label.text = hint_text
 	_hint_label.visible = true
+	_nap.visible = false
 
 
 func _open_options() -> void:
 	_main.visible = false
 	_options.open()
+	UiTheme.pop_in(_options)
 
 
 func _open_album() -> void:
 	_main.visible = false
 	_album.open()
+	UiTheme.pop_in(_album)
 
 
 func _back_to_main() -> void:
 	_main.visible = true
 	_buttons[0].grab_focus()
+	UiTheme.pop_in(_main)
 
 
 func _quit() -> void:

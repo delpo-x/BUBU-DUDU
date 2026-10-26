@@ -27,6 +27,7 @@ func _ready() -> void:
 	collision_mask = 0
 	_shape = CompUtil.add_rect_shape(self, size)
 	_room = Room.find_for(self)
+	add_to_group(Room.STATE_GROUP)
 	_want_open = _compute_open()
 	_amount = 1.0 if _want_open else 0.0
 	_apply_solid(not _want_open)
@@ -101,3 +102,17 @@ func _draw() -> void:
 		draw_rect(Rect2(r.position + Vector2(0, s), Vector2(size.x, minf(6.0, size.y - s))), stripe)
 		s += 22.0
 	draw_rect(Rect2(-half, size), Color(color.darkened(0.4), 0.35), false, 2.0)
+
+
+# --- Checkpoint save (see Room.capture_state) ---------------------------------------
+
+## Latched gates stay open; the others follow their channels again.
+func snapshot() -> Variant:
+	return {"latched": true} if _latched else null
+
+
+func restore(d: Dictionary) -> void:
+	_latched = bool(d.get("latched", false))
+	_want_open = _compute_open()
+	_amount = 1.0 if _want_open else 0.0
+	_apply_solid(not _want_open)

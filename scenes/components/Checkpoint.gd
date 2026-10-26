@@ -16,6 +16,7 @@ func _ready() -> void:
 	collision_mask = CompUtil.LAYER_PLAYERS
 	CompUtil.add_rect_shape(self, size, Vector2(0, -size.y * 0.5))
 	_room = Room.find_for(self)
+	add_to_group(Room.STATE_GROUP)
 	body_entered.connect(_on_body_entered)
 
 
@@ -26,6 +27,7 @@ func _on_body_entered(body: Node) -> void:
 	# Feet on the floor: body centers sit half a body above the origin.
 	_room.set_checkpoint(global_position + Vector2(-26, -32), global_position + Vector2(26, -34))
 	Sfx.play("plate_on", 0.0, -6.0)
+	_room.checkpoint_reached.emit()
 
 
 func is_lit() -> bool:
@@ -45,3 +47,14 @@ func _draw() -> void:
 	draw_rect(Rect2(-8, -88, 16, 16), glow)
 	if _lit:
 		draw_circle(Vector2(0, -80), 28.0 + sin(_t * 3.0) * 2.0, Color(color, 0.15))
+
+
+# --- Checkpoint save (see Room.capture_state) ---------------------------------------
+
+func snapshot() -> Variant:
+	return {"lit": true} if _lit else null
+
+
+func restore(d: Dictionary) -> void:
+	_lit = bool(d.get("lit", false))
+	queue_redraw()

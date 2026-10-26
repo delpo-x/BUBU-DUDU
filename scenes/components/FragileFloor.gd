@@ -26,6 +26,7 @@ func _ready() -> void:
 	CompUtil.setup_trigger(_sensor)
 	add_child(_sensor)
 	CompUtil.add_rect_shape(_sensor, Vector2(size.x - 4.0, 26.0), Vector2(0, -size.y * 0.5 - 13.0))
+	add_to_group(Room.STATE_GROUP)
 
 
 func is_broken() -> bool:
@@ -87,3 +88,18 @@ func _draw() -> void:
 	draw_polyline(PackedVector2Array([Vector2(half.x * 0.3, -half.y), Vector2(half.x * 0.45, -2), Vector2(half.x * 0.25, half.y)]), dark, 2.0)
 	for i in break_weight:
 		draw_circle(Vector2((i - (break_weight - 1) * 0.5) * 10.0, 0), 3.0, dark)
+
+
+# --- Checkpoint save (see Room.capture_state) ---------------------------------------
+
+## Floors that never reform stay broken.
+func snapshot() -> Variant:
+	return {"broken": true} if _broken and reform_time <= 0.0 else null
+
+
+func restore(d: Dictionary) -> void:
+	if bool(d.get("broken", false)):
+		_broken = true
+		_crack = 1.0
+		_fall = 10.0
+		_shape.set_deferred(&"disabled", true)

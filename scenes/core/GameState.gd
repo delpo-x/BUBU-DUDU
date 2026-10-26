@@ -36,6 +36,9 @@ var memories: Dictionary = {}      # memory id -> true
 var flags: Dictionary = {}         # string -> Variant (dialogue seen, cozy spots, ...)
 var play_time: float = 0.0
 var game_completed: bool = false
+## Mid-room save (lantern, cozy spot, pause, quit): {chapter, room, room_time, players,
+## state}. Empty when the last save is a plain room entry. See Game.save_checkpoint().
+var room_snapshot: Dictionary = {}
 
 # --- Settings (saved separately) ---
 var master_volume: float = 0.9
@@ -46,6 +49,10 @@ var fullscreen: bool = false
 var text_speed: float = 45.0
 ## Contextual character lines on/off (options menu).
 var barks_enabled: bool = true
+## Characters drawn with their animated stickers instead of the vector cut-out (options).
+var sticker_characters: bool = true
+## Babbling voices for Bubu and Dudu (options menu).
+var voices_enabled: bool = true
 ## Accessibility: stops decorative looping motion (menu drift, bobbing, pulsing prompts)
 ## and softens squash & stretch.
 var reduce_motion: bool = false
@@ -154,17 +161,21 @@ func new_game() -> void:
 	room_index = 0
 	flags = {}
 	play_time = 0.0
+	room_snapshot = {}
 	save_progress()
 
 
 func start_chapter(index: int) -> void:
 	chapter_index = clampi(index, 0, maxi(unlocked_chapter, 0))
 	room_index = 0
+	room_snapshot = {}
 	save_progress()
 
 
 ## Called by the game on every room entry (auto-save).
 func set_position(ch: int, room: int) -> void:
+	if ch != chapter_index or room != room_index:
+		room_snapshot = {}
 	chapter_index = ch
 	room_index = room
 	unlocked_chapter = maxi(unlocked_chapter, ch)
@@ -182,6 +193,7 @@ func collect_memory(id: String) -> bool:
 	if memories.get(id, false):
 		return false
 	memories[id] = true
+	flags["stat_last_memory"] = id
 	save_progress()
 	memory_collected.emit(id)
 	return true
@@ -198,6 +210,12 @@ func set_flag(key: String, value: Variant = true) -> void:
 	save_progress()
 
 
+## Counts something the players did ("falls_bubu", "hugs"...), for dialogue variations
+## (see DialogueText). Kept in the save's flags, so a new game starts from zero.
+func bump_stat(stat_name: String) -> void:
+	set_flag("stat_" + stat_name, int(flags.get("stat_" + stat_name, 0)) + 1)
+
+
 func get_flag(key: String, default: Variant = false) -> Variant:
 	return flags.get(key, default)
 
@@ -212,6 +230,7 @@ func capture() -> Dictionary:
 		"flags": flags,
 		"play_time": play_time,
 		"game_completed": game_completed,
+		"room_snapshot": room_snapshot,
 	}
 
 
@@ -227,6 +246,8 @@ func apply(data: Dictionary) -> void:
 	flags = fl if fl is Dictionary else {}
 	play_time = float(data.get("play_time", 0.0))
 	game_completed = bool(data.get("game_completed", false))
+	var snap: Variant = data.get("room_snapshot", {})
+	room_snapshot = snap if snap is Dictionary else {}
 
 
 func save_progress() -> void:
@@ -238,9 +259,10 @@ func load_progress() -> bool:
 	for path in [save_path, save_path + ".bak"]:
 		if not FileAccess.file_exists(path):
 			continue
-		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
-		if parsed is Dictionary:
-			apply(_migrate(parsed))
+		# JSON instance instead of JSON.parse_string: a damaged save is expected, not an engine error.
+		var json := JSON.new()
+		if json.parse(FileAccess.get_file_as_string(path)) == OK and json.data is Dictionary:
+			apply(_migrate(json.data))
 			return true
 		push_warning("GameState: unreadable save at " + path)
 	return false
@@ -257,6 +279,7 @@ func delete_progress() -> void:
 	flags = {}
 	play_time = 0.0
 	game_completed = false
+	room_snapshot = {}
 	progress_changed.emit()
 
 
@@ -295,6 +318,8 @@ func load_settings() -> void:
 		fullscreen = bool(cfg.get_value("video", "fullscreen", fullscreen))
 		text_speed = float(cfg.get_value("game", "text_speed", text_speed))
 		barks_enabled = bool(cfg.get_value("game", "barks", barks_enabled))
+		voices_enabled = bool(cfg.get_value("audio", "voices", voices_enabled))
+		sticker_characters = bool(cfg.get_value("video", "sticker_characters", sticker_characters))
 		reduce_motion = bool(cfg.get_value("access", "reduce_motion", reduce_motion))
 		large_text = bool(cfg.get_value("access", "large_text", large_text))
 	apply_settings()
@@ -308,6 +333,8 @@ func save_settings() -> void:
 	cfg.set_value("video", "fullscreen", fullscreen)
 	cfg.set_value("game", "text_speed", text_speed)
 	cfg.set_value("game", "barks", barks_enabled)
+	cfg.set_value("audio", "voices", voices_enabled)
+	cfg.set_value("video", "sticker_characters", sticker_characters)
 	cfg.set_value("access", "reduce_motion", reduce_motion)
 	cfg.set_value("access", "large_text", large_text)
 	cfg.save(SETTINGS_PATH)

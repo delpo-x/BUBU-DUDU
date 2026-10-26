@@ -87,6 +87,10 @@ func _hug(a: BasePlayer, b: BasePlayer) -> void:
 	a.show_hearts(2.2)
 	b.show_hearts(2.2)
 	Sfx.play("hug", 0.0)
+	GameState.bump_stat("hugs")
+	Voices.action("bubu", "hug")
+	Voices.action("dudu", "hug")
+	Stickers.pop(get_parent(), "both_hug", global_position - Vector2(0, size.y + 20.0), 150.0)
 	_glow = 1.0
 	await get_tree().create_timer(1.0).timeout
 	if not is_inside_tree():
@@ -99,6 +103,7 @@ func _hug(a: BasePlayer, b: BasePlayer) -> void:
 	if _room != null:
 		_room.set_checkpoint(a.global_position if a.player_index == 1 else b.global_position,
 			b.global_position if b.player_index == 2 else a.global_position)
+		_room.checkpoint_reached.emit()
 	_done = true
 	_busy = false
 	if remember and _flag_key() != "":

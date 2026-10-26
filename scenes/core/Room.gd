@@ -13,8 +13,13 @@ extends Node2D
 signal channel_changed(channel: StringName, active: bool)
 signal completed
 signal exit_unlocked_changed(unlocked: bool)
+## A lantern was lit or a cozy spot hugged: a good moment to save mid-room.
+signal checkpoint_reached
 
 const ROOMS_GROUP := &"rooms"
+## Components with puzzle state to keep in a mid-room save: snapshot() -> Variant (null =
+## nothing worth keeping) and restore(Dictionary).
+const STATE_GROUP := &"room_state"
 
 @export var room_id: StringName = &""
 ## Playable area in world coordinates. The camera never shows outside it.
@@ -126,6 +131,44 @@ func get_checkpoint(player_index: int) -> Vector2:
 
 func set_checkpoint(p1_pos: Vector2, p2_pos: Vector2) -> void:
 	_checkpoints = [p1_pos, p2_pos]
+
+
+## Puzzle state for a mid-room save: each stateful component's snapshot by node path,
+## plus the respawn points.
+func capture_state() -> Dictionary:
+	var nodes := {}
+	for n in get_tree().get_nodes_in_group(STATE_GROUP):
+		if is_ancestor_of(n):
+			var snap: Variant = n.call(&"snapshot")
+			if snap != null:
+				nodes[String(get_path_to(n))] = snap
+	var cps: Array = []
+	for c in _checkpoints:
+		cps.append([c.x, c.y])
+	return {"nodes": nodes, "checkpoints": cps}
+
+
+func restore_state(d: Dictionary) -> void:
+	# The data comes from the save file: skip anything with an unexpected shape.
+	var nodes: Variant = d.get("nodes", {})
+	if nodes is Dictionary:
+		for path: Variant in (nodes as Dictionary).keys():
+			var n := get_node_or_null(NodePath(String(path)))
+			if n != null and n.has_method(&"restore") and nodes[path] is Dictionary:
+				n.call(&"restore", nodes[path])
+	var cps: Variant = d.get("checkpoints", [])
+	if cps is Array and (cps as Array).size() == 2:
+		var a: Variant = to_vec(cps[0])
+		var b: Variant = to_vec(cps[1])
+		if a is Vector2 and b is Vector2:
+			set_checkpoint(a, b)
+
+
+## A saved [x, y] pair as a Vector2, or null when it is malformed.
+static func to_vec(v: Variant) -> Variant:
+	if v is Array and (v as Array).size() == 2 and (v[0] is float or v[0] is int) and (v[1] is float or v[1] is int):
+		return Vector2(float(v[0]), float(v[1]))
+	return null
 
 
 func get_kill_y() -> float:

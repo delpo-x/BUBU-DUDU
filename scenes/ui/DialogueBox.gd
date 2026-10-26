@@ -55,6 +55,11 @@ var _t: float = 0.0
 var _at_top: bool = false
 var _blink: float = 2.5
 var _drawn_face: String = ""
+## Optional sticker mood of the current line ("m": "grudge" -> art/stickers/<speaker>_grudge).
+var _mood: String = ""
+var _speaker: String = "narr"
+var _plain: String = ""
+var _both_turn: int = 0
 
 
 func _ready() -> void:
@@ -64,7 +69,7 @@ func _ready() -> void:
 	theme = UiTheme.get_theme()
 
 	_panel = PanelContainer.new()
-	_panel.add_theme_stylebox_override(&"panel", UiTheme.box(UiTheme.PANEL, 20, 4, UiTheme.ACCENT, 26))
+	_panel.add_theme_stylebox_override(&"panel", UiTheme.lift(UiTheme.box(UiTheme.PANEL, 20, 4, UiTheme.ACCENT, 26)))
 	add_child(_panel)
 
 	var v := VBoxContainer.new()
@@ -115,6 +120,7 @@ func play_dialogue(id: StringName) -> void:
 func play_lines(lines: Array, id: StringName = &"") -> void:
 	while _busy:
 		await finished
+	lines = DialogueText.resolve(lines)
 	if lines.is_empty():
 		return
 	_busy = true
@@ -150,6 +156,7 @@ func _show_line() -> void:
 	_speaker_color = info["color"]
 	_speaker_side = int(info["side"])
 	_name_label.add_theme_color_override(&"font_color", _speaker_color)
+	_mood = String(line.get("m", ""))
 	var body := String(line.get("t", ""))
 	_text.text = "[i]%s[/i]" % body if who == "narr" else body
 	_visible_chars = 0.0
@@ -157,6 +164,11 @@ func _show_line() -> void:
 	_line_time = 0.0
 	_arrow.modulate.a = 0.0
 	Sfx.play("text", 0.0, -10.0)
+	_speaker = who
+	_plain = _text.get_parsed_text()
+	if _mood != "" and who != "narr":
+		for w: String in (["bubu", "dudu"] if who == "both" else [who]):
+			Voices.emote(w, _mood)
 	_portrait.queue_redraw()
 	line_shown.emit(_index)
 
@@ -173,15 +185,15 @@ func _process(delta: float) -> void:
 	else:
 		var before := int(_visible_chars)
 		_visible_chars = minf(_visible_chars + speed * delta, total)
-		if int(_visible_chars) / 6 != before / 6:
-			Sfx.play("text", 0.08, -16.0)
+		if int(_visible_chars) != before:
+			_voice_tick(before, int(_visible_chars))
 	_text.visible_characters = int(_visible_chars)
 	_arrow.modulate.a = (0.0 if _visible_chars < total else 1.0) * (1.0 - 0.45 * UiTheme.motion() * (0.5 + 0.5 * sin(_t * 6.0)))
 	# Portrait blink: a short closed-eyes frame every few seconds.
 	_blink -= delta
 	if _blink < -0.13:
 		_blink = randf_range(2.2, 4.5)
-	if _face() != _drawn_face:
+	if _face() != _drawn_face or _face() == "happy" or _mood != "":
 		_portrait.queue_redraw()
 	if _advance_requested:
 		_advance_requested = false
@@ -264,9 +276,28 @@ func _draw_portrait() -> void:
 		1:
 			_draw_head("dudu", right, sz, face)
 		_:
-			if _name_label.text != "":
+			var duo := Stickers.frame("both_" + _mood, _t) if _mood != "" else null
+			if duo != null:
+				var c := Vector2(r.get_center().x, y + sz.y * 0.5)
+				_portrait.draw_texture_rect(duo, Stickers.fit(duo, c, Vector2(sz.x * 2.6, sz.y * 1.15)), false)
+			elif _name_label.text != "":
 				_draw_head("bubu", left, sz, face)
 				_draw_head("dudu", right, sz, face)
+
+
+## Babble for the letters just revealed: the speaker's voice (both take turns on shared
+## lines), the old blip for the narrator or with voices off.
+func _voice_tick(before: int, now: int) -> void:
+	if _speaker == "narr" or not Voices.enabled():
+		if now / 6 != before / 6:
+			Sfx.play("text", 0.08, -16.0)
+		return
+	for i in range(before + 1, now + 1):
+		var who := _speaker
+		if who == "both":
+			_both_turn += 1
+			who = "bubu" if (_both_turn / 4) % 2 == 0 else "dudu"
+		Voices.speak(who, _plain.substr(0, i), _plain, _mood)
 
 
 ## Face for the current portrait: shared lines smile, single speakers blink now and then.
@@ -277,6 +308,17 @@ func _face() -> String:
 
 
 func _draw_head(who: String, pos: Vector2, sz: Vector2, face: String) -> void:
-	var tex: Texture2D = PORTRAITS[who][face]
 	_portrait.draw_circle(pos + sz * 0.5 + Vector2(0, 4), sz.x * 0.5, Color(0.3, 0.15, 0.2, 0.18))
+	# A line's mood sticker, or the laugh on shared happy lines, replaces the still head.
+	var anim: Texture2D = null
+	if _mood != "":
+		anim = Stickers.frame(who + "_" + _mood, _t)
+		if anim == null:
+			anim = Stickers.frame("both_" + _mood, _t)
+	elif face == "happy":
+		anim = Stickers.frame(who + "_laugh", _t)
+	if anim != null:
+		_portrait.draw_texture_rect(anim, Stickers.fit(anim, pos + sz * 0.5, sz * 1.15), false)
+		return
+	var tex: Texture2D = PORTRAITS[who][face]
 	_portrait.draw_texture_rect(tex, Rect2(pos, sz), false)

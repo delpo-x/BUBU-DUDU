@@ -12,6 +12,8 @@ var _detail_title: Label
 var _detail_text: Label
 var _count: Label
 var _back: Button
+var _card: Control
+var _t: float = 0.0
 
 
 func _ready() -> void:
@@ -46,6 +48,13 @@ func _ready() -> void:
 	_detail_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_detail_text.custom_minimum_size = Vector2(520, 0)
 	detail.add_child(_detail_text)
+	# Bubu as the album's keeper, a small animated postcard under the text.
+	_card = Control.new()
+	_card.custom_minimum_size = Vector2(200, 200)
+	_card.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_card.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_card.draw.connect(_draw_card)
+	detail.add_child(_card)
 	_back = UiTheme.button("Indietro", _close)
 	v.add_child(_back)
 
@@ -91,6 +100,26 @@ func open() -> void:
 	focusables.append(_back)
 	UiTheme.chain_focus(focusables)
 	focusables[0].grab_focus()
+
+
+func _process(delta: float) -> void:
+	if visible:
+		_t += delta
+		_card.queue_redraw()
+
+
+func _draw_card() -> void:
+	var tex := Stickers.frame("bubu_boss", _t)
+	if tex == null:
+		return
+	# Kept clear of the Back button below: the card is tilted and framed, so it needs margin.
+	var side := minf(_card.size.y - 28.0, 190.0)
+	var center := Vector2(_card.size.x - side * 0.5 - 14.0, _card.size.y - side * 0.5 - 14.0)
+	_card.draw_set_transform(center, 0.05, Vector2.ONE)
+	var r := Rect2(Vector2(-side, -side) * 0.5, Vector2(side, side))
+	_card.draw_style_box(UiTheme.box(Color.WHITE, 18), r.grow(6.0))
+	_card.draw_texture_rect(tex, Stickers.fit(tex, Vector2.ZERO, r.size), false)
+	_card.draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 
 
 func _close() -> void:

@@ -11,6 +11,8 @@ const PICTURES: Array[String] = [
 	"res://art/illustrations/05_regalo.svg",
 	"res://art/illustrations/04_sotto_coperta.svg",
 	"res://art/illustrations/06_bacio.svg",
+	"sticker:bubu_helmet",
+	"sticker:bubu_back",
 ]
 
 @export var scroll_speed: float = 46.0
@@ -67,6 +69,9 @@ func _ready() -> void:
 func _picture(path: String) -> Control:
 	var box := CenterContainer.new()
 	box.custom_minimum_size = Vector2(900, 340)
+	if path.begins_with("sticker:"):
+		box.add_child(StickerView.new(path.trim_prefix("sticker:"), Vector2(300, 300)))
+		return box
 	var tex := TextureRect.new()
 	tex.texture = load(path)
 	tex.expand_mode = TextureRect.EXPAND_IGNORE_SIZE

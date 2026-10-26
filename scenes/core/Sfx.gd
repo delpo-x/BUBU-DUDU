@@ -129,6 +129,7 @@ func stop_music() -> void:
 func stop_all() -> void:
 	for v in _voices:
 		v.stop()
+		v.stream = null
 	_music_player.stop()
 	_music_playback = null
 	_music_theme = ""

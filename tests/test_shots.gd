@@ -1,6 +1,7 @@
 extends "res://tests/TestBase.gd"
 ## Visual check (not part of the default suite; needs a real window, not --headless):
 ##   godot --path . --script res://tests/run.gd -- shots c1_r01 c3_r05
+## Extra names: menu, screens (album, controls, options, credits), title, ui, balloon, rig.
 ## Saves user://shots/<room>.png after the room settles.
 
 const GAME_SCENE := "res://scenes/core/Game.tscn"
@@ -37,6 +38,9 @@ func run() -> void:
 		m.call(&"_open_options")
 		await _secs(0.4)
 		_save("options")
+		(m.get(&"_options") as OptionsPanel).call(&"_open_controls")
+		await _secs(0.4)
+		_save("remap")
 		get_tree().change_scene_to_file("res://scenes/ui/Credits.tscn")
 		await _secs(3.0)
 		_save("credits")
@@ -65,6 +69,24 @@ func run() -> void:
 		await _secs(0.8)
 		_save("memory_popup")
 		tg.queue_free()
+		await frames(3)
+	if wanted.has("balloon"):
+		# Both players on their heart balloon (the sticker one where it exists).
+		var bg := (load(GAME_SCENE) as PackedScene).instantiate() as Game
+		bg.autostart = false
+		bg.fast_transitions = true
+		bg.auto_advance = false
+		get_tree().root.add_child(bg)
+		await bg.enter_room(0, 1)
+		while bg.dialogue.is_busy():
+			bg.dialogue.advance()
+			await _secs(0.2)
+		# Bubu falls (heart balloon), Dudu is called over (scooter).
+		bg.bubu.call(&"_enter_balloon", true)
+		bg.dudu.call(&"_enter_balloon", true)
+		await _secs(0.6)
+		_save("balloon")
+		bg.queue_free()
 		await frames(3)
 	if wanted.has("ui"):
 		# First room with its intro dialogue on screen, then the pause menu.

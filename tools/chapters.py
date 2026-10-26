@@ -34,6 +34,10 @@ CHAPTER_DIFFICULTY = {1: 1.0, 2: 1.1, 3: 1.15, 4: 1.25}
 HEAD = {"seesaw": 8.5, "boost_gate": 4.5, "call_lesson": 4.5, "boost_memory": 4.5, "pulley": 5.5}
 
 
+# Rooms estimated this long (minutes) or more get a lantern-checkpoint halfway.
+LANTERN_MIN_EST = 7.0
+
+
 def _head(name, kw, g_in, g_out):
     if name == "walljump_shaft":
         return kw.get("height", 6) + 3.5
@@ -42,8 +46,8 @@ def _head(name, kw, g_in, g_out):
     return 3.5 + max(0.0, g_in - g_out)
 
 
-def _run_beats(b, beats, x, g, trace=None):
-    for item in beats:
+def _run_beats(b, beats, x, g, trace=None, lantern_after=-1):
+    for i, item in enumerate(beats):
         name = item[0]
         if name == "sign":
             B.sign(b, x - 1.15, g, item[1])
@@ -56,6 +60,9 @@ def _run_beats(b, beats, x, g, trace=None):
         x, g = getattr(B, name)(b, x, g, **kw)
         if trace is not None:
             trace.append((name, kw, g_in, g))
+        if i == lantern_after:
+            # A lantern-checkpoint on the ground just past the puzzle (mid-room save).
+            B.checkpoint(b, x - 1.0, g)
     return x, g
 
 
@@ -74,18 +81,30 @@ def build_room(root, chapter, index, spec):
     g0 = 200.0 - (bottom - h)  # keep the bottom margin; extra height goes on top
 
     est = FRAME
+    efforts = []
     for n, kw, _, _ in trace:
         # A puzzle seen before goes faster: full effort the first time, then less.
         seen = SEEN.get(n, 0)
         SEEN[n] = seen + 1
-        est += EFFORT[n] * FAMILIARITY[min(seen, len(FAMILIARITY) - 1)]
+        efforts.append(EFFORT[n] * FAMILIARITY[min(seen, len(FAMILIARITY) - 1)])
+        est += efforts[-1]
     est = round(est * CHAPTER_DIFFICULTY[chapter], 1)
+    # Long rooms get a lantern once about half of the puzzle effort is behind the players.
+    lantern_after = -1
+    if est >= LANTERN_MIN_EST and len(efforts) >= 2:
+        done, half = 0.0, sum(efforts) / 2.0
+        steps = [i for i, item in enumerate(beats) if item[0] not in ("sign", "talk")]
+        for k, e in enumerate(efforts[:-1]):
+            done += e
+            if done >= half:
+                lantern_after = steps[k]
+                break
     b = Builder(rid, chapter, 400, h, est=est, hint=spec["hint"], intro=spec.get("intro", ""),
                 call=spec.get("call", False), seed=chapter * 100 + index)
     if spec.get("intro"):
         b.dialogues.append(spec["intro"])
     x, g = B.start(b, g0)
-    x, g = _run_beats(b, beats, x, g)
+    x, g = _run_beats(b, beats, x, g, lantern_after=lantern_after)
     x, g = B.exit_door(b, x, g)
     b.w = int(math.ceil(x + 1))
     return b.write(root), b

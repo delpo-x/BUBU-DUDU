@@ -3,29 +3,31 @@
   {"s": "narr", "t": "La notte. Le lanterne del borgo, lontane, sembrano stelle cadute."},
   {"s": "bubu", "t": "Le ultime pagine sono qui, da qualche parte."},
   {"s": "dudu", "t": "È buio. Ma ti vedo benissimo."},
-  {"s": "bubu", "t": "Sono bianco e nero. Sono fatto apposta per essere visto."},
-  {"s": "dudu", "t": "Allora stammi vicino. Stavolta faccio strada io."}
+  {"s": "bubu", "m": "boss", "t": "Sono bianco e nero. Sono fatto apposta per essere visto."},
+  {"s": "dudu", "m": "handsome", "t": "Allora stammi vicino. Stavolta faccio strada io."}
  ],
  "c4_outro": [
   {"s": "narr", "t": "Tutte le pagine sono tornate. Tranne una, che non è mai volata via."},
   {"s": "dudu", "t": "L'ultima pagina è bianca."},
-  {"s": "bubu", "t": "Pensavo l'avessimo persa. Invece era vuota fin dall'inizio."},
-  {"s": "dudu", "t": "Allora non è persa. È per noi."},
+  {"s": "bubu", "m": "cry", "t": "Pensavo l'avessimo persa. Invece era vuota fin dall'inizio."},
+  {"s": "dudu", "m": "giggle", "t": "Allora non è persa. È per noi."},
   {"s": "bubu", "t": "Che ci scriviamo?"},
   {"s": "dudu", "t": "Oggi. Questa giornata a rincorrere il vento."},
   {"s": "bubu", "t": "E domani?"},
   {"s": "dudu", "t": "Domani compriamo un album nuovo. Questo è quasi pieno."},
-  {"s": "both", "t": "Insieme."}
+  {"s": "bubu", "m": "teary", "if": "hugs >= 5", "t": "E dentro ci mettiamo anche questi {hugs} abbracci."},
+  {"s": "dudu", "m": "giggle", "if": "memories == memories_total", "t": "Abbiamo trovato tutte le pagine. Tutte e {memories_total}."},
+  {"s": "both", "m": "cheers", "t": "Insieme."}
  ],
  "c4_r01_in": [
   {"s": "dudu", "t": "Mettiamo insieme tutto quello che abbiamo imparato."},
-  {"s": "bubu", "t": "Hai detto «abbiamo imparato». Mi piace."},
-  {"s": "dudu", "t": "Ho imparato io. Tu hai imparato a insegnare."}
+  {"s": "bubu", "m": "smug", "t": "Hai detto «abbiamo imparato». Mi piace."},
+  {"s": "dudu", "m": "handsome", "t": "Ho imparato io. Tu hai imparato a insegnare."}
  ],
  "c4_r02_in": [
   {"s": "bubu", "t": "Un'altalena. Ma stavolta voli tu."},
-  {"s": "dudu", "t": "Io? Ma peso il doppio!"},
-  {"s": "bubu", "t": "Allora mi serve qualcosa di pesante da portare. Ci penso io."}
+  {"s": "dudu", "m": "sus", "t": "Io? Ma peso il doppio!"},
+  {"s": "bubu", "m": "smug", "t": "Allora mi serve qualcosa di pesante da portare. Ci penso io."}
  ],
  "c4_sign_launch": [
   {"s": "narr", "t": "Il peso conta anche in braccio: chi porta una cassa pesa di più."}
@@ -33,54 +35,55 @@
  "c4_r04_talk": [
   {"s": "bubu", "t": "Ti ricordi le stelle cadenti? Ne passò una sola."},
   {"s": "dudu", "t": "E ci siamo detti il desiderio."},
-  {"s": "bubu", "t": "Non si dovrebbe."},
+  {"s": "bubu", "m": "sulk", "t": "Non si dovrebbe."},
   {"s": "dudu", "t": "Si è avverato lo stesso. Stiamo qui, no?"}
  ],
  "c4_cozy_a": [
   {"s": "dudu", "t": "Quando ho volato con l'altalena, mi hai preso tu?"},
-  {"s": "bubu", "t": "Ti ho guardato. Ero troppo occupato a essere fiero."},
+  {"s": "bubu", "m": "teary", "t": "Ti ho guardato. Ero troppo occupato a essere fiero."},
   {"s": "dudu", "t": "Fiero di me?"},
-  {"s": "bubu", "t": "Di te. Di come sei cambiato oggi. E di come sei rimasto uguale."}
+  {"s": "bubu", "m": "cute", "t": "Di te. Di quanto sei cambiato oggi, e di quanto sei rimasto uguale."}
  ],
  "c4_r07_in": [
   {"s": "dudu", "t": "C'è una canzone che mi gira in testa."},
   {"s": "bubu", "t": "Quella della macchina? Con i finestrini abbassati?"},
-  {"s": "dudu", "t": "Quella. Siamo stonati da far paura."},
-  {"s": "bubu", "t": "Siamo stonati insieme. È un'armonia tutta nostra."}
+  {"s": "dudu", "m": "laugh", "t": "Quella. Siamo stonati da far paura."},
+  {"s": "bubu", "t": "Sì, ma stonati in coppia. Quasi quasi è un'armonia."}
  ],
  "c4_r08_talk": [
   {"s": "bubu", "t": "Dudu, all'inizio guidavo io. Ora mi sembra di seguirti."},
-  {"s": "dudu", "t": "Ti dà fastidio?"},
-  {"s": "bubu", "t": "No. È bello stare dietro, ogni tanto. Si vede chi hai davanti."}
+  {"s": "dudu", "m": "sus", "t": "Ti dà fastidio?"},
+  {"s": "bubu", "m": "cute", "t": "No. È bello stare dietro, ogni tanto. Si vede chi hai davanti."}
  ],
  "c4_r11_in": [
   {"s": "dudu", "t": "Ogni mattina mi fai il caffè senza chiedermelo."},
   {"s": "bubu", "t": "Perché so come lo vuoi."},
   {"s": "dudu", "t": "Io non te l'ho mai detto, che mi piace così tanto."},
-  {"s": "bubu", "t": "Me lo dici adesso. Vale lo stesso."}
+  {"s": "bubu", "m": "cute", "t": "Me lo dici adesso. Vale lo stesso."}
  ],
  "c4_cozy_b": [
   {"s": "bubu", "t": "Siediti un attimo. Guarda quante stelle."},
   {"s": "dudu", "t": "Ne vedo una che cade."},
-  {"s": "bubu", "t": "Desiderio?"},
-  {"s": "dudu", "t": "Già espresso. Ce l'ho accanto."}
+  {"s": "bubu", "m": "cute", "t": "Desiderio?"},
+  {"s": "dudu", "m": "giggle", "t": "Già espresso. Ce l'ho accanto."}
  ],
  "c4_r13_talk": [
   {"s": "dudu", "t": "Siamo quasi alla fine."},
   {"s": "bubu", "t": "Della notte?"},
   {"s": "dudu", "t": "Dell'album. Mi dispiace un po'."},
-  {"s": "bubu", "t": "Gli album finiscono. Noi no."}
+  {"s": "bubu", "m": "cute", "t": "Gli album finiscono. Poi se ne comincia un altro."}
  ],
  "c4_r14_in": [
   {"s": "bubu", "t": "L'ultima stanza. Sento che l'ultima pagina è qui."},
   {"s": "dudu", "t": "Allora facciamola bene. Come sappiamo fare."},
-  {"s": "bubu", "t": "Insieme."},
-  {"s": "dudu", "t": "Sempre."}
+  {"s": "bubu", "t": "Dai, che ce la facciamo."},
+  {"s": "dudu", "t": "Ovvio."}
  ],
  "c4_cozy_c": [
   {"s": "dudu", "t": "Grazie, Bubu. Per avermi insegnato a giocare."},
-  {"s": "bubu", "t": "Grazie a te, Dudu. Per aver avuto voglia di imparare."},
+  {"s": "bubu", "m": "teary", "t": "Grazie a te, Dudu. Per aver avuto voglia di imparare."},
+  {"s": "bubu", "m": "cute", "if": "piggy >= 15", "t": "E per tutte le volte che mi hai portato in spalla. {piggy}, più o meno."},
   {"s": "dudu", "t": "Lo rifacciamo?"},
-  {"s": "bubu", "t": "Tutti i giorni. Anche senza vento."}
+  {"s": "bubu", "m": "hey", "t": "Tutti i giorni. Anche senza vento."}
  ]
 }

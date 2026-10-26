@@ -128,7 +128,8 @@ var _balloon_time: float = 0.0
 var _balloon_wait: float = 0.0
 
 var _body_size: Vector2 = Vector2(44, 58)
-var _rig: CharacterRig = null
+## CharacterRig (vector cut-out) or StickerRig (animated stickers), see _build_rig().
+var _rig: Node2D = null
 var _fx_scale: Vector2 = Vector2.ONE
 var _shake_time: float = 0.0
 var _blink_time: float = 2.0
@@ -153,14 +154,10 @@ func _ready() -> void:
 	if rect != null:
 		_body_size = rect.size
 	_blink_time = randf_range(1.5, 4.0)
-	if art_dir != "":
-		var rig := CharacterRig.new()
-		rig.name = &"Rig"
-		add_child(rig)
-		if rig.setup(art_dir):
-			_rig = rig
-		else:
-			rig.queue_free()
+	_build_rig()
+	GameState.settings_changed.connect(func() -> void:
+		if (_rig is StickerRig) != GameState.sticker_characters:
+			_build_rig())
 	queue_redraw()
 
 
@@ -368,6 +365,8 @@ func _do_jump(vy: float) -> void:
 	_fx_scale = Vector2(0.82, 1.2)
 	jumped.emit(self)
 	Sfx.play("jump_heavy" if weight >= 2 else "jump")
+	if randf() < 0.35:
+		Voices.action(_voice_name(), "jump")
 
 
 func _update_horizontal(delta: float) -> void:
@@ -567,9 +566,40 @@ func get_weight() -> int:
 	return w
 
 
+## Stickers when the option is on and the character has them, else the vector cut-out,
+## else (no art at all) the placeholder drawn in _draw().
+func _build_rig() -> void:
+	if _rig != null:
+		_rig.queue_free()
+		_rig = null
+	if GameState.sticker_characters:
+		var sticker := StickerRig.new()
+		sticker.name = &"Rig"
+		if sticker.setup(_voice_name()):
+			add_child(sticker)
+			_rig = sticker
+			return
+		sticker.free()
+	if art_dir != "":
+		var rig := CharacterRig.new()
+		rig.name = &"Rig"
+		add_child(rig)
+		if rig.setup(art_dir):
+			_rig = rig
+		else:
+			rig.queue_free()
+	queue_redraw()
+
+
+## "bubu" or "dudu", for voices and stickers.
+func _voice_name() -> String:
+	return "bubu" if player_index == 1 else "dudu"
+
+
 func nope() -> void:
 	_shake_time = 0.3
 	Sfx.play("nope", 0.0, -2.0)
+	Voices.action(_voice_name(), "nope")
 
 
 # --- Piggyback ------------------------------------------------------------------------
@@ -605,6 +635,7 @@ func hop_on(other: BasePlayer) -> void:
 	_collision.set_deferred(&"disabled", true)
 	_snap_to_carrier(other)
 	Sfx.play("piggy_on")
+	Voices.action(_voice_name(), "piggy")
 	piggyback_started.emit(self, other)
 
 
@@ -677,6 +708,8 @@ func _try_call() -> void:
 		return
 	partner.travel_to_partner()
 	Sfx.play("call")
+	Voices.action(_voice_name(), "call")
+	Stickers.pop(get_parent(), _voice_name() + "_phone", global_position - Vector2(0, _body_size.y + 30.0), 96.0, 2.0)
 	called_partner.emit(self)
 
 
@@ -726,11 +759,17 @@ func _enter_balloon(fell: bool) -> void:
 	if _balloon != null and is_instance_valid(_balloon):
 		_balloon.queue_free()
 	_balloon = HeartBalloon.new()
-	_balloon.setup(body_color, lower_color, marker_color)
+	# A fall rides the heart balloon; a call flies over (broom, scooter) when there's a sticker.
+	var ride := _voice_name() + ("_balloon" if fell else "_fly")
+	if not fell and Stickers.frames(ride) == null:
+		ride = _voice_name() + "_balloon"
+	_balloon.setup(body_color, lower_color, marker_color, ride)
 	get_parent().add_child(_balloon)
 	_balloon.global_position = global_position
 	_balloon.reset_physics_interpolation()
 	Sfx.play("balloon")
+	if fell:
+		Voices.action(_voice_name(), "fall")
 	if fell:
 		balance_lost.emit(self)
 

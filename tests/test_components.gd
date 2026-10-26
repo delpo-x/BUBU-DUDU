@@ -13,6 +13,9 @@ func run() -> void:
 	GameState.save_path = SAVE
 	GameState.delete_progress()
 	_test_save()
+	_test_save_bad_types()
+	await _test_bad_snapshot()
+	_test_dialogue_text()
 
 	var game := await _game("res://scenes/rooms/dev/Room_steps.tscn")
 	if game != null:
@@ -27,6 +30,8 @@ func run() -> void:
 		await _test_call(game, false)
 		game.queue_free()
 		await frames(2)
+	await _test_room_state("res://scenes/rooms/ch1/Room_03.tscn")
+	await _test_room_state("res://scenes/rooms/dev/Room_fragile.tscn")
 	game = await _game("res://scenes/rooms/dev/Room_call.tscn")
 	if game != null:
 		await _test_call(game, true)
@@ -36,6 +41,24 @@ func run() -> void:
 	GameState.delete_progress()
 	GameState.save_path = _old_save
 	GameState.load_progress()
+
+
+## Dialogue variations: conditions pick lines, {name} fills in, {a|b} picks one, mem() works.
+func _test_dialogue_text() -> void:
+	GameState.new_game()
+	GameState.bump_stat("falls_dudu")
+	GameState.bump_stat("falls_dudu")
+	GameState.bump_stat("falls_bubu")
+	var lines := DialogueText.resolve([
+		{"s": "dudu", "if": "falls_dudu > falls_bubu", "t": "Cadute: {falls_dudu} e {falls_bubu}."},
+		{"s": "bubu", "if": "falls_bubu > falls_dudu", "t": "Mai detta."},
+		{"s": "bubu", "if": "not mem('m4_e')", "t": "{uno|uno}, {clumsier}, {nessuno}"},
+	])
+	check(lines.size() == 2 and lines[0]["t"] == "Cadute: 2 e 1." and not lines[0].has("if"),
+		"dialogue conditions choose lines and fill in counts")
+	check(lines.size() == 2 and lines[1]["t"] == "uno, Dudu, {nessuno}", "dialogue alternatives pick one, unknown names stay")
+	GameState.new_game()
+	check(int(GameState.get_flag("stat_falls_dudu", 0)) == 0, "a new game starts the counts from zero")
 
 
 func _test_save() -> void:
@@ -54,14 +77,92 @@ func _test_save() -> void:
 	f.store_string("{ not json")
 	f.close()
 	GameState.memories = {}
-	var logger: Object = get_tree().root.get_meta(&"error_logger", null)
-	if logger != null:
-		logger.call(&"expect_errors", 1)  # the JSON parser reports the corrupted file
+	# No expect_errors here: a corrupted save is an expected situation, not an engine error.
 	var ok := GameState.load_progress()
 	check(ok and GameState.has_memory("m1_a"), "corrupted save recovers from backup")
 	check(snap.has("version"), "save carries a format version")
 	GameState.delete_progress()
 	check(not GameState.has_save(), "delete removes every save file")
+
+
+## A hand-edited or damaged save with wrong value types still loads to a sane state.
+func _test_save_bad_types() -> void:
+	_write_save({"chapter_index": "abc", "room_index": 999, "unlocked_chapter": -3,
+		"memories": ["m1_a"], "flags": 5, "play_time": "x", "room_snapshot": [1, 2]})
+	var ok := GameState.load_progress()
+	check(ok and GameState.chapter_index == 0 and GameState.room_index == 0 and GameState.unlocked_chapter == 0
+		and GameState.memories.is_empty() and GameState.flags.is_empty() and GameState.room_snapshot.is_empty()
+		and GameState.play_time == 0.0, "save with wrong value types loads with safe defaults")
+	GameState.delete_progress()
+
+
+## A mid-room save with a malformed snapshot resumes the room at the spawn points.
+func _test_bad_snapshot() -> void:
+	_write_save({"chapter_index": 0, "room_index": 0, "room_snapshot": {
+		"chapter": 0, "room": 0, "room_time": "x", "players": [[1], "x"],
+		"state": {"nodes": [1, 2], "checkpoints": [["a"], 3]}}})
+	GameState.load_progress()
+	var game := (load(GAME_SCENE) as PackedScene).instantiate() as Game
+	game.autostart = false
+	game.fast_transitions = true
+	game.auto_advance = false
+	get_tree().root.add_child(game)
+	game.enter_room(0, 0, "", true)
+	await frames(10)
+	var spawn := game.room.get_spawn(1) if game.room != null else Vector2.INF
+	check(game.room != null and game.bubu.global_position.distance_to(spawn) < 64.0,
+		"malformed mid-room save resumes at the spawn point")
+	game.queue_free()
+	await frames(2)
+	GameState.delete_progress()
+
+
+func _write_save(data: Dictionary) -> void:
+	var f := FileAccess.open(SAVE, FileAccess.WRITE)
+	f.store_string(JSON.stringify(data))
+	f.close()
+
+
+## Mid-room save round trip: change what a room remembers (crates moved, levers flipped,
+## floors broken), capture it, load the room fresh and restore: same state again.
+func _test_room_state(path: String) -> void:
+	var game := await _game(path)
+	if game == null:
+		return
+	var changed := 0
+	for n in get_tree().get_nodes_in_group(Room.STATE_GROUP):
+		if not game.room.is_ancestor_of(n):
+			continue
+		if n is CarryableItem:
+			n.call(&"restore", {"x": (n as Node2D).global_position.x + 48.0, "y": (n as Node2D).global_position.y - 4.0})
+			changed += 1
+		elif n is WallButton and (n as WallButton).mode == WallButton.Mode.LEVER:
+			(n as WallButton).interact(game.bubu)
+			changed += 1
+		elif n is FragileFloor:
+			n.call(&"restore", {"broken": true})
+			changed += 1
+	await frames(40)
+	var saved := game.room.capture_state()
+	game.queue_free()
+	await frames(2)
+	game = await _game(path)
+	if game == null:
+		return
+	game.room.restore_state(saved)
+	await frames(2)
+	var again := game.room.capture_state()
+	var same := true
+	for k: String in (saved["nodes"] as Dictionary).keys():
+		var a: Variant = saved["nodes"][k]
+		var b: Variant = (again["nodes"] as Dictionary).get(k)
+		if a is Dictionary and a.has("x"):
+			same = same and b is Dictionary and Vector2(a["x"], a["y"]).distance_to(Vector2(b["x"], b["y"])) < 6.0
+		else:
+			same = same and JSON.stringify(a) == JSON.stringify(b)
+	check(changed > 0 and same, "mid-room save restores the puzzle (%s)" % path.get_file())
+	game.queue_free()
+	await frames(2)
 
 
 func _game(path: String) -> Game:

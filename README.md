@@ -17,6 +17,8 @@ Four chapters, 56 rooms, about 6 hours for a first-time pair. Targets: Windows a
 | Y hold | Call the partner over (where allowed) |
 | Start | Pause |
 
+Every key and button (but the stick and D-pad moves) can be changed in Options → "Assegna i tasti"
+(`scenes/core/Bindings.gd`, saved in `user://controls.cfg`; a taken key swaps).
 Pad 0 is Bubu (P1) and pad 1 is Dudu (P2). Keyboard fallback: P1 uses `A D W S`, `Space`, `E`, `Q`, `Esc`.
 P2 uses the arrow keys, `Enter`, `.`, `/` and `Backspace`.
 
@@ -49,6 +51,12 @@ edge. The pack says it is fan-style art, not official: check the rights before a
 The same script writes the dialogue portraits, the window icon and the UI icons in `art/ui/` (heart,
 next arrow, toggles, slider knob), so the UI uses no font glyphs or emoji that a web font might lack.
 
+## App icon
+
+`art/app_icon.png` (window, web favicon) and `art/app_icon.ico` (Windows exe, set by the export with
+"modify resources" on) are the Bubu & Dudu logo. `tools/gen_sprites.py` still writes `art/icon.svg`,
+which the project no longer uses as its icon.
+
 ## UI
 
 `scenes/ui/UiTheme.gd` holds the color tokens (each text color is checked for at least 4.5:1 contrast
@@ -58,6 +66,50 @@ movimento" (menu drift off, gentler squash, tilt and shake). The dialogue box go
 bottom of the screen, whichever hides fewer of the two characters.
 Fonts are Nunito (reading) and Fredoka (headings) from Google Fonts, both under the SIL Open
 Font License (`art/fonts/OFL_*.txt`).
+
+## Stickers
+
+```bash
+python -I tools/gen_stickers.py path/to/webp_folder [fps]
+```
+
+Turns animated sticker WebPs into transparent lossy WebP sprite sheets (kept lossy on export by their
+`.import`) plus `SpriteFrames` in `art/stickers/`:
+the white background, floating captions and stray text go, the floor shadow becomes see-through.
+A watermark printed on the character (`WATERMARKS`: sticker -> box) is found as the pixels that
+stay put while the character moves, and painted over from its surroundings.
+White inside the outline stays; stickers listed in `WHITE_IS_BG` (the skipping rope) drop all big near-white areas.
+`scenes/ui/Stickers.gd` draws them: laughs in shared dialogue portraits, the skipping rope on the menu,
+Bubu's postcard in the album and the two hugging in cozy spots.
+A `<who>_balloon` sticker (hanging ones listed in `HeartBalloon.HANGING` get a heart on their rope) replaces that character's heart balloon when they fall, `<who>_fly` when
+they are called over (`HeartBalloon.FACING` says which way each one is drawn going). "Riduci movimento" holds the first frame.
+Frames cut by the image border (a close-up) keep their white: the stretch between two outline crossings
+on the border counts as body. Outline gaps up to `GAP` pixels are closed, transparent padding is
+flattened on white and straight frame lines along the border are dropped.
+
+A dialogue line can name a mood, `{"s": "bubu", "m": "grudge", "t": "..."}`: the portrait then plays
+`art/stickers/bubu_grudge`. Contextual lines get one per pool and speaker (`BarkDirector.MOODS`,
+e.g. many falls -> Bubu grudge / Dudu sus, resuming -> Bubu bed, fast room -> Dudu handsome). Bubu also pops the phone sticker when calling Dudu, the
+pause menu shows him in bed and the credits end with the helmet and the bow. `check_content.py` checks
+that every mood has its sticker.
+
+## Sticker characters
+
+With "Personaggi animati" on (default), `scenes/characters/StickerRig.gd` draws Bubu and Dudu with
+their stickers instead of the vector cut-out: idle, walk, jump (rising and falling hold one frame each of
+the trampoline somersault) and Bubu's wave for the partner call. Poses with no sticker borrow another
+(`POSES` and `FALLBACK`), `LOOKS` says which way a sticker faces so it flips with the player, `FIT`
+scales stickers that leave room around the character. Without the idle and walk stickers a character
+keeps the vector rig.
+
+## Voices
+
+`scenes/core/Voices.gd` (autoload) babbles for Bubu and Dudu, Animal Crossing style, all synthesized:
+a syllable every two letters while a line types (vowel from the text, pitch from the character and the
+line's mood, rising on questions, trembling when sad), a short reaction when a line with a mood starts
+(laugh, sob, "eh?") and grunts for jump, fall, call, piggyback, hug and "nope". "Voci dei personaggi"
+in the options turns them off. A recording overrides any piece: `art/voices/<who>_<name>.wav` or
+`.ogg`, where `<name>` is a vowel (`a`), a mood (`laugh`) or an action (`jump`).
 
 ## Animated GIFs
 
@@ -70,6 +122,15 @@ Records looping clips of the two characters (wave, hug, jump, walk, piggyback) f
 and encodes them into `media/gifs/` (480x360, 20 fps, pure-Python encoder, no Pillow needed). The
 recording needs a window, so run it without `--headless`. `media/` is not imported or exported.
 
+## Saves
+
+Progress saves on every room entry. Inside a room it also saves the players' spot and the puzzle state
+(latched plates and gates, levers, crates, broken floors, seesaws, lit lanterns) at lantern-checkpoints
+and cozy spots ("Partita salvata"), on pause, on quitting to the menu and on closing the window, so
+"Continua" picks up where the players were. Restarting the room drops that save. Components keep their
+state through `snapshot()` / `restore()` (group `Room.STATE_GROUP`). Rooms estimated at
+`LANTERN_MIN_EST` minutes or more get a lantern once half their puzzle effort is done (`tools/chapters.py`).
+
 ## Regenerate rooms
 
 ```bash
@@ -79,6 +140,33 @@ python -I tools/gen_rooms.py
 This rewrites `scenes/rooms/ch*/`, `tests/solutions/` and `data/chapters.json`. It also checks that every
 dialogue and memory id exists and prints the duration estimate. `python -I tools/gen_rooms.py dev`
 writes one whitebox room per puzzle beat.
+
+## Dialogue variations
+
+Any dialogue or contextual line can change with how the pair has played (`scenes/core/DialogueText.gd`):
+`"if"` holds a condition (`"falls_dudu > falls_bubu"`, `"mem('m2_b')"`, `"hugs >= 5"`) and the line is
+skipped when it is false; `{a|b|c}` in the text picks one at random; `{name}` puts in a value
+(`{falls}`, `{hugs}`, `{piggy}`, `{memories}`, `{last_memory}`, `{hours}`, `{clumsier}`...). Counts
+live in the save (`stat_*` flags, reset by a new game). `check_content.py` rejects unknown names.
+
+## Contextual lines
+
+`data/dialogue/barks.json` holds the short exchanges the characters say during play (falls, calls,
+piggyback rides, memories, opened doors, long stays in one room, idle pads, resuming a save). Each key
+is a pool and each pool is a list of exchanges, written as `[{"s": speaker, "t": text}, ...]` with the
+speakers `bubu`, `dudu`, `both` or `narr`. `BarkDirector` plays every entry of a pool before repeating
+one, so adding entries is safe and needs no code. Keep each line short and in the existing tone.
+
+## Content checks
+
+```bash
+python -I tools/check_content.py
+```
+
+Needs only Python. It checks the shape of the dialogue, contextual lines, memories and credits (known
+speakers, no empty or duplicate text, lines that fit the dialogue box) and that the UI text colors in
+`UiTheme.gd` keep at least 4.5:1 contrast on the panel. Run it after editing anything in `data/`.
+`tools/gen_rooms.py` separately checks that every dialogue and memory id used by a room exists.
 
 ## Tests
 

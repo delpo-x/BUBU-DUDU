@@ -95,12 +95,13 @@ func is_transitioning() -> bool:
 
 
 func start(ch: int, idx: int) -> void:
-	await enter_room(ch, idx)
+	await enter_room(ch, idx, "", true)
 
 
 ## Loads room `idx` of chapter `ch` (fade out, swap, auto-save, title, fade in, intro).
-## `path_override` loads another room file in that slot (tests, dev rooms).
-func enter_room(ch: int, idx: int, path_override: String = "") -> void:
+## `path_override` loads another room file in that slot (tests, dev rooms). `resume` picks
+## up a mid-room save of this room if there is one (players, puzzle state, time).
+func enter_room(ch: int, idx: int, path_override: String = "", resume: bool = false) -> void:
 	_transitioning = true
 	_set_players_locked(true)
 	if not fast_transitions:
@@ -121,6 +122,7 @@ func enter_room(ch: int, idx: int, path_override: String = "") -> void:
 	room = packed.instantiate() as Room
 	room_holder.add_child(room)
 	room.completed.connect(_on_room_completed, CONNECT_ONE_SHOT)
+	room.checkpoint_reached.connect(save_checkpoint.bind(true))
 	camera.level_bounds = room.bounds
 	camera.min_zoom = room.camera_min_zoom
 	camera.max_zoom = room.camera_max_zoom
@@ -128,8 +130,11 @@ func enter_room(ch: int, idx: int, path_override: String = "") -> void:
 	dudu.teleport_to(room.get_spawn(2))
 	bubu.face_towards(dudu.global_position.x + 1.0)
 	dudu.face_towards(bubu.global_position.x - 1.0)
-	camera.snap_to_targets()
 	room_time = 0.0
+	var snap := GameState.room_snapshot
+	if resume and path_override == "" and int(snap.get("chapter", -1)) == ch and int(snap.get("room", -1)) == idx:
+		_resume_snapshot(snap)
+	camera.snap_to_targets()
 	if path_override == "":
 		GameState.set_position(ch, idx)
 
@@ -148,6 +153,45 @@ func enter_room(ch: int, idx: int, path_override: String = "") -> void:
 	await _play_once("room_intro_%s" % room.room_id, room.intro_dialogue)
 	_set_players_locked(false)
 	_transitioning = false
+
+
+# --- Mid-room saves ---------------------------------------------------------------------
+
+## Saves where the players are and the state of the room's puzzle, so the next session
+## continues from here. Players in the air or on a balloon are saved at the respawn point.
+func save_checkpoint(announce: bool = false) -> void:
+	if room == null or _transitioning or _ending or room.is_completed():
+		return
+	var players: Array = []
+	for p: BasePlayer in [bubu, dudu]:
+		var pos := p.global_position
+		if p.state != BasePlayer.State.NORMAL or not p.is_on_floor():
+			pos = room.get_checkpoint(p.player_index)
+		players.append([pos.x, pos.y])
+	GameState.room_snapshot = {
+		"chapter": chapter_index, "room": room_index, "room_time": room_time,
+		"players": players, "state": room.capture_state(),
+	}
+	GameState.save_progress()
+	if announce:
+		hud.show_toast("Partita salvata", 1.6)
+
+
+func _resume_snapshot(snap: Dictionary) -> void:
+	var st: Variant = snap.get("state", {})
+	if st is Dictionary:
+		room.restore_state(st)
+	# Malformed or out-of-room positions (damaged save) keep the spawn points.
+	var ps: Variant = snap.get("players", [])
+	if ps is Array and (ps as Array).size() == 2:
+		var a: Variant = Room.to_vec(ps[0])
+		var b: Variant = Room.to_vec(ps[1])
+		var area := room.bounds.grow(64.0)
+		if a is Vector2 and b is Vector2 and area.has_point(a) and area.has_point(b):
+			bubu.teleport_to(a)
+			dudu.teleport_to(b)
+	var t: Variant = snap.get("room_time", 0.0)
+	room_time = float(t) if (t is float or t is int) else 0.0
 
 
 func _play_once(flag: String, id: StringName) -> void:
@@ -194,6 +238,9 @@ func _advance() -> void:
 	_set_players_locked(true)
 	var chapter := GameState.get_chapter(ch)
 	await _play_once("chapter_outro_%s" % chapter.get("id", ch), StringName(String(chapter.get("outro", ""))))
+	if not fast_transitions:
+		Stickers.pop(world, "both_cheers", camera.get_screen_center_position() + Vector2(0, 90), 200.0, 2.4)
+		await get_tree().create_timer(2.2).timeout
 	GameState.complete_chapter(ch)
 	if ch + 1 < GameState.chapter_count():
 		GameState.set_position(ch + 1, 0)
@@ -215,6 +262,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _notification(what: int) -> void:
+	# Closing the window (or the browser tab) keeps the place in the room.
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		save_checkpoint()
 	# Losing focus (alt-tab, browser tab hidden) pauses so nobody falls meanwhile.
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT and is_inside_tree() and not get_tree().paused \
 			and not _transitioning and room != null and DisplayServer.get_name() != "headless":
@@ -222,6 +272,7 @@ func _notification(what: int) -> void:
 
 
 func _pause() -> void:
+	save_checkpoint()
 	get_tree().paused = true
 	pause_menu.hint_text = room.hint_text if room != null else ""
 	pause_menu.room_time = room_time
@@ -236,6 +287,7 @@ func _resume() -> void:
 
 func _restart() -> void:
 	_resume()
+	GameState.room_snapshot = {}
 	await enter_room(chapter_index, room_index)
 
 
@@ -246,6 +298,7 @@ func _skip() -> void:
 
 
 func _quit_to_menu() -> void:
+	save_checkpoint()
 	pause_menu.close()
 	get_tree().paused = false
 	GameState.in_game = false

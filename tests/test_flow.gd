@@ -43,8 +43,15 @@ func run() -> void:
 	game.call(&"_restart")
 	await _settle(game)
 	check(not get_tree().paused and game.room_index == 2, "restart reloads the same room")
+	check(GameState.room_snapshot.is_empty(), "restart forgets the mid-room save")
 
-	# Quit to menu, continue.
+	# Walk a bit into the room, quit to menu, continue: same spot, not the room start.
+	var spawn_x := game.bubu.global_position.x
+	Input.action_press(&"p1_right")
+	await _play(0.8)
+	Input.action_release(&"p1_right")
+	await _play(0.8)
+	var walked := game.bubu.global_position
 	game.call(&"_quit_to_menu")
 	menu = await _wait_scene("MainMenu")
 	check(menu != null and not get_tree().paused, "quit returns to the main menu")
@@ -53,6 +60,10 @@ func run() -> void:
 	menu.call(&"_continue")
 	game = await _wait_game()
 	check(game != null and game.chapter_index == 0 and game.room_index == 2, "continue resumes the saved room")
+	if game != null:
+		await _settle(game)
+		check(walked.x > spawn_x + 40.0 and game.bubu.global_position.distance_to(walked) < 24.0,
+			"continue resumes mid-room where the players were")
 	if game == null:
 		return _cleanup()
 
@@ -131,3 +142,8 @@ func _settle(game: Game) -> void:
 				game.dialogue.advance()
 		elif not game.is_transitioning() and game.room != null:
 			return
+
+
+## Lets the game run for `seconds` of physics.
+func _play(seconds: float) -> void:
+	await frames(int(seconds * 60.0))

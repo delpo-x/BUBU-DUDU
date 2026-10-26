@@ -16,6 +16,7 @@ var _new_button: Button
 var _confirm_new: bool = false
 var _t: float = 0.0
 var _art: Control
+var _title: Label
 
 
 const LEFT_CARD := preload("res://art/illustrations/03_saluto.svg")
@@ -48,6 +49,7 @@ func _ready() -> void:
 	title.add_theme_color_override(&"font_outline_color", UiTheme.ACCENT_INK)
 	title.add_theme_constant_override(&"outline_size", 14)
 	add_child(title)
+	_title = title
 
 	_main = PanelContainer.new()
 	center.add_child(_main)
@@ -64,7 +66,7 @@ func _ready() -> void:
 	_main_buttons.append(UiTheme.button("Comandi", _open_controls))
 	_main_buttons.append(UiTheme.button("Opzioni", _open_options))
 	if not OS.has_feature("web"):
-		_main_buttons.append(UiTheme.button("Esci", func() -> void: get_tree().quit()))
+		_main_buttons.append(UiTheme.button("Esci", _quit))
 	for b in _main_buttons:
 		v.add_child(b)
 	if GameState.has_save():
@@ -92,11 +94,15 @@ func _ready() -> void:
 
 	UiTheme.chain_focus(_main_buttons)
 	_main_buttons[0].grab_focus()
+	UiTheme.pop_in(_main)
 
 
 func _process(delta: float) -> void:
 	_t += delta
 	_art.queue_redraw()
+	# Gentle sway of the title, like the cards beside the menu.
+	_title.pivot_offset = _title.size * 0.5
+	_title.rotation = sin(_t * 0.9) * 0.012 * UiTheme.motion()
 
 
 func _show_main() -> void:
@@ -106,6 +112,7 @@ func _show_main() -> void:
 	_options.visible = false
 	_main.visible = true
 	_main_buttons[0].grab_focus()
+	UiTheme.pop_in(_main)
 
 
 func _continue() -> void:
@@ -120,6 +127,16 @@ func _new_game() -> void:
 		return
 	GameState.new_game()
 	_go()
+
+
+## Silences every sound and lets the audio thread drop it before quitting (quitting with
+## live playbacks could crash at exit).
+func _quit() -> void:
+	set_process_unhandled_input(false)
+	Sfx.stop_all()
+	Voices.stop_all()
+	await get_tree().create_timer(0.25).timeout
+	get_tree().quit()
 
 
 func _go() -> void:
@@ -150,22 +167,33 @@ func _open_chapters() -> void:
 	_main.visible = false
 	_chapters.visible = true
 	buttons[0].grab_focus()
+	UiTheme.pop_in(_chapters)
 
 
 func _open_album() -> void:
 	_main.visible = false
 	_album.open()
+	UiTheme.pop_in(_album)
 
 
 func _open_options() -> void:
 	_main.visible = false
 	_options.open()
+	UiTheme.pop_in(_options)
 
 
 func _open_controls() -> void:
+	# Rebuilt each time: the keys may have been changed in Options meanwhile.
+	var holder := _controls.get_parent()
+	var at := _controls.get_index()
+	_controls.queue_free()
+	_controls = _build_controls()
+	holder.add_child(_controls)
+	holder.move_child(_controls, at)
 	_main.visible = false
 	_controls.visible = true
 	(_controls.get_meta(&"back") as Button).grab_focus()
+	UiTheme.pop_in(_controls)
 
 
 func _build_controls() -> PanelContainer:
@@ -175,14 +203,17 @@ func _build_controls() -> PanelContainer:
 	p.add_child(v)
 	v.add_child(UiTheme.label("Comandi", 36, UiTheme.ACCENT_INK, HORIZONTAL_ALIGNMENT_CENTER))
 	v.add_child(UiTheme.label("Primo controller: Bubu  ·  Secondo controller: Dudu", 20, UiTheme.MUTED, HORIZONTAL_ALIGNMENT_CENTER))
+	# Pad names from Bubu's current buttons (both start the same; Options can change them).
+	var jump := Bindings.pad_label(&"p1_jump")
+	var assist := Bindings.pad_label(&"p1_assist")
 	var rows := [
 		["Levetta sinistra", "Muoversi (su/giù per arrampicarsi)"],
-		["A", "Saltare (tienilo premuto per saltare più in alto)"],
-		["B", "Interagire: leve, pulsanti, cartelli, prendere e posare casse"],
-		["Y (tocco)", "In spalla al partner / scendere / abbracciarsi"],
-		["Y (tieni premuto)", "Chiamare il partner vicino a te"],
-		["A mentre sei in spalla", "Saltare giù con lo slancio"],
-		["Start", "Pausa (aiuto, ricomincia stanza, opzioni)"],
+		[jump, "Saltare (tienilo premuto per saltare più in alto)"],
+		[Bindings.pad_label(&"p1_interact"), "Interagire: leve, pulsanti, cartelli, prendere e posare casse"],
+		[assist + " (tocco)", "In spalla al partner / scendere / abbracciarsi"],
+		[assist + " (tieni premuto)", "Chiamare il partner vicino a te"],
+		[jump + " mentre sei in spalla", "Saltare giù con lo slancio"],
+		[Bindings.pad_label(&"p1_pause"), "Pausa (aiuto, ricomincia stanza, opzioni)"],
 	]
 	var grid := GridContainer.new()
 	grid.columns = 2
@@ -192,7 +223,13 @@ func _build_controls() -> PanelContainer:
 		grid.add_child(UiTheme.label(String(r[0]), 21, UiTheme.ACCENT_INK))
 		grid.add_child(UiTheme.label(String(r[1]), 21))
 	v.add_child(grid)
-	v.add_child(UiTheme.label("Tastiera — Bubu: A/D W/S, Spazio, E, Q, Esc  ·  Dudu: frecce, Invio, punto, /, Backspace", 16, UiTheme.MUTED, HORIZONTAL_ALIGNMENT_CENTER))
+	var kb := func(p: int) -> String:
+		var names: Array[String] = []
+		for s in ["left", "right", "up", "down", "jump", "interact", "assist", "pause"]:
+			names.append(Bindings.key_label(StringName("p%d_%s" % [p, s])))
+		return "%s/%s %s/%s, %s, %s, %s, %s" % names
+	v.add_child(UiTheme.label("Tastiera — Bubu: %s  ·  Dudu: %s" % [kb.call(1), kb.call(2)], 16, UiTheme.MUTED, HORIZONTAL_ALIGNMENT_CENTER))
+	v.add_child(UiTheme.label("Puoi cambiarli in Opzioni, alla voce «Assegna i tasti».", 16, UiTheme.MUTED, HORIZONTAL_ALIGNMENT_CENTER))
 	v.add_child(UiTheme.label("Non si perde mai: chi cade torna dal partner su un palloncino.", 18, UiTheme.INK, HORIZONTAL_ALIGNMENT_CENTER))
 	var back := UiTheme.button("Indietro", _show_main)
 	v.add_child(back)
@@ -219,7 +256,8 @@ func _draw_art() -> void:
 	var ground := size.y - 70.0
 	_art.draw_rect(Rect2(Vector2(0, ground), Vector2(size.x, 70)), Color(0.55, 0.72, 0.5))
 	# Two illustrations from the vector pack as tilted cards on either side of the menu.
-	_draw_card(LEFT_CARD, Vector2(size.x * 0.17, size.y * 0.62), CARD_SIZE, -0.07, 0.0)
+	var rope := Stickers.frame("dudu_rope", _t)
+	_draw_card(rope if rope != null else LEFT_CARD, Vector2(size.x * 0.17, size.y * 0.62), CARD_SIZE, -0.07, 0.0)
 	_draw_card(RIGHT_CARD, Vector2(size.x * 0.83, size.y * 0.6), CARD_SIZE, 0.06, 1.3)
 
 
@@ -230,7 +268,8 @@ func _draw_card(tex: Texture2D, center: Vector2, side: float, angle: float, phas
 	var bob := sin(_t * 1.6 + phase) * 4.0 * m
 	_art.draw_set_transform(center + Vector2(0, bob), angle + sin(_t * 0.9 + phase) * 0.01 * m, Vector2.ONE)
 	var r := Rect2(Vector2(-side, -side) * 0.5, Vector2(side, side))
-	_art.draw_rect(Rect2(r.position + Vector2(6, 8), r.size), Color(0.45, 0.25, 0.25, 0.18))
-	_art.draw_rect(r.grow(8.0), Color(1, 1, 1))
-	_art.draw_texture_rect(tex, r, false)
+	# Rounded photo frame: the stickers have a flat white background, so square corners show.
+	_art.draw_style_box(UiTheme.box(Color(0.45, 0.25, 0.25, 0.18), 22), Rect2(r.position + Vector2(6, 8), r.size).grow(8.0))
+	_art.draw_style_box(UiTheme.box(Color.WHITE, 22), r.grow(8.0))
+	_art.draw_texture_rect(tex, Stickers.fit(tex, Vector2.ZERO, r.size), false)
 	_art.draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
