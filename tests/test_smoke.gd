@@ -24,6 +24,10 @@ func run() -> void:
 				missing += 1
 	check(missing == 0, "input actions registered (p1_*, p2_*)")
 	_test_bindings()
+	# One pad with a non-zero id (after a reconnect) must not drive both players.
+	check(PadAssigner.device_for_slot(0, [1]) == 1 and PadAssigner.device_for_slot(1, [1]) != 1
+		and PadAssigner.device_for_slot(1, [0, 3]) == 3 and PadAssigner.device_for_slot(1, []) == 1,
+		"a player without a pad never shares the other player's pad")
 
 	var packed := load("res://scenes/rooms/test_gym.tscn") as PackedScene
 	check(packed != null, "test_gym loads")
@@ -101,5 +105,25 @@ func _test_bindings() -> void:
 	check(Bindings.key_of(&"p2_interact").physical_keycode == KEY_K, "remapped keys are saved and loaded")
 	Bindings.reset_defaults()
 	check(Bindings.key_of(&"p1_jump").physical_keycode == p1_jump_key and Bindings.key_label(&"p1_jump") == "Spazio", "reset restores the default keys")
+	# A damaged controls file (bad values, a key used twice) must never leave an action unbound.
+	var cfg := ConfigFile.new()
+	cfg.set_value("keys", "p1_jump", "foo")
+	cfg.set_value("keys", "p1_left", -5)
+	cfg.set_value("keys", "p2_jump", int(p1_left_key))
+	cfg.set_value("pad", "p1_jump", "x")
+	cfg.save(Bindings.path)
+	Bindings.load_bindings()
+	var used := {}
+	var unbound := 0
+	for a in Bindings.all_actions():
+		var k := Bindings.key_of(a)
+		if k == null or used.has(k.physical_keycode):
+			unbound += 1
+		else:
+			used[k.physical_keycode] = true
+		if Bindings.can_rebind_pad(a) and Bindings.pad_of(a) == null:
+			unbound += 1
+	check(unbound == 0, "a damaged controls file leaves every action with its own key and button")
+	Bindings.reset_defaults()
 	DirAccess.remove_absolute(Bindings.path)
 	Bindings.path = old_path

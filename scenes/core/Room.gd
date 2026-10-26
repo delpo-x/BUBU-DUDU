@@ -149,14 +149,26 @@ func capture_state() -> Dictionary:
 
 
 func restore_state(d: Dictionary) -> void:
-	var nodes: Dictionary = d.get("nodes", {})
-	for path: String in nodes.keys():
-		var n := get_node_or_null(NodePath(path))
-		if n != null and n.has_method(&"restore") and nodes[path] is Dictionary:
-			n.call(&"restore", nodes[path])
-	var cps: Array = d.get("checkpoints", [])
-	if cps.size() == 2:
-		set_checkpoint(Vector2(float(cps[0][0]), float(cps[0][1])), Vector2(float(cps[1][0]), float(cps[1][1])))
+	# The data comes from the save file: skip anything with an unexpected shape.
+	var nodes: Variant = d.get("nodes", {})
+	if nodes is Dictionary:
+		for path: Variant in (nodes as Dictionary).keys():
+			var n := get_node_or_null(NodePath(String(path)))
+			if n != null and n.has_method(&"restore") and nodes[path] is Dictionary:
+				n.call(&"restore", nodes[path])
+	var cps: Variant = d.get("checkpoints", [])
+	if cps is Array and (cps as Array).size() == 2:
+		var a: Variant = to_vec(cps[0])
+		var b: Variant = to_vec(cps[1])
+		if a is Vector2 and b is Vector2:
+			set_checkpoint(a, b)
+
+
+## A saved [x, y] pair as a Vector2, or null when it is malformed.
+static func to_vec(v: Variant) -> Variant:
+	if v is Array and (v as Array).size() == 2 and (v[0] is float or v[0] is int) and (v[1] is float or v[1] is int):
+		return Vector2(float(v[0]), float(v[1]))
+	return null
 
 
 func get_kill_y() -> float:

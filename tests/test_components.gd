@@ -13,6 +13,8 @@ func run() -> void:
 	GameState.save_path = SAVE
 	GameState.delete_progress()
 	_test_save()
+	_test_save_bad_types()
+	await _test_bad_snapshot()
 	_test_dialogue_text()
 
 	var game := await _game("res://scenes/rooms/dev/Room_steps.tscn")
@@ -75,14 +77,50 @@ func _test_save() -> void:
 	f.store_string("{ not json")
 	f.close()
 	GameState.memories = {}
-	var logger: Object = get_tree().root.get_meta(&"error_logger", null)
-	if logger != null:
-		logger.call(&"expect_errors", 1)  # the JSON parser reports the corrupted file
+	# No expect_errors here: a corrupted save is an expected situation, not an engine error.
 	var ok := GameState.load_progress()
 	check(ok and GameState.has_memory("m1_a"), "corrupted save recovers from backup")
 	check(snap.has("version"), "save carries a format version")
 	GameState.delete_progress()
 	check(not GameState.has_save(), "delete removes every save file")
+
+
+## A hand-edited or damaged save with wrong value types still loads to a sane state.
+func _test_save_bad_types() -> void:
+	_write_save({"chapter_index": "abc", "room_index": 999, "unlocked_chapter": -3,
+		"memories": ["m1_a"], "flags": 5, "play_time": "x", "room_snapshot": [1, 2]})
+	var ok := GameState.load_progress()
+	check(ok and GameState.chapter_index == 0 and GameState.room_index == 0 and GameState.unlocked_chapter == 0
+		and GameState.memories.is_empty() and GameState.flags.is_empty() and GameState.room_snapshot.is_empty()
+		and GameState.play_time == 0.0, "save with wrong value types loads with safe defaults")
+	GameState.delete_progress()
+
+
+## A mid-room save with a malformed snapshot resumes the room at the spawn points.
+func _test_bad_snapshot() -> void:
+	_write_save({"chapter_index": 0, "room_index": 0, "room_snapshot": {
+		"chapter": 0, "room": 0, "room_time": "x", "players": [[1], "x"],
+		"state": {"nodes": [1, 2], "checkpoints": [["a"], 3]}}})
+	GameState.load_progress()
+	var game := (load(GAME_SCENE) as PackedScene).instantiate() as Game
+	game.autostart = false
+	game.fast_transitions = true
+	game.auto_advance = false
+	get_tree().root.add_child(game)
+	game.enter_room(0, 0, "", true)
+	await frames(10)
+	var spawn := game.room.get_spawn(1) if game.room != null else Vector2.INF
+	check(game.room != null and game.bubu.global_position.distance_to(spawn) < 64.0,
+		"malformed mid-room save resumes at the spawn point")
+	game.queue_free()
+	await frames(2)
+	GameState.delete_progress()
+
+
+func _write_save(data: Dictionary) -> void:
+	var f := FileAccess.open(SAVE, FileAccess.WRITE)
+	f.store_string(JSON.stringify(data))
+	f.close()
 
 
 ## Mid-room save round trip: change what a room remembers (crates moved, levers flipped,

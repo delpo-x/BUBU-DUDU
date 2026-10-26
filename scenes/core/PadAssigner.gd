@@ -22,9 +22,18 @@ func _on_joy_connection_changed(_device: int, _connected: bool) -> void:
 
 ## Returns the joypad device id used by player 1..PLAYER_COUNT.
 func device_for_player(player_index: int) -> int:
-	var pads := _sorted_pads()
-	var slot := player_index - 1
-	return pads[slot] if slot < pads.size() else slot
+	return device_for_slot(player_index - 1, _sorted_pads())
+
+
+## Pads in id order go to P1, P2. A player without a pad gets an id no connected pad
+## uses, so a single pad (whatever its id) never drives both characters.
+static func device_for_slot(slot: int, pads: Array[int]) -> int:
+	if slot < pads.size():
+		return pads[slot]
+	var device := slot
+	while device in pads:
+		device += 1
+	return device
 
 
 func reassign() -> void:

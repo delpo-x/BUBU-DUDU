@@ -186,8 +186,38 @@ func load_bindings() -> void:
 		return
 	for a in all_actions():
 		if cfg.has_section_key("keys", String(a)):
-			_replace_key(a, int(cfg.get_value("keys", String(a))) as Key)
+			var k: Variant = cfg.get_value("keys", String(a))
+			if (k is int or k is float) and int(k) > 0:
+				_replace_key(a, int(k) as Key)
 		if _is_pad_button_action(a) and cfg.has_section_key("pad", String(a)):
-			_replace_pad(a, int(cfg.get_value("pad", String(a))) as JoyButton)
+			var b: Variant = cfg.get_value("pad", String(a))
+			if (b is int or b is float) and int(b) >= 0 and int(b) < JOY_BUTTON_MAX:
+				_replace_pad(a, int(b) as JoyButton)
+	# A damaged file (a key used twice, an action left without one) would make the game
+	# unplayable: go back to the default controls instead.
+	if not _is_complete():
+		push_warning("Bindings: damaged controls file, default controls restored")
+		reset_defaults()
+		return
 	PadAssigner.reassign()
 	changed.emit()
+
+
+## Every action has a key no other action uses; each player's buttons are all different.
+func _is_complete() -> bool:
+	var keys := {}
+	var pads := {}
+	for a in all_actions():
+		var k := key_of(a)
+		if k == null or keys.has(_code(k)):
+			return false
+		keys[_code(k)] = true
+		if _is_pad_button_action(a):
+			var b := pad_of(a)
+			if b == null:
+				return false
+			var id := "%s%d" % [String(a).substr(0, 3), b.button_index]
+			if pads.has(id):
+				return false
+			pads[id] = true
+	return true

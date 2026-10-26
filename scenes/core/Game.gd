@@ -181,11 +181,17 @@ func _resume_snapshot(snap: Dictionary) -> void:
 	var st: Variant = snap.get("state", {})
 	if st is Dictionary:
 		room.restore_state(st)
-	var ps: Array = snap.get("players", [])
-	if ps.size() == 2:
-		bubu.teleport_to(Vector2(float(ps[0][0]), float(ps[0][1])))
-		dudu.teleport_to(Vector2(float(ps[1][0]), float(ps[1][1])))
-	room_time = float(snap.get("room_time", 0.0))
+	# Malformed or out-of-room positions (damaged save) keep the spawn points.
+	var ps: Variant = snap.get("players", [])
+	if ps is Array and (ps as Array).size() == 2:
+		var a: Variant = Room.to_vec(ps[0])
+		var b: Variant = Room.to_vec(ps[1])
+		var area := room.bounds.grow(64.0)
+		if a is Vector2 and b is Vector2 and area.has_point(a) and area.has_point(b):
+			bubu.teleport_to(a)
+			dudu.teleport_to(b)
+	var t: Variant = snap.get("room_time", 0.0)
+	room_time = float(t) if (t is float or t is int) else 0.0
 
 
 func _play_once(flag: String, id: StringName) -> void:

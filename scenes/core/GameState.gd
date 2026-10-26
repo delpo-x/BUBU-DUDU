@@ -259,9 +259,10 @@ func load_progress() -> bool:
 	for path in [save_path, save_path + ".bak"]:
 		if not FileAccess.file_exists(path):
 			continue
-		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
-		if parsed is Dictionary:
-			apply(_migrate(parsed))
+		# JSON instance instead of JSON.parse_string: a damaged save is expected, not an engine error.
+		var json := JSON.new()
+		if json.parse(FileAccess.get_file_as_string(path)) == OK and json.data is Dictionary:
+			apply(_migrate(json.data))
 			return true
 		push_warning("GameState: unreadable save at " + path)
 	return false
