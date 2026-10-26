@@ -19,8 +19,9 @@ var _art: Control
 var _title: Label
 
 
-const LEFT_CARD := preload("res://art/illustrations/03_saluto.svg")
-const RIGHT_CARD := preload("res://art/illustrations/02_cuoricini.svg")
+## Stickers shown as tilted cards on either side of the menu.
+const LEFT_CARD := "dudu_rope"
+const RIGHT_CARD := "both_hug"
 const CARD_SIZE := 260.0
 
 
@@ -255,10 +256,8 @@ func _draw_art() -> void:
 		_art.draw_circle(Vector2(x, y), 26.0 + i % 3 * 8.0, Color(1, 1, 1, 0.35))
 	var ground := size.y - 70.0
 	_art.draw_rect(Rect2(Vector2(0, ground), Vector2(size.x, 70)), Color(0.55, 0.72, 0.5))
-	# Two illustrations from the vector pack as tilted cards on either side of the menu.
-	var rope := Stickers.frame("dudu_rope", _t)
-	_draw_card(rope if rope != null else LEFT_CARD, Vector2(size.x * 0.17, size.y * 0.62), CARD_SIZE, -0.07, 0.0)
-	_draw_card(RIGHT_CARD, Vector2(size.x * 0.83, size.y * 0.6), CARD_SIZE, 0.06, 1.3)
+	_draw_card(Stickers.frame(LEFT_CARD, _t), Vector2(size.x * 0.17, size.y * 0.62), CARD_SIZE, -0.07, 0.0)
+	_draw_card(Stickers.frame(RIGHT_CARD, _t + 0.4), Vector2(size.x * 0.83, size.y * 0.6), CARD_SIZE, 0.06, 1.3)
 
 
 func _draw_card(tex: Texture2D, center: Vector2, side: float, angle: float, phase: float) -> void:

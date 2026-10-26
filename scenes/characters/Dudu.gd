@@ -14,4 +14,3 @@ func _init() -> void:
 	accent_color = Color(0.3, 0.18, 0.1)
 	lower_color = Color(0.45, 0.29, 0.17)
 	marker_color = Color(1.0, 0.8, 0.4)
-	art_dir = "res://art/characters/dudu"

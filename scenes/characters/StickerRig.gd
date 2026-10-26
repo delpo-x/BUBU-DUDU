@@ -1,8 +1,7 @@
 class_name StickerRig
 extends Node2D
-## The character drawn with its animated stickers (art/stickers/) instead of the vector
-## cut-out: one sticker per pose, picked from the player's state every frame, with the
-## same squash & stretch, tilt and "nope" shake as CharacterRig.
+## The character drawn with its animated stickers (art/stickers/): one sticker per pose,
+## picked from the player's state every frame, with squash & stretch, tilt and a "nope" shake.
 ##
 ## Poses without a sticker of their own borrow one and move it in code: climbing wiggles
 ## the jump, carrying and riding hold the idle, the partner call waves when there is a

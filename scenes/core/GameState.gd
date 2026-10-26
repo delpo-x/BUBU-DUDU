@@ -49,8 +49,6 @@ var fullscreen: bool = false
 var text_speed: float = 45.0
 ## Contextual character lines on/off (options menu).
 var barks_enabled: bool = true
-## Characters drawn with their animated stickers instead of the vector cut-out (options).
-var sticker_characters: bool = true
 ## Babbling voices for Bubu and Dudu (options menu).
 var voices_enabled: bool = true
 ## Accessibility: stops decorative looping motion (menu drift, bobbing, pulsing prompts)
@@ -319,7 +317,6 @@ func load_settings() -> void:
 		text_speed = float(cfg.get_value("game", "text_speed", text_speed))
 		barks_enabled = bool(cfg.get_value("game", "barks", barks_enabled))
 		voices_enabled = bool(cfg.get_value("audio", "voices", voices_enabled))
-		sticker_characters = bool(cfg.get_value("video", "sticker_characters", sticker_characters))
 		reduce_motion = bool(cfg.get_value("access", "reduce_motion", reduce_motion))
 		large_text = bool(cfg.get_value("access", "large_text", large_text))
 	apply_settings()
@@ -334,7 +331,6 @@ func save_settings() -> void:
 	cfg.set_value("game", "text_speed", text_speed)
 	cfg.set_value("game", "barks", barks_enabled)
 	cfg.set_value("audio", "voices", voices_enabled)
-	cfg.set_value("video", "sticker_characters", sticker_characters)
 	cfg.set_value("access", "reduce_motion", reduce_motion)
 	cfg.set_value("access", "large_text", large_text)
 	cfg.save(SETTINGS_PATH)

@@ -32,7 +32,6 @@ func _ready() -> void:
 	switches.add_theme_constant_override(&"h_separation", 12)
 	switches.add_theme_constant_override(&"v_separation", 8)
 	v.add_child(switches)
-	focusables.append(_toggle(switches, "Personaggi animati", GameState.sticker_characters, func(on: bool) -> void: GameState.sticker_characters = on))
 	focusables.append(_toggle(switches, "Voci dei personaggi", GameState.voices_enabled, func(on: bool) -> void: GameState.voices_enabled = on))
 	focusables.append(_toggle(switches, "Battute dei personaggi", GameState.barks_enabled, func(on: bool) -> void: GameState.barks_enabled = on))
 	focusables.append(_toggle(switches, "Testo grande", GameState.large_text, func(on: bool) -> void: GameState.large_text = on))

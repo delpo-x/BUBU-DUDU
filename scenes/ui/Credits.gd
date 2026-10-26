@@ -5,12 +5,12 @@ extends Control
 
 const MENU_SCENE := "res://scenes/ui/MainMenu.tscn"
 const CREDITS_PATH := "res://data/credits.json"
-## Illustrations from the vector pack, spread evenly through the scrolling credits.
+## Stickers spread evenly through the scrolling credits.
 const PICTURES: Array[String] = [
-	"res://art/illustrations/01_abbraccio.svg",
-	"res://art/illustrations/05_regalo.svg",
-	"res://art/illustrations/04_sotto_coperta.svg",
-	"res://art/illustrations/06_bacio.svg",
+	"sticker:both_hug",
+	"sticker:both_cheers",
+	"sticker:bubu_bed",
+	"sticker:both_piggy",
 	"sticker:bubu_helmet",
 	"sticker:bubu_back",
 ]

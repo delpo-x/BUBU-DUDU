@@ -89,11 +89,6 @@ const SOLID_MASK := 1 | 4
 @export_group("Screen leash")
 @export var leash_enabled: bool = true
 
-@export_group("Art")
-## Folder with the character's vector parts (see tools/gen_sprites.py). Empty or
-## missing = the geometric placeholder below.
-@export_dir var art_dir: String = ""
-
 @export_group("Placeholder art")
 @export var body_color: Color = Color.WHITE
 @export var accent_color: Color = Color.BLACK
@@ -128,7 +123,7 @@ var _balloon_time: float = 0.0
 var _balloon_wait: float = 0.0
 
 var _body_size: Vector2 = Vector2(44, 58)
-## CharacterRig (vector cut-out) or StickerRig (animated stickers), see _build_rig().
+## StickerRig (animated stickers), see _build_rig().
 var _rig: Node2D = null
 var _fx_scale: Vector2 = Vector2.ONE
 var _shake_time: float = 0.0
@@ -155,9 +150,6 @@ func _ready() -> void:
 		_body_size = rect.size
 	_blink_time = randf_range(1.5, 4.0)
 	_build_rig()
-	GameState.settings_changed.connect(func() -> void:
-		if (_rig is StickerRig) != GameState.sticker_characters:
-			_build_rig())
 	queue_redraw()
 
 
@@ -566,28 +558,18 @@ func get_weight() -> int:
 	return w
 
 
-## Stickers when the option is on and the character has them, else the vector cut-out,
-## else (no art at all) the placeholder drawn in _draw().
+## The character's animated stickers, or (stickers missing) the placeholder drawn in _draw().
 func _build_rig() -> void:
 	if _rig != null:
 		_rig.queue_free()
 		_rig = null
-	if GameState.sticker_characters:
-		var sticker := StickerRig.new()
-		sticker.name = &"Rig"
-		if sticker.setup(_voice_name()):
-			add_child(sticker)
-			_rig = sticker
-			return
+	var sticker := StickerRig.new()
+	sticker.name = &"Rig"
+	if sticker.setup(_voice_name()):
+		add_child(sticker)
+		_rig = sticker
+	else:
 		sticker.free()
-	if art_dir != "":
-		var rig := CharacterRig.new()
-		rig.name = &"Rig"
-		add_child(rig)
-		if rig.setup(art_dir):
-			_rig = rig
-		else:
-			rig.queue_free()
 	queue_redraw()
 
 

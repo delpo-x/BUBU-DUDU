@@ -1,5 +1,5 @@
 extends "res://tests/TestBase.gd"
-## Records short looping clips of the two characters (CharacterRig) for animated GIFs.
+## Records short looping clips of the two characters (StickerRig) for animated GIFs.
 ## Not part of the default suite; needs a real window, not --headless:
 ##   godot --fixed-fps 60 --path . --script res://tests/run.gd -- gifs [clip names]
 ##   python -I tools/make_gif.py
