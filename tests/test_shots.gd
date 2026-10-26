@@ -80,7 +80,7 @@ func run() -> void:
 			await _secs(0.2)
 		# Bubu falls (heart balloon), Dudu is called over (scooter).
 		bg.bubu.call(&"_enter_balloon", true)
-		bg.dudu.travel_to_partner()
+		bg.dudu.call(&"_enter_balloon", true)
 		await _secs(0.6)
 		_save("balloon")
 		bg.queue_free()
