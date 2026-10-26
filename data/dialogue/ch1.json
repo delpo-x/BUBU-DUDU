@@ -27,7 +27,7 @@
  ],
  "c1_r02_talk": [
   {"s": "dudu", "t": "Ho saltato in tempo! Più o meno."},
-  {"s": "bubu", "t": "Il gioco perdona un po' di ritardo. Come me quando ti prepari per uscire."},
+  {"s": "bubu", "m": "smug", "t": "Il gioco perdona un po' di ritardo. Come me quando ti prepari per uscire."},
   {"s": "dudu", "m": "handsome", "t": "Io sono sempre puntuale. Rispetto al mio orario interno."}
  ],
  "c1_r03_in": [
@@ -90,7 +90,7 @@
  ],
  "c1_cozy_c": [
   {"s": "dudu", "t": "Il primo abbraccio. Te lo ricordi?"},
-  {"s": "bubu", "t": "Doveva essere un abbraccio di saluto."},
+  {"s": "bubu", "m": "teary", "t": "Doveva essere un abbraccio di saluto."},
   {"s": "dudu", "t": "E invece è durato un po' troppo."},
   {"s": "bubu", "m": "cute", "t": "Non troppo. Il giusto. Me ne sono accorto dopo."}
  ]

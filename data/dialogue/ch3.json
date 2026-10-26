@@ -2,7 +2,7 @@
  "c3_intro": [
   {"s": "narr", "t": "Sopra il borgo, dove le nuvole si possono calpestare."},
   {"s": "dudu", "t": "Siamo davvero sulle nuvole?"},
-  {"s": "bubu", "m": "worried", "t": "Sembra di sì. Non guardare giù."},
+  {"s": "bubu", "m": "nope", "t": "Sembra di sì. Non guardare giù."},
   {"s": "dudu", "t": "Ho guardato giù."},
   {"s": "bubu", "t": "E com'è?"},
   {"s": "dudu", "t": "Bellissimo. Ma tienimi la zampa."}
@@ -16,7 +16,7 @@
  ],
  "c3_r01_in": [
   {"s": "dudu", "m": "sus", "t": "Quei funghi sono... molleggiati?"},
-  {"s": "bubu", "t": "Funghi trampolino. Non chiedermi come funzionano."},
+  {"s": "bubu", "m": "smug", "t": "Funghi trampolino. Non chiedermi come funzionano."},
   {"s": "dudu", "t": "Non te lo chiedo. Ci salto e basta."}
  ],
  "c3_sign_bounce": [
@@ -56,7 +56,7 @@
   {"s": "dudu", "t": "Sempre."},
   {"s": "bubu", "m": "worried", "t": "Certe sere ho paura di non essere abbastanza. Per te, per noi."},
   {"s": "dudu", "t": "Non devo rispondere subito, vero?"},
-  {"s": "bubu", "t": "No."},
+  {"s": "bubu", "m": "teary", "t": "No."},
   {"s": "dudu", "t": "Allora resto qui. E ascolto. Tutto quello che vuoi dire."}
  ],
  "c3_r08_talk": [

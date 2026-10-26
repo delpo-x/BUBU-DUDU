@@ -94,18 +94,20 @@ def dilate(mask, r):
     return out
 
 
-def strip_frame(rgb, dark):
-    """Paints white the straight lines (any colour but white) some stickers draw along the image border."""
-    h, w = dark.shape
+def strip_frame(rgb, inked):
+    """Paints white the straight lines (any colour but white) some stickers draw along the
+    image border. The character's dark outline crossing that line is left alone."""
+    h, w = inked.shape
+    soft = rgb.mean(axis=2) >= 110
     for d in range(FRAME_SCAN):
-        if dark[d].mean() > 0.6:
-            rgb[d] = 255
-        if dark[h - 1 - d].mean() > 0.6:
-            rgb[h - 1 - d] = 255
-        if dark[:, d].mean() > 0.6:
-            rgb[:, d] = 255
-        if dark[:, w - 1 - d].mean() > 0.6:
-            rgb[:, w - 1 - d] = 255
+        # Each line next to the one a few pixels further in: a frame line is thin, a
+        # blanket or a floor running along the edge is not.
+        k = d + 4
+        for sel, inner in (((d, slice(None)), (k, slice(None))), ((h - 1 - d, slice(None)), (h - 1 - k, slice(None))),
+                           ((slice(None), d), (slice(None), k)), ((slice(None), w - 1 - d), (slice(None), w - 1 - k))):
+            if inked[sel].mean() > 0.6 and inked[inner].mean() < 0.45:
+                line = rgb[sel]
+                line[soft[sel]] = 255
 
 
 def big_parts(mask, min_px):
@@ -184,12 +186,20 @@ def cut(frame, white_is_bg=False):
 
 def frames_of(path):
     im = Image.open(path)
+    # Stickers drawn on a band inside a transparent canvas: crop to the band so where it
+    # cuts the character counts as the image border (see cropped_body).
+    box = None
+    for i in range(getattr(im, "n_frames", 1)):
+        im.seek(i)
+        b = im.convert("RGBA").getchannel("A").point(lambda v: 255 if v > 200 else 0).getbbox()
+        if b:
+            box = b if box is None else (min(box[0], b[0]), min(box[1], b[1]), max(box[2], b[2]), max(box[3], b[3]))
     for i in range(getattr(im, "n_frames", 1)):
         im.seek(i)
         # Some stickers pad with transparent pixels: flatten on white like the rest.
         flat = Image.new("RGBA", im.size, (255, 255, 255, 255))
         flat.alpha_composite(im.convert("RGBA"))
-        yield flat
+        yield flat.crop(box) if box else flat
 
 
 def build(path, fps):

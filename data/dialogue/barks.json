@@ -16,7 +16,7 @@
   [{"s": "dudu", "t": "Ops."}, {"s": "bubu", "t": "Il palloncino ti dona."}],
   [{"s": "bubu", "t": "Bentornato! Com'è il panorama da lassù?"}, {"s": "dudu", "t": "Bello, ma preferisco qui vicino a te."}],
   [{"s": "dudu", "t": "Il bordo era più vicino di quanto sembrava."}, {"s": "bubu", "t": "Succede a tutti. Riprova con calma."}],
-  [{"s": "bubu", "t": "Tranquillo: qui non si perde mai."}, {"s": "dudu", "t": "Allora posso cadere quanto voglio?"}, {"s": "bubu", "t": "...Non esageriamo."}],
+  [{"s": "bubu", "t": "Tranquillo: qui non si perde mai."}, {"s": "dudu", "t": "Allora posso cadere quanto voglio?"}, {"s": "bubu", "m": "nope", "t": "...Non esageriamo."}],
   [{"s": "dudu", "t": "Volevo vedere cosa c'era sotto."}, {"s": "bubu", "t": "E cosa c'era?"}, {"s": "dudu", "t": "Un palloncino a forma di cuore."}],
   [{"s": "bubu", "t": "Stai migliorando. Prima cadevi più in fretta."}],
   [{"s": "dudu", "t": "Scusa, scusa! Ci riprovo."}, {"s": "bubu", "t": "Non chiedere scusa. Siamo qui per questo."}],

@@ -15,7 +15,7 @@
  ],
  "c2_r01_in": [
   {"s": "dudu", "m": "sus", "t": "Una cassa. Che ci facciamo con una cassa?"},
-  {"s": "bubu", "t": "Quello che si fa con tutte le casse: ci si sale sopra."},
+  {"s": "bubu", "m": "smug", "t": "Quello che si fa con tutte le casse: ci si sale sopra."},
   {"s": "dudu", "t": "Pensavo ci si mettessero dentro le cose."},
   {"s": "bubu", "m": "boss", "t": "Quello è nella vita vera. Qui sono gradini."}
  ],
