@@ -128,7 +128,8 @@ var _balloon_time: float = 0.0
 var _balloon_wait: float = 0.0
 
 var _body_size: Vector2 = Vector2(44, 58)
-var _rig: CharacterRig = null
+## CharacterRig (vector cut-out) or StickerRig (animated stickers), see _build_rig().
+var _rig: Node2D = null
 var _fx_scale: Vector2 = Vector2.ONE
 var _shake_time: float = 0.0
 var _blink_time: float = 2.0
@@ -153,14 +154,10 @@ func _ready() -> void:
 	if rect != null:
 		_body_size = rect.size
 	_blink_time = randf_range(1.5, 4.0)
-	if art_dir != "":
-		var rig := CharacterRig.new()
-		rig.name = &"Rig"
-		add_child(rig)
-		if rig.setup(art_dir):
-			_rig = rig
-		else:
-			rig.queue_free()
+	_build_rig()
+	GameState.settings_changed.connect(func() -> void:
+		if (_rig is StickerRig) != GameState.sticker_characters:
+			_build_rig())
 	queue_redraw()
 
 
@@ -567,6 +564,31 @@ func get_weight() -> int:
 	if carried_item != null and is_instance_valid(carried_item):
 		w += int(carried_item.get(&"weight"))
 	return w
+
+
+## Stickers when the option is on and the character has them, else the vector cut-out,
+## else (no art at all) the placeholder drawn in _draw().
+func _build_rig() -> void:
+	if _rig != null:
+		_rig.queue_free()
+		_rig = null
+	if GameState.sticker_characters:
+		var sticker := StickerRig.new()
+		sticker.name = &"Rig"
+		if sticker.setup(_voice_name()):
+			add_child(sticker)
+			_rig = sticker
+			return
+		sticker.free()
+	if art_dir != "":
+		var rig := CharacterRig.new()
+		rig.name = &"Rig"
+		add_child(rig)
+		if rig.setup(art_dir):
+			_rig = rig
+		else:
+			rig.queue_free()
+	queue_redraw()
 
 
 ## "bubu" or "dudu", for voices and stickers.

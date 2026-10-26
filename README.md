@@ -85,6 +85,15 @@ e.g. many falls -> Bubu grudge / Dudu sus, resuming -> Bubu bed, fast room -> Du
 pause menu shows him in bed and the credits end with the helmet and the bow. `check_content.py` checks
 that every mood has its sticker.
 
+## Sticker characters
+
+With "Personaggi animati" on (default), `scenes/characters/StickerRig.gd` draws Bubu and Dudu with
+their stickers instead of the vector cut-out: idle, walk, jump (rising and falling hold one frame each of
+the trampoline somersault) and Bubu's wave for the partner call. Poses with no sticker borrow another
+(`POSES` and `FALLBACK`), `LOOKS` says which way a sticker faces so it flips with the player, `FIT`
+scales stickers that leave room around the character. Without the idle and walk stickers a character
+keeps the vector rig.
+
 ## Voices
 
 `scenes/core/Voices.gd` (autoload) babbles for Bubu and Dudu, Animal Crossing style, all synthesized:
