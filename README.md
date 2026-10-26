@@ -80,6 +80,25 @@ This rewrites `scenes/rooms/ch*/`, `tests/solutions/` and `data/chapters.json`. 
 dialogue and memory id exists and prints the duration estimate. `python -I tools/gen_rooms.py dev`
 writes one whitebox room per puzzle beat.
 
+## Contextual lines
+
+`data/dialogue/barks.json` holds the short exchanges the characters say during play (falls, calls,
+piggyback rides, memories, opened doors, long stays in one room, idle pads, resuming a save). Each key
+is a pool and each pool is a list of exchanges, written as `[{"s": speaker, "t": text}, ...]` with the
+speakers `bubu`, `dudu`, `both` or `narr`. `BarkDirector` plays every entry of a pool before repeating
+one, so adding entries is safe and needs no code. Keep each line short and in the existing tone.
+
+## Content checks
+
+```bash
+python -I tools/check_content.py
+```
+
+Needs only Python. It checks the shape of the dialogue, contextual lines, memories and credits (known
+speakers, no empty or duplicate text, lines that fit the dialogue box) and that the UI text colors in
+`UiTheme.gd` keep at least 4.5:1 contrast on the panel. Run it after editing anything in `data/`.
+`tools/gen_rooms.py` separately checks that every dialogue and memory id used by a room exists.
+
 ## Tests
 
 ```bash
