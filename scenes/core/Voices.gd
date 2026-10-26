@@ -29,7 +29,7 @@ const MOODS := {
 	"cute": [2.0, false], "smug": [1.0, false], "handsome": [1.0, false], "pig": [2.0, false],
 	"snack": [1.0, false], "dizzy": [-1.0, true],
 	"cry": [-2.0, true], "teary": [-1.0, true], "worried": [-1.0, true], "sulk": [-3.0, false],
-	"grudge": [-2.0, false], "sus": [-1.0, false], "think": [-1.0, false], "bed": [-2.0, false],
+	"grudge": [-2.0, false], "mad": [-2.0, false], "wave": [2.0, false], "piggy": [2.0, false], "sus": [-1.0, false], "think": [-1.0, false], "bed": [-2.0, false],
 }
 ## Mood -> syllables of its reaction: [vowel, semitones, seconds].
 const EMOTES := {
@@ -44,6 +44,8 @@ const EMOTES := {
 	"hey": [["e", 4.0, 0.06], ["i", 7.0, 0.1]],
 	"dizzy": [["u", 3.0, 0.08], ["a", -1.0, 0.08], ["u", -5.0, 0.12]],
 	"think": [["u", 0.0, 0.18]],
+	"mad": [["a", -3.0, 0.05], ["a", -3.0, 0.05], ["a", -1.0, 0.1]],
+	"wave": [["e", 4.0, 0.06], ["i", 7.0, 0.1]],
 	"smug": [["e", 0.0, 0.06], ["e", 5.0, 0.08]],
 }
 ## Action -> syllables, like EMOTES.

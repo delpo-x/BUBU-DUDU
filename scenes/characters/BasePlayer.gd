@@ -737,7 +737,11 @@ func _enter_balloon(fell: bool) -> void:
 	if _balloon != null and is_instance_valid(_balloon):
 		_balloon.queue_free()
 	_balloon = HeartBalloon.new()
-	_balloon.setup(body_color, lower_color, marker_color, _voice_name() + "_balloon")
+	# A fall rides the heart balloon; a call flies over (broom, scooter) when there's a sticker.
+	var ride := _voice_name() + ("_balloon" if fell else "_fly")
+	if not fell and Stickers.frames(ride) == null:
+		ride = _voice_name() + "_balloon"
+	_balloon.setup(body_color, lower_color, marker_color, ride)
 	get_parent().add_child(_balloon)
 	_balloon.global_position = global_position
 	_balloon.reset_physics_interpolation()

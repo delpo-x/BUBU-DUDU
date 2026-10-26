@@ -4,7 +4,7 @@
   [{"s": "bubu", "m": "dizzy", "t": "Non era previsto. Ma l'atterraggio era elegante."}],
   [{"s": "dudu", "t": "Tutto bene? Ti ho visto volare via."}, {"s": "bubu", "t": "Solo l'orgoglio, un po' ammaccato."}],
   [{"s": "dudu", "t": "Tranquillo, non lo dico a nessuno."}, {"s": "bubu", "t": "Lo stai dicendo adesso."}],
-  [{"s": "bubu", "t": "Ok. Quello non conta."}, {"s": "dudu", "t": "Conta un pochino."}],
+  [{"s": "bubu", "m": "mad", "t": "Ok. Quello non conta."}, {"s": "dudu", "t": "Conta un pochino."}],
   [{"s": "dudu", "t": "Bentornato! Ti ho tenuto il posto."}],
   [{"s": "bubu", "m": "dizzy", "t": "Il pavimento ha cambiato posto. Giuro."}],
   [{"s": "dudu", "t": "Anche i campioni cadono, no?"}, {"s": "bubu", "t": "Soprattutto i campioni. Per far sentire meglio gli altri."}],

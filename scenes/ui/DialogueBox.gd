@@ -312,6 +312,8 @@ func _draw_head(who: String, pos: Vector2, sz: Vector2, face: String) -> void:
 	var anim: Texture2D = null
 	if _mood != "":
 		anim = Stickers.frame(who + "_" + _mood, _t)
+		if anim == null:
+			anim = Stickers.frame("both_" + _mood, _t)
 	elif face == "happy":
 		anim = Stickers.frame(who + "_laugh", _t)
 	if anim != null:

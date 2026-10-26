@@ -78,8 +78,9 @@ func run() -> void:
 		while bg.dialogue.is_busy():
 			bg.dialogue.advance()
 			await _secs(0.2)
-		bg.bubu.call(&"_enter_balloon", false)
-		bg.dudu.call(&"_enter_balloon", false)
+		# Bubu falls (heart balloon), Dudu is called over (scooter).
+		bg.bubu.call(&"_enter_balloon", true)
+		bg.dudu.travel_to_partner()
 		await _secs(0.6)
 		_save("balloon")
 		bg.queue_free()

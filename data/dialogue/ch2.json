@@ -4,7 +4,7 @@
   {"s": "dudu", "t": "Sembra il quartiere della nostra prima casa."},
   {"s": "bubu", "m": "sulk", "t": "Con meno scatoloni. E meno discussioni su dove mettere il divano."},
   {"s": "dudu", "m": "handsome", "t": "Il divano stava benissimo dove dicevo io."},
-  {"s": "bubu", "m": "grudge", "t": "Il divano non entrava dalla porta, dove dicevi tu."}
+  {"s": "bubu", "m": "mad", "t": "Il divano non entrava dalla porta, dove dicevi tu."}
  ],
  "c2_outro": [
   {"s": "bubu", "t": "Il borgo è sistemato. Pagine recuperate, casse impilate."},

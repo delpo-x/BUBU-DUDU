@@ -5,6 +5,8 @@ extends Node2D
 ## With a sticker (art/stickers/<who>_balloon) the character riding its heart is drawn instead.
 
 const STICKER_H := 104.0
+## Stickers drawn travelling left (-1) or right (1); they flip to face the way they fly.
+const FACING := {"bubu_fly": 1, "dudu_fly": -1}
 
 var _body: Color = Color.WHITE
 var _lower: Color = Color.BLACK
@@ -12,6 +14,8 @@ var _heart: Color = Color(1.0, 0.45, 0.5)
 var _t: float = 0.0
 var _popping: float = -1.0
 var _sticker: String = ""
+var _last_x: float = 0.0
+var _dir: int = 0
 
 
 func setup(body: Color, lower: Color, heart: Color, sticker: String = "") -> void:
@@ -24,6 +28,10 @@ func setup(body: Color, lower: Color, heart: Color, sticker: String = "") -> voi
 
 func _process(delta: float) -> void:
 	_t += delta
+	var dx := global_position.x - _last_x
+	if absf(dx) > 0.5:
+		_dir = 1 if dx > 0.0 else -1
+	_last_x = global_position.x
 	if _popping >= 0.0:
 		_popping += delta
 		if _popping > 0.25:
@@ -46,7 +54,11 @@ func _draw() -> void:
 		return
 	var tex := Stickers.frame(_sticker, _t) if _sticker != "" else null
 	if tex != null:
+		var flip := _dir != 0 and FACING.has(_sticker) and _dir != int(FACING[_sticker])
+		if flip:
+			draw_set_transform(Vector2.ZERO, 0.0, Vector2(-1, 1))
 		draw_texture_rect(tex, Stickers.fit(tex, Vector2(0, -44 + bob), Vector2(STICKER_H, STICKER_H)), false)
+		draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 		return
 	var heart_pos := Vector2(0, -56 + bob)
 	draw_line(heart_pos + Vector2(0, 14), Vector2(0, -14), Color(0.3, 0.3, 0.35), 1.5)
