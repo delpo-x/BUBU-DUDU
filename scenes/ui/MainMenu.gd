@@ -16,6 +16,7 @@ var _new_button: Button
 var _confirm_new: bool = false
 var _t: float = 0.0
 var _art: Control
+var _title: Label
 
 
 const LEFT_CARD := preload("res://art/illustrations/03_saluto.svg")
@@ -48,6 +49,7 @@ func _ready() -> void:
 	title.add_theme_color_override(&"font_outline_color", UiTheme.ACCENT_INK)
 	title.add_theme_constant_override(&"outline_size", 14)
 	add_child(title)
+	_title = title
 
 	_main = PanelContainer.new()
 	center.add_child(_main)
@@ -92,11 +94,15 @@ func _ready() -> void:
 
 	UiTheme.chain_focus(_main_buttons)
 	_main_buttons[0].grab_focus()
+	UiTheme.pop_in(_main)
 
 
 func _process(delta: float) -> void:
 	_t += delta
 	_art.queue_redraw()
+	# Gentle sway of the title, like the cards beside the menu.
+	_title.pivot_offset = _title.size * 0.5
+	_title.rotation = sin(_t * 0.9) * 0.012 * UiTheme.motion()
 
 
 func _show_main() -> void:
@@ -106,6 +112,7 @@ func _show_main() -> void:
 	_options.visible = false
 	_main.visible = true
 	_main_buttons[0].grab_focus()
+	UiTheme.pop_in(_main)
 
 
 func _continue() -> void:
@@ -150,16 +157,19 @@ func _open_chapters() -> void:
 	_main.visible = false
 	_chapters.visible = true
 	buttons[0].grab_focus()
+	UiTheme.pop_in(_chapters)
 
 
 func _open_album() -> void:
 	_main.visible = false
 	_album.open()
+	UiTheme.pop_in(_album)
 
 
 func _open_options() -> void:
 	_main.visible = false
 	_options.open()
+	UiTheme.pop_in(_options)
 
 
 func _open_controls() -> void:
@@ -173,6 +183,7 @@ func _open_controls() -> void:
 	_main.visible = false
 	_controls.visible = true
 	(_controls.get_meta(&"back") as Button).grab_focus()
+	UiTheme.pop_in(_controls)
 
 
 func _build_controls() -> PanelContainer:

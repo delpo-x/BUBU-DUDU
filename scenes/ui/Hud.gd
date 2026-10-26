@@ -30,7 +30,7 @@ func _ready() -> void:
 	theme = UiTheme.get_theme()
 
 	_toast = PanelContainer.new()
-	_toast.add_theme_stylebox_override(&"panel", UiTheme.box(Color(UiTheme.INK, 0.85), 14, 0, Color.TRANSPARENT, 18))
+	_toast.add_theme_stylebox_override(&"panel", UiTheme.lift(UiTheme.box(Color(UiTheme.INK, 0.85), 14, 0, Color.TRANSPARENT, 18)))
 	_toast.anchor_left = 0.5
 	_toast.anchor_right = 0.5
 	_toast.offset_top = 22
@@ -41,7 +41,7 @@ func _ready() -> void:
 	add_child(_toast)
 
 	_memory = PanelContainer.new()
-	_memory.add_theme_stylebox_override(&"panel", UiTheme.box(UiTheme.PANEL, 18, 4, UiTheme.ACCENT, 22))
+	_memory.add_theme_stylebox_override(&"panel", UiTheme.lift(UiTheme.box(UiTheme.PANEL, 18, 4, UiTheme.ACCENT, 22)))
 	_memory.anchor_left = 1.0
 	_memory.anchor_right = 1.0
 	_memory.offset_left = -440
@@ -127,6 +127,10 @@ func _process(delta: float) -> void:
 	_toast.modulate.a = move_toward(_toast.modulate.a, 1.0 if _toast_time > 0.0 else 0.0, delta * 4.0)
 	_memory_time = maxf(_memory_time - delta, 0.0)
 	_memory.modulate.a = move_toward(_memory.modulate.a, 1.0 if _memory_time > 0.0 else 0.0, delta * 3.0)
+	# Slide in from the right while fading in (size stays the same).
+	var slide := (1.0 - _memory.modulate.a) * 60.0 * UiTheme.motion()
+	_memory.offset_left = -440.0 + slide
+	_memory.offset_right = -24.0 + slide
 
 
 ## Fades the screen to black (amount 1) or back to the game (amount 0).
