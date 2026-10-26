@@ -51,6 +51,12 @@ edge. The pack says it is fan-style art, not official: check the rights before a
 The same script writes the dialogue portraits, the window icon and the UI icons in `art/ui/` (heart,
 next arrow, toggles, slider knob), so the UI uses no font glyphs or emoji that a web font might lack.
 
+## App icon
+
+`art/app_icon.png` (window, web favicon) and `art/app_icon.ico` (Windows exe, set by the export with
+"modify resources" on) are the Bubu & Dudu logo. `tools/gen_sprites.py` still writes `art/icon.svg`,
+which the project no longer uses as its icon.
+
 ## UI
 
 `scenes/ui/UiTheme.gd` holds the color tokens (each text color is checked for at least 4.5:1 contrast
