@@ -32,8 +32,17 @@ const CHANCES := {
 	"ambient": 0.2, "fast": 0.5, "resume": 1.0, "falls_many": 1.0,
 	"slow": 1.0, "stuck": 1.0, "idle": 1.0,
 }
-## Pool -> sticker mood for Bubu's lines in it (see DialogueBox "m"), unless a line has one.
-const MOODS := {"falls_many": "grudge", "call_bubu": "phone", "resume": "bed"}
+## Pool -> speaker -> sticker mood for their lines in it (see DialogueBox "m"), unless a
+## line has its own.
+const MOODS := {
+	"falls_many": {"bubu": "grudge", "dudu": "sus"},
+	"call_bubu": {"bubu": "phone"},
+	"call_dudu": {"bubu": "hey"},
+	"resume": {"bubu": "bed"},
+	"slow": {"bubu": "worried", "dudu": "sus"},
+	"stuck": {"bubu": "worried"},
+	"fast": {"dudu": "handsome"},
+}
 ## Pools that wait for calm for as long as the room lasts and ignore the room cap.
 const PERSISTENT := ["slow", "stuck", "idle"]
 const VERBS: Array[String] = ["left", "right", "up", "down", "jump", "interact", "assist"]
@@ -246,8 +255,9 @@ func _play(pool: String) -> void:
 		return
 	if MOODS.has(pool):
 		lines = lines.map(func(ln: Variant) -> Variant:
-			if ln is Dictionary and ln.get("s") == "bubu" and not (ln as Dictionary).has("m"):
-				return (ln as Dictionary).merged({"m": MOODS[pool]})
+			var moods: Dictionary = MOODS[pool]
+			if ln is Dictionary and moods.has(ln.get("s")) and not (ln as Dictionary).has("m"):
+				return (ln as Dictionary).merged({"m": moods[ln.get("s")]})
 			return ln)
 	if not PERSISTENT.has(_event_of(pool)):
 		_room_lines += 1

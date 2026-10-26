@@ -3,8 +3,8 @@
   {"s": "narr", "t": "La notte. Le lanterne del borgo, lontane, sembrano stelle cadute."},
   {"s": "bubu", "t": "Le ultime pagine sono qui, da qualche parte."},
   {"s": "dudu", "t": "È buio. Ma ti vedo benissimo."},
-  {"s": "bubu", "t": "Sono bianco e nero. Sono fatto apposta per essere visto."},
-  {"s": "dudu", "t": "Allora stammi vicino. Stavolta faccio strada io."}
+  {"s": "bubu", "m": "boss", "t": "Sono bianco e nero. Sono fatto apposta per essere visto."},
+  {"s": "dudu", "m": "handsome", "t": "Allora stammi vicino. Stavolta faccio strada io."}
  ],
  "c4_outro": [
   {"s": "narr", "t": "Tutte le pagine sono tornate. Tranne una, che non è mai volata via."},
@@ -20,11 +20,11 @@
  "c4_r01_in": [
   {"s": "dudu", "t": "Mettiamo insieme tutto quello che abbiamo imparato."},
   {"s": "bubu", "t": "Hai detto «abbiamo imparato». Mi piace."},
-  {"s": "dudu", "t": "Ho imparato io. Tu hai imparato a insegnare."}
+  {"s": "dudu", "m": "handsome", "t": "Ho imparato io. Tu hai imparato a insegnare."}
  ],
  "c4_r02_in": [
   {"s": "bubu", "t": "Un'altalena. Ma stavolta voli tu."},
-  {"s": "dudu", "t": "Io? Ma peso il doppio!"},
+  {"s": "dudu", "m": "sus", "t": "Io? Ma peso il doppio!"},
   {"s": "bubu", "t": "Allora mi serve qualcosa di pesante da portare. Ci penso io."}
  ],
  "c4_sign_launch": [
@@ -45,12 +45,12 @@
  "c4_r07_in": [
   {"s": "dudu", "t": "C'è una canzone che mi gira in testa."},
   {"s": "bubu", "t": "Quella della macchina? Con i finestrini abbassati?"},
-  {"s": "dudu", "t": "Quella. Siamo stonati da far paura."},
+  {"s": "dudu", "m": "laugh", "t": "Quella. Siamo stonati da far paura."},
   {"s": "bubu", "t": "Siamo stonati insieme. È un'armonia tutta nostra."}
  ],
  "c4_r08_talk": [
   {"s": "bubu", "t": "Dudu, all'inizio guidavo io. Ora mi sembra di seguirti."},
-  {"s": "dudu", "t": "Ti dà fastidio?"},
+  {"s": "dudu", "m": "sus", "t": "Ti dà fastidio?"},
   {"s": "bubu", "t": "No. È bello stare dietro, ogni tanto. Si vede chi hai davanti."}
  ],
  "c4_r11_in": [
@@ -81,6 +81,6 @@
   {"s": "dudu", "t": "Grazie, Bubu. Per avermi insegnato a giocare."},
   {"s": "bubu", "t": "Grazie a te, Dudu. Per aver avuto voglia di imparare."},
   {"s": "dudu", "t": "Lo rifacciamo?"},
-  {"s": "bubu", "t": "Tutti i giorni. Anche senza vento."}
+  {"s": "bubu", "m": "hey", "t": "Tutti i giorni. Anche senza vento."}
  ]
 }

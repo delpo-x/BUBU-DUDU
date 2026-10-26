@@ -1,0 +1,179 @@
+[gd_resource type="SpriteFrames" load_steps=26 format=3]
+
+[ext_resource type="Texture2D" path="res://art/stickers/dudu_sus.webp" id="1"]
+
+[sub_resource type="AtlasTexture" id="f0"]
+atlas = ExtResource("1")
+region = Rect2(0, 0, 194, 256)
+
+[sub_resource type="AtlasTexture" id="f1"]
+atlas = ExtResource("1")
+region = Rect2(194, 0, 194, 256)
+
+[sub_resource type="AtlasTexture" id="f2"]
+atlas = ExtResource("1")
+region = Rect2(388, 0, 194, 256)
+
+[sub_resource type="AtlasTexture" id="f3"]
+atlas = ExtResource("1")
+region = Rect2(582, 0, 194, 256)
+
+[sub_resource type="AtlasTexture" id="f4"]
+atlas = ExtResource("1")
+region = Rect2(776, 0, 194, 256)
+
+[sub_resource type="AtlasTexture" id="f5"]
+atlas = ExtResource("1")
+region = Rect2(0, 256, 194, 256)
+
+[sub_resource type="AtlasTexture" id="f6"]
+atlas = ExtResource("1")
+region = Rect2(194, 256, 194, 256)
+
+[sub_resource type="AtlasTexture" id="f7"]
+atlas = ExtResource("1")
+region = Rect2(388, 256, 194, 256)
+
+[sub_resource type="AtlasTexture" id="f8"]
+atlas = ExtResource("1")
+region = Rect2(582, 256, 194, 256)
+
+[sub_resource type="AtlasTexture" id="f9"]
+atlas = ExtResource("1")
+region = Rect2(776, 256, 194, 256)
+
+[sub_resource type="AtlasTexture" id="f10"]
+atlas = ExtResource("1")
+region = Rect2(0, 512, 194, 256)
+
+[sub_resource type="AtlasTexture" id="f11"]
+atlas = ExtResource("1")
+region = Rect2(194, 512, 194, 256)
+
+[sub_resource type="AtlasTexture" id="f12"]
+atlas = ExtResource("1")
+region = Rect2(388, 512, 194, 256)
+
+[sub_resource type="AtlasTexture" id="f13"]
+atlas = ExtResource("1")
+region = Rect2(582, 512, 194, 256)
+
+[sub_resource type="AtlasTexture" id="f14"]
+atlas = ExtResource("1")
+region = Rect2(776, 512, 194, 256)
+
+[sub_resource type="AtlasTexture" id="f15"]
+atlas = ExtResource("1")
+region = Rect2(0, 768, 194, 256)
+
+[sub_resource type="AtlasTexture" id="f16"]
+atlas = ExtResource("1")
+region = Rect2(194, 768, 194, 256)
+
+[sub_resource type="AtlasTexture" id="f17"]
+atlas = ExtResource("1")
+region = Rect2(388, 768, 194, 256)
+
+[sub_resource type="AtlasTexture" id="f18"]
+atlas = ExtResource("1")
+region = Rect2(582, 768, 194, 256)
+
+[sub_resource type="AtlasTexture" id="f19"]
+atlas = ExtResource("1")
+region = Rect2(776, 768, 194, 256)
+
+[sub_resource type="AtlasTexture" id="f20"]
+atlas = ExtResource("1")
+region = Rect2(0, 1024, 194, 256)
+
+[sub_resource type="AtlasTexture" id="f21"]
+atlas = ExtResource("1")
+region = Rect2(194, 1024, 194, 256)
+
+[sub_resource type="AtlasTexture" id="f22"]
+atlas = ExtResource("1")
+region = Rect2(388, 1024, 194, 256)
+
+[sub_resource type="AtlasTexture" id="f23"]
+atlas = ExtResource("1")
+region = Rect2(582, 1024, 194, 256)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("f0")
+}, {
+"duration": 1.0,
+"texture": SubResource("f1")
+}, {
+"duration": 1.0,
+"texture": SubResource("f2")
+}, {
+"duration": 1.0,
+"texture": SubResource("f3")
+}, {
+"duration": 1.0,
+"texture": SubResource("f4")
+}, {
+"duration": 1.0,
+"texture": SubResource("f5")
+}, {
+"duration": 1.0,
+"texture": SubResource("f6")
+}, {
+"duration": 1.0,
+"texture": SubResource("f7")
+}, {
+"duration": 1.0,
+"texture": SubResource("f8")
+}, {
+"duration": 1.0,
+"texture": SubResource("f9")
+}, {
+"duration": 1.0,
+"texture": SubResource("f10")
+}, {
+"duration": 1.0,
+"texture": SubResource("f11")
+}, {
+"duration": 1.0,
+"texture": SubResource("f12")
+}, {
+"duration": 1.0,
+"texture": SubResource("f13")
+}, {
+"duration": 1.0,
+"texture": SubResource("f14")
+}, {
+"duration": 1.0,
+"texture": SubResource("f15")
+}, {
+"duration": 1.0,
+"texture": SubResource("f16")
+}, {
+"duration": 1.0,
+"texture": SubResource("f17")
+}, {
+"duration": 1.0,
+"texture": SubResource("f18")
+}, {
+"duration": 1.0,
+"texture": SubResource("f19")
+}, {
+"duration": 1.0,
+"texture": SubResource("f20")
+}, {
+"duration": 1.0,
+"texture": SubResource("f21")
+}, {
+"duration": 1.0,
+"texture": SubResource("f22")
+}, {
+"duration": 1.0,
+"texture": SubResource("f23")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]

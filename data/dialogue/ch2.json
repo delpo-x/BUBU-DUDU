@@ -3,21 +3,21 @@
   {"s": "narr", "t": "Il borgo: tetti rossi, lanterne, e pagine incastrate dappertutto."},
   {"s": "dudu", "t": "Sembra il quartiere della nostra prima casa."},
   {"s": "bubu", "t": "Con meno scatoloni. E meno discussioni su dove mettere il divano."},
-  {"s": "dudu", "t": "Il divano stava benissimo dove dicevo io."},
+  {"s": "dudu", "m": "handsome", "t": "Il divano stava benissimo dove dicevo io."},
   {"s": "bubu", "m": "grudge", "t": "Il divano non entrava dalla porta, dove dicevi tu."}
  ],
  "c2_outro": [
   {"s": "bubu", "t": "Il borgo è sistemato. Pagine recuperate, casse impilate."},
   {"s": "dudu", "t": "Le ultime sono volate in alto. Verso le nuvole."},
-  {"s": "bubu", "t": "Ce la fai? Lassù è tutto un po' più ballerino."},
-  {"s": "dudu", "t": "Ce la facciamo. Non sono più quello che si girava dalla parte sbagliata."},
-  {"s": "bubu", "t": "Solo una volta su tre, ormai."}
+  {"s": "bubu", "m": "worried", "t": "Ce la fai? Lassù è tutto un po' più ballerino."},
+  {"s": "dudu", "m": "handsome", "t": "Ce la facciamo. Non sono più quello che si girava dalla parte sbagliata."},
+  {"s": "bubu", "m": "pig", "t": "Solo una volta su tre, ormai."}
  ],
  "c2_r01_in": [
-  {"s": "dudu", "t": "Una cassa. Che ci facciamo con una cassa?"},
+  {"s": "dudu", "m": "sus", "t": "Una cassa. Che ci facciamo con una cassa?"},
   {"s": "bubu", "t": "Quello che si fa con tutte le casse: ci si sale sopra."},
   {"s": "dudu", "t": "Pensavo ci si mettessero dentro le cose."},
-  {"s": "bubu", "t": "Quello è nella vita vera. Qui sono gradini."}
+  {"s": "bubu", "m": "boss", "t": "Quello è nella vita vera. Qui sono gradini."}
  ],
  "c2_sign_crate": [
   {"s": "narr", "t": "B vicino a una cassa: raccoglierla. B di nuovo: posarla davanti a sé. Correndo, la lanciate."}
@@ -27,10 +27,10 @@
  ],
  "c2_r04_in": [
   {"s": "bubu", "t": "Una carrucola. Qui conta il peso."},
-  {"s": "dudu", "t": "Stai dicendo che sono pesante?"},
-  {"s": "bubu", "t": "Sto dicendo che sei solido. Affidabile. Una roccia."},
+  {"s": "dudu", "m": "sus", "t": "Stai dicendo che sono pesante?"},
+  {"s": "bubu", "m": "pig", "t": "Sto dicendo che sei solido. Affidabile. Una roccia."},
   {"s": "dudu", "t": "Le rocce sono pesanti."},
-  {"s": "bubu", "t": "...Sali sulla piattaforma, roccia mia."}
+  {"s": "bubu", "m": "laugh", "t": "...Sali sulla piattaforma, roccia mia."}
  ],
  "c2_sign_pulley": [
   {"s": "narr", "t": "Carrucola: la piattaforma più carica scende, l'altra sale."}
@@ -38,13 +38,13 @@
  "c2_r05_talk": [
   {"s": "dudu", "t": "Ti ricordi il giorno del trasloco? L'ascensore era rotto."},
   {"s": "bubu", "t": "Quinto piano. Quaranta scatoloni. Uno pieno solo di tazze."},
-  {"s": "dudu", "t": "Le tazze sono importanti."},
+  {"s": "dudu", "m": "handsome", "t": "Le tazze sono importanti."},
   {"s": "bubu", "m": "grudge", "t": "Ne abbiamo diciotto. Siamo in due."}
  ],
  "c2_r07_in": [
   {"s": "bubu", "t": "Queste pareti hanno le scanalature. Le conosco."},
   {"s": "dudu", "t": "Le conosci?"},
-  {"s": "bubu", "t": "Ci si arrampica saltando da una all'altra. Roba da esperti."},
+  {"s": "bubu", "m": "boss", "t": "Ci si arrampica saltando da una all'altra. Roba da esperti."},
   {"s": "dudu", "t": "Allora vai tu. Io faccio il tifo da qui."}
  ],
  "c2_sign_wall": [
@@ -58,15 +58,15 @@
  ],
  "c2_r10_talk": [
   {"s": "dudu", "t": "Ti ho visto saltare tra quelle pareti. Sembravi un ninja."},
-  {"s": "bubu", "t": "Un ninja panda. Il più temibile."},
+  {"s": "bubu", "m": "boss", "t": "Un ninja panda. Il più temibile."},
   {"s": "dudu", "t": "Il più morbido."},
-  {"s": "bubu", "t": "Temibilmente morbido."}
+  {"s": "bubu", "m": "pig", "t": "Temibilmente morbido."}
  ],
  "c2_r13_in": [
   {"s": "bubu", "t": "Sai qual è la cosa che preferisco della nostra casa?"},
   {"s": "dudu", "t": "Il divano nel posto sbagliato?"},
   {"s": "bubu", "t": "Che quando torno, la luce è accesa. Perché ci sei tu."},
-  {"s": "dudu", "t": "...Questa me la segno."}
+  {"s": "dudu", "m": "laugh", "t": "...Questa me la segno."}
  ],
  "c2_cozy_b": [
   {"s": "dudu", "t": "Siamo stanchi, eh?"},

@@ -33,6 +33,8 @@ LIGHT_LUM = 120       # light enough to become see-through when reached from the
 GREY_SAT = 48         # max channel spread for "grey"
 SIZE = 256            # longest side of a frame in the sheet
 QUALITY = 85          # WebP quality of the sheets
+GAP = 4               # widest outline gap closed (pixels, at source size)
+FRAME_SCAN = 24       # how far in from the border to look for drawn frame lines
 
 
 def flood(mask, seeds):
@@ -77,6 +79,48 @@ def cropped_body(dark):
     return out
 
 
+def dilate(mask, r):
+    """Square dilation by `r` pixels."""
+    out = mask.copy()
+    for _ in range(r):
+        grown = out.copy()
+        grown[1:] |= out[:-1]
+        grown[:-1] |= out[1:]
+        grown[:, 1:] |= out[:, :-1]
+        grown[:, :-1] |= out[:, 1:]
+        out = grown
+    return out
+
+
+def strip_frame(rgb, dark):
+    """Paints white the straight dark lines some stickers draw along the image border."""
+    h, w = dark.shape
+    for d in range(FRAME_SCAN):
+        if dark[d].mean() > 0.6:
+            rgb[d] = 255
+        if dark[h - 1 - d].mean() > 0.6:
+            rgb[h - 1 - d] = 255
+        if dark[:, d].mean() > 0.6:
+            rgb[:, d] = 255
+        if dark[:, w - 1 - d].mean() > 0.6:
+            rgb[:, w - 1 - d] = 255
+
+
+def big_parts(mask, min_px):
+    """Components of `mask` with at least `min_px` pixels."""
+    out = np.zeros_like(mask)
+    seen = np.zeros_like(mask)
+    ys, xs = np.nonzero(mask)
+    for y, x in zip(ys, xs):
+        if seen[y, x]:
+            continue
+        comp = flood(mask & ~seen, [(y, x)])
+        seen |= comp
+        if comp.sum() >= min_px:
+            out |= comp
+    return out
+
+
 def biggest_blob(mask):
     """Largest 4-connected component of `mask`."""
     seen = np.zeros_like(mask)
@@ -99,6 +143,9 @@ def cut(frame, white_is_bg=False):
     lum = rgb.mean(axis=2)
     spread = rgb.max(axis=2) - rgb.min(axis=2)
     seeds = border(h, w)
+    strip_frame(rgb, rgb.mean(axis=2) < 110)
+    lum = rgb.mean(axis=2)
+    spread = rgb.max(axis=2) - rgb.min(axis=2)
     wall = cropped_body(lum < 110)
     bg = flood(~wall & (rgb.min(axis=2) > BG_MIN) & (spread < 24), seeds)
     # 1. Keep the character only: drop floating captions and specks.
@@ -107,9 +154,15 @@ def cut(frame, white_is_bg=False):
     lum = rgb.mean(axis=2)
     spread = rgb.max(axis=2) - rgb.min(axis=2)
     # 2. Light grey reachable from outside -> black with alpha (background, edge, shadow).
-    see_through = flood(~wall & (lum > LIGHT_LUM) & (spread < GREY_SAT), seeds)
+    light = (lum > LIGHT_LUM) & (spread < GREY_SAT)
+    # Sketchy outlines have gaps: flood behind an outline thickened by GAP pixels, then
+    # take back the light ring along it so the anti-aliased edge still fades out.
+    thick = dilate(lum < 110, GAP)
+    see_through = flood(~wall & light & ~thick, seeds)
+    see_through |= light & dilate(see_through, GAP + 1) & ~(lum < 110)
     if white_is_bg:
-        see_through |= (lum > 175) & (spread < 40)
+        # Big near-white areas only: small ones are details (a cat's face, a highlight).
+        see_through |= big_parts((lum > 175) & (spread < 40) & ~see_through, 1500)
     alpha = np.full((h, w), 255, np.uint8)
     a = np.clip((BG_MIN - lum) / (BG_MIN - LIGHT_LUM), 0.0, 1.0)
     alpha[see_through] = (a[see_through] * 255).astype(np.uint8)
@@ -123,7 +176,10 @@ def frames_of(path):
     im = Image.open(path)
     for i in range(getattr(im, "n_frames", 1)):
         im.seek(i)
-        yield im.convert("RGBA")
+        # Some stickers pad with transparent pixels: flatten on white like the rest.
+        flat = Image.new("RGBA", im.size, (255, 255, 255, 255))
+        flat.alpha_composite(im.convert("RGBA"))
+        yield flat
 
 
 def build(path, fps):

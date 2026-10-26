@@ -2,7 +2,7 @@
  "c3_intro": [
   {"s": "narr", "t": "Sopra il borgo, dove le nuvole si possono calpestare."},
   {"s": "dudu", "t": "Siamo davvero sulle nuvole?"},
-  {"s": "bubu", "t": "Sembra di sì. Non guardare giù."},
+  {"s": "bubu", "m": "worried", "t": "Sembra di sì. Non guardare giù."},
   {"s": "dudu", "t": "Ho guardato giù."},
   {"s": "bubu", "t": "E com'è?"},
   {"s": "dudu", "t": "Bellissimo. Ma tienimi la zampa."}
@@ -15,7 +15,7 @@
   {"s": "dudu", "t": "Perché so che arrivi tu."}
  ],
  "c3_r01_in": [
-  {"s": "dudu", "t": "Quei funghi sono... molleggiati?"},
+  {"s": "dudu", "m": "sus", "t": "Quei funghi sono... molleggiati?"},
   {"s": "bubu", "t": "Funghi trampolino. Non chiedermi come funzionano."},
   {"s": "dudu", "t": "Non te lo chiedo. Ci salto e basta."}
  ],
@@ -24,10 +24,10 @@
  ],
  "c3_r02_in": [
   {"s": "bubu", "t": "Un'altalena. Qui il peso di Dudu diventa un superpotere."},
-  {"s": "dudu", "t": "Finalmente qualcuno lo riconosce."},
+  {"s": "dudu", "m": "handsome", "t": "Finalmente qualcuno lo riconosce."},
   {"s": "bubu", "t": "Tu atterri da una parte, io volo dall'altra."},
   {"s": "dudu", "t": "E se voli troppo lontano?"},
-  {"s": "bubu", "t": "Torno sempre. Lo sai."}
+  {"s": "bubu", "m": "hey", "t": "Torno sempre. Lo sai."}
  ],
  "c3_sign_seesaw": [
   {"s": "narr", "t": "Altalena: chi pesa di più, saltandoci sopra, lancia in alto chi sta dall'altra parte."}
@@ -41,7 +41,7 @@
  "c3_r05_in": [
   {"s": "dudu", "t": "Senti questo vento?"},
   {"s": "bubu", "t": "È un ventilatore. Gigante. In mezzo alle nuvole."},
-  {"s": "dudu", "t": "Le nuvole hanno caldo anche loro, immagino."}
+  {"s": "dudu", "m": "sus", "t": "Le nuvole hanno caldo anche loro, immagino."}
  ],
  "c3_sign_wind": [
   {"s": "narr", "t": "I ventilatori soffiano verso l'alto finché qualcosa li tiene accesi."}
@@ -49,12 +49,12 @@
  "c3_r05_talk": [
   {"s": "bubu", "t": "Quando eri lassù nel vento, ridevi come un bambino."},
   {"s": "dudu", "t": "Mi hai sentito?"},
-  {"s": "bubu", "t": "Ti hanno sentito anche dal borgo."}
+  {"s": "bubu", "m": "laugh", "t": "Ti hanno sentito anche dal borgo."}
  ],
  "c3_cozy_a": [
   {"s": "bubu", "t": "Posso dirti una cosa che non ti ho mai detto?"},
   {"s": "dudu", "t": "Sempre."},
-  {"s": "bubu", "t": "Certe sere ho paura di non essere abbastanza. Per te, per noi."},
+  {"s": "bubu", "m": "worried", "t": "Certe sere ho paura di non essere abbastanza. Per te, per noi."},
   {"s": "dudu", "t": "Non devo rispondere subito, vero?"},
   {"s": "bubu", "t": "No."},
   {"s": "dudu", "t": "Allora resto qui. E ascolto. Tutto quello che vuoi dire."}
@@ -69,11 +69,11 @@
   {"s": "bubu", "t": "Primo: vedere il mare d'inverno."},
   {"s": "dudu", "t": "Secondo: imparare a fare il pane."},
   {"s": "bubu", "m": "grudge", "t": "Terzo: smettere di comprare tazze."},
-  {"s": "dudu", "t": "Il terzo lo togliamo."}
+  {"s": "dudu", "m": "handsome", "t": "Il terzo lo togliamo."}
  ],
  "c3_r13_talk": [
   {"s": "bubu", "t": "Sai cosa ho capito con l'altalena?"},
-  {"s": "dudu", "t": "Che sono pesante?"},
+  {"s": "dudu", "m": "sus", "t": "Che sono pesante?"},
   {"s": "bubu", "t": "Che non serve essere su nello stesso momento. Quando uno scende, l'altro sale."},
   {"s": "dudu", "t": "E poi ci si scambia."},
   {"s": "bubu", "t": "E poi ci si scambia."}
