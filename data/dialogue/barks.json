@@ -137,7 +137,7 @@
   [{"s": "bubu", "t": "Un posto così meriterebbe una panchina."}, {"s": "dudu", "t": "Ci siamo quasi arrivati, a una."}]
  ],
  "ambient_c2": [
-  [{"s": "dudu", "t": "Senti? Qualcuno sta cucinando."}, {"s": "bubu", "t": "Non bruciare niente, tu. Siamo ospiti."}],
+  [{"s": "dudu", "t": "Senti? Qualcuno sta cucinando."}, {"s": "bubu", "m": "pan", "t": "Non bruciare niente, tu. Siamo ospiti."}],
   [{"s": "bubu", "t": "Le lanterne si stanno accendendo."}],
   [{"s": "dudu", "t": "Quella finestra assomiglia alla nostra cucina."}],
   [{"s": "bubu", "t": "Ogni casa qui sembra avere una storia."}, {"s": "dudu", "t": "Come la nostra."}],

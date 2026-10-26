@@ -9,13 +9,13 @@
  "c4_outro": [
   {"s": "narr", "t": "Tutte le pagine sono tornate. Tranne una, che non è mai volata via."},
   {"s": "dudu", "t": "L'ultima pagina è bianca."},
-  {"s": "bubu", "t": "Pensavo l'avessimo persa. Invece era vuota fin dall'inizio."},
+  {"s": "bubu", "m": "cry", "t": "Pensavo l'avessimo persa. Invece era vuota fin dall'inizio."},
   {"s": "dudu", "t": "Allora non è persa. È per noi."},
   {"s": "bubu", "t": "Che ci scriviamo?"},
   {"s": "dudu", "t": "Oggi. Questa giornata a rincorrere il vento."},
   {"s": "bubu", "t": "E domani?"},
   {"s": "dudu", "t": "Domani compriamo un album nuovo. Questo è quasi pieno."},
-  {"s": "both", "t": "Insieme."}
+  {"s": "both", "m": "cheers", "t": "Insieme."}
  ],
  "c4_r01_in": [
   {"s": "dudu", "t": "Mettiamo insieme tutto quello che abbiamo imparato."},

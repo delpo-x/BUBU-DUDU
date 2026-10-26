@@ -52,7 +52,7 @@
   {"s": "bubu", "m": "laugh", "t": "Ti hanno sentito anche dal borgo."}
  ],
  "c3_cozy_a": [
-  {"s": "bubu", "t": "Posso dirti una cosa che non ti ho mai detto?"},
+  {"s": "bubu", "m": "think", "t": "Posso dirti una cosa che non ti ho mai detto?"},
   {"s": "dudu", "t": "Sempre."},
   {"s": "bubu", "m": "worried", "t": "Certe sere ho paura di non essere abbastanza. Per te, per noi."},
   {"s": "dudu", "t": "Non devo rispondere subito, vero?"},
@@ -68,11 +68,11 @@
   {"s": "dudu", "t": "Facciamo una lista dei sogni? Come quella sul tovagliolo."},
   {"s": "bubu", "t": "Primo: vedere il mare d'inverno."},
   {"s": "dudu", "t": "Secondo: imparare a fare il pane."},
-  {"s": "bubu", "m": "grudge", "t": "Terzo: smettere di comprare tazze."},
+  {"s": "bubu", "m": "pan", "t": "Terzo: smettere di comprare tazze."},
   {"s": "dudu", "m": "handsome", "t": "Il terzo lo togliamo."}
  ],
  "c3_r13_talk": [
-  {"s": "bubu", "t": "Sai cosa ho capito con l'altalena?"},
+  {"s": "bubu", "m": "think", "t": "Sai cosa ho capito con l'altalena?"},
   {"s": "dudu", "m": "sus", "t": "Che sono pesante?"},
   {"s": "bubu", "t": "Che non serve essere su nello stesso momento. Quando uno scende, l'altro sale."},
   {"s": "dudu", "t": "E poi ci si scambia."},

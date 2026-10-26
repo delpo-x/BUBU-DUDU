@@ -267,7 +267,11 @@ func _draw_portrait() -> void:
 		1:
 			_draw_head("dudu", right, sz, face)
 		_:
-			if _name_label.text != "":
+			var duo := Stickers.frame("both_" + _mood, _t) if _mood != "" else null
+			if duo != null:
+				var c := Vector2(r.get_center().x, y + sz.y * 0.5)
+				_portrait.draw_texture_rect(duo, Stickers.fit(duo, c, Vector2(sz.x * 2.6, sz.y * 1.15)), false)
+			elif _name_label.text != "":
 				_draw_head("bubu", left, sz, face)
 				_draw_head("dudu", right, sz, face)
 

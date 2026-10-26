@@ -8,7 +8,7 @@ union of all frames so the character never jumps inside its box.
 
 Per frame:
   1. Text and decorations that float on the white background (separate blobs, e.g. Chinese
-     captions) are painted white. Only the biggest blob, the character, is kept.
+     captions) are painted white. Only the big blobs (the characters, a speech bubble) are kept.
   2. Everything light and grey that can be reached from the border without crossing the dark
      outline becomes black with alpha from its darkness: the white background vanishes, the
      anti-aliased edge stays smooth and the soft floor shadow turns into a real shadow.
@@ -34,6 +34,8 @@ GREY_SAT = 48         # max channel spread for "grey"
 SIZE = 256            # longest side of a frame in the sheet
 QUALITY = 85          # WebP quality of the sheets
 GAP = 4               # widest outline gap closed (pixels, at source size)
+KEEP_RATIO = 0.08      # blobs this fraction of the biggest are kept...
+MIN_FILL = 0.6         # ...if at least this share of them is not dark outline
 FRAME_SCAN = 24       # how far in from the border to look for drawn frame lines
 
 
@@ -121,20 +123,28 @@ def big_parts(mask, min_px):
     return out
 
 
-def biggest_blob(mask):
-    """Largest 4-connected component of `mask`."""
+def main_blobs(mask, dark):
+    """The largest component of `mask`, plus any other at least KEEP_RATIO its size that is
+    mostly filled (a second character, a speech bubble). Captions are made of dark strokes
+    and specks are small, so they go."""
+    comps = []
     seen = np.zeros_like(mask)
-    best, best_n = None, 0
     ys, xs = np.nonzero(mask)
     for y, x in zip(ys, xs):
         if seen[y, x]:
             continue
         comp = flood(mask & ~seen, [(y, x)])
         seen |= comp
-        n = int(comp.sum())
-        if n > best_n:
-            best, best_n = comp, n
-    return best if best is not None else mask
+        comps.append((int(comp.sum()), comp))
+    if not comps:
+        return mask
+    top = max(n for n, _ in comps)
+    out = np.zeros_like(mask)
+    for n, comp in comps:
+        filled = 1.0 - float((dark & comp).sum()) / n
+        if n == top or (n >= top * KEEP_RATIO and filled >= MIN_FILL):
+            out |= comp
+    return out
 
 
 def cut(frame, white_is_bg=False):
@@ -149,7 +159,7 @@ def cut(frame, white_is_bg=False):
     wall = cropped_body(lum < 110)
     bg = flood(~wall & (rgb.min(axis=2) > BG_MIN) & (spread < 24), seeds)
     # 1. Keep the character only: drop floating captions and specks.
-    keep = biggest_blob(~bg)
+    keep = main_blobs(~bg, lum < 110)
     rgb[~bg & ~keep] = 255
     lum = rgb.mean(axis=2)
     spread = rgb.max(axis=2) - rgb.min(axis=2)

@@ -194,6 +194,9 @@ func _advance() -> void:
 	_set_players_locked(true)
 	var chapter := GameState.get_chapter(ch)
 	await _play_once("chapter_outro_%s" % chapter.get("id", ch), StringName(String(chapter.get("outro", ""))))
+	if not fast_transitions:
+		Stickers.pop(world, "both_cheers", camera.get_screen_center_position() + Vector2(0, 90), 200.0, 2.4)
+		await get_tree().create_timer(2.2).timeout
 	GameState.complete_chapter(ch)
 	if ch + 1 < GameState.chapter_count():
 		GameState.set_position(ch + 1, 0)

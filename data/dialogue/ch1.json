@@ -3,7 +3,7 @@
   {"s": "narr", "t": "Una mattina di vento, in una casetta in fondo al prato."},
   {"s": "bubu", "m": "bed", "t": "Dudu, hai lasciato la finestra aperta?"},
   {"s": "dudu", "t": "Volevo far entrare un po' d'aria fresca."},
-  {"s": "bubu", "m": "worried", "t": "È entrata. Ed è uscita. Con tutte le pagine del nostro album."},
+  {"s": "bubu", "m": "cry", "t": "È entrata. Ed è uscita. Con tutte le pagine del nostro album."},
   {"s": "dudu", "m": "sus", "t": "...Il nostro album? Quello con tutte le foto, i biglietti, i ricordi?"},
   {"s": "bubu", "t": "Quello. Le pagine stanno volando verso il prato."},
   {"s": "dudu", "t": "Allora le andiamo a riprendere. Tutte. Insieme."},
@@ -69,7 +69,7 @@
   {"s": "bubu", "m": "grudge", "t": "Era un test. Per vedere se stavi attento."}
  ],
  "c1_r10_in": [
-  {"s": "bubu", "t": "Senti, posso dirti una cosa? Grazie per essere qui."},
+  {"s": "bubu", "m": "think", "t": "Senti, posso dirti una cosa? Grazie per essere qui."},
   {"s": "dudu", "t": "Dove dovrei essere? È il nostro album."},
   {"s": "bubu", "t": "Lo so. Ma non è da tutti mettersi a saltare per un prato solo perché glielo chiedi."},
   {"s": "dudu", "t": "Non è da tutti. È da me."}

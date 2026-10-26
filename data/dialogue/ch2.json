@@ -63,7 +63,7 @@
   {"s": "bubu", "m": "pig", "t": "Temibilmente morbido."}
  ],
  "c2_r13_in": [
-  {"s": "bubu", "t": "Sai qual è la cosa che preferisco della nostra casa?"},
+  {"s": "bubu", "m": "think", "t": "Sai qual è la cosa che preferisco della nostra casa?"},
   {"s": "dudu", "t": "Il divano nel posto sbagliato?"},
   {"s": "bubu", "t": "Che quando torno, la luce è accesa. Perché ci sei tu."},
   {"s": "dudu", "m": "laugh", "t": "...Questa me la segno."}
