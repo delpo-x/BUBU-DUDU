@@ -57,6 +57,25 @@ def border(h, w):
            [(y, 0) for y in range(h)] + [(y, w - 1) for y in range(h)]
 
 
+def cropped_body(dark):
+    """Border pixels where the character is cut by the frame: on each edge, a run between
+    two outline crossings (not reaching a corner) is inside the body, not background."""
+    h, w = dark.shape
+    out = np.zeros_like(dark)
+    for line, setter in ((dark[0], lambda a, b: out.__setitem__((0, slice(a, b)), True)),
+                         (dark[h - 1], lambda a, b: out.__setitem__((h - 1, slice(a, b)), True)),
+                         (dark[:, 0], lambda a, b: out.__setitem__((slice(a, b), 0), True)),
+                         (dark[:, w - 1], lambda a, b: out.__setitem__((slice(a, b), w - 1), True))):
+        idx = np.nonzero(line)[0]
+        if idx.size < 2:
+            continue
+        # Outline crossings: groups of dark pixels; pair them up from the outside in.
+        groups = np.split(idx, np.nonzero(np.diff(idx) > 1)[0] + 1)
+        if len(groups) >= 2:
+            setter(groups[0][0], groups[-1][-1] + 1)
+    return out
+
+
 def biggest_blob(mask):
     """Largest 4-connected component of `mask`."""
     seen = np.zeros_like(mask)
@@ -79,14 +98,15 @@ def cut(frame, white_is_bg=False):
     lum = rgb.mean(axis=2)
     spread = rgb.max(axis=2) - rgb.min(axis=2)
     seeds = border(h, w)
-    bg = flood((rgb.min(axis=2) > BG_MIN) & (spread < 24), seeds)
+    wall = cropped_body(lum < 110)
+    bg = flood(~wall & (rgb.min(axis=2) > BG_MIN) & (spread < 24), seeds)
     # 1. Keep the character only: drop floating captions and specks.
     keep = biggest_blob(~bg)
     rgb[~bg & ~keep] = 255
     lum = rgb.mean(axis=2)
     spread = rgb.max(axis=2) - rgb.min(axis=2)
     # 2. Light grey reachable from outside -> black with alpha (background, edge, shadow).
-    see_through = flood((lum > LIGHT_LUM) & (spread < GREY_SAT), seeds)
+    see_through = flood(~wall & (lum > LIGHT_LUM) & (spread < GREY_SAT), seeds)
     if white_is_bg:
         see_through |= (lum > 175) & (spread < 40)
     alpha = np.full((h, w), 255, np.uint8)

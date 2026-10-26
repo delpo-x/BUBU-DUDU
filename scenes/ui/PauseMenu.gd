@@ -11,6 +11,7 @@ signal quit_requested
 
 @export var skip_after_minutes: float = 12.0
 
+var _nap: StickerView
 var _main: PanelContainer
 var _buttons: Array[Control] = []
 var _hint_label: Label
@@ -61,6 +62,8 @@ func _ready() -> void:
 	_hint_label.visible = false
 	v.add_child(_hint_label)
 	v.add_child(UiTheme.label("Si salva da solo a ogni nuova stanza.", 16, UiTheme.MUTED, HORIZONTAL_ALIGNMENT_CENTER))
+	_nap = StickerView.new("bubu_bed", Vector2(0, 110))
+	v.add_child(_nap)
 
 	_options = OptionsPanel.new()
 	_options.visible = false
@@ -78,6 +81,7 @@ func open() -> void:
 	_confirm_quit = false
 	_quit_button.text = "Torna al titolo"
 	_hint_label.visible = false
+	_nap.visible = true
 	_hint_button.disabled = hint_text == ""
 	_skip_button.visible = room_time >= skip_after_minutes * 60.0
 	var shown: Array[Control] = []
@@ -98,6 +102,7 @@ func close() -> void:
 func _show_hint() -> void:
 	_hint_label.text = hint_text
 	_hint_label.visible = true
+	_nap.visible = false
 
 
 func _open_options() -> void:

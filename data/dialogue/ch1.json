@@ -1,7 +1,7 @@
 {
  "c1_intro": [
   {"s": "narr", "t": "Una mattina di vento, in una casetta in fondo al prato."},
-  {"s": "bubu", "t": "Dudu, hai lasciato la finestra aperta?"},
+  {"s": "bubu", "m": "bed", "t": "Dudu, hai lasciato la finestra aperta?"},
   {"s": "dudu", "t": "Volevo far entrare un po' d'aria fresca."},
   {"s": "bubu", "t": "È entrata. Ed è uscita. Con tutte le pagine del nostro album."},
   {"s": "dudu", "t": "...Il nostro album? Quello con tutte le foto, i biglietti, i ricordi?"},
@@ -66,7 +66,7 @@
   {"s": "dudu", "t": "Stiamo diventando bravi, eh?"},
   {"s": "bubu", "t": "Tu stai diventando bravo. Io lo ero già."},
   {"s": "dudu", "t": "Allora chi ha sbagliato piastra prima?"},
-  {"s": "bubu", "t": "Era un test. Per vedere se stavi attento."}
+  {"s": "bubu", "m": "grudge", "t": "Era un test. Per vedere se stavi attento."}
  ],
  "c1_r10_in": [
   {"s": "bubu", "t": "Senti, posso dirti una cosa? Grazie per essere qui."},

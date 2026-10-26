@@ -4,7 +4,7 @@
   {"s": "dudu", "t": "Sembra il quartiere della nostra prima casa."},
   {"s": "bubu", "t": "Con meno scatoloni. E meno discussioni su dove mettere il divano."},
   {"s": "dudu", "t": "Il divano stava benissimo dove dicevo io."},
-  {"s": "bubu", "t": "Il divano non entrava dalla porta, dove dicevi tu."}
+  {"s": "bubu", "m": "grudge", "t": "Il divano non entrava dalla porta, dove dicevi tu."}
  ],
  "c2_outro": [
   {"s": "bubu", "t": "Il borgo è sistemato. Pagine recuperate, casse impilate."},
@@ -39,7 +39,7 @@
   {"s": "dudu", "t": "Ti ricordi il giorno del trasloco? L'ascensore era rotto."},
   {"s": "bubu", "t": "Quinto piano. Quaranta scatoloni. Uno pieno solo di tazze."},
   {"s": "dudu", "t": "Le tazze sono importanti."},
-  {"s": "bubu", "t": "Ne abbiamo diciotto. Siamo in due."}
+  {"s": "bubu", "m": "grudge", "t": "Ne abbiamo diciotto. Siamo in due."}
  ],
  "c2_r07_in": [
   {"s": "bubu", "t": "Queste pareti hanno le scanalature. Le conosco."},

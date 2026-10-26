@@ -44,6 +44,9 @@ def check_lines(where, lines):
             continue
         if len(t) > MAX_LINE:
             fail("%s[%d]: %d characters (max %d)" % (where, i, len(t), MAX_LINE))
+        mood = ln.get("m")
+        if mood is not None and not os.path.exists(path("art", "stickers", "%s_%s.tres" % (ln["s"], mood))):
+            fail("%s[%d]: no sticker art/stickers/%s_%s.tres for mood" % (where, i, ln["s"], mood))
         if t != t.strip() or "  " in t or re.search(r"[.!?,]{4,}", t):
             fail("%s[%d]: stray spaces or repeated punctuation" % (where, i))
 

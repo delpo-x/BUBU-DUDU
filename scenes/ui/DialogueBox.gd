@@ -55,6 +55,8 @@ var _t: float = 0.0
 var _at_top: bool = false
 var _blink: float = 2.5
 var _drawn_face: String = ""
+## Optional sticker mood of the current line ("m": "grudge" -> art/stickers/<speaker>_grudge).
+var _mood: String = ""
 
 
 func _ready() -> void:
@@ -150,6 +152,7 @@ func _show_line() -> void:
 	_speaker_color = info["color"]
 	_speaker_side = int(info["side"])
 	_name_label.add_theme_color_override(&"font_color", _speaker_color)
+	_mood = String(line.get("m", ""))
 	var body := String(line.get("t", ""))
 	_text.text = "[i]%s[/i]" % body if who == "narr" else body
 	_visible_chars = 0.0
@@ -181,7 +184,7 @@ func _process(delta: float) -> void:
 	_blink -= delta
 	if _blink < -0.13:
 		_blink = randf_range(2.2, 4.5)
-	if _face() != _drawn_face or _face() == "happy":
+	if _face() != _drawn_face or _face() == "happy" or _mood != "":
 		_portrait.queue_redraw()
 	if _advance_requested:
 		_advance_requested = false
@@ -278,10 +281,14 @@ func _face() -> String:
 
 func _draw_head(who: String, pos: Vector2, sz: Vector2, face: String) -> void:
 	_portrait.draw_circle(pos + sz * 0.5 + Vector2(0, 4), sz.x * 0.5, Color(0.3, 0.15, 0.2, 0.18))
-	# Shared happy lines: the animated laugh sticker instead of the still smile.
-	var laugh := Stickers.frame(who + "_laugh", _t) if face == "happy" else null
-	if laugh != null:
-		_portrait.draw_texture_rect(laugh, Stickers.fit(laugh, pos + sz * 0.5, sz * 1.15), false)
+	# A line's mood sticker, or the laugh on shared happy lines, replaces the still head.
+	var anim: Texture2D = null
+	if _mood != "":
+		anim = Stickers.frame(who + "_" + _mood, _t)
+	elif face == "happy":
+		anim = Stickers.frame(who + "_laugh", _t)
+	if anim != null:
+		_portrait.draw_texture_rect(anim, Stickers.fit(anim, pos + sz * 0.5, sz * 1.15), false)
 		return
 	var tex: Texture2D = PORTRAITS[who][face]
 	_portrait.draw_texture_rect(tex, Rect2(pos, sz), false)

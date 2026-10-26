@@ -68,7 +68,7 @@
   {"s": "dudu", "t": "Facciamo una lista dei sogni? Come quella sul tovagliolo."},
   {"s": "bubu", "t": "Primo: vedere il mare d'inverno."},
   {"s": "dudu", "t": "Secondo: imparare a fare il pane."},
-  {"s": "bubu", "t": "Terzo: smettere di comprare tazze."},
+  {"s": "bubu", "m": "grudge", "t": "Terzo: smettere di comprare tazze."},
   {"s": "dudu", "t": "Il terzo lo togliamo."}
  ],
  "c3_r13_talk": [

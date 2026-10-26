@@ -677,6 +677,7 @@ func _try_call() -> void:
 		return
 	partner.travel_to_partner()
 	Sfx.play("call")
+	Stickers.pop(get_parent(), ("bubu" if player_index == 1 else "dudu") + "_phone", global_position - Vector2(0, _body_size.y + 30.0), 96.0, 2.0)
 	called_partner.emit(self)
 
 
