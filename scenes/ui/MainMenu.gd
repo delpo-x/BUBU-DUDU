@@ -66,7 +66,7 @@ func _ready() -> void:
 	_main_buttons.append(UiTheme.button("Comandi", _open_controls))
 	_main_buttons.append(UiTheme.button("Opzioni", _open_options))
 	if not OS.has_feature("web"):
-		_main_buttons.append(UiTheme.button("Esci", func() -> void: get_tree().quit()))
+		_main_buttons.append(UiTheme.button("Esci", _quit))
 	for b in _main_buttons:
 		v.add_child(b)
 	if GameState.has_save():
@@ -127,6 +127,16 @@ func _new_game() -> void:
 		return
 	GameState.new_game()
 	_go()
+
+
+## Silences every sound and lets the audio thread drop it before quitting (quitting with
+## live playbacks could crash at exit).
+func _quit() -> void:
+	set_process_unhandled_input(false)
+	Sfx.stop_all()
+	Voices.stop_all()
+	await get_tree().create_timer(0.25).timeout
+	get_tree().quit()
 
 
 func _go() -> void:
@@ -219,7 +229,7 @@ func _build_controls() -> PanelContainer:
 			names.append(Bindings.key_label(StringName("p%d_%s" % [p, s])))
 		return "%s/%s %s/%s, %s, %s, %s, %s" % names
 	v.add_child(UiTheme.label("Tastiera — Bubu: %s  ·  Dudu: %s" % [kb.call(1), kb.call(2)], 16, UiTheme.MUTED, HORIZONTAL_ALIGNMENT_CENTER))
-	v.add_child(UiTheme.label("Puoi cambiarli in Opzioni → Assegna i tasti.", 16, UiTheme.MUTED, HORIZONTAL_ALIGNMENT_CENTER))
+	v.add_child(UiTheme.label("Puoi cambiarli in Opzioni, alla voce «Assegna i tasti».", 16, UiTheme.MUTED, HORIZONTAL_ALIGNMENT_CENTER))
 	v.add_child(UiTheme.label("Non si perde mai: chi cade torna dal partner su un palloncino.", 18, UiTheme.INK, HORIZONTAL_ALIGNMENT_CENTER))
 	var back := UiTheme.button("Indietro", _show_main)
 	v.add_child(back)

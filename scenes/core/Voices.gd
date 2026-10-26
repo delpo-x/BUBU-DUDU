@@ -66,6 +66,8 @@ var _recorded: Dictionary = {}    # "who_name" -> AudioStream (art/voices)
 var _players: Array[AudioStreamPlayer] = []
 var _next: int = 0
 var _rng := RandomNumberGenerator.new()
+## Bumped by stop_all() so syllable sequences still waiting on a timer give up.
+var _gen: int = 0
 
 
 func _ready() -> void:
@@ -131,9 +133,25 @@ func action(who: String, kind: String) -> void:
 # --- Internals -------------------------------------------------------------------------
 
 func _sequence(who: String, sylls: Array, sad: bool) -> void:
+	var gen := _gen
 	for s: Array in sylls:
+		# stop_all() (quitting) or leaving the tree ends a sequence between two syllables.
+		if gen != _gen or not is_inside_tree():
+			return
 		_play(_banks["%s:%s%s" % [who, s[0], ":sad" if sad else ""]], float(s[1]), float(CHARACTERS[who][3]) + 2.0)
 		await get_tree().create_timer(float(s[2]), true, false, true).timeout
+
+
+## Stops every voice right away (quitting): no playback outlives the tree.
+func stop_all() -> void:
+	_gen += 1
+	for p in _players:
+		p.stop()
+		p.stream = null
+
+
+func _exit_tree() -> void:
+	stop_all()
 
 
 func _play(stream: AudioStream, semitones: float, volume_db: float) -> void:

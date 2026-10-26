@@ -79,7 +79,8 @@ func key_label(action: StringName) -> String:
 		return KEY_NAMES[code]
 	# The key's name on this keyboard layout (QWERTZ, AZERTY...), where the display server knows it.
 	var local := code
-	if k.physical_keycode != KEY_NONE and DisplayServer.get_name() != "headless":
+	# Not supported by the headless and web display servers (it logs an engine error there).
+	if k.physical_keycode != KEY_NONE and DisplayServer.get_name() != "headless" and not OS.has_feature("web"):
 		local = DisplayServer.keyboard_get_keycode_from_physical(code)
 	return OS.get_keycode_string(local)
 

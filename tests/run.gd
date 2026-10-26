@@ -57,9 +57,12 @@ func _run_all(names: Array[String]) -> void:
 		node.queue_free()
 		await process_frame
 	print("Results: %d passed, %d failed" % [total_passed, total_failed])
-	var sfx := root.get_node_or_null(^"Sfx")
-	if sfx != null:
-		sfx.call(&"stop_all")
-	await process_frame
+	for audio: NodePath in [^"Sfx", ^"Voices"]:
+		var n := root.get_node_or_null(audio)
+		if n != null:
+			n.call(&"stop_all")
+	# Give the audio thread time to drop the stopped playbacks before the engine shuts down
+	# (quitting with live playbacks could crash at exit).
+	await create_timer(0.25, true, false, true).timeout
 	OS.remove_logger(logger)
 	quit(1 if total_failed > 0 else 0)
