@@ -112,11 +112,12 @@ func _draw_card() -> void:
 	var tex := Stickers.frame("bubu_boss", _t)
 	if tex == null:
 		return
-	var side := minf(_card.size.y, 200.0)
-	var center := Vector2(_card.size.x - side * 0.5 - 8.0, _card.size.y - side * 0.5)
+	# Kept clear of the Back button below: the card is tilted and framed, so it needs margin.
+	var side := minf(_card.size.y - 28.0, 190.0)
+	var center := Vector2(_card.size.x - side * 0.5 - 14.0, _card.size.y - side * 0.5 - 14.0)
 	_card.draw_set_transform(center, 0.05, Vector2.ONE)
 	var r := Rect2(Vector2(-side, -side) * 0.5, Vector2(side, side))
-	_card.draw_rect(r.grow(6.0), Color(1, 1, 1))
+	_card.draw_style_box(UiTheme.box(Color.WHITE, 18), r.grow(6.0))
 	_card.draw_texture_rect(tex, Stickers.fit(tex, Vector2.ZERO, r.size), false)
 	_card.draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 

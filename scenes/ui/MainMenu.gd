@@ -258,7 +258,8 @@ func _draw_card(tex: Texture2D, center: Vector2, side: float, angle: float, phas
 	var bob := sin(_t * 1.6 + phase) * 4.0 * m
 	_art.draw_set_transform(center + Vector2(0, bob), angle + sin(_t * 0.9 + phase) * 0.01 * m, Vector2.ONE)
 	var r := Rect2(Vector2(-side, -side) * 0.5, Vector2(side, side))
-	_art.draw_rect(Rect2(r.position + Vector2(6, 8), r.size), Color(0.45, 0.25, 0.25, 0.18))
-	_art.draw_rect(r.grow(8.0), Color(1, 1, 1))
+	# Rounded photo frame: the stickers have a flat white background, so square corners show.
+	_art.draw_style_box(UiTheme.box(Color(0.45, 0.25, 0.25, 0.18), 22), Rect2(r.position + Vector2(6, 8), r.size).grow(8.0))
+	_art.draw_style_box(UiTheme.box(Color.WHITE, 22), r.grow(8.0))
 	_art.draw_texture_rect(tex, Stickers.fit(tex, Vector2.ZERO, r.size), false)
 	_art.draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
