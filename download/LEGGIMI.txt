@@ -1,0 +1,29 @@
+BUBU & DUDU - come giocare su Windows
+=====================================
+
+1. Scarica BubuDudu-Windows.zip da questa cartella
+   (su GitHub: apri il file e premi il pulsante di download, "Download raw file").
+2. Tasto destro sullo zip > "Estrai tutto...".
+3. Apri la cartella estratta e fai doppio clic su BubuDudu.exe.
+
+Windows potrebbe mostrare "Windows ha protetto il PC": il gioco non è firmato.
+Premi "Ulteriori informazioni" e poi "Esegui comunque".
+
+Non serve installare niente: tutto il gioco sta in BubuDudu.exe.
+
+Comandi
+-------
+Si gioca in due sullo stesso schermo.
+- Due controller: il primo collegato è Bubu, il secondo è Dudu.
+- Tastiera:
+    Bubu: A D W S per muoversi, Spazio salta, E interagisce, Q groppa/chiama/abbraccio, Esc pausa
+    Dudu: frecce per muoversi, Invio salta, . interagisce, / groppa/chiama/abbraccio, Backspace pausa
+Si possono cambiare in Opzioni > "Assegna i tasti". Il menu "Comandi" li riassume.
+
+Salvataggi
+----------
+Il gioco salva da solo (lanterne, angoli comodi, pausa, uscita).
+I file stanno in %APPDATA%\Godot\app_userdata\Bubu & Dudu
+Per ricominciare da zero basta "Nuova partita" nel menu (i ricordi dell'album restano).
+
+Schermo intero: Opzioni > "Schermo intero".
