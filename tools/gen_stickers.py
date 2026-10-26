@@ -95,7 +95,7 @@ def dilate(mask, r):
 
 
 def strip_frame(rgb, dark):
-    """Paints white the straight dark lines some stickers draw along the image border."""
+    """Paints white the straight lines (any colour but white) some stickers draw along the image border."""
     h, w = dark.shape
     for d in range(FRAME_SCAN):
         if dark[d].mean() > 0.6:
@@ -153,7 +153,7 @@ def cut(frame, white_is_bg=False):
     lum = rgb.mean(axis=2)
     spread = rgb.max(axis=2) - rgb.min(axis=2)
     seeds = border(h, w)
-    strip_frame(rgb, rgb.mean(axis=2) < 110)
+    strip_frame(rgb, rgb.min(axis=2) < 230)
     lum = rgb.mean(axis=2)
     spread = rgb.max(axis=2) - rgb.min(axis=2)
     wall = cropped_body(lum < 110)
