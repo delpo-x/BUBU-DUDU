@@ -105,7 +105,7 @@
  "idle": [
   [{"s": "dudu", "t": "Siamo fermi da un po'. Stiamo pensando o stiamo ammirando il paesaggio?"}, {"s": "bubu", "t": "Entrambe le cose."}],
   [{"s": "bubu", "t": "Pausa merenda?"}, {"s": "dudu", "m": "snack", "t": "Sempre sì."}],
-  [{"s": "dudu", "t": "Mi piace anche stare fermi, se ci sei tu."}],
+  [{"s": "dudu", "m": "giggle", "t": "Mi piace anche stare fermi, se ci sei tu."}],
   [{"s": "bubu", "t": "Se volete fare una pausa vera, c'è Start. Il gioco aspetta."}],
   [{"s": "dudu", "t": "Ho contato tutte le nuvole che si vedono."}, {"s": "bubu", "t": "Quante sono?"}, {"s": "dudu", "t": "Mi sono distratto a metà."}],
   [{"s": "bubu", "t": "Se vuoi riposare, io resto qui."}, {"s": "dudu", "t": "Ci siamo riposati abbastanza. Più o meno."}]

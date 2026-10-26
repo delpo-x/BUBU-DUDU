@@ -13,8 +13,8 @@ Per frame:
      outline becomes black with alpha from its darkness: the white background vanishes, the
      anti-aliased edge stays smooth and the soft floor shadow turns into a real shadow.
      White inside the outline (the panda's fur) is never reached, so it stays opaque.
-     Files whose name starts with "dudu" have no white in the character, so for them every
-     near-white pixel goes (e.g. the white seen through a skipping rope).
+     Stickers in WHITE_IS_BG have no white in them, so every big near-white area goes too
+     (the white seen through a skipping rope).
 
 Needs Pillow and numpy.
 """
@@ -32,6 +32,7 @@ BG_MIN = 236          # every channel above this, with little colour, is backgro
 LIGHT_LUM = 120       # light enough to become see-through when reached from the border
 GREY_SAT = 48         # max channel spread for "grey"
 SIZE = 256            # longest side of a frame in the sheet
+WHITE_IS_BG = {"dudu_rope"}   # stickers with no white of their own
 QUALITY = 85          # WebP quality of the sheets
 GAP = 4               # widest outline gap closed (pixels, at source size)
 KEEP_RATIO = 0.08      # blobs this fraction of the biggest are kept...
@@ -204,7 +205,7 @@ def frames_of(path):
 
 def build(path, fps):
     name = os.path.splitext(os.path.basename(path))[0]
-    cuts = [cut(f, name.startswith("dudu")) for f in frames_of(path)]
+    cuts = [cut(f, name in WHITE_IS_BG) for f in frames_of(path)]
     box = None
     for c in cuts:
         b = c.getchannel("A").point(lambda v: 255 if v > 8 else 0).getbbox()

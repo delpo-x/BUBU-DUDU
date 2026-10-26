@@ -12,7 +12,7 @@
   {"s": "bubu", "t": "L'ultima pagina è volata verso le stelle."},
   {"s": "dudu", "t": "Bubu... posso dirti una cosa? Non ho più paura di cadere."},
   {"s": "bubu", "t": "Perché sai che arriva il palloncino?"},
-  {"s": "dudu", "t": "Perché so che arrivi tu."}
+  {"s": "dudu", "m": "giggle", "t": "Perché so che arrivi tu."}
  ],
  "c3_r01_in": [
   {"s": "dudu", "m": "sus", "t": "Quei funghi sono... molleggiati?"},

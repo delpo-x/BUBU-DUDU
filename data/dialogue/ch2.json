@@ -66,7 +66,7 @@
   {"s": "bubu", "m": "think", "t": "Sai qual è la cosa che preferisco della nostra casa?"},
   {"s": "dudu", "t": "Il divano nel posto sbagliato?"},
   {"s": "bubu", "m": "cute", "t": "Che quando torno, la luce è accesa. Perché ci sei tu."},
-  {"s": "dudu", "m": "laugh", "t": "...Questa me la segno."}
+  {"s": "dudu", "m": "giggle", "t": "...Questa me la segno."}
  ],
  "c2_cozy_b": [
   {"s": "dudu", "t": "Siamo stanchi, eh?"},

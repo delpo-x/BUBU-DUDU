@@ -10,7 +10,7 @@
   {"s": "narr", "t": "Tutte le pagine sono tornate. Tranne una, che non è mai volata via."},
   {"s": "dudu", "t": "L'ultima pagina è bianca."},
   {"s": "bubu", "m": "cry", "t": "Pensavo l'avessimo persa. Invece era vuota fin dall'inizio."},
-  {"s": "dudu", "t": "Allora non è persa. È per noi."},
+  {"s": "dudu", "m": "giggle", "t": "Allora non è persa. È per noi."},
   {"s": "bubu", "t": "Che ci scriviamo?"},
   {"s": "dudu", "t": "Oggi. Questa giornata a rincorrere il vento."},
   {"s": "bubu", "t": "E domani?"},
@@ -63,7 +63,7 @@
   {"s": "bubu", "t": "Siediti un attimo. Guarda quante stelle."},
   {"s": "dudu", "t": "Ne vedo una che cade."},
   {"s": "bubu", "m": "cute", "t": "Desiderio?"},
-  {"s": "dudu", "t": "Già espresso. Ce l'ho accanto."}
+  {"s": "dudu", "m": "giggle", "t": "Già espresso. Ce l'ho accanto."}
  ],
  "c4_r13_talk": [
   {"s": "dudu", "t": "Siamo quasi alla fine."},

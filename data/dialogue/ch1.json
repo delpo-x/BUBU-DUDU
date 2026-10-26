@@ -76,7 +76,7 @@
  ],
  "c1_cozy_b": [
   {"s": "bubu", "t": "Pausa. Due minuti di niente."},
-  {"s": "dudu", "t": "Mi piace il niente, con te."},
+  {"s": "dudu", "m": "giggle", "t": "Mi piace il niente, con te."},
   {"s": "bubu", "m": "cute", "t": "È il mio niente preferito."}
  ],
  "c1_r13_talk": [
@@ -91,7 +91,7 @@
  "c1_cozy_c": [
   {"s": "dudu", "t": "Il primo abbraccio. Te lo ricordi?"},
   {"s": "bubu", "m": "teary", "t": "Doveva essere un abbraccio di saluto."},
-  {"s": "dudu", "t": "E invece è durato un po' troppo."},
+  {"s": "dudu", "m": "giggle", "t": "E invece è durato un po' troppo."},
   {"s": "bubu", "m": "cute", "t": "Non troppo. Il giusto. Me ne sono accorto dopo."}
  ]
 }
