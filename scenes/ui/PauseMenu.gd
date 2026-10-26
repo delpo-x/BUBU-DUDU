@@ -89,6 +89,7 @@ func open() -> void:
 	_options.visible = false
 	_album.visible = false
 	shown[0].grab_focus()
+	UiTheme.pop_in(_main)
 
 
 func close() -> void:
@@ -103,16 +104,19 @@ func _show_hint() -> void:
 func _open_options() -> void:
 	_main.visible = false
 	_options.open()
+	UiTheme.pop_in(_options)
 
 
 func _open_album() -> void:
 	_main.visible = false
 	_album.open()
+	UiTheme.pop_in(_album)
 
 
 func _back_to_main() -> void:
 	_main.visible = true
 	_buttons[0].grab_focus()
+	UiTheme.pop_in(_main)
 
 
 func _quit() -> void:

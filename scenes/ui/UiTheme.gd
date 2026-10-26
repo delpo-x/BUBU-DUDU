@@ -47,6 +47,14 @@ static func box(color: Color, radius: int = 14, border: int = 0, border_color: C
 	return sb
 
 
+## Soft drop shadow under floating panels (depth without borders).
+static func lift(sb: StyleBoxFlat, size: int = 12) -> StyleBoxFlat:
+	sb.shadow_size = size
+	sb.shadow_color = Color(0.25, 0.1, 0.15, 0.25)
+	sb.shadow_offset = Vector2(0, 5)
+	return sb
+
+
 static func _build() -> Theme:
 	var t := Theme.new()
 	t.default_font = BODY_FONT
@@ -54,13 +62,13 @@ static func _build() -> Theme:
 	t.set_font(&"normal_font", &"RichTextLabel", BODY_FONT)
 	t.set_font(&"italics_font", &"RichTextLabel", BODY_ITALIC)
 	t.set_color(&"font_color", &"Label", INK)
-	t.set_stylebox(&"panel", &"PanelContainer", box(PANEL, 18, 0, Color.TRANSPARENT, 22))
+	t.set_stylebox(&"panel", &"PanelContainer", lift(box(PANEL, 18, 0, Color.TRANSPARENT, 22)))
 	t.set_stylebox(&"panel", &"Panel", box(PANEL, 18))
 
 	# Focus (pad/keyboard) = filled + dark ring; hover (mouse) = ring only, so the two never
 	# look alike when both happen at once; pressed = solid dark rose with white text.
 	t.set_stylebox(&"normal", &"Button", box(Color(1, 1, 1, 0.0), 12, 2, Color(INK, 0.15)))
-	t.set_stylebox(&"hover", &"Button", box(Color(1, 1, 1, 0.0), 12, 2, ACCENT))
+	t.set_stylebox(&"hover", &"Button", box(Color(ACCENT_SOFT, 0.3), 12, 2, ACCENT))
 	t.set_stylebox(&"pressed", &"Button", box(ACCENT_INK, 12, 2, ACCENT_INK))
 	t.set_stylebox(&"focus", &"Button", box(ACCENT_SOFT, 12, 3, ACCENT_INK))
 	t.set_stylebox(&"disabled", &"Button", box(Color(0, 0, 0, 0.04), 12))
@@ -119,11 +127,46 @@ static func button(text: String, on_pressed: Callable) -> Button:
 	var b := Button.new()
 	b.text = text
 	b.custom_minimum_size = Vector2(320, 52)
+	b.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	b.pressed.connect(func() -> void:
 		Sfx.play("ui_accept", 0.0, -4.0)
 		on_pressed.call())
-	b.focus_entered.connect(func() -> void: Sfx.play("ui_move", 0.0, -10.0))
+	b.focus_entered.connect(func() -> void:
+		Sfx.play("ui_move", 0.0, -10.0)
+		_pop(b, 1.04))
+	b.focus_exited.connect(func() -> void: _pop(b, 1.0))
 	return b
+
+
+## Small springy scale on the focused button; skipped with "reduce motion".
+static func _pop(c: Control, target: float) -> void:
+	if not c.is_inside_tree():
+		return
+	var prev: Variant = c.get_meta(&"pop_tween", null)
+	if prev is Tween:
+		(prev as Tween).kill()
+	c.pivot_offset = c.size * 0.5
+	var to := Vector2.ONE * (target if motion() > 0.0 else 1.0)
+	var tw := c.create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tw.tween_property(c, "scale", to, 0.12).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	c.set_meta(&"pop_tween", tw)
+
+
+## Fade + slight grow when a panel appears. Call right after making it visible.
+static func pop_in(c: Control) -> void:
+	c.modulate.a = 1.0
+	c.scale = Vector2.ONE
+	if motion() <= 0.0 or not c.is_inside_tree():
+		return
+	c.modulate.a = 0.0
+	c.scale = Vector2.ONE * 0.95
+	await c.get_tree().process_frame
+	if not is_instance_valid(c):
+		return
+	c.pivot_offset = c.size * 0.5
+	var tw := c.create_tween().set_parallel(true).set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tw.tween_property(c, "modulate:a", 1.0, 0.18)
+	tw.tween_property(c, "scale", Vector2.ONE, 0.22).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 
 ## Wires a vertical list of controls for gamepad/keyboard focus (wraps around).

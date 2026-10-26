@@ -64,7 +64,7 @@ func _ready() -> void:
 	theme = UiTheme.get_theme()
 
 	_panel = PanelContainer.new()
-	_panel.add_theme_stylebox_override(&"panel", UiTheme.box(UiTheme.PANEL, 20, 4, UiTheme.ACCENT, 26))
+	_panel.add_theme_stylebox_override(&"panel", UiTheme.lift(UiTheme.box(UiTheme.PANEL, 20, 4, UiTheme.ACCENT, 26)))
 	add_child(_panel)
 
 	var v := VBoxContainer.new()
