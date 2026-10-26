@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=29 format=3]
 
-[ext_resource type="Texture2D" path="res://art/stickers/bubu_phone.png" id="1"]
+[ext_resource type="Texture2D" path="res://art/stickers/bubu_phone.webp" id="1"]
 
 [sub_resource type="AtlasTexture" id="f0"]
 atlas = ExtResource("1")

@@ -2,22 +2,22 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3fgu3kxd6kp6"
-path="res://.godot/imported/dudu_rope.png-ea8c49cff99f5ff64fd670d6e32667cb.ctex"
+uid="uid://bddy13vkwnmq4"
+path="res://.godot/imported/bubu_laugh.webp-2c7f1d7b48aa406ebccfc83dacc09468.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/stickers/dudu_rope.png"
-dest_files=["res://.godot/imported/dudu_rope.png-ea8c49cff99f5ff64fd670d6e32667cb.ctex"]
+source_file="res://art/stickers/bubu_laugh.webp"
+dest_files=["res://.godot/imported/bubu_laugh.webp-2c7f1d7b48aa406ebccfc83dacc09468.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.85
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

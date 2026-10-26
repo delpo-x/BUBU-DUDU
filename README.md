@@ -65,7 +65,8 @@ Font License (`art/fonts/OFL_*.txt`).
 python -I tools/gen_stickers.py path/to/webp_folder [fps]
 ```
 
-Turns animated sticker WebPs into transparent sprite sheets plus `SpriteFrames` in `art/stickers/`:
+Turns animated sticker WebPs into transparent lossy WebP sprite sheets (kept lossy on export by their
+`.import`) plus `SpriteFrames` in `art/stickers/`:
 the white background, floating captions and stray text go, the floor shadow becomes see-through.
 Files named `dudu_*` drop all near-white (the bear has none); `bubu_*` keep white inside the outline.
 `scenes/ui/Stickers.gd` draws them: laughs in shared dialogue portraits, the skipping rope on the menu,

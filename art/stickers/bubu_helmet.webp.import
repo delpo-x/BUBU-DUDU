@@ -2,22 +2,22 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpe35m88424c6"
-path="res://.godot/imported/bubu_laugh.png-07fdf462d654609d70e026e2548c0993.ctex"
+uid="uid://clfw6obm0pw0i"
+path="res://.godot/imported/bubu_helmet.webp-dbb7886bc692ee0eea2429617502c7a3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/stickers/bubu_laugh.png"
-dest_files=["res://.godot/imported/bubu_laugh.png-07fdf462d654609d70e026e2548c0993.ctex"]
+source_file="res://art/stickers/bubu_helmet.webp"
+dest_files=["res://.godot/imported/bubu_helmet.webp-dbb7886bc692ee0eea2429617502c7a3.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.85
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

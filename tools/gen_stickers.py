@@ -2,7 +2,7 @@
 
     python -I tools/gen_stickers.py path/to/folder_with_webp [fps]
 
-For every <name>.webp in the folder it writes art/stickers/<name>.png (frames in a grid, row by row)
+For every <name>.webp in the folder it writes art/stickers/<name>.webp (lossy, frames in a grid, row by row)
 and art/stickers/<name>.tres (SpriteFrames, animation "default", looping), cropped to the
 union of all frames so the character never jumps inside its box.
 
@@ -32,6 +32,7 @@ BG_MIN = 236          # every channel above this, with little colour, is backgro
 LIGHT_LUM = 120       # light enough to become see-through when reached from the border
 GREY_SAT = 48         # max channel spread for "grey"
 SIZE = 256            # longest side of a frame in the sheet
+QUALITY = 85          # WebP quality of the sheets
 
 
 def flood(mask, seeds):
@@ -144,8 +145,15 @@ def build(path, fps):
     for i, c in enumerate(cuts):
         sheet.paste(c.crop(box).resize((fw, fh), Image.LANCZOS), ((i % cols) * fw, (i // cols) * fh))
     os.makedirs(OUT, exist_ok=True)
-    sheet.save(os.path.join(OUT, name + ".png"), optimize=True)
-    res = "res://art/stickers/%s.png" % name
+    # Lossy WebP keeps the repo small; the import file keeps it lossy in exports too
+    # (Godot's default would re-encode it losslessly).
+    sheet.save(os.path.join(OUT, name + ".webp"), quality=QUALITY, method=6)
+    imp = os.path.join(OUT, name + ".webp.import")
+    if not os.path.exists(imp):
+        with open(imp, "w", encoding="utf-8", newline="\n") as f:
+            f.write('[remap]\n\nimporter="texture"\ntype="CompressedTexture2D"\n\n'
+                    '[params]\n\ncompress/mode=1\ncompress/lossy_quality=%.2f\n' % (QUALITY / 100.0))
+    res = "res://art/stickers/%s.webp" % name
     lines = ['[gd_resource type="SpriteFrames" load_steps=%d format=3]' % (len(cuts) + 2), "",
              '[ext_resource type="Texture2D" path="%s" id="1"]' % res, ""]
     for i in range(len(cuts)):

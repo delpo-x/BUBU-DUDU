@@ -2,22 +2,22 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqu08dtxfkt5r"
-path="res://.godot/imported/bubu_phone.png-b356dcd6fee757e1bae3ebbcb9f65c8e.ctex"
+uid="uid://b56na65ekgeuk"
+path="res://.godot/imported/dudu_snack.webp-310bba5addb73bc193e01586a187b292.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/stickers/bubu_phone.png"
-dest_files=["res://.godot/imported/bubu_phone.png-b356dcd6fee757e1bae3ebbcb9f65c8e.ctex"]
+source_file="res://art/stickers/dudu_snack.webp"
+dest_files=["res://.godot/imported/dudu_snack.webp-310bba5addb73bc193e01586a187b292.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.85
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

@@ -2,22 +2,22 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b76k6f6kbywof"
-path="res://.godot/imported/bubu_grudge.png-21151fc317ab9b6d63f67b06353bbc79.ctex"
+uid="uid://cfxddwyw3ha8o"
+path="res://.godot/imported/bubu_back.webp-92c0a522b4e93bef0b0d0bd6f5427a50.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/stickers/bubu_grudge.png"
-dest_files=["res://.godot/imported/bubu_grudge.png-21151fc317ab9b6d63f67b06353bbc79.ctex"]
+source_file="res://art/stickers/bubu_back.webp"
+dest_files=["res://.godot/imported/bubu_back.webp-92c0a522b4e93bef0b0d0bd6f5427a50.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=0.85
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
