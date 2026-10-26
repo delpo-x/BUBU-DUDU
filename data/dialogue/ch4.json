@@ -15,6 +15,8 @@
   {"s": "dudu", "t": "Oggi. Questa giornata a rincorrere il vento."},
   {"s": "bubu", "t": "E domani?"},
   {"s": "dudu", "t": "Domani compriamo un album nuovo. Questo è quasi pieno."},
+  {"s": "bubu", "m": "teary", "if": "hugs >= 5", "t": "E dentro ci mettiamo anche questi {hugs} abbracci."},
+  {"s": "dudu", "m": "giggle", "if": "memories == memories_total", "t": "Abbiamo trovato tutte le pagine. Tutte e {memories_total}."},
   {"s": "both", "m": "cheers", "t": "Insieme."}
  ],
  "c4_r01_in": [
@@ -80,6 +82,7 @@
  "c4_cozy_c": [
   {"s": "dudu", "t": "Grazie, Bubu. Per avermi insegnato a giocare."},
   {"s": "bubu", "m": "teary", "t": "Grazie a te, Dudu. Per aver avuto voglia di imparare."},
+  {"s": "bubu", "m": "cute", "if": "piggy >= 15", "t": "E per tutte le volte che mi hai portato in spalla. {piggy}, più o meno."},
   {"s": "dudu", "t": "Lo rifacciamo?"},
   {"s": "bubu", "m": "hey", "t": "Tutti i giorni. Anche senza vento."}
  ]

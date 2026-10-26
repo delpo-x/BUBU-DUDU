@@ -87,6 +87,7 @@ func _hug(a: BasePlayer, b: BasePlayer) -> void:
 	a.show_hearts(2.2)
 	b.show_hearts(2.2)
 	Sfx.play("hug", 0.0)
+	GameState.bump_stat("hugs")
 	Voices.action("bubu", "hug")
 	Voices.action("dudu", "hug")
 	Stickers.pop(get_parent(), "both_hug", global_position - Vector2(0, size.y + 20.0), 150.0)

@@ -16,6 +16,9 @@ SPEAKERS = ("bubu", "dudu", "both", "narr")
 MAX_LINE = 170          # characters in one dialogue line before the box gets crowded
 MIN_CONTRAST = 4.5
 TEXT_TOKENS = ("INK", "MUTED", "ACCENT_INK", "BUBU", "DUDU")
+# Names a dialogue condition or {placeholder} may use: read from scenes/core/DialogueText.gd.
+DIALOGUE_VARS = re.findall(r'"(\w+)"', re.search(r"const VARS := \[(.*?)\]",
+                           open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scenes", "core", "DialogueText.gd"), encoding="utf-8").read(), re.S).group(1))
 problems = []
 
 
@@ -47,6 +50,15 @@ def check_lines(where, lines):
         mood = ln.get("m")
         if mood is not None and not any(os.path.exists(path("art", "stickers", "%s_%s.tres" % (w, mood))) for w in (ln["s"], "both")):
             fail("%s[%d]: no sticker art/stickers/%s_%s.tres for mood" % (where, i, ln["s"], mood))
+        cond = ln.get("if")
+        if cond is not None:
+            words = set(re.findall(r"[A-Za-z_]+", re.sub(r"\"[^\"]*\"|'[^']*'", "", cond)))
+            unknown = words - set(DIALOGUE_VARS) - {"mem", "seen", "and", "or", "not", "true", "false"}
+            if unknown or not cond.strip():
+                fail("%s[%d]: condition uses unknown names %s" % (where, i, sorted(unknown)))
+        for ph in re.findall(r"\{([^{}|]*)\}", t):
+            if ph not in DIALOGUE_VARS:
+                fail("%s[%d]: unknown placeholder {%s}" % (where, i, ph))
         if t != t.strip() or "  " in t or re.search(r"[.!?,]{4,}", t):
             fail("%s[%d]: stray spaces or repeated punctuation" % (where, i))
 

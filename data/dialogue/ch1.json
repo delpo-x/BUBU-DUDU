@@ -14,6 +14,7 @@
   {"s": "bubu", "t": "Il vento le ha portate verso il borgo. Si vedono i tetti, laggiù."},
   {"s": "dudu", "t": "Sai che all'inizio pensavo di essere un disastro?"},
   {"s": "bubu", "m": "hey", "t": "Sei stato bravissimo. E se cadi, ci sono io."},
+  {"s": "dudu", "m": "handsome", "if": "falls_dudu == 0", "t": "Veramente non sono mai caduto. Nemmeno una volta."},
   {"s": "dudu", "t": "E se cadi tu, ci sono io. Va bene, andiamo."}
  ],
  "c1_r01_in": [

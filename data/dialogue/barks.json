@@ -31,7 +31,9 @@
   [{"s": "bubu", "t": "Ok, cambio di strategia: andiamo piano, un pezzo alla volta."}],
   [{"s": "dudu", "t": "Quante volte siamo caduti?"}, {"s": "bubu", "t": "Abbastanza da diventare esperti di palloncini."}],
   [{"s": "dudu", "t": "Forse la stanza vuole solo un po' di rispetto."}, {"s": "bubu", "t": "O un po' di calma. Ricominciamo piano."}],
-  [{"s": "bubu", "t": "Regola numero uno: nessuna fretta."}, {"s": "dudu", "t": "E la regola due?"}, {"s": "bubu", "t": "Ripeti la regola uno."}]
+  [{"s": "bubu", "t": "Regola numero uno: nessuna fretta."}, {"s": "dudu", "t": "E la regola due?"}, {"s": "bubu", "t": "Ripeti la regola uno."}],
+  [{"s": "dudu", "m": "sus", "if": "falls_dudu > falls_bubu + 5", "t": "Ho contato: {falls_dudu} cadute io, {falls_bubu} tu."}, {"s": "bubu", "m": "smug", "if": "falls_dudu > falls_bubu + 5", "t": "Non è una gara."}, {"s": "dudu", "if": "falls_dudu > falls_bubu + 5", "t": "Lo dici perché stai vincendo."}],
+  [{"s": "bubu", "m": "cry", "if": "falls_bubu > falls_dudu", "t": "Sono caduto più di te. {falls_bubu} volte."}, {"s": "dudu", "m": "giggle", "if": "falls_bubu > falls_dudu", "t": "Il grande esperto di videogiochi."}]
  ],
  "call_bubu": [
   [{"s": "dudu", "t": "Arrivo! Arrivo! Wheee!"}],
@@ -52,7 +54,8 @@
   [{"s": "bubu", "t": "Ok capo, eccomi."}, {"s": "dudu", "t": "Mi piace come suona, capo."}],
   [{"s": "bubu", "t": "Eccomi. Hai trovato qualcosa di bello?"}, {"s": "dudu", "t": "Sì. Te."}],
   [{"s": "dudu", "t": "Hai visto che ti ho chiamato bene?"}, {"s": "bubu", "t": "Benissimo. Quasi ti sentivo anche senza."}],
-  [{"s": "bubu", "t": "Sono arrivato. Dov'è la meraviglia?"}, {"s": "dudu", "t": "Quella sei tu, ma intanto guarda qui."}]
+  [{"s": "bubu", "t": "Sono arrivato. Dov'è la meraviglia?"}, {"s": "dudu", "t": "Quella sei tu, ma intanto guarda qui."}],
+  [{"s": "bubu", "m": "think", "if": "calls_dudu > calls_bubu + 3", "t": "Ultimamente sei tu che chiami me."}, {"s": "dudu", "m": "giggle", "if": "calls_dudu > calls_bubu + 3", "t": "Ti piace farti chiamare, ammettilo."}]
  ],
  "piggy": [
   [{"s": "dudu", "t": "Sei più leggero di quanto pensassi."}, {"s": "bubu", "t": "Sono fatto di bambù e buone intenzioni."}],
@@ -63,7 +66,8 @@
   [{"s": "bubu", "t": "Pronti? Al tre. Anzi, al due. Anzi, ora."}],
   [{"s": "dudu", "t": "Non dondolare, eh."}, {"s": "bubu", "t": "Sono un panda esperto. Non dondolo mai. Quasi."}],
   [{"s": "bubu", "t": "Da quassù vedo anche i tuoi pensieri."}, {"s": "dudu", "t": "Allora sai cosa sto pensando."}, {"s": "bubu", "t": "Che ho fame?"}, {"s": "dudu", "t": "Esatto."}],
-  [{"s": "dudu", "t": "Comodo, lì sopra?"}, {"s": "bubu", "t": "Il miglior posto a sedere del prato."}]
+  [{"s": "dudu", "t": "Comodo, lì sopra?"}, {"s": "bubu", "t": "Il miglior posto a sedere del prato."}],
+  [{"s": "dudu", "if": "piggy >= 10", "t": "Groppa numero {piggy}. Le conto, sai?"}, {"s": "bubu", "if": "piggy >= 10", "t": "Lo so. Anch'io."}]
  ],
  "memory": [
   [{"s": "dudu", "t": "Un'altra pagina! Questa me la ricordo benissimo."}],
@@ -74,7 +78,8 @@
   [{"s": "bubu", "t": "Questa l'avevo dimenticata. Grazie per averla trovata con me."}],
   [{"s": "bubu", "t": "Questa pagina sa di casa."}, {"s": "dudu", "t": "Sa di tè e di coperte."}],
   [{"s": "dudu", "t": "Metto la pagina al sicuro, qui."}, {"s": "bubu", "t": "Con cura. È la cosa più preziosa che abbiamo."}],
-  [{"s": "bubu", "t": "Ogni pagina ci riporta indietro."}, {"s": "dudu", "t": "E poi ci rimette qui, un po' più vicini."}]
+  [{"s": "bubu", "t": "Ogni pagina ci riporta indietro."}, {"s": "dudu", "t": "E poi ci rimette qui, un po' più vicini."}],
+  [{"s": "dudu", "t": "Siamo a {memories} pagine su {memories_total}."}, {"s": "bubu", "t": "{Un passo alla volta.|Ne mancano sempre meno.|Il vento sta perdendo.}"}]
  ],
  "progress": [
   [{"s": "dudu", "t": "Ha funzionato! Abbiamo fatto qualcosa!"}],
@@ -108,7 +113,8 @@
   [{"s": "dudu", "m": "giggle", "t": "Mi piace anche stare fermi, se ci sei tu."}],
   [{"s": "bubu", "t": "Se volete fare una pausa vera, c'è Start. Il gioco aspetta."}],
   [{"s": "dudu", "t": "Ho contato tutte le nuvole che si vedono."}, {"s": "bubu", "t": "Quante sono?"}, {"s": "dudu", "t": "Mi sono distratto a metà."}],
-  [{"s": "bubu", "t": "Se vuoi riposare, io resto qui."}, {"s": "dudu", "t": "Ci siamo riposati abbastanza. Più o meno."}]
+  [{"s": "bubu", "t": "Se vuoi riposare, io resto qui."}, {"s": "dudu", "t": "Ci siamo riposati abbastanza. Più o meno."}],
+  [{"s": "bubu", "t": "Pausa {merenda|tè|biscotti}?"}, {"s": "dudu", "m": "snack", "t": "{Sempre sì.|Pensavo non lo chiedessi più.|Ne ho già una in tasca.}"}]
  ],
  "resume": [
   [{"s": "dudu", "t": "Eccoci di nuovo!"}, {"s": "bubu", "t": "Dove eravamo rimasti?"}, {"s": "dudu", "t": "Qui. Insieme."}],
@@ -116,7 +122,9 @@
   [{"s": "dudu", "t": "Mi eri mancato, gioco."}, {"s": "bubu", "t": "E io?"}, {"s": "dudu", "t": "Tu non sei mai andato via."}],
   [{"s": "bubu", "t": "Riprendiamo? Ho le zampe che scalpitano."}],
   [{"s": "dudu", "t": "Dov'è finita l'ultima pagina?"}, {"s": "bubu", "t": "Ci aspetta. Andiamo a prenderla."}],
-  [{"s": "bubu", "t": "Eccoci di nuovo. Il vento non si è stancato."}, {"s": "dudu", "t": "Noi neanche."}]
+  [{"s": "bubu", "t": "Eccoci di nuovo. Il vento non si è stancato."}, {"s": "dudu", "t": "Noi neanche."}],
+  [{"s": "bubu", "if": "memories > 0", "t": "L'ultima pagina che abbiamo trovato era «{last_memory}»."}, {"s": "dudu", "if": "memories > 0", "t": "Me la ricordo. Andiamo a cercare la prossima."}],
+  [{"s": "dudu", "if": "hours >= 2", "t": "Giochiamo insieme da più di {hours} ore, sai?"}, {"s": "bubu", "m": "cute", "if": "hours >= 2", "t": "E mi sembrano dieci minuti."}]
  ],
  "fast": [
   [{"s": "dudu", "t": "Quella l'abbiamo fatta in un attimo!"}, {"s": "bubu", "t": "Siamo una squadra pericolosa."}],
@@ -134,7 +142,8 @@
   [{"s": "dudu", "t": "Che bello camminare senza fretta."}, {"s": "bubu", "t": "Abbiamo un po' di fretta, in realtà."}, {"s": "dudu", "t": "Senza fretta, ma veloci."}],
   [{"s": "bubu", "t": "Senti il vento tra l'erba?"}, {"s": "dudu", "t": "Sembra che sussurri."}],
   [{"s": "dudu", "t": "Quelle nuvole hanno la forma di un panda."}, {"s": "bubu", "t": "O di un orso. Dipende dai punti di vista."}],
-  [{"s": "bubu", "t": "Un posto così meriterebbe una panchina."}, {"s": "dudu", "t": "Ci siamo quasi arrivati, a una."}]
+  [{"s": "bubu", "t": "Un posto così meriterebbe una panchina."}, {"s": "dudu", "t": "Ci siamo quasi arrivati, a una."}],
+  [{"s": "dudu", "t": "Senti che profumo {di fiori|di erba tagliata|di domenica}."}]
  ],
  "ambient_c2": [
   [{"s": "dudu", "t": "Senti? Qualcuno sta cucinando."}, {"s": "bubu", "m": "pan", "t": "Non bruciare niente, tu. Siamo ospiti."}],
@@ -164,6 +173,7 @@
   [{"s": "dudu", "t": "Mi piace la notte con te. Sembra tutto possibile."}],
   [{"s": "dudu", "t": "Quella stella si muove."}, {"s": "bubu", "t": "È una lucciola."}, {"s": "dudu", "t": "...Allora è una stella piccola."}],
   [{"s": "bubu", "t": "Il buio è meno buio quando si è in due."}, {"s": "dudu", "t": "Lo dici sempre."}],
-  [{"s": "dudu", "t": "Dove andremo, dopo?"}, {"s": "bubu", "t": "Dove porta il vento. E se il vento non c'è, ci inventiamo un posto."}]
+  [{"s": "dudu", "t": "Dove andremo, dopo?"}, {"s": "bubu", "t": "Dove porta il vento. E se il vento non c'è, ci inventiamo un posto."}],
+  [{"s": "bubu", "t": "{Una stella cadente!|Guarda, la luna.|Senti i grilli?}"}, {"s": "dudu", "t": "{Esprimi un desiderio.|È bellissima.|Cantano per noi.}"}]
  ]
 }

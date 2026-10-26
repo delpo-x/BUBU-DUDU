@@ -193,6 +193,7 @@ func collect_memory(id: String) -> bool:
 	if memories.get(id, false):
 		return false
 	memories[id] = true
+	flags["stat_last_memory"] = id
 	save_progress()
 	memory_collected.emit(id)
 	return true
@@ -207,6 +208,12 @@ func set_flag(key: String, value: Variant = true) -> void:
 		return
 	flags[key] = value
 	save_progress()
+
+
+## Counts something the players did ("falls_bubu", "hugs"...), for dialogue variations
+## (see DialogueText). Kept in the save's flags, so a new game starts from zero.
+func bump_stat(stat_name: String) -> void:
+	set_flag("stat_" + stat_name, int(flags.get("stat_" + stat_name, 0)) + 1)
 
 
 func get_flag(key: String, default: Variant = false) -> Variant:

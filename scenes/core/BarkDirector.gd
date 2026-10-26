@@ -113,6 +113,7 @@ func _on_room_completed() -> void:
 
 
 func _on_fall(pl: BasePlayer) -> void:
+	GameState.bump_stat("falls_" + _who(pl))
 	_room_falls += 1
 	if _room_falls >= 4 and not _once.has("falls_many"):
 		_once["falls_many"] = true
@@ -122,10 +123,12 @@ func _on_fall(pl: BasePlayer) -> void:
 
 
 func _on_call(pl: BasePlayer) -> void:
+	GameState.bump_stat("calls_" + _who(pl))
 	request("call_" + _who(pl))
 
 
 func _on_piggy(_rider: BasePlayer, _carrier: BasePlayer) -> void:
+	GameState.bump_stat("piggy")
 	request("piggy")
 
 
@@ -287,6 +290,12 @@ func pick(pool: String) -> Array:
 		order[j] = tmp
 	var key := "bark_" + pool
 	var pos := int(GameState.get_flag(key, 0))
+	# Entries whose conditions all fail right now are passed over (see DialogueText).
+	for tries in order.size():
+		var entry: Variant = entries[order[(pos + tries) % order.size()]]
+		var lines: Array = DialogueText.resolve(entry) if entry is Array else []
+		if not lines.is_empty():
+			GameState.set_flag(key, pos + tries + 1)
+			return lines
 	GameState.set_flag(key, pos + 1)
-	var entry: Variant = entries[order[pos % order.size()]]
-	return entry if entry is Array else []
+	return []

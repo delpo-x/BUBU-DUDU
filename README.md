@@ -135,6 +135,14 @@ This rewrites `scenes/rooms/ch*/`, `tests/solutions/` and `data/chapters.json`. 
 dialogue and memory id exists and prints the duration estimate. `python -I tools/gen_rooms.py dev`
 writes one whitebox room per puzzle beat.
 
+## Dialogue variations
+
+Any dialogue or contextual line can change with how the pair has played (`scenes/core/DialogueText.gd`):
+`"if"` holds a condition (`"falls_dudu > falls_bubu"`, `"mem('m2_b')"`, `"hugs >= 5"`) and the line is
+skipped when it is false; `{a|b|c}` in the text picks one at random; `{name}` puts in a value
+(`{falls}`, `{hugs}`, `{piggy}`, `{memories}`, `{last_memory}`, `{hours}`, `{clumsier}`...). Counts
+live in the save (`stat_*` flags, reset by a new game). `check_content.py` rejects unknown names.
+
 ## Contextual lines
 
 `data/dialogue/barks.json` holds the short exchanges the characters say during play (falls, calls,

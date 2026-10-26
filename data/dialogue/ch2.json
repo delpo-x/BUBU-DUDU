@@ -2,6 +2,8 @@
  "c2_intro": [
   {"s": "narr", "t": "Il borgo: tetti rossi, lanterne, e pagine incastrate dappertutto."},
   {"s": "dudu", "t": "Sembra il quartiere della nostra prima casa."},
+  {"s": "bubu", "m": "pig", "if": "falls_dudu >= 10", "t": "Nel prato sei caduto {falls_dudu} volte. Qui ci sono i tetti: occhio."},
+  {"s": "dudu", "m": "sus", "if": "falls_dudu >= 10", "t": "Le hai contate?"},
   {"s": "bubu", "m": "sulk", "t": "Con meno scatoloni. E meno discussioni su dove mettere il divano."},
   {"s": "dudu", "m": "handsome", "t": "Il divano stava benissimo dove dicevo io."},
   {"s": "bubu", "m": "mad", "t": "Il divano non entrava dalla porta, dove dicevi tu."}

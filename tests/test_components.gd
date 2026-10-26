@@ -13,6 +13,7 @@ func run() -> void:
 	GameState.save_path = SAVE
 	GameState.delete_progress()
 	_test_save()
+	_test_dialogue_text()
 
 	var game := await _game("res://scenes/rooms/dev/Room_steps.tscn")
 	if game != null:
@@ -38,6 +39,24 @@ func run() -> void:
 	GameState.delete_progress()
 	GameState.save_path = _old_save
 	GameState.load_progress()
+
+
+## Dialogue variations: conditions pick lines, {name} fills in, {a|b} picks one, mem() works.
+func _test_dialogue_text() -> void:
+	GameState.new_game()
+	GameState.bump_stat("falls_dudu")
+	GameState.bump_stat("falls_dudu")
+	GameState.bump_stat("falls_bubu")
+	var lines := DialogueText.resolve([
+		{"s": "dudu", "if": "falls_dudu > falls_bubu", "t": "Cadute: {falls_dudu} e {falls_bubu}."},
+		{"s": "bubu", "if": "falls_bubu > falls_dudu", "t": "Mai detta."},
+		{"s": "bubu", "if": "not mem('m4_e')", "t": "{uno|uno}, {clumsier}, {nessuno}"},
+	])
+	check(lines.size() == 2 and lines[0]["t"] == "Cadute: 2 e 1." and not lines[0].has("if"),
+		"dialogue conditions choose lines and fill in counts")
+	check(lines.size() == 2 and lines[1]["t"] == "uno, Dudu, {nessuno}", "dialogue alternatives pick one, unknown names stay")
+	GameState.new_game()
+	check(int(GameState.get_flag("stat_falls_dudu", 0)) == 0, "a new game starts the counts from zero")
 
 
 func _test_save() -> void:

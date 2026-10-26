@@ -120,6 +120,7 @@ func play_dialogue(id: StringName) -> void:
 func play_lines(lines: Array, id: StringName = &"") -> void:
 	while _busy:
 		await finished
+	lines = DialogueText.resolve(lines)
 	if lines.is_empty():
 		return
 	_busy = true
