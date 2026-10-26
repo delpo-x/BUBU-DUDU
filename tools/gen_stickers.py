@@ -33,6 +33,8 @@ LIGHT_LUM = 120       # light enough to become see-through when reached from the
 GREY_SAT = 48         # max channel spread for "grey"
 SIZE = 256            # longest side of a frame in the sheet
 WHITE_IS_BG = {"dudu_rope"}   # stickers with no white of their own
+## Watermarks printed over the character: sticker -> box (x0, y0, x1, y1) in source pixels.
+WATERMARKS = {"dudu_walk": (130, 335, 270, 380)}
 QUALITY = 85          # WebP quality of the sheets
 GAP = 4               # widest outline gap closed (pixels, at source size)
 KEEP_RATIO = 0.08      # blobs this fraction of the biggest are kept...
@@ -185,7 +187,7 @@ def cut(frame, white_is_bg=False):
     return Image.fromarray(out, "RGBA")
 
 
-def frames_of(path):
+def frames_of(path, watermark=None):
     im = Image.open(path)
     # Stickers drawn on a band inside a transparent canvas: crop to the band so where it
     # cuts the character counts as the image border (see cropped_body).
@@ -195,17 +197,55 @@ def frames_of(path):
         b = im.convert("RGBA").getchannel("A").point(lambda v: 255 if v > 200 else 0).getbbox()
         if b:
             box = b if box is None else (min(box[0], b[0]), min(box[1], b[1]), max(box[2], b[2]), max(box[3], b[3]))
+    flats = []
     for i in range(getattr(im, "n_frames", 1)):
         im.seek(i)
         # Some stickers pad with transparent pixels: flatten on white like the rest.
         flat = Image.new("RGBA", im.size, (255, 255, 255, 255))
         flat.alpha_composite(im.convert("RGBA"))
-        yield flat.crop(box) if box else flat
+        flats.append(flat)
+    if watermark:
+        flats = unwatermark(flats, watermark)
+    return [f.crop(box) if box else f for f in flats]
+
+
+def unwatermark(frames, box):
+    """Paints over a watermark printed on the character: inside `box` (source pixels),
+    the pixels that stay the same white or near-black in every frame while the character
+    moves under them are the text. They are filled from their neighbours, frame by frame."""
+    x0, y0, x1, y1 = box
+    stack = np.stack([np.asarray(f.convert("RGB")).astype(np.int16)[y0:y1, x0:x1] for f in frames])
+    hi, lo = stack.max(axis=0), stack.min(axis=0)
+    still = (hi - lo).max(axis=2) < 90
+    ink = (lo.min(axis=2) > 190) | (hi.max(axis=2) < 110)
+    mask = dilate(still & ink, 3)
+    out = []
+    for f in frames:
+        a = np.asarray(f.convert("RGB")).astype(np.float32)
+        reg = a[y0:y1, x0:x1].copy()
+        known = ~mask
+        # Diffusion fill: holes take the average of their known neighbours, ring by ring.
+        while not known.all():
+            acc = np.zeros_like(reg)
+            cnt = np.zeros(mask.shape, np.float32)
+            for dy, dx in ((-1, 0), (1, 0), (0, -1), (0, 1)):
+                k = np.roll(known, (dy, dx), (0, 1))
+                acc += np.roll(reg, (dy, dx), (0, 1)) * k[..., None]
+                cnt += k
+            grow = ~known & (cnt > 0)
+            if not grow.any():
+                break
+            reg[grow] = acc[grow] / cnt[grow][:, None]
+            known = known | grow
+        a[y0:y1, x0:x1] = reg
+        out.append(Image.fromarray(a.clip(0, 255).astype(np.uint8), "RGB").convert("RGBA"))
+    return out
 
 
 def build(path, fps):
     name = os.path.splitext(os.path.basename(path))[0]
-    cuts = [cut(f, name in WHITE_IS_BG) for f in frames_of(path)]
+    frames = frames_of(path, WATERMARKS.get(name))
+    cuts = [cut(f, name in WHITE_IS_BG) for f in frames]
     box = None
     for c in cuts:
         b = c.getchannel("A").point(lambda v: 255 if v > 8 else 0).getbbox()

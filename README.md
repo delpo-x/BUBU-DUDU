@@ -68,6 +68,8 @@ python -I tools/gen_stickers.py path/to/webp_folder [fps]
 Turns animated sticker WebPs into transparent lossy WebP sprite sheets (kept lossy on export by their
 `.import`) plus `SpriteFrames` in `art/stickers/`:
 the white background, floating captions and stray text go, the floor shadow becomes see-through.
+A watermark printed on the character (`WATERMARKS`: sticker -> box) is found as the pixels that
+stay put while the character moves, and painted over from its surroundings.
 White inside the outline stays; stickers listed in `WHITE_IS_BG` (the skipping rope) drop all big near-white areas.
 `scenes/ui/Stickers.gd` draws them: laughs in shared dialogue portraits, the skipping rope on the menu,
 Bubu's postcard in the album and the two hugging in cozy spots.
