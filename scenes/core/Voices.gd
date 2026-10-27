@@ -148,6 +148,8 @@ func stop_all() -> void:
 	for p in _players:
 		p.stop()
 		p.stream = null
+	# Recordings load again on demand; holding them here outlives the engine at exit.
+	_recorded.clear()
 
 
 func _exit_tree() -> void:
