@@ -78,7 +78,7 @@ A watermark printed on the character (`WATERMARKS`: sticker -> box) is found as 
 stay put while the character moves, and painted over from its surroundings.
 White inside the outline stays; stickers listed in `WHITE_IS_BG` (the skipping rope) drop all big near-white areas.
 `scenes/ui/Stickers.gd` draws them: laughs in shared dialogue portraits, the skipping rope on the menu,
-Bubu's postcard in the album and the two hugging in cozy spots.
+Bubu's postcard in the album, the two hugging in cozy spots and the taxi that drives in over each chapter title.
 A `<who>_balloon` sticker (hanging ones listed in `HeartBalloon.HANGING` get a heart on their rope) replaces that character's heart balloon when they fall, `<who>_fly` when
 they are called over (`HeartBalloon.FACING` says which way each one is drawn going). "Riduci movimento" holds the first frame.
 Frames cut by the image border (a close-up) keep their white: the stretch between two outline crossings

@@ -10,7 +10,7 @@ extends Node2D
 ## who -> pose -> sticker. A missing pose falls back along FALLBACK.
 const POSES := {
 	"bubu": {"idle": "bubu_shy", "walk": "bubu_run", "jump": "bubu_jump", "wave": "bubu_wave"},
-	"dudu": {"idle": "dudu_idle", "walk": "dudu_walk", "jump": "dudu_jump"},
+	"dudu": {"idle": "dudu_idle", "walk": "dudu_stroll", "jump": "dudu_jump"},
 }
 const FALLBACK := {"fall": "jump", "climb": "jump", "wave": "idle", "carry": "idle", "ride": "idle", "jump": "idle", "walk": "idle"}
 ## Poses shown as one still frame of a sticker: sticker -> pose -> frame (the jump stickers

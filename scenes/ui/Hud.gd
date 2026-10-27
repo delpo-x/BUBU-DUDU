@@ -16,6 +16,7 @@ var _memory_time: float = 0.0
 
 var _title_root: Control
 var _title_label: Label
+var _taxi: StickerView
 var _subtitle_label: Label
 var _chapter_label: Label
 
@@ -84,6 +85,12 @@ func _ready() -> void:
 	tv.add_child(_chapter_label)
 	tv.add_child(_title_label)
 	tv.add_child(_subtitle_label)
+	# The two drive in by taxi above the chapter title.
+	_taxi = StickerView.new("both_taxi", Vector2(230, 185))
+	_taxi.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
+	_taxi.offset_top = 40.0
+	_taxi.offset_bottom = 225.0
+	_title_root.add_child(_taxi)
 	_title_root.modulate.a = 0.0
 	_title_root.visible = false
 
@@ -151,8 +158,12 @@ func show_title(chapter_text: String, title: String, subtitle: String, hold: flo
 	_subtitle_label.text = subtitle
 	_title_root.visible = true
 	Sfx.play("chapter", 0.0)
+	# Taxi rolls in from the left edge ("Riduci movimento": already parked).
+	var drive := 760.0 * UiTheme.motion()
+	_set_taxi_x(-115.0 - drive)
 	var tw := create_tween()
 	tw.tween_property(_title_root, "modulate:a", 1.0, 0.6)
+	tw.parallel().tween_method(_set_taxi_x, -115.0 - drive, -115.0, 1.1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	await tw.finished
 	var t := 0.0
 	while t < hold and is_inside_tree():
@@ -162,3 +173,8 @@ func show_title(chapter_text: String, title: String, subtitle: String, hold: flo
 	tw2.tween_property(_title_root, "modulate:a", 0.0, 0.6)
 	await tw2.finished
 	_title_root.visible = false
+
+
+func _set_taxi_x(left: float) -> void:
+	_taxi.offset_left = left
+	_taxi.offset_right = left + 230.0
