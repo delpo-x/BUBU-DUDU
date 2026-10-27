@@ -26,6 +26,8 @@ var _next_voice: int = 0
 var _last_played: Dictionary = {}
 
 var _music_player: AudioStreamPlayer
+## Plays art/music/<theme>.mp3 when that file exists, in place of the generated theme.
+var _file_player: AudioStreamPlayer
 var _music_playback: AudioStreamGeneratorPlayback
 var _music_theme: String = ""
 var _rng := RandomNumberGenerator.new()
@@ -66,6 +68,9 @@ func _ready() -> void:
 	# Generated audio must be mixed by the engine (the web default "sample" mode can't).
 	_music_player.playback_type = AudioServer.PLAYBACK_TYPE_STREAM
 	add_child(_music_player)
+	_file_player = AudioStreamPlayer.new()
+	_file_player.bus = &"Music"
+	add_child(_file_player)
 
 
 func _process(delta: float) -> void:
@@ -75,6 +80,10 @@ func _process(delta: float) -> void:
 	if _music_gain <= 0.0 and _music_target_gain <= 0.0 and _music_player.playing:
 		_music_player.stop()
 		_music_playback = null
+	if _file_player.playing:
+		_file_player.volume_db = linear_to_db(maxf(_music_gain, 0.0001))
+		if _music_gain <= 0.0 and _music_target_gain <= 0.0:
+			_file_player.stop()
 
 
 ## Plays a one-shot effect. Unknown names are ignored (a warning in debug builds).
@@ -103,10 +112,23 @@ func has_sound(sfx_name: String) -> bool:
 func play_music(theme: String) -> void:
 	if not MUSIC_THEMES.has(theme):
 		theme = "menu"
-	if theme == _music_theme and _music_player.playing:
+	if theme == _music_theme and (_music_player.playing or _file_player.playing):
 		_music_target_gain = 1.0
 		return
 	_music_theme = theme
+	var path := "res://art/music/%s.mp3" % theme
+	# A scene freed while the game quits may ask for music after _exit_tree.
+	if ResourceLoader.exists(path) and is_inside_tree():
+		var mp3 := load(path) as AudioStreamMP3
+		mp3.loop = true
+		_music_player.stop()
+		_music_playback = null
+		_file_player.stream = mp3
+		_music_gain = 0.0
+		_music_target_gain = 1.0
+		_file_player.play()
+		return
+	_file_player.stop()
 	var cfg: Array = MUSIC_THEMES[theme]
 	_root = cfg[0]
 	_beat_len = 60.0 / float(cfg[1])
@@ -132,6 +154,8 @@ func stop_all() -> void:
 		v.stream = null
 	_music_player.stop()
 	_music_playback = null
+	_file_player.stop()
+	_file_player.stream = null
 	_music_theme = ""
 
 

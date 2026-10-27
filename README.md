@@ -108,6 +108,11 @@ does nothing, and a box whose memory is already in the album starts empty. Rooms
 in `data/memories.json`). The beat does not register its memory for the room bot, which never has to
 collect it. `tests/test_components.gd` covers the bump and `shots box` shows it.
 
+## Music files
+
+`art/music/<theme>.mp3` (`menu`, `ch1`-`ch4`, `credits`) replaces that generated theme and loops.
+Today the menu and the credits have one.
+
 ## Voices
 
 `scenes/core/Voices.gd` (autoload) babbles for Bubu and Dudu, Animal Crossing style, all synthesized:
