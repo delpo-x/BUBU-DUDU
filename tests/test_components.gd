@@ -16,6 +16,7 @@ func run() -> void:
 	_test_save_bad_types()
 	await _test_bad_snapshot()
 	_test_dialogue_text()
+	await _test_mystery_box()
 
 	var game := await _game("res://scenes/rooms/dev/Room_steps.tscn")
 	if game != null:
@@ -59,6 +60,39 @@ func _test_dialogue_text() -> void:
 	check(lines.size() == 2 and lines[1]["t"] == "uno, Dudu, {nessuno}", "dialogue alternatives pick one, unknown names stay")
 	GameState.new_game()
 	check(int(GameState.get_flag("stat_falls_dudu", 0)) == 0, "a new game starts the counts from zero")
+
+
+## The "?" block gives its keepsake only when a player bumps it from below.
+func _test_mystery_box() -> void:
+	GameState.new_game()
+	var world := Node2D.new()
+	add_child(world)
+	var floor_body := StaticBody2D.new()
+	floor_body.collision_layer = CompUtil.LAYER_WORLD
+	CompUtil.add_rect_shape(floor_body, Vector2(1000, 20))
+	floor_body.position = Vector2(0, 10)
+	world.add_child(floor_body)
+	var box := MysteryBox.new()
+	box.memory_id = "m1_f"
+	box.position = Vector2(0, -192)   # underside 160 px above the floor
+	world.add_child(box)
+	var bubu := (load("res://scenes/characters/Bubu.tscn") as PackedScene).instantiate() as BasePlayer
+	world.add_child(bubu)
+	bubu.global_position = Vector2(0, -40)
+	await frames(40)
+	check(not box.is_opened() and not GameState.has_memory("m1_f"), "mystery box stays shut while a player stands under it")
+	Input.action_press(&"p1_jump")
+	await frames(30)
+	Input.action_release(&"p1_jump")
+	await frames(10)
+	check(box.is_opened() and GameState.has_memory("m1_f"), "bumping the mystery box from below gives its memory")
+	var again := MysteryBox.new()
+	again.memory_id = "m1_f"
+	world.add_child(again)
+	check(again.is_opened(), "a mystery box whose memory is already in the album starts empty")
+	world.queue_free()
+	GameState.new_game()
+	await frames(2)
 
 
 func _test_save() -> void:

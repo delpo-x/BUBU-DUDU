@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scenes/core/Room.gd" id="1_room"]
 [ext_resource type="Script" path="res://scenes/core/WhiteboxBlock.gd" id="2_block"]
@@ -7,12 +7,13 @@
 [ext_resource type="Script" path="res://scenes/components/Decor.gd" id="5_decor"]
 [ext_resource type="Script" path="res://scenes/components/Exit.gd" id="6_exit"]
 [ext_resource type="Script" path="res://scenes/components/Gate.gd" id="7_gate"]
-[ext_resource type="Script" path="res://scenes/components/WallButton.gd" id="8_wallbutton"]
+[ext_resource type="Script" path="res://scenes/components/MysteryBox.gd" id="8_mysterybox"]
+[ext_resource type="Script" path="res://scenes/components/WallButton.gd" id="9_wallbutton"]
 
 [node name="Room_01" type="Node2D"]
 script = ExtResource("1_room")
 room_id = &"c4_r01"
-bounds = Rect2(0.0, 0.0, 3136.0, 768.0)
+bounds = Rect2(0.0, 0.0, 3456.0, 768.0)
 background_color = Color(0.18, 0.173, 0.282, 1.0)
 backdrop = "night"
 backdrop_seed = 400
@@ -21,7 +22,7 @@ camera_min_zoom = 0.55
 camera_max_zoom = 1.0
 intro_dialogue = &"c4_r01_in"
 hint_text = "Tutto quello che avete imparato, di notte."
-est_minutes = 5.7
+est_minutes = 5.9
 
 [node name="Spawns" type="Node2D" parent="."]
 
@@ -74,6 +75,21 @@ script = ExtResource("5_decor")
 kind = "lamp"
 scale_factor = 1.0
 seed_value = 0
+
+[node name="Decor6" type="Node2D" parent="Decor"]
+position = Vector2(2754.01, 464.0)
+script = ExtResource("5_decor")
+kind = "lamp"
+scale_factor = 1.0
+seed_value = 0
+
+[node name="Decor7" type="Node2D" parent="Decor"]
+position = Vector2(2990.98, 464.0)
+script = ExtResource("5_decor")
+kind = "pine"
+scale_factor = 0.759
+seed_value = 0
+color = Color(0.317, 0.477, 0.407, 1.0)
 
 [node name="Rock" type="StaticBody2D" parent="Geometry"]
 position = Vector2(32.0, 352.0)
@@ -165,8 +181,14 @@ script = ExtResource("2_block")
 size = Vector2(320.0, 336.0)
 color = Color(0.435, 0.416, 0.549, 1.0)
 
+[node name="Ground12" type="StaticBody2D" parent="Geometry"]
+position = Vector2(3180.8, 632.0)
+script = ExtResource("2_block")
+size = Vector2(320.0, 336.0)
+color = Color(0.435, 0.416, 0.549, 1.0)
+
 [node name="Rock4" type="StaticBody2D" parent="Geometry"]
-position = Vector2(3052.8, 352.0)
+position = Vector2(3372.8, 352.0)
 script = ExtResource("2_block")
 size = Vector2(64.0, 832.0)
 color = Color(0.365, 0.345, 0.471, 1.0)
@@ -181,7 +203,7 @@ latch = true
 
 [node name="Lever" type="Node2D" parent="Things"]
 position = Vector2(787.2, 400.0)
-script = ExtResource("8_wallbutton")
+script = ExtResource("9_wallbutton")
 mode = 1
 channel = &"c1"
 
@@ -198,6 +220,11 @@ script = ExtResource("3_bouncepad")
 size = Vector2(72.0, 18.0)
 bounce_speed = 1100.0
 
+[node name="MysteryBox" type="StaticBody2D" parent="Things"]
+position = Vector2(2860.8, 272.0)
+script = ExtResource("8_mysterybox")
+memory_id = "m4_f"
+
 [node name="Exit" type="Area2D" parent="Things"]
-position = Vector2(2860.8, 464.0)
+position = Vector2(3180.8, 464.0)
 script = ExtResource("6_exit")

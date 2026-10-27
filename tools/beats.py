@@ -120,6 +120,17 @@ def flat(b, x, g, n=4, deco=True):
     return x + n, g
 
 
+def mystery_box(b, x, g, mem):
+    """Optional "?" block over a flat stretch: jump under it for a keepsake (nothing needs it).
+    Its underside is 2.5 tiles up, above both players' heads, so walking by never touches it."""
+    n = 5
+    b.ground(x, x + n, g)
+    scatter(b, x, x + n, g)
+    b.add("MysteryBox", "Things", (px(x + n / 2), px(g - 3.0)), memory_id=mem)
+    b.walk2(x + n - 1.2, x + n - 0.7)
+    return x + n, g
+
+
 def exit_door(b, x, g, n=5):
     b.ground(x, x + n, g)
     b.add("Exit", "Things", (px(x + n / 2), px(g)))

@@ -38,5 +38,13 @@
  "m4_d": {"chapter": "c4", "title": "Il mattino dopo", "short": "Caffè per due, senza chiedere.",
   "text": "Non è un giorno preciso. È ogni mattina in cui uno dei due prepara il caffè per entrambi senza chiedere, perché ormai sa."},
  "m4_e": {"chapter": "c4", "title": "La pagina bianca", "short": "La più bella è quella ancora da scrivere.",
-  "text": "L'ultima pagina dell'album era vuota. Non era una pagina persa: era una pagina che aspettava noi. La scriviamo adesso, e domani, e dopodomani."}
+  "text": "L'ultima pagina dell'album era vuota. Non era una pagina persa: era una pagina che aspettava noi. La scriviamo adesso, e domani, e dopodomani."},
+ "m1_f": {"chapter": "c1", "title": "Il biglietto nascosto", "short": "Piegato in quattro, lasciato dove l'avresti trovato.",
+  "text": "Un biglietto piegato in quattro, infilato dove l'avresti trovato di sicuro. Sopra due righe e un cuore storto. Non l'abbiamo mai letto ad alta voce, e va bene così."},
+ "m2_f": {"chapter": "c2", "title": "Il calzino spaiato", "short": "Ne manca sempre uno. Ormai è una tradizione.",
+  "text": "Nel cassetto ne manca sempre uno. Abbiamo smesso di cercarlo e abbiamo iniziato a metterne due diversi. Gli amici hanno detto che era stile. Noi sapevamo che era pigrizia."},
+ "m3_f": {"chapter": "c3", "title": "La mappa disegnata a mano", "short": "Le strade storte, il nostro posto segnato con una X.",
+  "text": "Una mappa disegnata a mano, con le strade storte e una X dove ci siamo fermati. Ci siamo persi due volte, e a metà della terza ci siamo accorti che non ci dispiaceva."},
+ "m4_f": {"chapter": "c4", "title": "Il saluto alla finestra", "short": "Una mano che si agita, anche se manca poco.",
+  "text": "Dalla finestra, una mano che si agita. Mancavano cinque minuti al ritrovarci e ci siamo salutati lo stesso, come se fosse un addio breve. Era il modo di dire che non ci stavamo dando per scontati."}
 }

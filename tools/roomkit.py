@@ -100,6 +100,7 @@ SCRIPTS = {
     "CallBlockZone": "res://scenes/components/CallBlockZone.gd",
     "Checkpoint": "res://scenes/components/Checkpoint.gd",
     "Decor": "res://scenes/components/Decor.gd",
+    "MysteryBox": "res://scenes/components/MysteryBox.gd",
 }
 BASE_TYPES = {
     "Block": "StaticBody2D", "PressurePlate": "Area2D", "WallButton": "Node2D", "Gate": "StaticBody2D",
@@ -107,7 +108,7 @@ BASE_TYPES = {
     "CozySpot": "Area2D", "Exit": "Area2D", "Hazard": "Area2D", "FragileFloor": "StaticBody2D",
     "BouncePad": "StaticBody2D", "WindZone": "Area2D", "Vine": "Area2D", "MemoryPickup": "Area2D",
     "DialogueTrigger": "Area2D", "Sign": "Node2D", "CallBlockZone": "Node2D", "Checkpoint": "Area2D",
-    "Decor": "Node2D",
+    "Decor": "Node2D", "MysteryBox": "StaticBody2D",
 }
 
 # Chapter palettes: ground, accent block, backdrop name, background color.

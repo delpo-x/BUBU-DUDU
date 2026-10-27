@@ -23,7 +23,7 @@ EFFORT = {
     "crate_ledge": 3.5, "heavy_crate_plate": 3.5, "crate_plate_door": 3.5, "pulley": 5.0,
     "moving_cross": 1.5, "elevator": 4.5, "fragile_drop": 2.5, "walljump_shaft": 4.0,
     "seesaw": 5.0, "bounce_up": 1.5, "timed_pair": 3.0, "vine_climb": 1.5, "wind_lift": 4.5,
-    "boost_memory": 2.0,
+    "boost_memory": 2.0, "mystery_box": 0.4,
 }
 FAMILIARITY = [1.0, 0.65, 0.5, 0.42]
 SEEN = {}
@@ -31,7 +31,7 @@ FRAME = 0.6          # entering, walking to the exit, looking around
 CHAPTER_DIFFICULTY = {1: 1.0, 2: 1.1, 3: 1.15, 4: 1.25}
 
 # Tiles of headroom a beat needs above its entry floor.
-HEAD = {"seesaw": 8.5, "boost_gate": 4.5, "call_lesson": 4.5, "boost_memory": 4.5, "pulley": 5.5}
+HEAD = {"seesaw": 8.5, "boost_gate": 4.5, "call_lesson": 4.5, "boost_memory": 4.5, "pulley": 5.5, "mystery_box": 5.0}
 
 
 # Rooms estimated this long (minutes) or more get a lantern-checkpoint halfway.
@@ -138,7 +138,8 @@ CH1 = [
        P("flat", n=3), hint="Stick sinistro per camminare, A per saltare. Tieni premuto A per saltare più in alto.",
        intro="c1_r01_in"),
     _r(P("gap", w=2.0), P("steps_up", k=3), P("gap", w=2.0), P("steps_down", k=3), TALK("c1_r02_talk"),
-       P("flat", n=3), hint="Prendete la rincorsa e saltate all'ultimo momento: il gioco perdona i salti tardivi."),
+       P("flat", n=3), P("mystery_box", mem="m1_f"),
+       hint="Prendete la rincorsa e saltate all'ultimo momento: il gioco perdona i salti tardivi."),
     _r(S("c1_sign_piggy"), P("boost_gate"), P("flat", n=3),
        hint="Bubu salta in groppa a Dudu con Y vicino a lui; poi A per un salto spinto, più alto del normale.",
        intro="c1_r03_in"),
@@ -187,7 +188,7 @@ CH2 = [
     _r(P("crate_ledge"), P("fragile_drop", depth=3), P("two_plates"), P("boost_memory", mem="m2_b"),
        hint="Le assi crepate reggono Bubu ma non Dudu. A volte la strada è giù."),
     _r(S("c2_sign_wall"), P("walljump_shaft", height=6, mem="m2_c"), P("flat", n=3),
-       hint="Bubu salta tra le pareti scanalate: spingi verso la parete e premi A quando la tocchi.",
+       P("mystery_box", mem="m2_f"), hint="Bubu salta tra le pareti scanalate: spingi verso la parete e premi A quando la tocchi.",
        intro="c2_r07_in"),
     _r(P("heavy_crate_plate"), P("moving_cross", span=6), P("cozy", dialogue="c2_cozy_a", mem="m2_d"),
        hint="Dudu porta la cassa pesante sulla piastra; poi un momento per voi."),
@@ -210,7 +211,8 @@ CH2 = [
 # --- Chapter 3: Le nuvole --------------------------------------------------------------------
 CH3 = [
     _r(S("c3_sign_bounce"), P("flat", n=2), P("bounce_up", height=3), P("steps_down", k=3), P("bounce_up", height=4),
-       P("steps_down", k=2), P("flat", n=2), hint="I funghi molleggiati vi lanciano in alto: saltateci sopra.",
+       P("steps_down", k=2), P("flat", n=2), P("mystery_box", mem="m3_f"),
+       hint="I funghi molleggiati vi lanciano in alto: saltateci sopra.",
        intro="c3_r01_in"),
     _r(S("c3_sign_seesaw"), P("seesaw", mem="m3_a"),
        hint="Altalena: chi pesa di più atterra su un'estremità e lancia l'altro dall'altra.", intro="c3_r02_in"),
@@ -250,7 +252,7 @@ CH3 = [
 # --- Chapter 4: La notte ---------------------------------------------------------------------
 CH4 = [
     _r(P("flat", n=2), P("boost_gate"), P("crate_ledge"), P("steps_down", k=2), P("bounce_up", height=3),
-       P("steps_down", k=2), hint="Tutto quello che avete imparato, di notte.", intro="c4_r01_in"),
+       P("steps_down", k=2), P("mystery_box", mem="m4_f"), hint="Tutto quello che avete imparato, di notte.", intro="c4_r01_in"),
     _r(S("c4_sign_launch"), P("seesaw", crate_launch=True, mem="m4_a"),
        hint="Stavolta vola Dudu: a Bubu serve qualcosa di pesante in braccio.", intro="c4_r02_in"),
     _r(P("heavy_crate_plate"), P("walljump_shaft", height=6), P("vine_climb", height=4), P("steps_down", k=3),

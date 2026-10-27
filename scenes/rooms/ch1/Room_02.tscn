@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scenes/core/Room.gd" id="1_room"]
 [ext_resource type="Script" path="res://scenes/core/WhiteboxBlock.gd" id="2_block"]
@@ -6,11 +6,12 @@
 [ext_resource type="Script" path="res://scenes/components/DialogueTrigger.gd" id="4_dialoguetrigger"]
 [ext_resource type="Script" path="res://scenes/components/Exit.gd" id="5_exit"]
 [ext_resource type="Script" path="res://scenes/components/Hazard.gd" id="6_hazard"]
+[ext_resource type="Script" path="res://scenes/components/MysteryBox.gd" id="7_mysterybox"]
 
 [node name="Room_02" type="Node2D"]
 script = ExtResource("1_room")
 room_id = &"c1_r02"
-bounds = Rect2(0.0, 0.0, 2304.0, 768.0)
+bounds = Rect2(0.0, 0.0, 2624.0, 768.0)
 background_color = Color(0.851, 0.933, 0.941, 1.0)
 backdrop = "meadow"
 backdrop_seed = 101
@@ -19,7 +20,7 @@ camera_min_zoom = 0.55
 camera_max_zoom = 1.0
 intro_dialogue = &""
 hint_text = "Prendete la rincorsa e saltate all'ultimo momento: il gioco perdona i salti tardivi."
-est_minutes = 2.0
+est_minutes = 2.4
 
 [node name="Spawns" type="Node2D" parent="."]
 
@@ -57,6 +58,14 @@ script = ExtResource("3_decor")
 kind = "bush"
 scale_factor = 0.88
 seed_value = 57
+color = Color(0.435, 0.659, 0.396, 1.0)
+
+[node name="Decor4" type="Node2D" parent="Decor"]
+position = Vector2(1989.4, 576.0)
+script = ExtResource("3_decor")
+kind = "grass"
+scale_factor = 1.111
+seed_value = 86
 color = Color(0.435, 0.659, 0.396, 1.0)
 
 [node name="Rock" type="StaticBody2D" parent="Geometry"]
@@ -143,8 +152,14 @@ script = ExtResource("2_block")
 size = Vector2(320.0, 224.0)
 color = Color(0.561, 0.718, 0.486, 1.0)
 
+[node name="Ground14" type="StaticBody2D" parent="Geometry"]
+position = Vector2(2400.0, 688.0)
+script = ExtResource("2_block")
+size = Vector2(320.0, 224.0)
+color = Color(0.561, 0.718, 0.486, 1.0)
+
 [node name="Rock2" type="StaticBody2D" parent="Geometry"]
-position = Vector2(2272.0, 352.0)
+position = Vector2(2592.0, 352.0)
 script = ExtResource("2_block")
 size = Vector2(64.0, 832.0)
 color = Color(0.627, 0.647, 0.561, 1.0)
@@ -168,6 +183,11 @@ size = Vector2(128.0, 256.0)
 dialogue = &"c1_r02_talk"
 require_both = true
 
+[node name="MysteryBox" type="StaticBody2D" parent="Things"]
+position = Vector2(2080.0, 384.0)
+script = ExtResource("7_mysterybox")
+memory_id = "m1_f"
+
 [node name="Exit" type="Area2D" parent="Things"]
-position = Vector2(2080.0, 576.0)
+position = Vector2(2400.0, 576.0)
 script = ExtResource("5_exit")

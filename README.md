@@ -98,6 +98,16 @@ and falling hold one frame each of the trampoline somersault) and Bubu's wave fo
 (`POSES` and `FALLBACK`), `LOOKS` says which way a sticker faces so it flips with the player, `FIT`
 scales stickers that leave room around the character.
 
+## Mystery boxes
+
+`scenes/components/MysteryBox.gd` is a floating "?" block, like in Super Mario: jump and bump it from
+below and a keepsake pops out into the album (an optional memory, no room needs it). Walking under it
+does nothing, and a box whose memory is already in the album starts empty. Rooms get one with the
+`mystery_box` beat in `tools/chapters.py` (`P("mystery_box", mem="m1_f")`, then
+`python -I tools/gen_rooms.py`). Today there is one per chapter (`m1_f` to `m4_f`, the bonus memories
+in `data/memories.json`). The beat does not register its memory for the room bot, which never has to
+collect it. `tests/test_components.gd` covers the bump and `shots box` shows it.
+
 ## Voices
 
 `scenes/core/Voices.gd` (autoload) babbles for Bubu and Dudu, Animal Crossing style, all synthesized:

@@ -88,6 +88,33 @@ func run() -> void:
 		_save("balloon")
 		bg.queue_free()
 		await frames(3)
+	if wanted.has("box"):
+		# The "?" block of room 2: before the bump and just after (heart pops out).
+		var xg := (load(GAME_SCENE) as PackedScene).instantiate() as Game
+		xg.autostart = false
+		xg.fast_transitions = true
+		xg.auto_advance = false
+		get_tree().root.add_child(xg)
+		await xg.enter_room(0, 1)
+		while xg.dialogue.is_busy():
+			xg.dialogue.advance()
+			await _secs(0.2)
+		var box := xg.room.get_node("Things/MysteryBox") as MysteryBox
+		var floor_y := box.global_position.y + box.size.y * 0.5 + 160.0
+		xg.bubu.teleport_to(Vector2(box.global_position.x - 60.0, floor_y - 30.0))
+		xg.dudu.teleport_to(Vector2(box.global_position.x + 60.0, floor_y - 31.0))
+		await _secs(0.8)
+		_save("box_before")
+		# Bubu steps under the block and jumps; the heart pops out of it.
+		xg.bubu.teleport_to(Vector2(box.global_position.x, floor_y - 30.0))
+		await _secs(0.2)
+		Input.action_press(&"p1_jump")
+		await _secs(0.3)
+		Input.action_release(&"p1_jump")
+		check(box.is_opened(), "box shot: the block opened")
+		_save("box_after")
+		xg.queue_free()
+		await frames(3)
 	if wanted.has("ui"):
 		# First room with its intro dialogue on screen, then the pause menu.
 		var g := (load(GAME_SCENE) as PackedScene).instantiate() as Game
