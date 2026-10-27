@@ -194,6 +194,13 @@ func _rig_shots() -> void:
 	_save("rig_walk")
 	Input.action_release(&"p1_right")
 	Input.action_release(&"p2_left")
+	# And the other way round: each sticker must face where it is going.
+	Input.action_press(&"p1_left")
+	Input.action_press(&"p2_right")
+	await _secs(0.35)
+	_save("rig_walk_back")
+	Input.action_release(&"p1_left")
+	Input.action_release(&"p2_right")
 	await _secs(0.6)
 	Input.action_press(&"p1_jump")
 	Input.action_press(&"p2_jump")

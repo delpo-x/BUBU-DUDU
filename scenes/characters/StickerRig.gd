@@ -20,7 +20,7 @@ const STILLS := {
 	"dudu_jump": {"jump": 0, "fall": 2, "climb": 0},
 }
 ## Which way each sticker looks when drawn as is (1 right, -1 left, 0 front: never flipped).
-const LOOKS := {"bubu_run": 1, "dudu_walk": -1}
+const LOOKS := {"bubu_run": 1, "dudu_walk": 1}
 ## Sticker height on screen for a 60 px tall body (stickers include some margin and shadow).
 const HEIGHT := 78.0
 ## Stickers whose character fills only part of the frame: [scale, share of the frame left
