@@ -63,6 +63,9 @@ const EVERY := 2
 
 var _banks: Dictionary = {}       # "who:vowel" / "who:vowel:sad" -> AudioStreamWAV
 var _recorded: Dictionary = {}    # "who_name" -> AudioStream (art/voices)
+## One player per character for recordings, so the babble pool never cuts one short.
+var _rec_players: Dictionary = {}  # who -> AudioStreamPlayer
+var _rec_until: Dictionary = {}    # who -> msec when their recording ends (babble waits)
 var _players: Array[AudioStreamPlayer] = []
 var _next: int = 0
 var _rng := RandomNumberGenerator.new()
@@ -93,6 +96,9 @@ func speak(who: String, shown: String, full: String, mood: String = "") -> void:
 		return
 	if shown.length() % EVERY != 0:
 		return
+	# A recorded reaction is still playing: no babble over it.
+	if Time.get_ticks_msec() < int(_rec_until.get(who, 0)):
+		return
 	var c := shown.substr(shown.length() - 1, 1).to_lower()
 	if c == " " or ".,;:!?…«»-".contains(c):
 		return
@@ -112,7 +118,7 @@ func emote(who: String, mood: String) -> void:
 		return
 	var rec := _recorded_stream(who, mood)
 	if rec != null:
-		_play(rec, 0.0, float(CHARACTERS[who][3]) + 2.0)
+		_play_recording(who, rec, 0.0)
 		return
 	if EMOTES.has(mood):
 		_sequence(who, EMOTES[mood], bool((MOODS.get(mood, [0.0, false]) as Array)[1]))
@@ -124,7 +130,7 @@ func action(who: String, kind: String) -> void:
 		return
 	var rec := _recorded_stream(who, kind)
 	if rec != null:
-		_play(rec, _rng.randf_range(-0.5, 0.5), float(CHARACTERS[who][3]) + 1.0)
+		_play_recording(who, rec, _rng.randf_range(-0.5, 0.5))
 		return
 	if ACTIONS.has(kind):
 		_sequence(who, ACTIONS[kind], false)
@@ -148,12 +154,32 @@ func stop_all() -> void:
 	for p in _players:
 		p.stop()
 		p.stream = null
+	for p: AudioStreamPlayer in _rec_players.values():
+		p.stop()
+		p.stream = null
+	_rec_until.clear()
 	# Recordings load again on demand; holding them here outlives the engine at exit.
 	_recorded.clear()
 
 
 func _exit_tree() -> void:
 	stop_all()
+
+
+## Recordings are levelled to about the synthesized syllables (-23 dB mean), so they play at
+## the character's own volume.
+func _play_recording(who: String, stream: AudioStream, semitones: float) -> void:
+	var p: AudioStreamPlayer = _rec_players.get(who)
+	if p == null:
+		p = AudioStreamPlayer.new()
+		p.bus = &"SFX"
+		add_child(p)
+		_rec_players[who] = p
+	p.stream = stream
+	p.volume_db = float(CHARACTERS[who][3])
+	p.pitch_scale = pow(2.0, semitones / 12.0)
+	p.play()
+	_rec_until[who] = Time.get_ticks_msec() + int(stream.get_length() * 1000.0 / p.pitch_scale)
 
 
 func _play(stream: AudioStream, semitones: float, volume_db: float) -> void:

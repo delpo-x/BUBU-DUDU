@@ -129,6 +129,7 @@ func play_music(theme: String) -> void:
 		_file_player.play()
 		return
 	_file_player.stop()
+	_file_player.stream = null
 	var cfg: Array = MUSIC_THEMES[theme]
 	_root = cfg[0]
 	_beat_len = 60.0 / float(cfg[1])
